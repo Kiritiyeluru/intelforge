@@ -157,3 +157,33 @@ Capture important discoveries, insights, and lessons learned during development 
 **Application:** [How this changes development approach]  
 **Related:** [Links to relevant documentation or issues]  
 **Follow-up:** [Any additional research or action needed]
+
+---
+
+## 2025-01-06: Perplexity MCP Integration and Enhanced Research
+
+### Discovery: Real-time Tool Validation
+**Context:** Installed Perplexity MCP server to enhance tool research capabilities  
+**Key Finding:** Real-time search confirms 2025 changes in Reddit API landscape  
+**Insight:** Reddit has become "very restrictive" with API access, making PRAW even more valuable  
+**Application:** Our tool selection was validated and enhanced with current best practices  
+
+### Technical Learning: MCP Server Installation Process
+**Discovery:** Successfully installed official Perplexity MCP server  
+**Installation Path:** `/home/kiriti/alpha_projects/intelforge/modelcontextprotocol/perplexity-ask/`  
+**Configuration:** Uses .env file for secure API key management  
+**Integration:** Now available as search capability in Claude Code sessions  
+
+### Research Validation Insights
+**Key 2025 Updates:**
+- Reddit API restrictions have increased significantly
+- PRAW's automatic rate limiting is now critical (not just helpful)
+- Alternative tools (URS, Apify) have limitations for production use
+- Sentiment analysis for trading remains a strong use case
+- AI-powered scraping tools exist but PRAW remains optimal for Reddit
+
+### Workflow Enhancement
+**New Capability:** Real-time research during development sessions  
+**Use Cases:** Tool validation, best practice verification, current trend analysis  
+**Integration:** Perplexity search complements existing find_tools_template.md approach  
+**Future Potential:** Content validation, strategy verification, market research

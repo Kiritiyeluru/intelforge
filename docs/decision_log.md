@@ -27,6 +27,47 @@ Track architectural and implementation decisions with rationale to prevent repea
 
 ---
 
+---
+
+## 2025-01-06: Tool Reuse Strategy for Content Extraction
+
+**Decision:** Use specialized existing libraries for each content type vs. building custom scrapers  
+**Alternatives Considered:** 
+- Build everything from scratch using requests/BeautifulSoup
+- Use single general-purpose scraping framework
+- Mix of specialized tools (chosen approach)
+
+**Rationale:** 
+- Marker for PDFs provides superior quality vs. custom PDF parsing
+- PRAW for Reddit is official API wrapper with built-in rate limiting
+- PaperScraper for ArXiv handles academic paper extraction professionally
+- Specialized tools handle edge cases and API changes automatically
+
+**Impact:** 
+- ~80% reduction in development time
+- More robust error handling and edge case coverage
+- Reduced long-term maintenance burden
+- Higher quality extraction results
+
+**Implementation Plan:**
+- Phase 1: PRAW + Reddit2Text for Reddit extraction
+- Phase 2: PyGitHub for repository mining  
+- Phase 4: Marker for PDF processing
+- Phase 4: PaperScraper for ArXiv papers
+- Custom wrapper for Obsidian formatting and metadata
+
+**Status:** Approved - will implement in phases  
+**Follow-up Required:** Update each phase roadmap with specific tool integration
+
+**2025 Research Update:** Perplexity MCP search confirmed PRAW remains the best choice:
+- Still the most mature and reliable Reddit API wrapper in 2025
+- Automatic rate limit management (critical with Reddit's stricter policies)
+- Abstracts API complexities effectively
+- Alternative tools (URS, Apify) are either CLI-only or require paid services
+- Reddit API has become more restrictive, making official API wrapper essential
+
+---
+
 ## Template for Future Decisions
 
 **Decision:** [Brief description]  

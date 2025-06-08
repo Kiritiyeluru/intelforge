@@ -149,6 +149,30 @@ When you encounter a new problem:
 
 ---
 
+## MCP (Model Context Protocol) Issues
+
+### Problem: MCP server installation fails
+**Symptoms:** `claude mcp add` command returns errors  
+**Common Causes:**
+- Missing dependencies (Node.js, Python)
+- Incorrect server path or name
+- API key authentication issues
+
+**Debugging Steps:**
+1. Verify dependencies: `node --version && npm --version`
+2. Check server installation: `which mcp-server-name`
+3. Test API keys manually
+4. Review Claude Code logs
+
+**Reference:** See `docs/mcp_setup_guide.md` for complete installation guide
+
+### Problem: MCP server not responding
+**Symptoms:** Tools show as available but don't return results  
+**Solution:** Check API quotas, restart Claude Code, verify server status  
+**Prevention:** Monitor API usage and set up alerts for quota limits  
+
+---
+
 ## Quick Reference Commands
 
 ```bash
@@ -168,4 +192,8 @@ python phase_XX_module.py --dry-run
 
 # Check recent commits for context
 git log --oneline -10
+
+# MCP server management
+claude mcp list
+claude mcp get <server_name>
 ```
