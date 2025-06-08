@@ -1,0 +1,70 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:reddit.com)",
+      "WebFetch(domain:github.com)", 
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:towards.dev)",
+      "WebFetch(domain:towardsdatascience.com)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:ssrn.com)",
+      "Bash(pip install:*)",
+      "Bash(python phase_*)",
+      "Bash(python -m *)",
+      "Bash(git status)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
+      "Bash(echo *)",
+      "Bash(cat config/*)",
+      "Bash(find vault/*)",
+      "Bash(grep *)"
+    ],
+    "deny": [
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)"
+    ]
+  },
+  "env": {
+    "BASH_MAX_TIMEOUT_MS": "300000",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8000",
+    "PYTHONPATH": "/home/kiriti/alpha_projects/intelforge",
+    "INTELFORGE_CONFIG": "/home/kiriti/alpha_projects/intelforge/config/config.yaml",
+    "INTELFORGE_VAULT": "/home/kiriti/alpha_projects/intelforge/vault"
+  },
+  "project_preferences": {
+    "default_python_version": "python3",
+    "preferred_package_manager": "pip",
+    "code_style": "simple_pythonic",
+    "logging_level": "INFO",
+    "dry_run_default": true
+  },
+  "ai_assistance": {
+    "code_generation_style": "modular_functions",
+    "documentation_level": "comprehensive",
+    "error_handling": "graceful_with_logging",
+    "testing_approach": "manual_with_dry_run"
+  },
+  "security": {
+    "require_confirmation_for": [
+      "file_deletion",
+      "git_push",
+      "pip_install_global"
+    ],
+    "auto_gitignore_patterns": [
+      "*.log",
+      "config.yaml",
+      "vault/logs/*",
+      "__pycache__/",
+      "*.pyc",
+      ".env"
+    ]
+  }
+}
