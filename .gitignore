@@ -54,3 +54,9 @@ api_keys.yaml
 temp/
 tmp/
 scratch/
+
+# MCP Server Dependencies (external git repositories)
+financial-datasets-mcp/
+github-mcp/
+mcp-servers/
+modelcontextprotocol/
