@@ -29,6 +29,25 @@
 3. **Check current roadmap** in `@cline_docs/projectRoadmap.md`
 4. **Update current task** in `@cline_docs/currentTask.md`
 
+### Session Management (CRITICAL - Always Follow)
+
+**Before every session:**
+- Read `current_task.md` - what's actively being worked on
+- Read `next_task.md` - planned priorities for this session  
+- Read `session_summary.md` - recent progress and key decisions
+- Follow `session_checklist.md` for consistent workflow
+
+**During development:**
+- Update `current_task.md` with progress and blockers
+- Log decisions in `docs/decision_log.md` with rationale
+- Document solutions in `docs/troubleshooting_guide.md`
+- Track config changes in `docs/config_changelog.md`
+
+**End of every session (MANDATORY):**
+- Update all three handover files: `current_task.md`, `next_task.md`, `session_summary.md`
+- Follow end-of-session checklist in `session_checklist.md`
+- Commit with proper phase_XX: format
+
 ### Code Structure Standards
 
 - **Modules**: `phase_XX_description.py` (sequential numbering)

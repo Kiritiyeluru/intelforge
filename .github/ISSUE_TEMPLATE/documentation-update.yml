@@ -1,0 +1,110 @@
+name: Documentation Update
+description: Improve or update project documentation
+title: "[DOCS] "
+labels: ["documentation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for documentation improvements, updates to handover files,
+        or clarification of project processes.
+
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs updating?
+      options:
+        - "Session handover files (current_task.md, next_task.md, session_summary.md)"
+        - "Project README or CLAUDE.md"
+        - "API documentation or code comments"
+        - "Process documentation (automation, templates)"
+        - "Technical architecture documentation"
+        - "Development guidelines or checklists"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: Current Problem
+      description: What's unclear, missing, or outdated in the current documentation?
+      placeholder: "Session handover files don't include enough context about configuration decisions"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: How should the documentation be improved?
+      placeholder: |
+        - Add configuration decision log to session_summary.md
+        - Include rationale for library choices
+        - Document common troubleshooting steps
+        - Add examples of proper phase_XX naming
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected Files
+      description: Which documentation files need updates?
+      placeholder: |
+        - docs/automation/session_summary.md
+        - docs/automation/current_task.md
+        - CLAUDE.md (if process changes)
+
+  - type: textarea
+    id: target_audience
+    attributes:
+      label: Target Audience
+      description: Who will benefit from this documentation update?
+      placeholder: |
+        - Future developers working on IntelForge
+        - AI assistants helping with development
+        - Solo developer during session handovers
+
+  - type: checkboxes
+    id: doc_goals
+    attributes:
+      label: Documentation Goals
+      description: What should this update achieve?
+      options:
+        - label: Prevent information loss between sessions
+        - label: Improve onboarding for new developers/AI assistants
+        - label: Clarify project architecture and decisions
+        - label: Standardize development processes
+        - label: Reduce time to context understanding
+        - label: Prevent documentation decay
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Success Criteria
+      description: How will you know this documentation update is successful?
+      placeholder: |
+        - New developer can understand project context in <5 minutes
+        - Session handovers contain all necessary context
+        - Development decisions are clearly documented and rationale preserved
+        - Process documentation prevents common mistakes
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgent is this documentation update?
+      options:
+        - "Critical - Blocking current development"
+        - "High - Needed for next session"
+        - "Medium - Should be done soon"
+        - "Low - Nice to have improvement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other information relevant to this documentation update?
+      placeholder: "This relates to preventing the documentation decay that led to burning previous repositories"

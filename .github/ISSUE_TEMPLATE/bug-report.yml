@@ -1,0 +1,137 @@
+name: Bug Report
+description: Report issues with existing IntelForge functionality
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to report bugs in IntelForge modules or functionality.
+
+  - type: input
+    id: affected_phase
+    attributes:
+      label: Affected Phase Module
+      description: Which phase module has the bug? (e.g., phase_01_reddit.py)
+      placeholder: "phase_01_reddit.py"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Bug Description
+      description: Clear description of what's not working
+      placeholder: "Module fails to authenticate with Reddit API when using valid credentials"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: "Should successfully authenticate and begin scraping specified subreddits"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Actual Behavior
+      description: What's actually happening?
+      placeholder: "Authentication fails with 401 error, no data is scraped"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can this bug be reproduced?
+      placeholder: |
+        1. Configure Reddit API credentials in config.yaml
+        2. Run `python phase_01_reddit.py`
+        3. Observe authentication error in logs
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: Error Logs
+      description: Relevant error messages or log output
+      placeholder: |
+        ```
+        2025-01-06 10:30:15 - ERROR - Reddit authentication failed: 401 Unauthorized
+        2025-01-06 10:30:15 - ERROR - Check API credentials in config.yaml
+        ```
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: System and configuration information
+      placeholder: |
+        - OS: Linux/Windows/macOS
+        - Python version: 3.x.x
+        - Library versions: praw==7.x.x
+        - Config file location: config/config.yaml
+
+  - type: textarea
+    id: config_sanitized
+    attributes:
+      label: Configuration (Sanitized)
+      description: Relevant config.yaml content with secrets removed
+      placeholder: |
+        reddit:
+          client_id: "[REDACTED]"
+          client_secret: "[REDACTED]"
+          user_agent: "IntelForge/1.0"
+          subreddits: ["algotrading"]
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this issue?
+      options:
+        - "Critical - Blocks development"
+        - "High - Major functionality broken"
+        - "Medium - Feature partially working"
+        - "Low - Minor issue or cosmetic"
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Is there a temporary way to work around this issue?
+      placeholder: "Manually authenticating with different credentials works"
+
+  - type: textarea
+    id: investigation
+    attributes:
+      label: Initial Investigation
+      description: Any debugging or investigation you've already done?
+      placeholder: |
+        - Verified API credentials are correct
+        - Checked Reddit API status (operational)
+        - Tested with different user agents
+        - Reviewed PRAW documentation
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impact Areas
+      description: What functionality is affected?
+      options:
+        - label: Authentication/API access
+        - label: Data scraping/extraction
+        - label: Output generation
+        - label: Configuration loading
+        - label: Error handling
+        - label: Logging
+        - label: Session handover files

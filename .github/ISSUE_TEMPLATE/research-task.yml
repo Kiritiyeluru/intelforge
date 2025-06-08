@@ -1,0 +1,90 @@
+name: Research Task
+description: Investigate existing tools and libraries before building custom solutions
+title: "[RESEARCH] "
+labels: ["research"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for investigating existing solutions before building custom functionality.
+        Follow the "reuse over rebuild" principle from CLAUDE.md.
+
+  - type: input
+    id: phase
+    attributes:
+      label: Target Phase
+      description: Which phase will this research support? (e.g., phase_01, phase_02)
+      placeholder: "phase_01"
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Research Objective
+      description: What specific functionality or problem needs investigation?
+      placeholder: "Research Reddit scraping libraries for algorithmic trading content extraction"
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Research Scope
+      description: What specific areas should be investigated?
+      placeholder: |
+        - Available Python libraries for Reddit API access
+        - Rate limiting and ethical scraping practices
+        - Output format options for Obsidian compatibility
+        - Error handling patterns
+
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Evaluation Criteria
+      description: How will you determine the best solution?
+      placeholder: |
+        - Ease of integration with IntelForge
+        - Active maintenance and community support
+        - Documentation quality
+        - Performance and rate limiting features
+        - Compatibility with existing tech stack
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Expected Deliverables
+      description: What should be produced from this research?
+      placeholder: |
+        - Comparison of top 3 solutions
+        - Recommended library with justification
+        - Implementation approach outline
+        - Configuration requirements
+        - Updated next_task.md with implementation steps
+
+  - type: checkboxes
+    id: resources
+    attributes:
+      label: Research Resources
+      description: Check the resources you plan to use
+      options:
+        - label: prompts/find_tools_template.md
+        - label: Official library documentation
+        - label: GitHub repository analysis
+        - label: Community forums and discussions
+        - label: Performance benchmarks
+
+  - type: textarea
+    id: timeline
+    attributes:
+      label: Estimated Timeline
+      description: How much time should this research take?
+      placeholder: "1-2 hours of focused investigation"
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Potential Blockers
+      description: What might prevent completing this research?
+      placeholder: "API access requirements, unclear documentation, deprecated libraries"

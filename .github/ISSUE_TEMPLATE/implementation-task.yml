@@ -1,0 +1,126 @@
+name: Implementation Task
+description: Development work for phase modules and features
+title: "[IMPL] "
+labels: ["implementation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for implementing new functionality in IntelForge.
+        Ensure research has been completed before starting implementation.
+
+  - type: input
+    id: phase
+    attributes:
+      label: Phase Module
+      description: Which phase module is being implemented? (e.g., phase_01_reddit.py)
+      placeholder: "phase_01_reddit.py"
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Implementation Objective
+      description: What specific functionality is being built?
+      placeholder: "Implement Reddit scraping using PRAW library for r/algotrading posts"
+    validations:
+      required: true
+
+  - type: textarea
+    id: research_reference
+    attributes:
+      label: Research Reference
+      description: Link to or reference the research that informed this implementation
+      placeholder: "Based on research in issue #XX, selected PRAW library for Reddit integration"
+
+  - type: textarea
+    id: technical_approach
+    attributes:
+      label: Technical Approach
+      description: High-level implementation strategy
+      placeholder: |
+        - Use PRAW library for Reddit API access
+        - Implement rate limiting with configurable delays
+        - Output Obsidian-compatible markdown with frontmatter
+        - Store configuration in config/config.yaml
+        - Log all operations to vault/logs/
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know this is complete and working?
+      placeholder: |
+        - [ ] Module successfully connects to Reddit API
+        - [ ] Extracts posts from specified subreddits
+        - [ ] Generates Obsidian-compatible markdown files
+        - [ ] Handles rate limits gracefully
+        - [ ] Includes --dry-run mode for testing
+        - [ ] Logs operations with appropriate detail
+        - [ ] Follows phase_XX naming conventions
+        - [ ] Updates session handover files
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Configuration Requirements
+      description: What needs to be added to config.yaml?
+      placeholder: |
+        reddit:
+          client_id: "your_client_id"
+          client_secret: "your_client_secret"
+          user_agent: "IntelForge/1.0"
+          subreddits: ["algotrading", "investing"]
+          rate_limit_delay: 2
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: What libraries or setup is required?
+      placeholder: |
+        - praw>=7.0.0
+        - pyyaml>=6.0
+        - requests>=2.25.0
+
+  - type: textarea
+    id: testing_approach
+    attributes:
+      label: Testing Approach
+      description: How will this be tested and validated?
+      placeholder: |
+        - Manual testing with --dry-run mode
+        - Test with small subreddit first
+        - Verify output format matches Obsidian requirements
+        - Check error handling with invalid API keys
+        - Validate rate limiting behavior
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Development Checklist
+      description: Standard checks for IntelForge modules
+      options:
+        - label: Followed reuse-over-rebuild principle
+        - label: Used existing libraries instead of custom implementation
+        - label: Implemented graceful error handling
+        - label: Added comprehensive logging
+        - label: Included --dry-run mode
+        - label: Externalized configuration to config.yaml
+        - label: Generated Obsidian-compatible output
+        - label: Updated session handover files
+        - label: Followed phase_XX naming convention
+        - label: Added proper docstrings and comments
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Implementation Risks
+      description: What could go wrong during implementation?
+      placeholder: |
+        - Reddit API rate limits more restrictive than expected
+        - PRAW library compatibility issues
+        - Large subreddits overwhelming output volume
+        - Authentication setup complexity
