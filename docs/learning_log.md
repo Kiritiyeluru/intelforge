@@ -160,6 +160,63 @@ Capture important discoveries, insights, and lessons learned during development 
 
 ---
 
+## 2025-01-06: AKM (Automated Knowledge Miner) Vision Integration
+
+### Discovery: Comprehensive Enhancement Roadmap
+**Context:** Extracted insights from detailed AKM discussion for future IntelForge development  
+**Key Finding:** IntelForge can evolve from Reddit scraper to comprehensive knowledge mining system  
+**Insight:** Current Phase 1 implementation provides perfect foundation for AKM architecture  
+**Application:** Created actionable roadmap for Phases 2-6 development  
+
+### Technical Learning: Multi-Source Pipeline Architecture
+**Discovery:** Unified schema approach enables seamless multi-source integration  
+**Key Components:**
+- Query Builder for automated content discovery
+- Relevance Filter with ML-based scoring  
+- Content Deduplication using embeddings
+- Research Thread Tracking for knowledge connections
+- Gap Detection for identifying missing research areas
+
+### Research Validation: Tool Selection Strategy
+**Key Insights:**
+- Use official APIs where available (GitHub, arXiv, Dev.to)
+- Avoid risky scraping (Medium, Google Search)
+- Implement rule-based pre-filtering before expensive AI scoring
+- Cache embeddings locally for cost-effective similarity detection
+- Leverage existing tools (FAISS, sentence-transformers) over custom solutions
+
+### AI-Friendly Development Patterns
+**Discovery:** Specific patterns that enhance AI code generation effectiveness  
+**Implementation Guidelines:**
+- Detailed docstrings with AI_HINT comments for context
+- Explicit error handling instructions in comments
+- Configuration-driven design with YAML descriptions
+- Modular architecture enabling component regeneration
+- Helper scripts for testing, validation, and cleanup
+
+### Future Potential: Personal Research Assistant
+**Long-term Vision:** Evolution toward LLM-powered research assistant  
+**Capabilities:**
+- Semantic search: "What strategies for range-bound markets?"
+- Gap analysis: "Missing backtests for momentum indicators?"
+- Knowledge synthesis: Automatic connection of related findings
+- Real-time insights: Dynamic querying vs. static storage
+
+### Integration Strategy
+**Immediate Opportunities:**
+- Enhance Phase 1 with unified schema output
+- Add content deduplication to prevent duplicate strategies
+- Implement basic relevance filtering with TF-IDF
+- Expand configuration system for multi-source support
+
+**Medium-term Development:**
+- Multi-source pipeline with GitHub, Dev.to, arXiv
+- Research thread tracking and automatic backlinking
+- Gap detection for identifying missing knowledge areas
+- Local LLM integration for semantic search capabilities
+
+---
+
 ## 2025-01-06: Perplexity MCP Integration and Enhanced Research
 
 ### Discovery: Real-time Tool Validation
@@ -187,3 +244,211 @@ Capture important discoveries, insights, and lessons learned during development 
 **Use Cases:** Tool validation, best practice verification, current trend analysis  
 **Integration:** Perplexity search complements existing find_tools_template.md approach  
 **Future Potential:** Content validation, strategy verification, market research
+
+---
+
+## 2025-01-06: Remote MCP Capabilities Discovery
+
+### Discovery: Cloud-Based MCP Integration
+**Context:** Anthropic announced remote MCP server support in Claude Code  
+**Key Finding:** No longer need to manage local MCP servers for third-party integrations  
+**Insight:** Cloud-based MCP servers provide enterprise-grade tool integration  
+**Application:** Future phases can leverage remote servers for Linear, Sentry, and other tools  
+
+### Technical Learning: Remote vs Local MCP Architecture
+**Local MCP Servers (Current Setup):**
+- 6 servers installed locally: Perplexity, Financial Datasets, SQLite, Puppeteer, GitHub, Brave Search
+- Require local installation and maintenance
+- Full control over configuration and data
+
+**Remote MCP Servers (New Capability):**
+- Vendor-managed servers with OAuth authentication
+- Examples: Linear (project management), Sentry (error tracking)
+- Zero maintenance, automatic updates and scaling
+- Native integration through Anthropic's MCP directory
+
+### Integration Strategy
+**Hybrid Approach Recommendation:**
+- Keep local MCP servers for development tools (SQLite, Puppeteer, GitHub)
+- Adopt remote MCP servers for external service integrations
+- Use OAuth-based authentication for secure cloud connections
+- Leverage vendor-managed scaling and updates
+
+### Future Opportunities
+**Enhanced Development Workflow:**
+- Linear integration for project management and issue tracking
+- Sentry integration for error monitoring and debugging
+- Stay in flow between planning, coding, and issue management
+- Reduced context switching between tools and Claude Code
+
+**Implementation Priority:**
+- Phase 2+: Evaluate remote MCP servers for project management
+- Consider Linear integration for IntelForge development workflow
+- Explore Sentry for production monitoring of scraping operations
+
+### Custom Remote MCP Integration Assessment
+**Context:** Analyzed custom remote MCP integration documentation for IntelForge applicability  
+**Key Finding:** Local MCP setup sufficient for current Phase 1 needs  
+**Insight:** Remote MCP valuable for external API integrations in future phases  
+
+**Technical Comparison:**
+- **Local MCP (Current):** Runs on laptop, full control, 6 servers installed
+- **Remote MCP (Future):** Internet-hosted, external data access, live integrations
+- **Custom Remote MCP:** Build own remote servers for specific use cases
+
+**IntelForge Relevance Assessment:**
+- ✅ **Current local setup adequate** for Phase 1 Reddit scraping
+- 🔄 **Future potential** for real-time external data source integration
+- ⚠️ **Security considerations** critical for personal research system
+- 📋 **Evaluation needed** for Phase 2+ external service requirements
+
+**Decision Framework:**
+- Use local MCP for development tools and controlled data sources
+- Consider remote MCP for live external APIs (financial data, real-time feeds)
+- Evaluate custom remote MCP only if existing solutions insufficient
+- Prioritize security and privacy for personal knowledge extraction
+
+### Remote MCP Implementation Details
+**Context:** Detailed analysis of remote MCP setup and performance from Medium article  
+**Key Finding:** Remote MCP provides significant setup simplification and performance benefits  
+**Technical Details:** Server-Sent Events (SSE) for real-time updates, OAuth authentication  
+
+**Setup Commands:**
+```bash
+# Add remote MCP server
+claude mcp add sse --name "server-name" --url "vendor-endpoint" --scope project
+
+# Authenticate
+/mcp auth server-name
+
+# Check status
+/mcp status
+```
+
+**Live Endpoints:**
+- Linear: `https://mcp.linear.app/sse` (project management)
+- Sentry: `https://mcp.sentry.io/sse` (error monitoring)
+- Additional vendors rolling out endpoints
+
+**Team Configuration (.mcp.json):**
+```json
+{
+  "servers": {
+    "linear": {
+      "type": "sse",
+      "url": "https://mcp.linear.app/sse",
+      "oauth": {
+        "client_id": "your_client_id",
+        "scopes": ["read:issues", "write:issues"]
+      }
+    }
+  }
+}
+```
+
+**Performance Benefits:**
+- Real-time updates via SSE (no polling)
+- Vendor-managed uptime and scaling
+- Efficient bandwidth usage
+- Eliminates local server maintenance
+
+**IntelForge Application:**
+- Current local setup optimal for Phase 1
+- Future phases could leverage real-time financial data feeds
+- Error monitoring for production scraping operations
+- Team configuration not applicable for solo development
+
+---
+
+## 2025-01-06: MCP Server Management Commands
+
+### MCP Server Removal Process
+**Context:** Successfully removed all local MCP servers for reinstallation with updated methods  
+**Key Commands:** Complete workflow for managing MCP server lifecycle  
+
+**List Configured Servers:**
+```bash
+claude mcp list
+```
+
+**Remove Individual Server:**
+```bash
+claude mcp remove server-name
+```
+
+**Remove Multiple Servers:**
+```bash
+claude mcp remove server1 && claude mcp remove server2 && claude mcp remove server3
+```
+
+**Servers Removed:**
+- zen (Docker-based server)
+- perplexity-ask (Node.js server)
+- sqlite-server (Python/uv server)
+- puppeteer-server (Node.js server)
+- github-server (Node.js server)  
+- brave-search (Node.js server)
+
+**Verification:**
+```bash
+claude mcp list
+# Output: "No MCP servers configured. Use `claude mcp add` to add a server."
+```
+
+**Cleanup Results:**
+- All servers removed from user/local config
+- Ready for fresh installation with updated methods
+- No residual configuration conflicts
+
+---
+
+## 2025-01-06: Comprehensive MCP Documentation Analysis
+
+### Discovery: Official MCP Command Reference
+**Context:** Analyzed complete official Anthropic MCP documentation  
+**Key Finding:** Comprehensive command set with advanced features not previously documented  
+**Insight:** MCP provides much richer functionality than initially understood  
+
+**Complete Command Syntax:**
+```bash
+# Local/Stdio servers
+claude mcp add <name> <command> [args...]
+claude mcp add my-server -e API_KEY=123 -- /path/to/server arg1 arg2
+
+# Remote SSE servers  
+claude mcp add --transport sse <name> <url>
+claude mcp add --transport sse api-server https://api.example.com/mcp --header "X-API-Key: key"
+
+# Remote HTTP servers
+claude mcp add --transport http <name> <url>
+claude mcp add --transport http secure-server https://api.example.com/mcp --header "Authorization: Bearer token"
+
+# JSON configuration
+claude mcp add-json <name> '<json>'
+
+# Import from Claude Desktop
+claude mcp add-from-claude-desktop
+```
+
+**Scope Management Strategy:**
+- **Local scope (default):** Personal, project-specific servers
+- **Project scope:** Team-shared via `.mcp.json` file (version controlled)
+- **User scope:** Cross-project personal servers
+
+**Advanced Features Discovered:**
+1. **Resource References:** `@server:protocol://resource/path` for external data
+2. **Slash Commands:** `/mcp__servername__promptname` for server-exposed prompts
+3. **OAuth Authentication:** Automated via `/mcp` command interface
+4. **Claude as Server:** `claude mcp serve` exposes Claude tools to other clients
+
+**IntelForge Implementation Strategy:**
+- Use local scope for development-specific servers (SQLite, Puppeteer)
+- Consider project scope for team collaboration (future phases)
+- Leverage resource references for external knowledge sources
+- Explore slash commands for automated research workflows
+
+**Security Considerations:**
+- Official warning: "Use third party MCP servers at your own risk"
+- Prompt injection risks with internet-connected servers
+- OAuth 2.0 for secure authentication with remote services
+- Project scope requires approval for team-shared servers

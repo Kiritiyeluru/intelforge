@@ -169,7 +169,20 @@ When you encounter a new problem:
 ### Problem: MCP server not responding
 **Symptoms:** Tools show as available but don't return results  
 **Solution:** Check API quotas, restart Claude Code, verify server status  
-**Prevention:** Monitor API usage and set up alerts for quota limits  
+**Prevention:** Monitor API usage and set up alerts for quota limits
+
+### Problem: All MCP servers failed to connect
+**Symptoms:** `/mcp` command returns "all mcp servers failed to connect"  
+**Root Cause:** Outdated or broken MCP server configurations  
+**Solution:** Complete MCP server reset using removal commands  
+
+**Step-by-step fix:**
+1. List current servers: `claude mcp list`
+2. Remove all servers: `claude mcp remove server-name` for each
+3. Verify cleanup: `claude mcp list` should show "No MCP servers configured"
+4. Reinstall using updated methods
+
+**Prevention:** Use consistent installation methods, avoid mixing approaches  
 
 ---
 
@@ -196,4 +209,5 @@ git log --oneline -10
 # MCP server management
 claude mcp list
 claude mcp get <server_name>
+claude mcp remove <server_name>
 ```
