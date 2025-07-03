@@ -98,6 +98,8 @@ If the answer is no — **keep it simple**.
 | `phase_04_pdfs.py` | Extract and summarize research papers and PDFs |
 | `phase_05_summarizer.py` | Use GPT to auto-clean, tag, and summarize |
 | `phase_06_curator.py` | Organize all outputs into markdown vault |
+| `phase_07_article_organizer.py` | Auto-organize saved articles with AI-ready processing ✅ |
+| `phase_08_ai_processor.py` | Semantic search with embeddings and vector database ✅ |
 
 ---
 
@@ -106,13 +108,18 @@ If the answer is no — **keep it simple**.
 ```
 
 intelforge/
-├── phase\_01\_github.py       # Modular scraper (self-contained)
+├── phase\_XX\_module.py       # Self-contained phase modules
 ├── config.py                # Simple settings and API keys
 ├── vault/
 │   ├── notes/               # Saved markdown outputs
 │   └── logs/                # Log files and error traces
+├── knowledge_management/     # Article organization system
+│   ├── intake/              # Drop folder for new articles
+│   ├── articles/            # Auto-categorized articles
+│   ├── docs/                # Project tracking & decisions
+│   └── config/              # Categorization rules
 ├── prompts/
-│   └── github\_scraper.md    # Claude/GPT prompt used for generation
+│   └── templates/           # Claude/GPT prompts for generation
 ├── docs/
 │   └── development\_checklist.md  # Reusable checklist for building each module
 ├── README.md
@@ -209,5 +216,86 @@ This project is personal and private, but credits go to:
 | [`docs/find_vs_build.md`](docs/find_vs_build.md) | Helps decide whether to build from scratch or wrap existing tools |
 | [`prompts/find_tools_template.md`](prompts/find_tools_template.md) | Reusable prompt template for Claude/GPT to search for prebuilt tools before coding |
 | [`docs/development_checklist.md`](docs/development_checklist.md) | End-to-end checklist for building each module with AI help |
+| [`docs/scraping_tools_recommendations.md`](docs/scraping_tools_recommendations.md) | Comprehensive scraping tools analysis and recommendations for IntelForge |
+| [`phase_07_article_organizer.py`](phase_07_article_organizer.py) | Auto-organize saved articles with AI-ready processing |
+| [`phase_08_ai_processor.py`](phase_08_ai_processor.py) | Semantic search with embeddings and vector database |
 
+## 🗂️ Knowledge Management System
+
+**Current Status:** Phases 7 & 8 operational with 47 articles organized + AI search
+
+## 🪝 Claude Code Hooks Integration
+
+**Current Status:** 3 automation hooks configured for seamless workflow
+
+IntelForge leverages Claude Code's hook system to automate critical development tasks:
+
+### ✅ Active Hooks
+
+| Hook Type | Trigger | Purpose |
+|-----------|---------|---------|
+| **Bash Command Logging** | PreToolUse (Bash) | Logs all shell commands to `~/.claude/bash-command-log.txt` for debugging |
+| **Phase File Validation** | PreToolUse (Write/Edit) | Enforces `phase_XX_name.py` naming convention |
+| **Knowledge Auto-Organization** | PostToolUse (Write) | Triggers article organizer when files added to `intake/` |
+
+### 🎯 Benefits
+
+- **Consistency**: Automatic enforcement of naming conventions
+- **Visibility**: Complete audit trail of all operations
+- **Efficiency**: Auto-organization of knowledge without manual intervention
+- **Reliability**: Workflow automation reduces human error
+
+### 🔧 Hook Configuration
+
+Hooks are configured in `.claude/settings.json` and activate automatically. To modify:
+
+1. **Via UI**: Use `/hooks` command in Claude Code terminal
+2. **Via File**: Edit `.claude/settings.json` directly
+3. **Scope**: Project-level (applies to IntelForge only)
+
+**Configuration Location**: `.claude/settings.json` → `"hooks"` section
+
+### Auto-Organization (Phase 7) ✅
+**Workflow:**
+1. Save new articles to `knowledge_management/intake/`
+2. Run `python phase_07_article_organizer.py` to auto-categorize  
+3. Articles moved to organized folders based on content analysis
+4. Categories: claude_mcp, web_scraping, ai_workflows, productivity
+
+**Commands:**
+```bash
+# Test organization (safe)
+python phase_07_article_organizer.py --dry-run
+
+# Organize articles once
+python phase_07_article_organizer.py
+
+# Watch continuously  
+python phase_07_article_organizer.py --watch
 ```
+
+### AI-Powered Semantic Search (Phase 8) ✅
+**Setup:**
+```bash
+# Install dependencies
+pip install sentence-transformers faiss-cpu numpy
+
+# Build vector database (one-time)
+python phase_08_ai_processor.py --build
+```
+
+**Search Commands:**
+```bash
+# Semantic search examples
+python phase_08_ai_processor.py --search "MCP servers"
+python phase_08_ai_processor.py --search "web scraping Python libraries"
+python phase_08_ai_processor.py --search "Claude Code productivity tips"
+```
+
+**Technical Details:**
+- 1,683 chunks processed from 47 articles
+- 384-dimensional embeddings (sentence-transformers)
+- FAISS vector database (4MB total)
+- <1 second search time, 0.7-0.8+ similarity scores
+- 100% local, no cloud dependencies
+

@@ -66,5 +66,38 @@
       "*.pyc",
       ".env"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '\"\\(.tool_input.command) - \\(.tool_input.description // \"No description\")\"' >> ~/.claude/bash-command-log.txt"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -E '^phase_[0-9]{2}_.*\.py || echo 'Use phase_XX_name.py format'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'knowledge_management/intake' && python /home/kiriti/alpha_projects/intelforge/phase_07_article_organizer.py --dry-run || true"
+          }
+        ]
+      }
+    ]
   }
 }
