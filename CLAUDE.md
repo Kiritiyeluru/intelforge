@@ -129,9 +129,30 @@ Content with [[wikilinks]] and #tags
 
 ## Current Phase Priority
 
-**Phase 1: Reddit Scraping** - Implement PRAW-based extraction from trading subreddits
+**Unified Scraping Framework** - Complete modular scraping system ✅ COMPLETE
+**Phase 1: Reddit Scraping** - PRAW-based extraction from trading subreddits ✅ COMPLETE  
+**Phase 2: GitHub Mining** - PyGitHub-based repository and documentation extraction ✅ COMPLETE
+**Phase 3: Web Scraping** - httpx + selectolax for blogs and articles ✅ COMPLETE
 **Phase 7: Knowledge Management** - Auto-organize articles with AI-ready processing pipeline ✅ COMPLETE
 **Phase 8: AI Processing** - Semantic search with embeddings and vector database ✅ COMPLETE
+
+## New Scraping Framework Components
+
+**Base Framework** (`scraping_base.py`):
+- Unified base class with rate limiting, user-agent rotation, retry logic
+- SQLite storage + Obsidian-compatible markdown output
+- Robots.txt compliance and basic anti-detection
+- Environment variable configuration overrides
+
+**Specialized Scrapers**:
+- `reddit_scraper.py` - PRAW + base framework for r/algotrading, r/investing
+- `github_scraper.py` - PyGitHub + base framework for algorithm repositories  
+- `web_scraper.py` - httpx + selectolax for Medium, Dev.to, blogs
+
+**Automation & Organization**:
+- `scraping_scheduler.py` - Python schedule library for automated runs
+- `data_organizer.py` - Deduplication, organization, and analytics utilities
+- `requirements_scraping.txt` - All dependencies for the framework
 
 ## Development Checklist Reference
 
