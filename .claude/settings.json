@@ -11,18 +11,25 @@
       "WebFetch(domain:arxiv.org)",
       "WebFetch(domain:ssrn.com)",
       "Bash(pip install:*)",
+      "Bash(uv *)",
       "Bash(python phase_*)",
       "Bash(python -m *)",
       "Bash(git status)",
       "Bash(git add *)",
       "Bash(git commit *)",
+      "Bash(git push *)",
       "Bash(ls *)",
+      "Bash(exa *)",
       "Bash(mkdir *)",
       "Bash(touch *)",
       "Bash(echo *)",
       "Bash(cat config/*)",
+      "Bash(bat config/*)",
       "Bash(find vault/*)",
-      "Bash(grep *)"
+      "Bash(fd vault/*)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(btm *)"
     ],
     "deny": [
       "Bash(curl:*)",
@@ -37,14 +44,29 @@
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8000",
     "PYTHONPATH": "/home/kiriti/alpha_projects/intelforge",
     "INTELFORGE_CONFIG": "/home/kiriti/alpha_projects/intelforge/config/config.yaml",
-    "INTELFORGE_VAULT": "/home/kiriti/alpha_projects/intelforge/vault"
+    "INTELFORGE_VAULT": "/home/kiriti/alpha_projects/intelforge/vault",
+    "PATH": "/home/kiriti/.cargo/bin:/home/kiriti/.local/bin:$PATH",
+    "RUST_TOOLS_AVAILABLE": "true"
   },
   "project_preferences": {
     "default_python_version": "python3",
-    "preferred_package_manager": "pip",
+    "preferred_package_manager": "uv",
+    "rust_tools_enabled": true,
+    "performance_optimized": true,
     "code_style": "simple_pythonic",
     "logging_level": "INFO",
     "dry_run_default": true
+  },
+  "rust_tool_aliases": {
+    "grep": "rg",
+    "find": "fd",
+    "cat": "bat",
+    "ls": "exa",
+    "htop": "btm",
+    "pip": "uv",
+    "BeautifulSoup": "selectolax",
+    "requests": "httpx",
+    "pandas": "polars"
   },
   "ai_assistance": {
     "code_generation_style": "modular_functions",
