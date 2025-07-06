@@ -83,7 +83,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -E '^phase_[0-9]{2}_.*\.py || echo 'Use phase_XX_name.py format'"
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -E '^phase_[0-9]{2}_.*\.py' || echo 'Use phase_XX_name.py format'"
           }
         ]
       }
@@ -94,7 +94,43 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'knowledge_management/intake' && python /home/kiriti/alpha_projects/intelforge/phase_07_article_organizer.py --dry-run || true"
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'knowledge_management/intake' && python3 /home/kiriti/alpha_projects/intelforge/phase_07_article_organizer.py --dry-run || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$CLAUDE_TOOL_INPUT' | jq -r '.command // empty' | grep -E '^python (scrapers/|phase_|scripts/phase_)' && python3 /home/kiriti/alpha_projects/intelforge/scripts/hooks/scraping_session_logger.py \"$CLAUDE_TOOL_INPUT\" \"$CLAUDE_TOOL_OUTPUT\" || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$CLAUDE_FILE_PATHS' | grep -q '\\.py$' && python3 /home/kiriti/alpha_projects/intelforge/scripts/hooks/dependency_intelligence.py \"$CLAUDE_FILE_PATHS\" || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$CLAUDE_FILE_PATHS' | grep -q '\\.py$' && python3 /home/kiriti/alpha_projects/intelforge/scripts/hooks/module_structure_guardian.py \"$CLAUDE_FILE_PATHS\" || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$CLAUDE_FILE_PATHS' | grep -q 'config/config.yaml' && python3 /home/kiriti/alpha_projects/intelforge/scripts/hooks/config_change_propagator.py \"$CLAUDE_FILE_PATHS\" || true"
           }
         ]
       }

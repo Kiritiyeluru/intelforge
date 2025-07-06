@@ -17,18 +17,22 @@
 
 - **ALWAYS** check for existing libraries/tools before building custom logic
 - Use `@prompts/find_tools_template.md` before starting any new module
-- Refer to `@docs/find_vs_build.md` for decision framework
-- **Check `@docs/scraping_tools_recommendations.md` for vetted scraping tools and libraries**
+- Refer to `@guidance/core_essentials/find_vs_build.md` for decision framework
+- **Check `@guidance/core_essentials/scraping_tools_recommendations.md` for vetted scraping tools and libraries**
 - Wrap existing tools rather than reimplementing common functionality
 
 ## Development Workflow
 
 ### Claude Code Hooks Integration
 
-**3 Active Automation Hooks:**
+**7 Active Automation Hooks:**
 - **Bash Command Logging** (PreToolUse): Logs all shell commands to `~/.claude/bash-command-log.txt`
 - **Phase File Validation** (PreToolUse): Enforces `phase_XX_name.py` naming convention
 - **Knowledge Auto-Organization** (PostToolUse): Auto-triggers article organizer for `intake/` files
+- **Scraping Session Logger** (PostToolUse): Tracks scraping activities and performance metrics
+- **Dependency Intelligence** (PostToolUse): Auto-tracks imports and updates requirements
+- **Module Structure Guardian** (PostToolUse): Enforces consistent code patterns
+- **Config Change Propagator** (PostToolUse): Propagates config changes automatically
 
 **Configuration**: Located in `.claude/settings.json` → `"hooks"` section. Modify via `/hooks` command or direct file editing.
 
@@ -36,26 +40,24 @@
 
 1. **Research existing solutions** using find_tools_template.md
 2. **Follow development checklist** from `@knowledge_docs/Reusable_Development_Checklist_for_Each_Module.md`
-3. **Check current roadmap** in `@cline_docs/projectRoadmap.md`
-4. **Update current task** in `@cline_docs/currentTask.md`
+3. **Check current roadmap** in `@session_docs/CURRENT_PROJECT_PLAN.md`
+4. **Update current task** in `@session_docs/CURRENT_PROJECT_PLAN.md`
+5. **Review maintenance strategy** in `@guidance/operations/claude_code_hooks_maintenance_plan.md` for long-term code sustainability
 
 ### Session Management (CRITICAL - Always Follow)
 
 **Before every session:**
-- Read `current_task.md` - what's actively being worked on
-- Read `next_task.md` - planned priorities for this session  
-- Read `session_summary.md` - recent progress and key decisions
-- Follow `session_checklist.md` for consistent workflow
+- Read `session_docs/CURRENT_PROJECT_PLAN.md` - consolidated project status and current work
+- Follow `session_docs/session_checklist.md` for consistent workflow (if needed)
 
 **During development:**
-- Update `current_task.md` with progress and blockers
-- Log decisions in `docs/decision_log.md` with rationale
-- Document solutions in `docs/troubleshooting_guide.md`
-- Track config changes in `docs/config_changelog.md`
+- Update `session_docs/CURRENT_PROJECT_PLAN.md` with progress and current focus
+- Log decisions in `guidance/project_intelligence/decision_log.md` with rationale
+- Document solutions in `guidance/core_essentials/troubleshooting_guide.md`
+- Track config changes in `guidance/operations/config_changelog.md`
 
 **End of every session (MANDATORY):**
-- Update all three handover files: `current_task.md`, `next_task.md`, `session_summary.md`
-- Follow end-of-session checklist in `session_checklist.md`
+- Update `session_docs/CURRENT_PROJECT_PLAN.md` with accomplishments and next priorities
 - Commit with proper phase_XX: format
 
 ### Code Structure Standards
@@ -71,12 +73,28 @@
 
 ```text
 intelforge/
-├── phase_XX_module.py     # Self-contained phase modules
-├── config/config.yaml     # Centralized configuration
+├── session_docs/          # Session management & status tracking
+│   ├── current_task.md    # What's actively being worked on
+│   ├── next_task.md       # Planned priorities for next session
+│   ├── session_summary.md # Recent progress and key decisions
+│   └── session_checklist.md # Consistent workflow checklist
+├── scrapers/             # All scraping modules
+│   ├── phase_01_reddit.py # Reddit scraper implementation
+│   ├── phase_02_github.py # GitHub scraper implementation
+│   ├── reddit_scraper.py  # Unified Reddit scraper
+│   ├── github_scraper.py  # Unified GitHub scraper
+│   └── web_scraper.py     # Web/blog scraper
+├── scripts/              # Utility scripts & processing
+│   ├── scraping_base.py   # Base scraping framework
+│   ├── scraping_scheduler.py # Automation scheduler
+│   ├── data_organizer.py  # Data organization utilities
+│   ├── phase_07_article_organizer.py # Auto-categorization
+│   └── phase_08_ai_processor.py # AI semantic search
+├── config/config.yaml    # Centralized configuration
 ├── vault/
 │   ├── notes/            # Scraped content (Obsidian format)
 │   └── logs/             # Operation logs
-├── knowledge_management/  # Article organization system
+├── knowledge_management/ # Article organization system
 │   ├── intake/           # Drop folder for new articles
 │   ├── articles/         # Auto-categorized articles
 │   ├── docs/             # Project tracking & decisions
@@ -89,7 +107,7 @@ intelforge/
 
 ## Technical Standards
 
-### Web Scraping (see `@docs/scraping_tools_recommendations.md` for details)
+### Web Scraping (see `@guidance/core_essentials/scraping_tools_recommendations.md` for details)
 
 - **Static Content**: selectolax + httpx (high-performance)
 - **Dynamic Content**: Playwright (modern, reliable)
@@ -127,14 +145,23 @@ Content with [[wikilinks]] and #tags
 - **Ethical scraping**: Respect robots.txt and rate limits
 - **Personal use only**: Non-commercial research purposes
 
-## Current Phase Priority
+## Current Project Status
 
-**Unified Scraping Framework** - Complete modular scraping system ✅ COMPLETE
-**Phase 1: Reddit Scraping** - PRAW-based extraction from trading subreddits ✅ COMPLETE  
-**Phase 2: GitHub Mining** - PyGitHub-based repository and documentation extraction ✅ COMPLETE
-**Phase 3: Web Scraping** - httpx + selectolax for blogs and articles ✅ COMPLETE
-**Phase 7: Knowledge Management** - Auto-organize articles with AI-ready processing pipeline ✅ COMPLETE
-**Phase 8: AI Processing** - Semantic search with embeddings and vector database ✅ COMPLETE
+**Project Status:** Production Ready → Performance Enhancement Phase  
+**Current Phase:** Phase 1 Optimization - Performance Upgrades (HIGH PRIORITY)
+
+### ✅ **COMPLETED & OPERATIONAL**
+- **Unified Scraping Framework** - Complete modular scraping system ✅ COMPLETE
+- **Phase 1: Reddit Scraping** - PRAW-based extraction from trading subreddits ✅ COMPLETE  
+- **Phase 2: GitHub Mining** - PyGitHub-based repository and documentation extraction ✅ COMPLETE
+- **Phase 3: Web Scraping** - httpx + selectolax for blogs and articles ✅ COMPLETE
+- **Phase 7: Knowledge Management** - Auto-organize articles with AI-ready processing pipeline ✅ COMPLETE
+- **Phase 8: AI Processing** - Semantic search with embeddings and vector database ✅ COMPLETE
+
+### 🚀 **CURRENT FOCUS: Phase 1 Optimization**
+**Target:** 28x performance gains + modern tooling upgrades  
+**Timeline:** 2-3 hours  
+**Priority:** HIGH - Immediate performance improvements for operational system
 
 ## New Scraping Framework Components
 
@@ -156,7 +183,7 @@ Content with [[wikilinks]] and #tags
 
 ## Development Checklist Reference
 
-Use `@knowledge_docs/Reusable_Development_Checklist_for_Each_Module.md` for every module:
+Use `@guidance/development/Reusable_Development_Checklist_for_Each_Module.md` for every module:
 
 1. Reuse over rebuild
 2. Clear interfaces & modularity  
@@ -199,7 +226,7 @@ Use `@knowledge_docs/Reusable_Development_Checklist_for_Each_Module.md` for ever
 3. Uses sentence-transformers + FAISS for local vector search
 4. 1,683 chunks processed, 384D embeddings, <1s search time
 
-**Current Status:** 47 articles organized, AI search operational, 4MB vector database
+**Current Status:** 59 articles organized, AI search operational, 4MB vector database
 
 ## MCP Integration
 
@@ -265,6 +292,23 @@ claude mcp add-from-claude-desktop  # Import from Claude Desktop
 **Performance Benefits:** Real-time updates via Server-Sent Events, vendor-managed scaling, eliminates local server maintenance.
 
 ## Claude Code Hooks Configuration
+
+**Current Status:** 7 automation hooks active across 6 functional categories
+
+**Active Hooks:**
+- **Bash Command Logging**: Logs all shell commands for debugging (PreToolUse)
+- **Phase File Validation**: Enforces naming conventions (PreToolUse)
+- **Knowledge Auto-Organization**: Auto-triggers article organizer (PostToolUse)
+- **Scraping Session Logger**: Tracks scraping activities and performance metrics (PostToolUse)
+- **Dependency Intelligence**: Auto-tracks imports and updates requirements (PostToolUse)  
+- **Module Structure Guardian**: Enforces consistent code patterns (PostToolUse)
+- **Config Change Propagator**: Propagates config changes automatically (PostToolUse)
+
+**🎯 Next-Level Automation:** See `@guidance/operations/claude_code_hooks_maintenance_plan.md` for comprehensive long-term maintenance strategy including:
+- **Dependency Intelligence**: Auto-track imports and update requirements
+- **Module Structure Guardian**: Enforce consistent code patterns
+- **Documentation Sync Engine**: Keep docs automatically updated
+- **Refactoring Impact Analyzer**: Safe refactoring with change analysis
 
 **Hook Configuration Process:**
 

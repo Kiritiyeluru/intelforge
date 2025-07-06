@@ -1,0 +1,119 @@
+{
+  "core_dependencies": {
+    "web_scraping": {
+      "httpx": ">=0.25.0 - High-performance HTTP client with HTTP/2 and async support",
+      "selectolax": ">=0.3.17 - Ultra-fast HTML parsing (28x faster than BeautifulSoup)",
+      "scrapy": ">=2.11.0 - Production-ready framework for large-scale scraping",
+      "retrying": ">=1.3.4 - Robust retry logic with exponential backoff"
+    },
+    "dynamic_content": {
+      "playwright": ">=1.40.0 - Modern browser automation (35% faster than Selenium)",
+      "undetected-chromedriver": ">=3.5.0 - Stealth browser automation for anti-bot systems"
+    },
+    "api_clients": {
+      "praw": ">=7.7.1 - Reddit API wrapper for r/algotrading, r/investing",
+      "PyGithub": ">=1.59.1 - GitHub API client for repository mining"
+    },
+    "ai_processing": {
+      "sentence-transformers": ">=2.2.0 - Local embeddings for semantic search",
+      "faiss-cpu": ">=1.7.0 - Vector database for similarity search",
+      "numpy": ">=1.24.0 - Numerical processing for embeddings"
+    },
+    "anti_detection": {
+      "scrapy-fake-useragent": ">=1.4.0 - User-agent rotation for Scrapy",
+      "fake-useragent": ">=1.4.0 - Dynamic user-agent strings",
+      "requests[socks]": ">=2.31.0 - SOCKS proxy support for residential proxies"
+    },
+    "data_processing": {
+      "pandas": ">=2.0.0 - Data cleaning and manipulation",
+      "polars": ">=0.20.0 - High-performance DataFrame alternative (10-30x faster)"
+    },
+    "utilities": {
+      "pyyaml": ">=6.0 - Configuration management",
+      "python-dotenv": ">=1.0.0 - Environment variables",
+      "schedule": ">=1.2.0 - Task scheduling"
+    },
+    "future_rust_components": {
+      "reqwest": "High-performance HTTP client (2-10x faster than Python)",
+      "scraper": "Fast HTML parsing with CSS selectors",
+      "tokio": "Async runtime for concurrent operations",
+      "thirtyfour": "WebDriver client for headless browser automation"
+    }
+  },
+  "architecture_patterns": {
+    "base_class": "scripts.scraping_base.BaseScraper",
+    "inheritance_model": "All scrapers inherit from BaseScraper",
+    "configuration": "YAML-based with environment overrides",
+    "storage": "SQLite database + Obsidian-compatible markdown",
+    "logging": "Comprehensive logging to vault/logs/",
+    "error_handling": "Graceful failures with retry logic"
+  },
+  "performance_strategy": {
+    "static_content": "selectolax + httpx (28x faster parsing, HTTP/2 support)",
+    "dynamic_content": "Playwright (35% faster than Selenium, auto-waiting)",
+    "large_scale": "Scrapy with async pipelines and rate limiting",
+    "rust_integration": "Strategic use for performance-critical bottlenecks",
+    "anti_detection": "Multi-layer approach: proxies + user-agent rotation + stealth",
+    "benchmarks": {
+      "selectolax_vs_beautifulsoup": "3.4s vs 95.4s for 100K operations",
+      "playwright_vs_selenium": "35% faster, 20-30% lower memory usage",
+      "rust_vs_python": "2-10x faster CPU, 3-5x lower memory usage"
+    }
+  },
+  "data_flow": "Source APIs → Scraping Modules → Raw Data → AI Processing → Markdown Output → Obsidian Vault",
+  "security_model": {
+    "approach": "Local-first privacy",
+    "api_keys": "Stored in config/config.yaml (gitignored)",
+    "data_storage": "All local in vault/ directory", 
+    "compliance": "Respects robots.txt and rate limits",
+    "usage": "Personal research only (non-commercial)"
+  },
+  "module_structure": {
+    "template": "#!/usr/bin/env python3\nclass CustomScraper(BaseScraper):\n    def scrape_content(self):\n        pass",
+    "cli_pattern": "argparse with --dry-run and --config options",
+    "error_handling": "try/except with comprehensive logging",
+    "testing": "Manual testing with --dry-run mode"
+  },
+  "output_format": {
+    "markdown_structure": "YAML frontmatter + content",
+    "obsidian_compatibility": "[[wikilinks]] and #tags",
+    "metadata_fields": ["source", "date", "tags", "content_hash", "author"],
+    "file_naming": "source_topic_YYYY-MM-DD.md"
+  },
+  "implementation_roadmap": {
+    "phase_1_optimization": {
+      "priority": "High - Immediate performance gains",
+      "tasks": [
+        "Replace BeautifulSoup with selectolax for 28x performance boost",
+        "Upgrade requests to httpx for HTTP/2 and async support", 
+        "Add Playwright for JavaScript-heavy financial sites",
+        "Implement scrapy-fake-useragent for basic anti-detection"
+      ]
+    },
+    "phase_2_rust_integration": {
+      "priority": "Medium - Strategic performance gains",
+      "tasks": [
+        "Use Rust (reqwest + scraper + tokio) for high-frequency static scraping",
+        "Keep Python for orchestration and complex business logic",
+        "Implement hybrid approach leveraging both languages' strengths",
+        "Profile and optimize performance-critical bottlenecks"
+      ]
+    },
+    "phase_3_production_hardening": {
+      "priority": "Medium - Anti-detection and reliability",
+      "tasks": [
+        "Implement residential proxy rotation (Bright Data/Oxylabs)",
+        "Add sophisticated anti-detection layers (undetected-chromedriver)",
+        "Scale with Docker containerization and systemd scheduling",
+        "Add comprehensive monitoring and alerting"
+      ]
+    }
+  },
+  "tools_to_avoid": {
+    "selenium": "Slower and more resource-intensive than Playwright",
+    "beautifulsoup": "28x slower than selectolax for large-scale parsing", 
+    "custom_http_scrapers": "Violates 'reuse over rebuild' principle",
+    "complex_frameworks": "Goes against simplicity-first philosophy",
+    "commercial_apis": "Unnecessary for personal research use case"
+  }
+}

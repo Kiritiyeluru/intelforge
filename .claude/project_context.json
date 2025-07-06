@@ -1,0 +1,46 @@
+{
+  "project_name": "IntelForge",
+  "project_type": "personal_ai_research_tool",
+  "description": "AI-powered knowledge extraction system for algorithmic trading research",
+  "philosophy": {
+    "core_principle": "We are building a lab notebook, not a SaaS platform",
+    "architecture_approach": "Simplicity First - Reuse Over Rebuild - AI-Cooperative",
+    "development_model": "Solo developer with AI assistance (Claude Code)",
+    "design_patterns": [
+      "One file per phase, flat structure",
+      "Functions over classes when possible", 
+      "Configuration-driven behavior",
+      "AI-regenerable modules"
+    ]
+  },
+  "current_status": {
+    "phase": "Production Ready - All Core Scrapers Operational",
+    "completion_date": "2025-07-04",
+    "total_implementation_time": "5 hours",
+    "active_components": [
+      "Unified scraping framework (scripts/scraping_base.py)",
+      "Reddit scraper (scrapers/reddit_scraper.py)",
+      "GitHub scraper (scrapers/github_scraper.py)", 
+      "Web scraper (scrapers/web_scraper.py)",
+      "Knowledge management system (47 articles organized)",
+      "AI semantic search (1,683 chunks, FAISS vector DB)"
+    ]
+  },
+  "project_structure": {
+    "session_management": "session_docs/",
+    "scrapers": "scrapers/",
+    "utilities": "scripts/", 
+    "configuration": "config/",
+    "output": "vault/notes/",
+    "logs": "vault/logs/",
+    "knowledge_base": "knowledge_management/"
+  },
+  "key_files": {
+    "current_project_plan": "session_docs/CURRENT_PROJECT_PLAN.md",
+    "session_checklist": "session_docs/session_checklist.md",
+    "main_config": "config/config.yaml",
+    "base_framework": "scripts/scraping_base.py",
+    "development_checklist": "guidance/development/Reusable_Development_Checklist_for_Each_Module.md",
+    "scraping_recommendations": "guidance/core_essentials/scraping_tools_recommendations.md"
+  }
+}

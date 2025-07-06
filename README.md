@@ -47,7 +47,7 @@ Rather than reinventing common tools, this system wraps reliable scraping method
 | Rebuild tools from scratch | 📦 Use trusted libraries or wrap open-source tools |
 
 ### 🧠 See Also:
-- [♻️ Find vs Build Checklist](docs/find_vs_build.md)
+- [♻️ Find vs Build Checklist](guidance/core_essentials/find_vs_build.md)
 - [🤖 AI Prompt Template – Tool Discovery](prompts/find_tools_template.md)
 
 
@@ -106,25 +106,42 @@ If the answer is no — **keep it simple**.
 ## 📁 Folder Structure
 
 ```
-
 intelforge/
-├── phase\_XX\_module.py       # Self-contained phase modules
-├── config.py                # Simple settings and API keys
+├── session_docs/            # Session management & status tracking
+│   ├── CURRENT_PROJECT_PLAN.md # Comprehensive project status and current work
+│   ├── session_checklist.md # Consistent workflow checklist
+│   └── README.md           # Session management documentation
+├── scrapers/               # All scraping modules
+│   ├── phase_01_reddit.py  # Reddit scraper implementation
+│   ├── phase_02_github.py  # GitHub scraper implementation
+│   ├── reddit_scraper.py   # Unified Reddit scraper
+│   ├── github_scraper.py   # Unified GitHub scraper
+│   └── web_scraper.py      # Web/blog scraper
+├── scripts/                # Utility scripts & processing
+│   ├── scraping_base.py    # Base scraping framework
+│   ├── scraping_scheduler.py # Automation scheduler
+│   ├── data_organizer.py   # Data organization utilities
+│   ├── phase_07_article_organizer.py # Auto-categorization
+│   └── phase_08_ai_processor.py # AI semantic search
+├── config/
+│   └── config.yaml         # Centralized configuration
 ├── vault/
-│   ├── notes/               # Saved markdown outputs
-│   └── logs/                # Log files and error traces
-├── knowledge_management/     # Article organization system
-│   ├── intake/              # Drop folder for new articles
-│   ├── articles/            # Auto-categorized articles
-│   ├── docs/                # Project tracking & decisions
-│   └── config/              # Categorization rules
+│   ├── notes/              # Saved markdown outputs
+│   └── logs/               # Log files and error traces
+├── knowledge_management/   # Article organization system
+│   ├── intake/             # Drop folder for new articles
+│   ├── articles/           # Auto-categorized articles
+│   ├── docs/               # Project tracking & decisions
+│   └── config/             # Categorization rules
 ├── prompts/
-│   └── templates/           # Claude/GPT prompts for generation
-├── docs/
-│   └── development\_checklist.md  # Reusable checklist for building each module
-├── README.md
-
-````
+│   └── templates/          # Claude/GPT prompts for generation
+├── guidance/               # Development guidance and documentation
+│   ├── core_essentials/    # Find vs build, troubleshooting, tools
+│   ├── development/        # Development checklists and processes
+│   ├── operations/         # Config changes, maintenance plans
+│   └── project_intelligence/ # Decision logs, dependency reports
+└── README.md
+```
 
 ---
 
@@ -138,26 +155,128 @@ intelforge/
 | 🔹 Test-friendly by design | Includes dry-run mode and test data |
 | 🔹 Logging by default | Logs to markdown or plaintext logs |
 
+## 🏗️ Optimized Technical Architecture
+
+### **High-Performance Scraping Stack**
+
+**Static Content (Optimized for Speed):**
+- **selectolax** ⚡ - Ultra-fast HTML parsing (28x faster than BeautifulSoup)
+- **httpx** ⚡ - HTTP/2 support + async capabilities for concurrent requests
+- **Scrapy** ⚡ - Production framework with async pipelines and rate limiting
+
+**Dynamic Content (JavaScript-Heavy Sites):**
+- **Playwright** ⚡ - Modern browser automation (35% faster than Selenium)
+- **undetected-chromedriver** ⚡ - Stealth automation for anti-bot systems
+
+**API Integration:**
+- **PRAW** - Reddit API wrapper for r/algotrading, r/investing
+- **PyGithub** - GitHub repository mining for algorithms
+
+**AI Processing:**
+- **sentence-transformers** + **faiss-cpu** - Local semantic search
+- **numpy** - Numerical processing for embeddings
+
+**Anti-Detection & Stealth:**
+- **scrapy-fake-useragent** - Dynamic user-agent rotation
+- **Residential proxies** - 95-99% success rates for financial sites
+- **Session management** - Cookie persistence and request throttling
+
+**Data Processing:**
+- **pandas** - Data cleaning and manipulation
+- **polars** ⚡ - High-performance alternative (10-30x faster for large datasets)
+
+### **Performance Benchmarks**
+| Tool Comparison | Performance Gain |
+|-----------------|------------------|
+| selectolax vs BeautifulSoup | **28x faster** (3.4s vs 95.4s for 100K operations) |
+| Playwright vs Selenium | **35% faster**, 20-30% lower memory usage |
+| httpx vs requests | HTTP/2 support, native async capabilities |
+| polars vs pandas | **10-30x faster** for large financial datasets |
+
+### **Future Rust Integration**
+For performance-critical components:
+- **reqwest + scraper + tokio** - 2-10x faster CPU performance
+- **thirtyfour** - WebDriver client for headless browser automation
+- **Hybrid approach** - Rust for speed, Python for orchestration
+
+### **Data Flow Architecture**
+```
+Financial Sources → selectolax/httpx → Raw Data → pandas/polars → AI Processing → Obsidian Vault
+     ↓                ↓                   ↓           ↓              ↓
+Playwright/Stealth → Scrapy Pipelines → SQLite → sentence-transformers → Markdown
+```
+
+### **Security & Privacy Model**
+- **Local-first approach** - All data stored locally in vault/ directory
+- **No cloud dependencies** for core functionality
+- **API credentials** in gitignored configuration files
+- **Ethical scraping** - Respects robots.txt and rate limits
+- **Anti-detection layers** - Multi-proxy rotation and stealth techniques
+- **Personal research use only** (non-commercial)
+
+### **📋 Implementation Roadmap**
+
+**Phase 1: Immediate Optimization (High Priority)**
+- [ ] Replace BeautifulSoup with **selectolax** for 28x performance boost
+- [ ] Upgrade requests to **httpx** for HTTP/2 and async support
+- [ ] Add **Playwright** for JavaScript-heavy financial sites
+- [ ] Implement **scrapy-fake-useragent** for basic anti-detection
+
+**Phase 2: Strategic Rust Integration (Medium Priority)**
+- [ ] Use **Rust** (reqwest + scraper + tokio) for high-frequency static scraping
+- [ ] Keep **Python** for orchestration and complex business logic
+- [ ] Implement **hybrid approach** leveraging both languages' strengths
+- [ ] Profile and optimize performance-critical bottlenecks
+
+**Phase 3: Production Hardening (Medium Priority)**
+- [ ] Implement **residential proxy rotation** (Bright Data/Oxylabs)
+- [ ] Add sophisticated **anti-detection layers** (undetected-chromedriver)
+- [ ] Scale with **Docker** containerization and systemd scheduling
+- [ ] Add comprehensive monitoring and alerting
+
 ---
 
 ## 🧪 Getting Started
 
-1. Clone the repo privately.
-2. Add your API keys and settings to `config.py` or `config.yaml`.
-3. Run the health check:
+1. **Clone and Setup**
    ```bash
-   python scripts/health_check.py
-````
-
-4. Start the GitHub fetcher in dry-run mode:
-
-   ```bash
-   python phase_01_github.py --dry-run
+   git clone <your-private-repo>
+   cd intelforge
+   pip install -r requirements_scraping.txt
    ```
-5. Output will be saved to:
 
-   * ✅ Notes: `vault/notes/`
-   * ✅ Logs: `vault/logs/`
+2. **Configure API Keys**
+   ```bash
+   # Create config file
+   cp config/config.yaml.example config/config.yaml
+   # Add your API keys to config/config.yaml
+   ```
+
+3. **Test Scrapers**
+   ```bash
+   # Test Reddit scraper
+   python scrapers/reddit_scraper.py --dry-run --limit 5
+   
+   # Test GitHub scraper  
+   python scrapers/github_scraper.py --dry-run --limit 5
+   
+   # Test web scraper
+   python scrapers/web_scraper.py --dry-run --limit 5
+   ```
+
+4. **AI Processing (Optional)**
+   ```bash
+   # Build semantic search database
+   python scripts/phase_08_ai_processor.py --build
+   
+   # Search your collected content
+   python scripts/phase_08_ai_processor.py --search "trading strategies"
+   ```
+
+5. **Output Locations**
+   - ✅ **Scraped Notes**: `vault/notes/`
+   - ✅ **Operation Logs**: `vault/logs/`
+   - ✅ **Organized Articles**: `knowledge_management/articles/`
 
 ---
 
@@ -175,10 +294,40 @@ intelforge/
 
 ## 🧠 Development Process
 
-* All code is written using AI (Claude or GPT), based on saved prompts in `/prompts`
-* Every script includes a docstring, inline comments, and fallback logic
-* I follow a **10-point development checklist** in `/docs/development_checklist.md`
-* I use versioned prompt files to track how each module was built or fixed
+### AI-Cooperative Development
+* All code written using AI (Claude Code), based on saved prompts in `/prompts/`
+* Every script includes docstring, inline comments, and fallback logic
+* Follow **10-point development checklist** in `/guidance/development/`
+* Use versioned prompt files to track module creation and fixes
+
+### Error Handling Strategy
+- **Comprehensive logging** to `vault/logs/` directory
+- **Dry-run mode** for safe testing before real execution
+- **Graceful failure** with detailed error messages and recovery
+- **Retry logic** with exponential backoff for API failures
+- **Content hashing** for duplicate detection and prevention
+
+### Module Structure Pattern
+```python
+#!/usr/bin/env python3
+"""
+Phase X: [Description]
+Purpose: [One-line purpose]
+Usage: python module.py [--dry-run] [--config config.yaml]
+"""
+
+import logging
+from pathlib import Path
+from scripts.scraping_base import BaseScraper
+
+class CustomScraper(BaseScraper):
+    def scrape_content(self):
+        """Core scraping logic with error handling"""
+        pass
+
+if __name__ == "__main__":
+    # CLI argument parsing and execution
+```
 
 ---
 
@@ -213,47 +362,73 @@ This project is personal and private, but credits go to:
 
 | File | Purpose |
 |------|---------|
-| [`docs/find_vs_build.md`](docs/find_vs_build.md) | Helps decide whether to build from scratch or wrap existing tools |
+| [`guidance/core_essentials/find_vs_build.md`](guidance/core_essentials/find_vs_build.md) | Helps decide whether to build from scratch or wrap existing tools |
 | [`prompts/find_tools_template.md`](prompts/find_tools_template.md) | Reusable prompt template for Claude/GPT to search for prebuilt tools before coding |
-| [`docs/development_checklist.md`](docs/development_checklist.md) | End-to-end checklist for building each module with AI help |
-| [`docs/scraping_tools_recommendations.md`](docs/scraping_tools_recommendations.md) | Comprehensive scraping tools analysis and recommendations for IntelForge |
-| [`phase_07_article_organizer.py`](phase_07_article_organizer.py) | Auto-organize saved articles with AI-ready processing |
-| [`phase_08_ai_processor.py`](phase_08_ai_processor.py) | Semantic search with embeddings and vector database |
+| [`guidance/development/Reusable_Development_Checklist_for_Each_Module.md`](guidance/development/Reusable_Development_Checklist_for_Each_Module.md) | End-to-end checklist for building each module with AI help |
+| [`guidance/core_essentials/scraping_tools_recommendations.md`](guidance/core_essentials/scraping_tools_recommendations.md) | Comprehensive scraping tools analysis and recommendations for IntelForge |
+| [`guidance/operations/claude_code_hooks_maintenance_plan.md`](guidance/operations/claude_code_hooks_maintenance_plan.md) | **Long-term maintenance strategy using Claude Code hooks for automated dependency tracking, pattern enforcement, and documentation sync** |
+| [`scripts/phase_07_article_organizer.py`](scripts/phase_07_article_organizer.py) | Auto-organize saved articles with AI-ready processing |
+| [`scripts/phase_08_ai_processor.py`](scripts/phase_08_ai_processor.py) | Semantic search with embeddings and vector database |
 
 ## 🗂️ Knowledge Management System
 
-**Current Status:** Phases 7 & 8 operational with 47 articles organized + AI search
+**Current Status:** Phases 7 & 8 operational with 59 articles organized + AI search
 
 ## 🪝 Claude Code Hooks Integration
 
-**Current Status:** 3 automation hooks configured for seamless workflow
+**Current Status:** Phase 1 complete - 7 automation hooks active across 6 functional categories
 
-IntelForge leverages Claude Code's hook system to automate critical development tasks:
+IntelForge leverages Claude Code's advanced hook system for automated maintenance and development intelligence:
 
-### ✅ Active Hooks
+### ✅ Phase 1 Hooks - Critical Infrastructure
 
 | Hook Type | Trigger | Purpose |
 |-----------|---------|---------|
-| **Bash Command Logging** | PreToolUse (Bash) | Logs all shell commands to `~/.claude/bash-command-log.txt` for debugging |
+| **Scraping Session Logger** ⭐ | PostToolUse (Bash) | Automatically tracks all scraping activities, performance metrics, and session history |
+| **Dependency Intelligence** ⭐ | PostToolUse (Python files) | Auto-tracks imports, generates requirements.txt, and maintains dependency reports |
+| **Module Structure Guardian** ⭐ | PostToolUse (New Python files) | Enforces IntelForge patterns, validates compliance, and suggests improvements |
+| **Config Change Propagator** ⭐ | PostToolUse (config.yaml) | Propagates config changes to .env.example, docs, and validates syntax |
 | **Phase File Validation** | PreToolUse (Write/Edit) | Enforces `phase_XX_name.py` naming convention |
 | **Knowledge Auto-Organization** | PostToolUse (Write) | Triggers article organizer when files added to `intake/` |
 
-### 🎯 Benefits
+### 🎯 Phase 1 Benefits
 
-- **Consistency**: Automatic enforcement of naming conventions
-- **Visibility**: Complete audit trail of all operations
-- **Efficiency**: Auto-organization of knowledge without manual intervention
-- **Reliability**: Workflow automation reduces human error
+- **Zero Manual Tracking**: All scraping sessions automatically logged with metrics
+- **Dependency Intelligence**: Never forget imports or requirements again
+- **Pattern Enforcement**: New modules automatically follow IntelForge conventions
+- **Config Consistency**: Changes propagate automatically to related files
+- **Complete Audit Trail**: All operations logged for debugging and analysis
+
+### 📊 Generated Intelligence Files
+
+| File | Purpose |
+|------|---------|
+| `.claude/scraping_history.json` | Complete scraping session history with performance metrics |
+| `.claude/dependencies.json` | Live dependency map with usage tracking |
+| `.claude/module_patterns.json` | IntelForge coding patterns and compliance data |
+| `.claude/config_history.json` | Config change tracking and propagation history |
+| `requirements_auto.txt` | Auto-generated requirements from dependency analysis |
+| `guidance/project_intelligence/dependency_report.md` | Human-readable dependency and usage analysis |
+| `guidance/project_intelligence/module_compliance_report.md` | Pattern compliance status and suggestions |
+| `guidance/operations/config_changelog.md` | Detailed config change history |
 
 ### 🔧 Hook Configuration
 
-Hooks are configured in `.claude/settings.json` and activate automatically. To modify:
+Hooks are configured in `.claude/settings.json` and run automatically. Phase 1 implementation includes:
 
-1. **Via UI**: Use `/hooks` command in Claude Code terminal
-2. **Via File**: Edit `.claude/settings.json` directly
-3. **Scope**: Project-level (applies to IntelForge only)
+- **6 active hooks** covering critical development workflows
+- **Automatic execution** on file changes and command runs
+- **Intelligent filtering** to avoid false triggers
+- **Error handling** with graceful fallbacks
 
 **Configuration Location**: `.claude/settings.json` → `"hooks"` section
+
+### 🚀 Future Phases
+
+**Phase 2 (Planned)**: Documentation automation, session context maintenance
+**Phase 3 (Planned)**: Advanced refactoring safety, knowledge base optimization
+
+See [`guidance/operations/claude_code_hooks_maintenance_plan.md`](guidance/operations/claude_code_hooks_maintenance_plan.md) for complete strategy.
 
 ### Auto-Organization (Phase 7) ✅
 **Workflow:**
@@ -293,7 +468,7 @@ python phase_08_ai_processor.py --search "Claude Code productivity tips"
 ```
 
 **Technical Details:**
-- 1,683 chunks processed from 47 articles
+- 1,683 chunks processed from 59 articles
 - 384-dimensional embeddings (sentence-transformers)
 - FAISS vector database (4MB total)
 - <1 second search time, 0.7-0.8+ similarity scores

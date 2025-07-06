@@ -1,0 +1,76 @@
+{
+  "last_updated": "2025-07-04T18:40:22.367402",
+  "files": {
+    "scrapers/reddit_scraper.py": {
+      "last_analyzed": "2025-07-04T18:40:22.367386",
+      "imports": [
+        {
+          "type": "import",
+          "module": "argparse",
+          "alias": null,
+          "line": 15,
+          "classification": "stdlib"
+        },
+        {
+          "type": "import",
+          "module": "os",
+          "alias": null,
+          "line": 16,
+          "classification": "stdlib"
+        },
+        {
+          "type": "from",
+          "module": "typing",
+          "name": "Dict",
+          "alias": null,
+          "line": 17,
+          "classification": "stdlib"
+        },
+        {
+          "type": "from",
+          "module": "typing",
+          "name": "List",
+          "alias": null,
+          "line": 17,
+          "classification": "stdlib"
+        },
+        {
+          "type": "from",
+          "module": "typing",
+          "name": "Optional",
+          "alias": null,
+          "line": 17,
+          "classification": "stdlib"
+        },
+        {
+          "type": "import",
+          "module": "praw",
+          "alias": null,
+          "line": 19,
+          "classification": "third-party"
+        },
+        {
+          "type": "from",
+          "module": "dotenv",
+          "name": "load_dotenv",
+          "alias": null,
+          "line": 20,
+          "classification": "unknown"
+        },
+        {
+          "type": "from",
+          "module": "scripts.scraping_base",
+          "name": "BaseScraper",
+          "alias": null,
+          "line": 22,
+          "classification": "local"
+        }
+      ]
+    }
+  },
+  "imports": {},
+  "packages": {},
+  "warnings": [
+    "Unknown package 'dotenv' in scrapers/reddit_scraper.py:20"
+  ]
+}

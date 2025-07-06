@@ -19,7 +19,7 @@ from typing import Dict, List, Optional
 from github import Github
 from dotenv import load_dotenv
 
-from scraping_base import BaseScraper
+from scripts.scraping_base import BaseScraper
 
 
 class GitHubScraper(BaseScraper):

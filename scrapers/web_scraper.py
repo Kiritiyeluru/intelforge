@@ -21,7 +21,7 @@ from urllib.parse import urljoin, urlparse
 import selectolax.parser as sp
 from dotenv import load_dotenv
 
-from scraping_base import BaseScraper
+from scripts.scraping_base import BaseScraper
 
 
 class WebScraper(BaseScraper):
