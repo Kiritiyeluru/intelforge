@@ -374,6 +374,126 @@ This project is personal and private, but credits go to:
 
 **Current Status:** Phases 7 & 8 operational with 59 articles organized + AI search
 
+## 🔌 MCP Server Integration
+
+**Current Status:** Production-ready MCP ecosystem with 25+ servers available
+
+IntelForge features a comprehensive Model Context Protocol (MCP) server infrastructure for enhanced AI capabilities:
+
+### ✅ Core Active Servers
+
+| Server | Type | Status | Purpose |
+|--------|------|--------|---------|
+| **GitHub** | Remote HTTP | ✅ Operational | Repository management, notifications, issues, PRs |
+| **Filesystem** | Local | ✅ Operational | File system operations within project |
+| **Memory** | Local | ✅ Operational | Knowledge graph and memory management |
+
+### 🕷️ IntelForge MCP Server Ecosystem
+
+**📁 Complete Setup:** [`mcp_servers/`](mcp_servers/) - Organized MCP server management system
+
+| Category | Servers Available | Installation |
+|----------|------------------|--------------|
+| **🕷️ Scraping & Crawling** | 25+ servers (Puppeteer, Firecrawl, Playwright, etc.) | `./scripts/install_scraping.sh` |
+| **🚀 Productivity** | 6+ servers (Git, SQLite, Everything, etc.) | `./scripts/install_productivity.sh` |
+| **🔍 Search & Discovery** | 8+ servers (Brave, Tavily, Kagi, Perplexity, etc.) | Interactive installer |
+| **📊 Data Processing** | 5+ servers (SQLite, PostgreSQL, Memory, etc.) | `./scripts/install.sh` |
+
+### 🎯 Key MCP Features
+
+**Scraping Enhancement:**
+- **Anti-Bot Protection** - Scrapling Fetch, Oxylabs enterprise proxies
+- **Modern Automation** - Playwright, Puppeteer with stealth features  
+- **Production Scale** - Firecrawl with rate limiting and PDF processing
+- **Search Integration** - Brave Search, Tavily AI-powered discovery
+
+**Development Productivity:**
+- **Repository Management** - GitHub API integration, local Git operations
+- **Data Storage** - SQLite databases, persistent memory graphs
+- **File Operations** - Secure filesystem access with configurable permissions
+
+**Installation & Management:**
+- **Interactive Setup** - Menu-driven installation with custom options
+- **Multiple Configurations** - Pre-configured templates for different use cases
+- **Health Monitoring** - Status scripts and comprehensive troubleshooting
+- **Easy Maintenance** - Update, backup, and recovery scripts
+
+### 🚀 Quick Setup
+
+```bash
+# Navigate to MCP servers directory
+cd mcp_servers/
+
+# Interactive installation with menu options
+./scripts/install.sh
+
+# Or install specific categories
+./scripts/install_scraping.sh     # Web scraping servers
+./scripts/install_productivity.sh # Development servers
+
+# Check installation status
+./scripts/status.sh
+```
+
+**Configuration Templates:**
+- `claude_desktop_complete.json` - Full server ecosystem
+- `claude_desktop_scraping.json` - Scraping-focused setup  
+- `claude_desktop_productivity.json` - Development-focused setup
+- `claude_desktop_custom.json` - Custom installation options
+
+### 📚 MCP Documentation & Resources
+
+**Comprehensive Documentation:** All MCP server details, configurations, and troubleshooting available in [`mcp_servers/`](mcp_servers/)
+
+**Quick Reference:**
+
+- **Installation Guide**: [`mcp_servers/docs/installation.md`](mcp_servers/docs/installation.md)
+- **Server Catalog**: [`mcp_servers/README.md`](mcp_servers/README.md) - 25+ servers categorized by use case
+- **Troubleshooting**: [`mcp_servers/docs/troubleshooting.md`](mcp_servers/docs/troubleshooting.md)
+- **Configuration Templates**: [`mcp_servers/config/`](mcp_servers/config/) - Ready-to-use Claude Desktop configs
+
+**Management Commands:**
+
+```bash
+# Check all server status
+./mcp_servers/scripts/status.sh
+
+# Health check with resource monitoring  
+./mcp_servers/scripts/health_check.sh
+
+# Manage Claude Desktop servers
+claude mcp list                    # List active servers
+claude mcp get <server-name>       # Get server details
+```
+
+### 🎯 IntelForge MCP Integration Strategy
+
+**Phase 1: GitHub Integration (Complete)**
+- ✅ Repository scraping enhancement
+- ✅ Automated issue tracking for project management
+- ✅ PR-based knowledge contribution workflow
+
+**Phase 2: Planned Extensions**
+- **Linear MCP** (`https://mcp.linear.app/sse`) - Project management
+- **Sentry MCP** (`https://mcp.sentry.io/sse`) - Error monitoring
+- **Custom MCP Servers** - Domain-specific financial data APIs
+
+**Technical Architecture:**
+```
+IntelForge → Claude Code → GitHub MCP Server → GitHub API
+     ↓            ↓              ↓               ↓
+Scraping → AI Processing → Repository Ops → External APIs
+```
+
+### 📚 MCP Documentation
+
+For detailed MCP server setup and management:
+- **Local Setup**: `docs/Run MCP Servers In Seconds With Docker.md`
+- **Remote Servers**: Use vendor-managed endpoints for external services
+- **Configuration**: `.claude/settings.json` → `"mcpServers"` section
+
+**Security Note:** MCP servers provide powerful API access. Always verify endpoints and use secure authentication methods.
+
 ## 🪝 Claude Code Hooks Integration
 
 **Current Status:** Phase 1 complete - 7 automation hooks active across 6 functional categories

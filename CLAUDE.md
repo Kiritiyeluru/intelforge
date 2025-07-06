@@ -291,6 +291,147 @@ claude mcp add-from-claude-desktop  # Import from Claude Desktop
 
 **Performance Benefits:** Real-time updates via Server-Sent Events, vendor-managed scaling, eliminates local server maintenance.
 
+### MCP Server Installation Protocol
+
+**CRITICAL:** After installing each MCP server, follow this comprehensive testing and documentation protocol:
+
+#### 🔍 **Post-Installation Testing Checklist**
+
+1. **Functionality Verification**
+   ```bash
+   # Test server startup
+   claude mcp list
+   
+   # Test basic functionality
+   # (Send test query to verify server responds)
+   
+   # Check logs for errors
+   tail -f ~/.claude/logs/mcp_servers.log
+   ```
+
+2. **Performance Assessment**
+   ```bash
+   # Monitor resource usage during testing
+   htop -p $(pgrep -f "mcp-server")
+   
+   # Test response times with sample queries
+   time <test-command>
+   
+   # Check memory consumption
+   ps aux | grep mcp-server | awk '{print $4, $11}'
+   ```
+
+3. **Integration Testing**
+   - Test with existing IntelForge workflows
+   - Verify compatibility with current scraping pipeline
+   - Test chunking/processing capabilities if applicable
+   - Validate output format (Markdown, JSON, etc.)
+
+#### 📋 **Installation Documentation Template**
+
+**MANDATORY:** Create detailed installation documentation for each server in `mcp_servers/docs/installations/`:
+
+**File:** `mcp_servers/docs/installations/[server-name]_installation.md`
+
+```markdown
+# [Server Name] Installation Documentation
+
+## Installation Details
+- **Installation Date**: [Date]
+- **Installation Method**: [git clone / npm install / pip install]
+- **Dependencies**: [List all dependencies]
+- **Configuration Location**: [Path to config files]
+
+## Choices Made & Rationale
+- **Transport Type**: [stdio/http/sse] - Why this choice?
+- **Storage Location**: [Path] - Why this directory structure?
+- **API Keys**: [Required keys] - How obtained and stored
+- **Performance Settings**: [Key settings] - Rationale for values
+
+## Installation Process
+1. **Preparation Steps**
+   - Dependencies installed
+   - Directory structure created
+   - API keys obtained
+
+2. **Installation Commands**
+   ```bash
+   [Exact commands used]
+   ```
+
+3. **Configuration Steps**
+   ```bash
+   [Configuration commands and file edits]
+   ```
+
+4. **Testing & Verification**
+   ```bash
+   [Commands used to verify installation]
+   ```
+
+## Lessons Learned
+- **Challenges Encountered**: [Issues faced during installation]
+- **Solutions Applied**: [How challenges were resolved]
+- **Time Investment**: [Actual time spent on installation]
+- **Performance Observations**: [Initial performance notes]
+
+## Integration Notes
+- **IntelForge Compatibility**: [How it integrates with existing workflow]
+- **Optimal Use Cases**: [Best scenarios for this server]
+- **Limitations Discovered**: [Any limitations or constraints]
+- **Future Optimization**: [Potential improvements identified]
+
+## Configuration Files
+- **Claude Code Config**: [Exact configuration added]
+- **Server Settings**: [Custom settings applied]
+- **Environment Variables**: [Required env vars and values]
+
+## Troubleshooting Guide
+- **Common Issues**: [Problems likely to occur]
+- **Solutions**: [How to resolve each issue]
+- **Debug Commands**: [Useful debugging commands]
+
+## Performance Metrics
+- **Startup Time**: [Seconds to initialize]
+- **Memory Usage**: [RAM consumption]
+- **Response Time**: [Average query response time]
+- **Throughput**: [Requests per minute if applicable]
+
+## Maintenance Requirements
+- **Update Process**: [How to update this server]
+- **Backup Needs**: [What needs backing up]
+- **Monitoring**: [What to monitor for health]
+```
+
+#### 🎯 **Quality Standards**
+
+**Each installation must meet these criteria:**
+- ✅ Server starts successfully and responds to test queries
+- ✅ Integration with Claude Code verified
+- ✅ Performance within acceptable ranges (startup <30s, response <5s)
+- ✅ Complete documentation created with all sections filled
+- ✅ Troubleshooting guide tested with common issues
+- ✅ Integration with existing IntelForge workflow verified
+
+#### 📊 **Post-Installation Actions**
+
+1. **Update Master Documentation**
+   - Add server to `mcp_servers/README.md` status table
+   - Update installation scripts if needed
+   - Add to recommended configurations
+
+2. **Integration Testing**
+   - Test with existing scraping workflows
+   - Verify content processing pipeline if applicable
+   - Update knowledge management system if relevant
+
+3. **Performance Optimization**
+   - Tune configuration settings based on testing
+   - Document optimal settings in server_configs.yaml
+   - Set up monitoring if needed
+
+**ENFORCEMENT:** No MCP server installation is considered complete until full documentation and testing protocol is finished. This ensures maintainable, reliable infrastructure for IntelForge.
+
 ## Claude Code Hooks Configuration
 
 **Current Status:** 7 automation hooks active across 6 functional categories
