@@ -49,6 +49,8 @@ config/config.yaml
 .env
 secrets.yaml
 api_keys.yaml
+# MCP installation summaries may contain API keys
+mcp_servers/docs/installations/installation_summary.md
 
 # Temporary files
 temp/
