@@ -30,6 +30,13 @@ import httpx
 import yaml
 from retrying import retry
 
+# Enhanced user agent rotation (optional)
+try:
+    from fake_useragent import UserAgent
+    FAKE_USERAGENT_AVAILABLE = True
+except ImportError:
+    FAKE_USERAGENT_AVAILABLE = False
+
 
 class BaseScraper:
     """Simple base class for all scrapers with essential functionality."""
@@ -47,7 +54,17 @@ class BaseScraper:
         """Initialize the base scraper with configuration."""
         self.scraper_name = scraper_name
         self.config = self._load_config(config_path)
-        self.session = httpx.Client(timeout=30.0)
+        
+        # Initialize enhanced user agent rotation if available
+        self.ua = UserAgent() if FAKE_USERAGENT_AVAILABLE else None
+        
+        # Create httpx client with HTTP/2 support and connection pooling
+        self.session = httpx.Client(
+            timeout=30.0,
+            http2=True,  # Enable HTTP/2 for better performance
+            limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
+            follow_redirects=True
+        )
         
         # Set up logging
         self._setup_logging()
@@ -121,7 +138,16 @@ class BaseScraper:
             conn.commit()
     
     def _get_random_user_agent(self) -> str:
-        """Get a random user agent string."""
+        """Get a random user agent string with enhanced rotation."""
+        if self.ua and FAKE_USERAGENT_AVAILABLE:
+            try:
+                # Use fake_useragent for more variety
+                return self.ua.random
+            except Exception:
+                # Fallback to static list
+                pass
+        
+        # Use static list as fallback
         return random.choice(self.USER_AGENTS)
     
     def _random_delay(self, min_delay: int = 2, max_delay: int = 5):

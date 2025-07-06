@@ -1,0 +1,22 @@
+[project]
+name = "intelforge"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "faiss-cpu>=1.11.0",
+    "httpx>=0.28.1",
+    "numpy>=2.3.1",
+    "pandas>=2.3.0",
+    "playwright>=1.53.0",
+    "polars>=1.31.0",
+    "praw>=7.8.1",
+    "pygithub>=2.6.1",
+    "python-dotenv>=1.1.1",
+    "pyyaml>=6.0.2",
+    "retrying>=1.4.0",
+    "scikit-learn>=1.7.0",
+    "scrapy-fake-useragent>=1.4.4",
+    "selectolax>=0.3.31",
+    "sentence-transformers>=5.0.0",
+]
