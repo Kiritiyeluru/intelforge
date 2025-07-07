@@ -36,7 +36,7 @@
     "knowledge_base": "knowledge_management/"
   },
   "key_files": {
-    "current_project_plan": "session_docs/CURRENT_PROJECT_PLAN.md",
+    "current_project_plan": "session_docs/PROJECT_STATUS.md",
     "session_checklist": "session_docs/session_checklist.md",
     "main_config": "config/config.yaml",
     "base_framework": "scripts/scraping_base.py",

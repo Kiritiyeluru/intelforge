@@ -95,24 +95,34 @@
 
 1. **Research existing solutions** using find_tools_template.md
 2. **Follow development checklist** from `@knowledge_docs/Reusable_Development_Checklist_for_Each_Module.md`
-3. **Check current roadmap** in `@session_docs/CURRENT_PROJECT_PLAN.md`
-4. **Update current task** in `@session_docs/CURRENT_PROJECT_PLAN.md`
+3. **Check current roadmap** in `@session_docs/PROJECT_STATUS.md`
+4. **Update current task** in `@session_docs/PROJECT_STATUS.md`
 5. **Review maintenance strategy** in `@guidance/operations/claude_code_hooks_maintenance_plan.md` for long-term code sustainability
 
 ### Session Management (CRITICAL - Always Follow)
 
-**Before every session:**
-- Read `session_docs/CURRENT_PROJECT_PLAN.md` - consolidated project status and current work
-- Follow `session_docs/session_checklist.md` for consistent workflow (if needed)
+**🚨 MANDATORY FIRST ACTION - Before every session:**
+- **READ `session_docs/PROJECT_STATUS.md` FIRST** - THIS IS THE ONLY AUTHORITATIVE PROJECT STATUS
+- Check `session_docs/SESSION_HANDOVER.md` for session-specific technical notes
+- Follow established session management protocols
+
+**📍 AUTHORITATIVE PROJECT STATUS LOCATION:**
+`/home/kiriti/alpha_projects/intelforge/session_docs/PROJECT_STATUS.md`
+
+**📋 STREAMLINED DOCUMENTATION STRUCTURE:**
+- `session_docs/PROJECT_STATUS.md` - Comprehensive project status and roadmap
+- `session_docs/SESSION_HANDOVER.md` - Session-specific technical handover notes
+- `session_docs/README.md` - Documentation overview
 
 **During development:**
-- Update `session_docs/CURRENT_PROJECT_PLAN.md` with progress and current focus
+- Update `session_docs/PROJECT_STATUS.md` with progress and current focus
 - Log decisions in `guidance/project_intelligence/decision_log.md` with rationale
 - Document solutions in `guidance/core_essentials/troubleshooting_guide.md`
 - Track config changes in `guidance/operations/config_changelog.md`
 
 **End of every session (MANDATORY):**
-- Update `session_docs/CURRENT_PROJECT_PLAN.md` with accomplishments and next priorities
+- Update `session_docs/PROJECT_STATUS.md` with accomplishments and next priorities
+- Create/update `session_docs/SESSION_HANDOVER.md` with technical details
 - Commit with proper phase_XX: format
 
 ### Code Structure Standards
@@ -129,10 +139,9 @@
 ```text
 intelforge/
 ├── session_docs/          # Session management & status tracking
-│   ├── current_task.md    # What's actively being worked on
-│   ├── next_task.md       # Planned priorities for next session
-│   ├── session_summary.md # Recent progress and key decisions
-│   └── session_checklist.md # Consistent workflow checklist
+│   ├── PROJECT_STATUS.md  # Comprehensive project status and roadmap
+│   ├── SESSION_HANDOVER.md # Session-specific technical handover notes
+│   └── README.md          # Documentation overview
 ├── scrapers/             # All scraping modules
 │   ├── phase_01_reddit.py # Reddit scraper implementation
 │   ├── phase_02_github.py # GitHub scraper implementation

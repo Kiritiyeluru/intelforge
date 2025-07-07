@@ -126,7 +126,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'session_docs/CURRENT_PROJECT_PLAN.md' && echo '✅ Reading AUTHORITATIVE project plan - current strategic direction confirmed' || true"
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'session_docs/PROJECT_STATUS.md' && echo '✅ Reading AUTHORITATIVE project status - current strategic direction confirmed' || true"
           }
         ]
       }
