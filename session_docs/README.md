@@ -2,40 +2,35 @@
 
 ## Documentation Status: CONSOLIDATED ✅
 
-This directory has been reorganized to eliminate confusion and provide a single source of truth for project status.
+This directory provides a single source of truth for project status and session management.
 
 ## Current Active Files
 
 ### 🎯 PRIMARY STATUS FILE
-- **`PROJECT_STATUS.md`** - **USE THIS FILE** for all project status tracking
-  - Consolidated view of all phases and components
-  - Current active work and priorities
-  - System architecture and statistics
-  - Development workflow and commands
-  - Success metrics and risk mitigation
+- **`CURRENT_PROJECT_PLAN.md`** - **AUTHORITATIVE PROJECT PLAN** - READ FIRST
+  - Comprehensive project status and strategic direction
+  - Current phase implementation details  
+  - Repository analysis findings and integration roadmap
+  - Performance benchmarks and success metrics
+  - Risk mitigation and implementation guidance
 
-### 📋 WORKFLOW SUPPORT
+### 📋 SESSION MANAGEMENT
+- **`current_task.md`** - Active work tracking and implementation steps
+- **`next_steps.md`** - Strategic roadmap and future priorities
+- **`completed_tasks.md`** - Session accomplishments and progress tracking
 - **`session_checklist.md`** - Development workflow checklist (if needed)
 - **`README.md`** - This file explaining the documentation structure
 
-## Deprecated Files (Historical Reference Only)
-
-These files contain outdated information from January 2025 and should not be used for current project guidance:
-
-- ~~`current_task.md`~~ - Outdated (January 2025) - Use `PROJECT_STATUS.md` instead
-- ~~`next_task.md`~~ - Outdated (January 2025) - Use `PROJECT_STATUS.md` instead  
-- ~~`session_summary.md`~~ - Outdated (January 2025) - Use `PROJECT_STATUS.md` instead
-
 ## Quick Reference
 
-### ✅ For Project Status
-**READ:** `PROJECT_STATUS.md`
+### ✅ For Project Status and Current Work
+**READ:** `CURRENT_PROJECT_PLAN.md` 
 
 ### ✅ For Development Workflow
-**FOLLOW:** Workflow section in `PROJECT_STATUS.md`
+**FOLLOW:** Session management section in `CURRENT_PROJECT_PLAN.md`
 
-### ✅ For Session Management
-**UPDATE:** `PROJECT_STATUS.md` with current work and accomplishments
+### ✅ For Session Updates
+**UPDATE:** `CURRENT_PROJECT_PLAN.md` with progress and next priorities
 
 ## Integration with Other Documentation
 

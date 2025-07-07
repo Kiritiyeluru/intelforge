@@ -46,7 +46,11 @@
     "INTELFORGE_CONFIG": "/home/kiriti/alpha_projects/intelforge/config/config.yaml",
     "INTELFORGE_VAULT": "/home/kiriti/alpha_projects/intelforge/vault",
     "PATH": "/home/kiriti/.cargo/bin:/home/kiriti/.local/bin:$PATH",
-    "RUST_TOOLS_AVAILABLE": "true"
+    "RUST_TOOLS_AVAILABLE": "true",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "TORCH_CUDA_ARCH_LIST": "8.6",
+    "NVIDIA_VISIBLE_DEVICES": "0",
+    "GPU_ACCELERATION": "true"
   },
   "project_preferences": {
     "default_python_version": "python3",
@@ -55,7 +59,15 @@
     "performance_optimized": true,
     "code_style": "simple_pythonic",
     "logging_level": "INFO",
-    "dry_run_default": true
+    "dry_run_default": true,
+    "gpu_acceleration": {
+      "enabled": true,
+      "device": "cuda",
+      "gpu_model": "RTX_3060", 
+      "cuda_version": "auto_detect",
+      "memory_optimization": true,
+      "frameworks": ["torch", "tensorflow", "cudf", "rapids"]
+    }
   },
   "rust_tool_aliases": {
     "grep": "rg",
@@ -106,6 +118,15 @@
           {
             "type": "command",
             "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -E '^phase_[0-9]{2}_.*\.py' || echo 'Use phase_XX_name.py format'"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '$0' | jq -r '.tool_input.file_path // empty' | grep -q 'session_docs/CURRENT_PROJECT_PLAN.md' && echo '✅ Reading AUTHORITATIVE project plan - current strategic direction confirmed' || true"
           }
         ]
       }
