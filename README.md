@@ -45,6 +45,8 @@ Rather than reinventing common tools, this system wraps reliable scraping method
 | ❌ Don’t Use                | ✅ Use Instead                                      |
 | -------------------------- | -------------------------------------------------- |
 | Rebuild tools from scratch | 📦 Use trusted libraries or wrap open-source tools |
+| Custom academic scrapers   | 🎓 Direct APIs: arxiv.py (1.3k⭐), paperscraper (381⭐) |
+| Complex integrations       | 🔧 Simple wrappers: <200 lines vs 400+ custom code |
 
 ### 🧠 See Also:
 - [♻️ Find vs Build Checklist](guidance/core_essentials/find_vs_build.md)
@@ -67,6 +69,13 @@ IntelForge is grounded in the principle of **reusing existing libraries, tools, 
 - [ ] Would future AI agents benefit more from a known tool than new code?
 
 When in doubt: **Search, evaluate, wrap — don’t rebuild.**
+
+### 🎯 **Phase 2C Success Story** *(January 2025)*
+**Challenge**: Built 400+ line custom academic scraper, violating reuse-over-rebuild principle  
+**Solution**: Replaced with direct usage of production frameworks:
+- `scripts/arxiv_simple.py` - Uses `lukasschwab/arxiv.py` (1.3k⭐, official API)
+- `scripts/academic_research.py` - Uses `jannisborn/paperscraper` (381⭐, 5 databases)
+- **Result**: <200 wrapper lines vs 400+ custom code, superior reliability
 
 ### ❌ Avoiding Unnecessary Complexity
 

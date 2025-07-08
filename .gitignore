@@ -41,9 +41,32 @@ Thumbs.db
 
 # Project-specific
 vault/logs/*.log
+vault/logs/*.txt
+vault/logs/*.json
+vault/logs/*.db
+vault/data/*.db
+vault/vector_db/
 config/config.yaml
 *.tmp
 *.temp
+
+# Generated files and caches
+output/
+profiles/
+knowledge_management/logs/
+knowledge_management/vector_db/
+.claude/session_config.json
+.claude/dependencies.json
+.claude/development_guidance.json
+.claude/project_context.json
+.claude/tech_stack.json
+
+# Test files and temporary URLs
+test_urls.txt
+financial_test_urls.txt
+
+# MCP Docker data
+mcp_servers/docker_data/
 
 # API Keys and Secrets
 .env

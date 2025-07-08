@@ -388,7 +388,125 @@ This document consolidates all GitHub repositories mentioned across multiple dee
 4. **Comprehensive Coverage**: News, academic, forum, and blog content
 5. **Performance**: 6x-240x speed improvements across different scenarios
 
-**Total Repositories Analyzed**: 40+ frameworks and tools  
-**Recommendation Confidence**: High - based on comprehensive GitHub analysis, performance benchmarks, and maintenance assessment  
-**Research Sources**: Multi-platform deep research (Claude Code, ChatGPT, Perplexity)  
-**Last Updated**: January 2025 - Current GitHub statistics and maintenance status
+## 📄 Additional Repositories from Gemini Deep Research
+
+### News & Blog Article Scraping
+
+#### **hailoc12/docbao** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Global news extraction with multi-language support (50+ languages)
+**Strengths**: Extracts titles, keywords, main text; supports multiple languages
+**Best For**: General news extraction, international content
+**Integration**: Good for general news but limited on heavy JS sites
+**Limitations**: May struggle with dynamic content
+**Research Source**: Gemini analysis - updated May 22, 2023
+
+#### **ADGEfficiency/climate-news-db** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Climate change news dataset creation with web application
+**Strengths**: Crawls URLs to JSONL/database, S3 integration, FastAPI, active maintenance
+**Best For**: News data pipeline reference, climate research
+**Integration**: Very good - active project with 6 open PRs
+**Limitations**: Domain-specific to climate news
+**Research Source**: Gemini analysis - updated June 2, 2024
+
+#### **nit-in/newspaper** ⭐ (Analysis Score: 1/5) (NOT RECOMMENDED)
+**Use Case**: Indian newspaper PDF download (ARCHIVED)
+**Strengths**: None - archived project
+**Best For**: Historical reference only
+**Integration**: Poor - archived by owner January 29, 2023
+**Limitations**: Archived, PDF download only, no structured extraction
+**Research Source**: Gemini analysis - archived project
+
+### Academic Paper Scraping
+
+#### **lukasschwab/arxiv.py** ⭐⭐⭐⭐⭐ (Analysis Score: 5/5)
+**Use Case**: Official arXiv API wrapper for metadata and PDF retrieval
+**Strengths**: 1.3k stars, 139 forks, 28 releases, comprehensive metadata, PDF download
+**Best For**: arXiv-focused research, reliable academic metadata
+**Integration**: Excellent - well-maintained, active community (v2.2.0 April 2025)
+**Limitations**: arXiv-specific only
+**Research Source**: Gemini analysis - highly recommended
+
+#### **titipata/arxivpy** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Alternative arXiv API wrapper
+**Strengths**: Similar functionality to arxiv.py, explicit API limits documentation
+**Best For**: arXiv research, API limit-aware applications
+**Integration**: Good but less community engagement than arxiv.py
+**Limitations**: Smaller community (59 stars, 18 forks)
+**Research Source**: Gemini analysis
+
+#### **braun-steven/arxiv-downloader** ⭐⭐ (Analysis Score: 2/5)
+**Use Case**: CLI tool for arXiv PDF downloads
+**Strengths**: Command-line interface, directory specification
+**Best For**: Simple PDF downloading tasks
+**Integration**: Limited - CLI tool, not comprehensive metadata
+**Limitations**: PDF download only, no metadata extraction, less maintained
+**Research Source**: Gemini analysis
+
+#### **joelthchao/arxiv-crawler** ⭐ (Analysis Score: 1/5) (NOT RECOMMENDED)
+**Use Case**: arXiv HTML crawler with SQLite storage
+**Strengths**: None significant
+**Best For**: Not recommended
+**Integration**: Poor - fragile BeautifulSoup parsing, unmaintained
+**Limitations**: HTML parsing fragility, no releases, 0 open issues/PRs
+**Research Source**: Gemini analysis - not recommended
+
+### General-Purpose Frameworks
+
+#### **omkarcloud/botasaurus** ⭐⭐⭐⭐⭐ (Analysis Score: 5/5)
+**Use Case**: All-in-one scraping framework with advanced anti-bot capabilities
+**Strengths**: Bypasses Cloudflare/BrowserScan/Datadome/Turnstile, human-like movements, desktop/web app conversion
+**Best For**: Dynamic content, sophisticated anti-bot systems, cost-effective proxy usage
+**Integration**: Excellent - flexible decorators (@browser, @request, @task), debugging tools
+**Limitations**: May be complex for simple use cases
+**Research Source**: Gemini analysis - highly recommended for dynamic content
+
+#### **ArchiveTeam/grab-site** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Robust web crawler for website archival and backup
+**Strengths**: WARC output, dashboard monitoring, disk-based URL queue, handles millions of pages
+**Best For**: Large-scale archival, comprehensive website backup, raw data capture
+**Integration**: Good for archival purposes, requires post-processing for structured data
+**Limitations**: Raw WARC output, not structured extraction
+**Research Source**: Gemini analysis - excellent for archival
+
+### Generic Content Extractors (Referenced in Gemini Analysis)
+
+#### **trafilatura** ⭐⭐⭐⭐⭐ (Already listed above - confirmed in Gemini)
+**Additional Notes from Gemini**: Explicitly supports CSV, JSON, HTML, MD, TXT, XML output formats
+
+#### **newspaper (library)** ⭐⭐⭐⭐ (Generic reference - see specific implementations above)
+**Additional Notes from Gemini**: Described as tool for "News extraction, article extraction and content curation in Python"
+
+#### **python-readability** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Fast Python port of arc90's readability tool
+**Strengths**: Effective boilerplate removal, main content extraction
+**Best For**: Clean article text extraction, content cleaning
+**Integration**: Good - established algorithm, clean API
+**Limitations**: Basic compared to modern alternatives like trafilatura
+**Research Source**: Gemini analysis
+
+#### **htmldate** ⭐⭐⭐⭐ (Analysis Score: 4/5)
+**Use Case**: Publication date extraction using heuristics
+**Strengths**: Specialized for accurate date extraction, structural patterns
+**Best For**: Metadata enhancement, date accuracy in content extraction
+**Integration**: Good - specialized tool for date extraction
+**Limitations**: Single-purpose tool
+**Research Source**: Gemini analysis
+
+## 🔄 Updated Analysis Summary
+
+### Gemini Research Highlights
+1. **Two-Phase Extraction Approach**: Gemini analysis confirms the need for separate crawling (Botasaurus) and content extraction (trafilatura/newspaper) phases
+2. **API-First for Academic Content**: Strong recommendation for API wrappers (lukasschwab/arxiv.py) over HTML scraping for academic papers
+3. **Generic vs Site-Specific**: Emphasis on generic extractors over brittle site-specific scrapers
+4. **Anti-Bot Arms Race**: Recognition that modern scraping requires sophisticated anti-detection (Botasaurus)
+
+### Key Architectural Insights from Gemini
+- **Layered Architecture**: Crawler/Fetcher → Content Extraction → URL Management → Data Storage
+- **Pipeline Processing**: Clear separation of concerns for debugging and modularity
+- **Async Operations**: Priority on asyncio, aiohttp, httpx for I/O-bound tasks
+- **Error Handling**: Robust retry mechanisms and comprehensive logging
+
+**Total Repositories Analyzed**: 50+ frameworks and tools  
+**Recommendation Confidence**: High - based on comprehensive GitHub analysis, performance benchmarks, maintenance assessment, and Gemini deep research  
+**Research Sources**: Multi-platform deep research (Claude Code, ChatGPT, Perplexity, Gemini)  
+**Last Updated**: January 2025 - Current GitHub statistics, maintenance status, and Gemini architectural analysis
