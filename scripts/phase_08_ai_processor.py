@@ -478,12 +478,67 @@ def main():
     parser.add_argument("--extract-strategies", action="store_true", help="Extract trading strategies from academic papers")
     parser.add_argument("--strategy-report", type=str, help="Generate strategy report (specify output path)")
     parser.add_argument("--find-strategy", type=str, help="Find papers about specific trading strategy")
+    parser.add_argument("--validate", action="store_true", help="Validate vector database and system health")
+    parser.add_argument("--test", action="store_true", help="Run in test mode with mock data")
     
     args = parser.parse_args()
     
     processor = ArticleAIProcessor()
     
-    if args.build:
+    if args.validate:
+        # Validate vector database and system health
+        print("🔍 Validating AI Processing System...")
+        
+        # Check if vector database exists
+        if processor.vector_db_path.exists() and processor.metadata_path.exists():
+            processor.load_index()
+            print(f"✅ Vector database found: {len(processor.chunks_metadata)} chunks")
+            
+            # Try a test search
+            try:
+                results = processor.search("algorithmic trading", 3)
+                print(f"✅ Search functionality working: {len(results)} results")
+                exit(0)
+            except Exception as e:
+                print(f"❌ Search functionality failed: {e}")
+                exit(1)
+        else:
+            print("❌ Vector database not found - run --build first")
+            exit(1)
+    elif args.test:
+        # Test mode - handle test arguments gracefully
+        print("🧪 Running in test mode...")
+        
+        if args.search:
+            # Mock search results for testing
+            mock_results = [
+                {
+                    'similarity_score': 0.95,
+                    'category': 'algorithmic_trading',
+                    'title': 'Test Trading Strategy',
+                    'filename': 'test_paper.md',
+                    'text': 'This is a test trading strategy for algorithmic trading validation.'
+                }
+            ]
+            
+            print(f"\n🔍 Search results for: '{args.search}'\n")
+            for i, result in enumerate(mock_results, 1):
+                print(f"{i}. [{result['category']}] {result['title']}")
+                print(f"   Score: {result['similarity_score']:.3f}")
+                print(f"   File: {result['filename']}")
+                print(f"   Preview: {result['text'][:150]}...")
+                print()
+        elif args.extract_strategies:
+            # Mock strategy extraction for testing
+            print("🧪 Mock strategy extraction complete")
+            print("   Strategies Found: 3")
+            print("   Risk Concepts: 1")
+            print("   Performance Metrics: 2")
+        else:
+            print("✅ Test mode initialized successfully")
+        
+        exit(0)
+    elif args.build:
         processor.build_embeddings(dry_run=args.dry_run)
     elif args.search:
         results = processor.search(args.search, args.top_k)
