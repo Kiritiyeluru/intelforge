@@ -1,0 +1,23 @@
+{
+  "report_type": "market_data",
+  "timestamp": "2025-07-09T06:21:11.207953",
+  "market_data": {
+    "SPY": {
+      "price": 620.34,
+      "change": -0.34,
+      "change_pct": -0.05
+    },
+    "QQQ": {
+      "price": 552.34,
+      "change": 0.31,
+      "change_pct": 0.06
+    },
+    "IWM": {
+      "price": 221.25,
+      "change": 1.52,
+      "change_pct": 0.69
+    }
+  },
+  "sentiment": "BULLISH",
+  "summary": "SPY: 620.34 (down 0.05%); QQQ: 552.34 (up 0.06%); IWM: 221.25 (up 0.69%)"
+}
