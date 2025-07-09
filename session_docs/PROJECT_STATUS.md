@@ -856,6 +856,70 @@ IntelForge successfully transformed from scraping platform into **comprehensive 
 
 ---
 
+## 🔍 **NEXT STRATEGIC PHASE: DISCOVERY LAYER IMPLEMENTATION**
+
+**Objective:** Implement intelligent content discovery system to solve the "where to scrape" problem  
+**Duration:** 2-3 weeks (4 phases)  
+**Priority:** Critical (transforms IntelForge from reactive to proactive intelligence gathering)
+
+### **🎯 Strategic Discovery Challenge**
+
+**Key Insight:** The bottleneck is no longer scraping performance—it's **intelligent content discovery**.
+
+IntelForge has a world-class scraping framework but needs to evolve from manually feeding URLs to autonomous content discovery. The next phase builds a discovery layer that automatically finds high-value content before extraction.
+
+### **📋 Discovery Layer Implementation Plan**
+
+**Phase D1: Search Intelligence (Week 1) - IMMEDIATE**
+- Advanced Google/Bing search automation using custom operators
+- GitHub API integration for algorithmic trading repository discovery  
+- Academic paper discovery automation (ArXiv, SSRN, RePEc)
+- **Tools**: SerpAPI, PyGithub, arxiv.py integration
+- **Output**: Automated search result feeds with relevance scoring
+
+**Phase D2: Community Mining (Week 2) - HIGH VALUE**
+- Reddit/forum intelligent content discovery and scoring
+- Blog network analysis with RSS feed automation
+- Social signal integration for content validation
+- **Tools**: PRAW enhancement, feedparser, social metrics APIs
+- **Output**: Community-validated content pipeline
+
+**Phase D3: Pattern Recognition (Week 3) - ADVANCED**
+- ML-based content relevance scoring using existing AI infrastructure
+- Automated duplicate detection across sources
+- Quality assessment pipeline for discovered content
+- **Tools**: sentence-transformers, existing vector database
+- **Output**: Intelligent content filtering and ranking
+
+**Phase D4: Production Discovery (Week 4) - AUTOMATION**
+- Fully automated discovery → scraping pipeline integration
+- Real-time content monitoring and alerting
+- Discovery performance optimization and scaling
+- **Tools**: Scheduler integration, monitoring dashboard
+- **Output**: Autonomous intelligence gathering system
+
+### **🔧 Discovery Architecture**
+
+```
+Search Discovery → Content Filtering → URL Extraction → Existing Scrapers → Knowledge Base
+       ↓                ↓                ↓                ↓                ↓
+Advanced Queries → Relevance Score → Candidate URLs → High-Performance → Obsidian Vault
+```
+
+### **🎯 Discovery Success Metrics**
+
+**Critical Success:**
+- 80%+ reduction in manual URL curation time
+- 3x increase in high-quality content discovery
+- Automated daily content feeds with relevance scoring
+- Full integration with existing scraping infrastructure
+
+**Expected Outcomes:**
+- Automated "momentum strategy" content discovery across 10+ sources
+- Real-time monitoring of trading strategy discussions
+- Academic paper alerts for algorithmic trading research
+- Community-validated content pipeline with quality scoring
+
 ## 🚀 **NEXT STAGE: PRODUCTION DEPLOYMENT & OPERATIONAL EXCELLENCE**
 
 **Objective:** Deploy production-ready financial intelligence system with operational monitoring and automated workflows  
