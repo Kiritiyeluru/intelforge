@@ -188,3 +188,14 @@ modelcontextprotocol/
 .Trashes
 ehthumbs.db
 Thumbs.db
+# Data and output directories
+output/
+vault/data/
+vault/vector_db/
+knowledge_management/vector_db/
+profiles/
+mcp_servers/docker_data/
+
+# Test files
+test_urls.txt
+financial_test_urls.txt
