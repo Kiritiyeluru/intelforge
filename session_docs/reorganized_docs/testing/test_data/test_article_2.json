@@ -1,0 +1,11 @@
+{
+  "title": "Risk Management in Quantitative Finance",
+  "content": "Effective risk management forms the cornerstone of successful quantitative trading operations. This study examines Value at Risk (VaR) calculations, stress testing methodologies, and portfolio optimization techniques. The research demonstrates how Monte Carlo simulations can be used to model tail risks and optimize position sizing for maximum risk-adjusted returns.",
+  "source": "https://example.com/risk-management",
+  "tags": [
+    "risk",
+    "quantitative",
+    "portfolio"
+  ],
+  "date": "2025-07-09"
+}

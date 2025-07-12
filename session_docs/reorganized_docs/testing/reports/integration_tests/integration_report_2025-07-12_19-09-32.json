@@ -1,0 +1,207 @@
+{
+  "session_id": "2025-07-12_19-09-32",
+  "test_type": "integration_testing",
+  "start_time": "2025-07-12T19:09:32.220452",
+  "core_modules": {
+    "reddit_scraper.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 10476
+    },
+    "github_scraper.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 12369
+    },
+    "web_scraper.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 14556
+    },
+    "scraping_base.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 13154
+    },
+    "data_organizer.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 11804
+    },
+    "phase_07_article_organizer.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 5193
+    },
+    "phase_08_ai_processor.py": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "syntax_valid": true,
+      "size_bytes": 24200
+    }
+  },
+  "integrations": {},
+  "workflows": {},
+  "performance": {
+    "system": {
+      "cpu_percent": 0.9,
+      "memory_percent": 28.2,
+      "disk_usage_percent": 81.5,
+      "load_average": [
+        0.3076171875,
+        0.40234375,
+        0.3974609375
+      ]
+    },
+    "python_process": {
+      "memory_mb": 20.61328125,
+      "cpu_percent": 0.0,
+      "num_threads": 1,
+      "open_files": 3
+    }
+  },
+  "status": "completed",
+  "configuration": {
+    "config.yaml": {
+      "status": "\u2705 PASS",
+      "file_exists": true,
+      "valid_yaml": true,
+      "sections": [
+        "reddit",
+        "github",
+        "web",
+        "ai",
+        "paths",
+        "options",
+        "api_keys",
+        "metadata"
+      ],
+      "size_bytes": 2640
+    },
+    "error": "Invalid \\escape: line 120 column 105 (char 3319)"
+  },
+  "database": {
+    "sqlite": {
+      "status": "\u2705 PASS",
+      "operations": [
+        "CREATE",
+        "INSERT",
+        "SELECT"
+      ],
+      "test_data_retrieved": true
+    },
+    "vector_database": {
+      "status": "\u26a0\ufe0f NOT_AVAILABLE",
+      "type": "none",
+      "note": "Neither FAISS nor ChromaDB available"
+    }
+  },
+  "scrapers": {
+    "scraping_base": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "compilation_successful": true
+    },
+    "reddit_scraper.py": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "size_bytes": 10476
+    },
+    "github_scraper.py": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "size_bytes": 12369
+    },
+    "web_scraper.py": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "size_bytes": 14556
+    }
+  },
+  "ai_workflow": {
+    "ai_processor": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "size_bytes": 24200
+    },
+    "article_organizer": {
+      "status": "\u2705 PASS",
+      "syntax_valid": true,
+      "size_bytes": 5193
+    }
+  },
+  "filesystem": {
+    "scrapers": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 9,
+      "status": "\u2705 PASS"
+    },
+    "scripts": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 30,
+      "status": "\u2705 PASS"
+    },
+    "vault": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 6,
+      "status": "\u2705 PASS"
+    },
+    "vault/notes": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 9,
+      "status": "\u2705 PASS"
+    },
+    "vault/logs": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 25,
+      "status": "\u2705 PASS"
+    },
+    "config": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 2,
+      "status": "\u2705 PASS"
+    },
+    "session_docs": {
+      "exists": true,
+      "is_directory": true,
+      "readable": true,
+      "writable": true,
+      "file_count": 21,
+      "status": "\u2705 PASS"
+    }
+  },
+  "end_time": "2025-07-12T19:09:33.567532",
+  "summary": {
+    "total_tests": 24,
+    "passed": 22,
+    "failed": 1,
+    "skipped": 1,
+    "avg_duration": 0.0131526875,
+    "min_duration": 0.000472,
+    "max_duration": 0.03271
+  }
+}

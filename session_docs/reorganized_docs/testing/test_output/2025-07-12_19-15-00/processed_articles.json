@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Cryptocurrency Market Analysis and Prediction",
+    "content": "Comprehensive study of cryptocurrency market dynamics using advanced time series analysis and machine learning techniques. The research applies LSTM networks, ARIMA models, and sentiment analysis to predict Bitcoin price movements. Findings show that combining on-chain metrics with social sentiment data improves prediction accuracy by 23%.",
+    "source_url": "https://example.com/crypto-analysis",
+    "keywords": [
+      "cryptocurrency",
+      "prediction",
+      "machine-learning"
+    ],
+    "publish_date": "2025-07-07",
+    "word_count": 45,
+    "character_count": 341,
+    "processing_timestamp": "2025-07-12T19:15:00.818483"
+  },
+  {
+    "id": 2,
+    "title": "Risk Management in Quantitative Finance",
+    "content": "Effective risk management forms the cornerstone of successful quantitative trading operations. This study examines Value at Risk (VaR) calculations, stress testing methodologies, and portfolio optimization techniques. The research demonstrates how Monte Carlo simulations can be used to model tail risks and optimize position sizing for maximum risk-adjusted returns.",
+    "source_url": "https://example.com/risk-management",
+    "keywords": [
+      "risk",
+      "quantitative",
+      "portfolio"
+    ],
+    "publish_date": "2025-07-09",
+    "word_count": 48,
+    "character_count": 367,
+    "processing_timestamp": "2025-07-12T19:15:00.818498"
+  },
+  {
+    "id": 3,
+    "title": "Market Microstructure and High-Frequency Trading",
+    "content": "An in-depth examination of market microstructure effects on high-frequency trading strategies. The analysis covers order book dynamics, latency arbitrage, and market making algorithms. Results indicate that co-location strategies provide significant advantages, with latency reductions of 10 microseconds improving profitability by 15% in equity markets.",
+    "source_url": "https://example.com/hft-analysis",
+    "keywords": [
+      "hft",
+      "microstructure",
+      "equity"
+    ],
+    "publish_date": "2025-07-08",
+    "word_count": 44,
+    "character_count": 354,
+    "processing_timestamp": "2025-07-12T19:15:00.818506"
+  },
+  {
+    "id": 4,
+    "title": "ESG Investing and Sustainable Finance Strategies",
+    "content": "Analysis of Environmental, Social, and Governance (ESG) factors in investment decision-making. The study evaluates ESG scoring methodologies, sustainable portfolio construction, and impact measurement frameworks. Research demonstrates that ESG-integrated portfolios achieve comparable returns while reducing downside risk by 12%.",
+    "source_url": "https://example.com/esg-investing",
+    "keywords": [
+      "esg",
+      "sustainable",
+      "portfolio"
+    ],
+    "publish_date": "2025-07-06",
+    "word_count": 38,
+    "character_count": 329,
+    "processing_timestamp": "2025-07-12T19:15:00.818511"
+  },
+  {
+    "id": 5,
+    "title": "Advanced Algorithmic Trading Strategies",
+    "content": "This comprehensive analysis explores modern algorithmic trading approaches including momentum strategies, mean reversion techniques, and statistical arbitrage. The paper discusses implementation of Bollinger Bands, RSI indicators, and machine learning models for market prediction. Key findings show that ensemble methods combining technical indicators with sentiment analysis achieve 67% accuracy in directional prediction.",
+    "source_url": "https://example.com/trading-strategies",
+    "keywords": [
+      "trading",
+      "algorithms",
+      "technical-analysis"
+    ],
+    "publish_date": "2025-07-10",
+    "word_count": 51,
+    "character_count": 424,
+    "processing_timestamp": "2025-07-12T19:15:00.818518"
+  }
+]

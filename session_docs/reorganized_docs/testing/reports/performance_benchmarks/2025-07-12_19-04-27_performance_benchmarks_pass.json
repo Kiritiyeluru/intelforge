@@ -1,0 +1,13 @@
+{
+  "test_type": "cli_benchmarks",
+  "timestamp": "2025-07-12_19-04-27",
+  "status": "pass",
+  "tool_used": "hyperfine",
+  "advantage": "Statistical analysis with outlier detection",
+  "benchmarks": {},
+  "details": [
+    "\u274c Failed to benchmark: python3.12 -c 'import sys; print(sys.version)'",
+    "\u274c Failed to benchmark: python3 -c 'import sys; print(sys.version)'",
+    "\u274c Failed to benchmark: ls scrapers/"
+  ]
+}

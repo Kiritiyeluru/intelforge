@@ -1,0 +1,23 @@
+{
+  "scraping": {
+    "user_agent": "IntelForge-E2E-Test/1.0",
+    "timeout": 30,
+    "retry_attempts": 2
+  },
+  "processing": {
+    "min_content_length": 100,
+    "max_content_length": 10000,
+    "keywords": [
+      "trading",
+      "finance",
+      "investment",
+      "market",
+      "analysis"
+    ]
+  },
+  "ai": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.7,
+    "max_chunk_size": 512
+  }
+}
