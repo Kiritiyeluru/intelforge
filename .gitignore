@@ -84,4 +84,4 @@ scratch/
 financial-datasets-mcp/
 github-mcp/
 mcp-servers/
-modelcontextprotocol/
+modelcontextprotocol/# Temporary analysis files\n.claude/*.json\n.claude/*.txt\nverify_tech_stack_split*.py\n\n# Temporary workflow files\n.github/workflows/\n\n# Temporary directories\nLong term plan/\nsemantic_crawler/

@@ -165,11 +165,58 @@ forgecli pipeline --topic "momentum trading" --sources google,github,arxiv --wor
 - **Enterprise-level automation** with notification systems
 - **Scalable architecture** supporting high-volume operations
 
+## 🛠️ Critical Tool Installation Required
+
+**⚠️ PRIORITY**: Before implementing Phase 1, install missing development tools for optimal workflow.
+
+### **Phase 3A: Core Development Tools (60 minutes)**
+```bash
+# Python code quality tools (Python 3.12 environment)
+source /home/kiriti/alpha_projects/intelforge/.venv/bin/activate
+pip install black isort pytest-mock
+
+# Rust testing enhancement  
+cargo install cargo-nextest
+
+# Security testing tools
+pip install atheris
+```
+
+### **Phase 3B: Advanced Scraping Tools (45 minutes)**
+```bash
+# Stealth browser automation (Python 3.12)
+source /home/kiriti/alpha_projects/intelforge/.venv/bin/activate
+pip install undetected-chromedriver selenium-stealth
+```
+
+### **Phase 3C: Visualization Tools (30 minutes)**
+```bash
+# Dashboard creation (Python 3.12)
+source /home/kiriti/alpha_projects/intelforge/.venv/bin/activate
+pip install streamlit
+```
+
+### **Tool Installation Status Summary**
+✅ **Already Installed**: 
+- cryptography (41.0.7), bcrypt (3.2.2), docker, TA-Lib (0.4.32), click, rich, matplotlib
+
+❌ **Missing & Needed**:
+- **black** - Python code formatting (immediate need)
+- **isort** - Import organization (immediate need) 
+- **nextest** - Rust faster testing (50% speed improvement)
+- **atheris** - Python fuzzing for security
+- **pytest-mock** - Enhanced testing capabilities
+- **undetected-chromedriver** - Advanced anti-detection for scraping
+
+**ROI Analysis**: 2.5 hours investment → 50% faster testing, consistent code formatting, better scraping success rates
+
 ## 🚀 Ready to Execute
 
-This implementation plan is **immediately actionable** with the current codebase. All dependencies are in place, and the architecture supports these enhancements without breaking changes.
+After installing the missing tools above, this implementation plan is **immediately actionable** with the current codebase. All dependencies are in place, and the architecture supports these enhancements without breaking changes.
 
-**Next Action**: Begin Phase 1 implementation starting with the subprocess helper function.
+**Next Action**: 
+1. **Install missing tools** (Phase 3A-3C above)
+2. **Begin Phase 1 implementation** starting with the subprocess helper function
 
 | Idea                         | Why It Matters                                                       | Effort |
 | ---------------------------- | -------------------------------------------------------------------- | ------ |

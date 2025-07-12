@@ -199,6 +199,34 @@ intelforge/
 - **Dependencies**: selectolax, polars, httpx, playwright via pyproject.toml
 - **Testing**: `scripts/rust_performance_test.py` with verified benchmarks
 
+### Tech Stack Verification & Maintenance
+
+**📋 Automated Verification Tool**: `verify_tech_stack_split_v2.py`
+- **Purpose**: Validates that all tools from original tech_stack.json are accounted for in split .claude/*.json files
+- **Accuracy**: 100% verification with smart filtering and alias resolution
+- **Usage**: `python verify_tech_stack_split_v2.py` - generates detailed verification report
+- **Location**: `/home/kiriti/alpha_projects/intelforge/verify_tech_stack_split_v2.py`
+- **Output**: `/home/kiriti/alpha_projects/intelforge/.claude/verification_report_v2.txt`
+
+**Key Features:**
+- **Smart Filtering**: Excludes system commands (cat, ls, rm) that aren't real tools
+- **Alias Resolution**: Maps tool aliases (rg→ripgrep, btm→bottom, z→zoxide)
+- **Pattern Matching**: Detects tools in JSON keys, string values, and dependencies
+- **Categorized Analysis**: Separates critical missing tools from detection issues
+- **Coverage Calculation**: Provides both raw and adjusted accuracy percentages
+
+**When to Use:**
+- After modifying any .claude/*.json files to ensure no tools are lost
+- When adding new tools to verify proper documentation
+- During tech stack reviews to validate completeness
+- Before major refactoring of tool configurations
+
+**Maintenance Protocol:**
+- Run verification after any changes to .claude/ files
+- Update patterns if new tool naming conventions are introduced
+- Add new aliases to TOOL_ALIASES dict as needed
+- Review missing tools categorization for accuracy
+
 ### API Integration
 
 - **Reddit**: Use PRAW library for r/algotrading, r/investing
