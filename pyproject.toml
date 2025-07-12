@@ -64,8 +64,11 @@ dependencies = [
 dev = [
     "coverage>=7.9.2",
     "hypothesis>=6.135.26",
+    "pytest-approvaltests>=0.2.4",
     "pytest-asyncio>=1.0.0",
     "pytest-benchmark>=5.1.0",
     "pytest-cov>=6.2.1",
     "pytest-xdist>=3.8.0",
+    "snapshottest>=0.6.0",
+    "typer>=0.16.0",
 ]

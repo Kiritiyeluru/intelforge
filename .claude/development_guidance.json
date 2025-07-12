@@ -1,0 +1,78 @@
+{
+  "session_workflow": {
+    "before_session": [
+      "Read session_docs/CURRENT_PROJECT_PLAN.md - comprehensive project status and current priorities",
+      "Follow session_docs/session_checklist.md for consistent workflow"
+    ],
+    "during_development": [
+      "Update session_docs/CURRENT_PROJECT_PLAN.md with progress and blockers",
+      "Log decisions in guidance/project_intelligence/decision_log.md with rationale",
+      "Document solutions in guidance/core_essentials/troubleshooting_guide.md", 
+      "Track config changes in guidance/operations/config_changelog.md"
+    ],
+    "end_of_session": [
+      "Update session_docs/CURRENT_PROJECT_PLAN.md with accomplishments and next priorities",
+      "Follow end-of-session checklist in session_docs/session_checklist.md",
+      "Commit with proper phase_XX: format"
+    ]
+  },
+  "reuse_over_rebuild": {
+    "checklist": [
+      "Search GitHub / PyPI / Reddit / arXiv before writing custom logic",
+      "Check if already available as library or CLI tool",
+      "Consider wrapping in function instead of building from scratch",
+      "Evaluate if future AI agents benefit more from known tool than new code"
+    ],
+    "decision_framework": "guidance/core_essentials/find_vs_build.md",
+    "tool_discovery": "prompts/find_tools_template.md"
+  },
+  "simplicity_guidelines": {
+    "avoid": [
+      "src/, lib/, abstract modules → Use flat script layout",
+      "Custom classes for everything → Use named functions",
+      "Over-abstracted configs → Use single config.yaml",
+      "Full test frameworks → Use manual tests + --dry-run",
+      "Framework-based structure → Use readable, AI-friendly scripts"
+    ],
+    "design_check": [
+      "Would I understand this in 3 months?",
+      "Can this live in one file instead of three?", 
+      "Would this make AI-generated fixes harder?",
+      "Is it adding value or just structure?"
+    ]
+  },
+  "testing_infrastructure": {
+    "testing_strategy_location": "session_docs/reorganized_docs/testing/",
+    "primary_testing_plan": "session_docs/reorganized_docs/testing/test_strategy.md",
+    "tool_selection_guide": ".claude/testing_tools_stack.json",
+    "hybrid_approach": "Use Rust for performance/security, Python for integration/ML",
+    "superior_tools": {
+      "performance_benchmarking": "Rust criterion (100x faster than Python)",
+      "load_testing": "k6 (superior to Python async)",
+      "security_fuzzing": "Rust cargo-fuzz (LLVM-based, memory-safe)",
+      "cli_benchmarking": "hyperfine (statistical analysis vs Python timeit)",
+      "property_testing": "Hypothesis (automatic edge case discovery)"
+    },
+    "test_runner": "session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py",
+    "configuration": "session_docs/reorganized_docs/testing/config/test_config.yaml"
+  },
+  "ai_cooperative_patterns": {
+    "code_generation": "All code written using Claude Code with saved prompts",
+    "documentation": "Every script includes docstring, inline comments, fallback logic",
+    "development_checklist": "guidance/development/Reusable_Development_Checklist_for_Each_Module.md",
+    "prompt_versioning": "Track module creation and fixes in prompts/"
+  },
+  "quality_standards": {
+    "session_completion": "Each session should complete logical unit of work",
+    "decision_documentation": "All decisions documented with rationale", 
+    "testing": "Code tested and working before commit",
+    "handover": "Session handover files updated before ending",
+    "priorities": "Next session priorities clearly defined"
+  },
+  "file_conventions": {
+    "modules": "phase_XX_description.py (sequential numbering)",
+    "outputs": "source_topic_YYYY-MM-DD.md (timestamped, organized)",
+    "logs": "module_name_YYYYMMDD.log (clear traceability)",
+    "configs": "Descriptive YAML with comments"
+  }
+}
