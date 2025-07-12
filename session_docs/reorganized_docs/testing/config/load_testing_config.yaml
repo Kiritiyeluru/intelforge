@@ -1,0 +1,91 @@
+# k6 Load Testing Configuration for IntelForge
+# High-performance load testing for scraping infrastructure
+
+load_testing:
+  tool: "k6"
+  version: "1.1.0"
+  location: "~/.local/bin/k6"
+  
+  # Default test configuration
+  default_config:
+    duration: "5m"
+    vus: 10  # Virtual users
+    iterations: 1000
+    
+  # Test scenarios
+  scenarios:
+    anti_detection_load:
+      description: "Test anti-detection under load"
+      executor: "ramping-vus"
+      stages:
+        - duration: "2m"
+          target: 10
+        - duration: "5m" 
+          target: 50
+        - duration: "2m"
+          target: 0
+      
+    rate_limit_discovery:
+      description: "Discover rate limits for various sites"
+      executor: "constant-arrival-rate"
+      rate: 30  # requests per second
+      duration: "10m"
+      pre_allocated_vus: 5
+      max_vus: 20
+      
+    concurrent_scraping:
+      description: "Validate concurrent scraping performance"
+      executor: "per-vu-iterations"
+      vus: 20
+      iterations: 50
+      max_duration: "10m"
+
+  # Target endpoints for testing
+  targets:
+    safe_endpoints:
+      httpbin: "https://httpbin.org/delay/1"
+      example: "https://example.com"
+      
+    # Mock/testing endpoints (add real ones carefully)
+    mock_endpoints:
+      local_test: "http://localhost:8000/test"
+      
+  # Performance thresholds
+  thresholds:
+    http_req_duration: 
+      - "p(95)<5000"  # 95% of requests under 5s
+    http_req_failed:
+      - "rate<0.05"   # Error rate under 5%
+    checks:
+      - "rate>0.95"   # 95% of checks pass
+
+  # Anti-detection testing
+  anti_detection:
+    user_agents:
+      - "Mozilla/5.0 (compatible; IntelForge-Test/1.0)"
+      - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    
+    rate_limiting:
+      min_delay: 1000  # ms
+      max_delay: 5000  # ms
+      respect_robots: true
+    
+    headers:
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+      Accept-Language: "en-US,en;q=0.5"
+      Accept-Encoding: "gzip, deflate"
+      DNT: "1"
+      Connection: "keep-alive"
+      Upgrade-Insecure-Requests: "1"
+
+  # Monitoring and reporting
+  monitoring:
+    output_format: ["json", "influxdb"]
+    real_time_monitoring: true
+    summary_trend_stats: ["avg", "min", "med", "max", "p(90)", "p(95)"]
+    
+  # Cloud testing (optional)
+  cloud:
+    enabled: false
+    project_id: null
+    zones: ["us-east-1", "eu-west-1"]
