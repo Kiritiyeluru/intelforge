@@ -1,0 +1,40 @@
+{
+  "session_id": "2025-07-13_03-31-33",
+  "assessment_type": "production_readiness",
+  "start_time": "2025-07-13T03:31:33.585363",
+  "categories": {
+    "security": {
+      "score": 97.0,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "security_tools_score": 40.0,
+        "tools_installed": 7,
+        "config_score": 20.0,
+        "configs_found": 4,
+        "reports_score": 20,
+        "exposure_score": 7,
+        "exposure_issues": 1,
+        "permission_score": 10,
+        "permission_issues": 0
+      }
+    }
+  },
+  "overall_score": 19.400000000000002,
+  "readiness_level": "not_ready",
+  "recommendations": [
+    "Complete all assessment categories to achieve production readiness",
+    "Resolve all blocking issues before production deployment"
+  ],
+  "blocking_issues": [
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/gitleaks.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    }
+  ],
+  "status": "completed",
+  "end_time": "2025-07-13T03:31:41.095945"
+}

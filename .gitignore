@@ -169,6 +169,9 @@ Cargo.lock
 .claude/*.txt
 verify_tech_stack_split*.py
 
+# Security: Exclude files with secrets
+.claude/settings.local.json
+
 # Temporary workflow files
 .github/workflows/
 

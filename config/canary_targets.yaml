@@ -1,0 +1,89 @@
+# CanaryValidator v2 External Configuration
+# Canary validation targets with enhanced assertion-style checks
+
+canary_targets:
+  basic_connectivity:
+    url: "https://example.com"
+    timeout_seconds: 10
+    critical: true
+    description: "Basic internet connectivity and browser function"
+    min_content_size: 500
+    required_elements:
+      - "title"
+      - "body"
+    forbidden_keywords:
+      - "access denied"
+      - "blocked"
+
+  javascript_execution:
+    url: "https://httpbin.org/headers"
+    timeout_seconds: 10
+    critical: true
+    description: "JavaScript execution and DOM access"
+    min_content_size: 200
+    required_elements:
+      - "headers"
+    forbidden_keywords:
+      - "error"
+      - "not found"
+
+  anti_detection_basic:
+    url: "https://bot.sannysoft.com/"
+    timeout_seconds: 20
+    critical: false
+    description: "Basic anti-detection capabilities"
+    min_content_size: 5000
+    required_elements:
+      - "detection"
+    forbidden_keywords:
+      - "failed to load"
+
+  finviz_canary:
+    url: "https://finviz.com/"
+    timeout_seconds: 30
+    critical: false
+    description: "Finviz accessibility and stealth check"
+    min_content_size: 10000
+    required_elements:
+      - "screener"
+      - "finviz"
+    forbidden_keywords:
+      - "access denied"
+      - "blocked"
+      - "captcha"
+
+  yahoo_finance_canary:
+    url: "https://finance.yahoo.com/"
+    timeout_seconds: 30
+    critical: false
+    description: "Yahoo Finance accessibility and stealth check"
+    min_content_size: 8000
+    required_elements:
+      - "finance"
+      - "yahoo"
+    forbidden_keywords:
+      - "access denied"
+      - "blocked"
+      - "captcha"
+
+  httpbin_canary:
+    url: "https://httpbin.org/user-agent"
+    timeout_seconds: 15
+    critical: false
+    description: "HTTP testing and user agent validation"
+    min_content_size: 100
+    required_elements:
+      - "user-agent"
+    forbidden_keywords:
+      - "error"
+
+# Cache configuration
+cache_settings:
+  duration_minutes: 30
+  enabled: true
+
+# Browser configuration
+browser_settings:
+  reuse_session: true
+  headless: true
+  enable_ttr_tracking: false

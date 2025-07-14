@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.6
+    hooks:
+      - id: bandit
+        args: ['-r', './scrapers', './scripts']
+        exclude: '^(tests|venv|\.venv)/'
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.128.1
+    hooks:
+      - id: semgrep
+        args: ['--config=auto']
+        exclude: '^(tests|venv|\.venv)/'
+
+  - repo: local
+    hooks:
+      - id: comprehensive-security-scan
+        name: Full Security Scan
+        entry: ./scripts/security_scan.sh
+        language: script
+        pass_filenames: false
+        always_run: true
+        stages: [manual]

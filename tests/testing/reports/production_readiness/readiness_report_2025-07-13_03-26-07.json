@@ -1,0 +1,208 @@
+{
+  "session_id": "2025-07-13_03-26-07",
+  "assessment_type": "production_readiness",
+  "start_time": "2025-07-13T03:26:07.603111",
+  "categories": {
+    "security": {
+      "score": 90.0,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "security_tools_score": 40.0,
+        "tools_installed": 7,
+        "config_score": 20.0,
+        "configs_found": 4,
+        "reports_score": 20,
+        "exposure_score": 0,
+        "exposure_issues": 25,
+        "permission_score": 10,
+        "permission_issues": 0
+      }
+    }
+  },
+  "overall_score": 18.0,
+  "readiness_level": "not_ready",
+  "recommendations": [
+    "Complete all assessment categories to achieve production readiness",
+    "Resolve all blocking issues before production deployment"
+  ],
+  "blocking_issues": [
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/discovery_system.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/settings.local.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/core_dependencies.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/missing_tools.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/tech_stack.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/architecture.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/security_tools.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/.claude/settings.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/trufflehog.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/gitleaks.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/semgrep.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/bandit.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/output/stealth_scrape_page.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/modelcontextprotocol/reference-servers/package-lock.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/vector_db/financial_metadata.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/vector_db/chunks_metadata.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1752022052.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_performance_enhancement_results.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1752022254.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1751992350.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1751992406.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1752022740.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/vault/logs/rust_enhancement_report_1751990665.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/knowledge_management/vector_db/chunks_metadata.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    },
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/config/config.yaml",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    }
+  ],
+  "status": "completed",
+  "end_time": "2025-07-13T03:26:15.145801"
+}
