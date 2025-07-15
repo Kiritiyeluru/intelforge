@@ -1,0 +1,10 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "python_version": "3.10",
+    "shared_fs": false,
+    "timeout_seconds": 600,
+    "network_access": false,
+    "max_memory_mb": 2048
+  }
+}

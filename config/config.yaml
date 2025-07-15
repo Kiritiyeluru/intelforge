@@ -90,7 +90,7 @@ options:
 
 # API keys (populated from .env file)
 api_keys:
-  github_token: "your_github_token_here"
+  github_token: "${GITHUB_TOKEN}"
   reddit_client_id: ""
   reddit_client_secret: ""
 

@@ -1,0 +1,7 @@
+Date,Time,Site,Failure_Mode,Frequency,Total_Attempts,Mitigation_Applied,Success_After_Mitigation,Recovery_Time_Seconds,Notes,Stealth_Score,Performance_Impact
+2025-07-13,14:30:00,Finviz,Botasaurus_Load_Hang,3,10,Driver_Restart_Logic,7,45,"Timeout after 30s default",N/A,Moderate
+2025-07-13,15:15:00,Yahoo_Finance,CAPTCHA_Challenge,2,10,CapSolver_Integration,8,12,"99.15% success rate maintained",N/A,Low
+2025-07-13,16:00:00,Finviz,Slow_Response,4,10,Connection_Timeout_Tuning,6,0,"<5s target not met consistently",N/A,High
+2025-07-13,16:45:00,CreepJS,Detection_Score_Low,1,5,Stealth_Headers_Added,4,0,">70% achieved after header tuning",75%,Low
+2025-07-13,17:30:00,Yahoo_Finance,Access_Denied,1,10,User_Agent_Rotation,9,5,"Changed to mobile user agent",N/A,Low
+2025-07-13,18:00:00,Finviz,Parse_Error,2,10,CSS_Selector_Update,10,0,"Site layout changed detection",N/A,None

@@ -1,0 +1,97 @@
+{
+  "session_id": "2025-07-13_03-31-46",
+  "assessment_type": "production_readiness",
+  "start_time": "2025-07-13T03:31:46.495447",
+  "categories": {
+    "infrastructure": {
+      "score": 135.0,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "directory_score": 70,
+        "config_score": 15,
+        "module_score": 30,
+        "python_score": 20.0,
+        "total_raw_score": 135.0,
+        "max_raw_score": 100
+      }
+    },
+    "security": {
+      "score": 97.0,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "security_tools_score": 40.0,
+        "tools_installed": 7,
+        "config_score": 20.0,
+        "configs_found": 4,
+        "reports_score": 20,
+        "exposure_score": 7,
+        "exposure_issues": 1,
+        "permission_score": 10,
+        "permission_issues": 0
+      }
+    },
+    "performance": {
+      "score": 97.925,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "baseline_score": 25,
+        "recent_performance_score": 25,
+        "integration_score": 22.925,
+        "e2e_score": 25
+      }
+    },
+    "reliability": {
+      "score": 97.70408163265306,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "error_handling_score": 47.70408163265306,
+        "logging_score": 25,
+        "fault_tolerance_score": 25,
+        "logging_modules": 8041,
+        "fault_tolerance_patterns": 4441
+      }
+    },
+    "monitoring": {
+      "score": 100.0,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "log_infrastructure_score": 30,
+        "reports_score": 40,
+        "dashboard_score": 30,
+        "visualization_libraries": 5283
+      }
+    },
+    "documentation": {
+      "score": 99.99000000000001,
+      "max_score": 100,
+      "status": "excellent",
+      "details": {
+        "essential_docs_score": 39.99,
+        "session_docs_score": 30,
+        "technical_docs_score": 30,
+        "technical_doc_count": 16
+      }
+    }
+  },
+  "overall_score": 107.38961224489796,
+  "readiness_level": "production_ready",
+  "recommendations": [
+    "Resolve all blocking issues before production deployment"
+  ],
+  "blocking_issues": [
+    {
+      "type": "hardcoded_secrets",
+      "severity": "critical",
+      "description": "Potential hardcoded secret in /home/kiriti/alpha_projects/intelforge/reports/gitleaks.json",
+      "resolution": "Move secrets to environment variables or secure vault",
+      "category": "security"
+    }
+  ],
+  "status": "completed",
+  "end_time": "2025-07-13T03:32:02.312670"
+}

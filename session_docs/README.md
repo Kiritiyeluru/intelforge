@@ -1,42 +1,60 @@
 # Session Documentation - IntelForge
 
-## Documentation Status: STREAMLINED ✅
+## Documentation Status: ORGANIZED ✅
 
-This directory provides a single source of truth for project status and session management.
+This directory provides organized project documentation across development phases.
 
-## Current Active Files
+## Directory Structure
 
-### 🎯 PRIMARY STATUS FILE
+### 📋 `/active/` - Current Development
+Current project status, tasks, and immediate priorities:
 - **`PROJECT_STATUS.md`** - **AUTHORITATIVE PROJECT STATUS** - READ FIRST
-  - Comprehensive project status and strategic direction
-  - Current phase implementation details  
-  - Session accomplishments and progress tracking
-  - Strategic roadmap and future priorities
-  - Performance benchmarks and success metrics
-  - Risk mitigation and implementation guidance
+- `CURRENT_TASK.md` - Active development tasks  
+- `NEXT_STEPS.md` - Immediate action items
+- `ROADMAP.md` - Project roadmap
+- `priority_*_*.md` - Current priorities
 
-### 📋 SESSION MANAGEMENT
-- **`SESSION_HANDOVER.md`** - Session-specific technical notes and handover details
-- **`README.md`** - This file explaining the documentation structure
+### 📚 `/history/` - Historical Records
+Completed phases and session handovers:
+- `SESSION_HANDOVER*.md` - Session transition documents
+- `COMPLETED_TASKS.md` - Historical task completion records
+- `phase_*_tasks_completed.md` - Phase completion summaries
+
+### 🎯 `/planning/` - Implementation Plans
+Development strategies and implementation blueprints:
+- `SEMANTIC_CRAWLER_IMPLEMENTATION_PLAN.md` - Core implementation plan
+- `semantic_crawler_implementation_plan_*.md` - Detailed phase plans
+- `REORGANIZATION_PLAN.md` - Repository organization strategy
+
+### 🔍 `/analysis/` - Research & Analysis
+Research, analysis, and review documents:
+- `CONTENT_MAPPING_ANALYSIS.md` - Content structure analysis
+- Test reports and reviews
+
+### 🏗️ `/reorganized_docs/` - Structured Documentation
+Comprehensive structured documentation:
+- `01_PROJECT_OVERVIEW.md` through `07_TECHNICAL_REFERENCE.md`
+- Complete testing infrastructure documentation
+- Implementation status and security plans
 
 ## Quick Reference
 
 ### ✅ For Project Status and Current Work
-**READ:** `PROJECT_STATUS.md` 
+**READ:** `active/PROJECT_STATUS.md` 
 
 ### ✅ For Session-Specific Technical Details
-**CHECK:** `SESSION_HANDOVER.md`
+**CHECK:** `history/SESSION_HANDOVER*.md`
 
-### ✅ For Session Updates
-**UPDATE:** `PROJECT_STATUS.md` with progress and next priorities
+### ✅ For Implementation Planning
+**REVIEW:** `planning/SEMANTIC_CRAWLER_IMPLEMENTATION_PLAN.md`
 
 ## Integration with Other Documentation
 
-- **Project Memory:** `/CLAUDE.md` - Core development philosophy and standards
+- **Project Memory:** `/.claude/` - Core development philosophy and standards
 - **Project Overview:** `/README.md` - Public project description
 - **Technical Docs:** `/docs/` - Decision logs, troubleshooting, and technical documentation
 - **Knowledge Base:** `/knowledge_management/` - Organized articles and research
 
 ---
 
-*This consolidated approach eliminates documentation fragmentation and provides clear guidance for all development sessions.*
+*This organized approach provides clear navigation and eliminates documentation fragmentation across development sessions.*

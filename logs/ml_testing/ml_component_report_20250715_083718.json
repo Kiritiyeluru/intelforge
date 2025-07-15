@@ -1,0 +1,18 @@
+{
+  "ml_testing_report": {
+    "timestamp": "2025-07-15T08:37:18.469722",
+    "component_availability": {
+      "sentence_transformers": true,
+      "chromadb": true,
+      "qdrant": true,
+      "timestamp": "2025-07-15T08:37:18.469241"
+    },
+    "test_results": [],
+    "summary": {
+      "components_available": 3,
+      "total_components": 3,
+      "tests_run": 0,
+      "tests_passed": 0
+    }
+  }
+}

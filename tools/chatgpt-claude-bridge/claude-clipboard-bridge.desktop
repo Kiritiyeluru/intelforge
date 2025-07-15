@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Claude Clipboard Bridge
+Comment=Bridge clipboard content from ChatGPT to Claude Code
+Exec=/home/kiriti/alpha_projects/intelforge/tools/chatgpt-claude-bridge/scripts/save-clipboard-to-claude.sh
+Icon=utilities-terminal
+Type=Application
+Categories=Utility;Development;
+Keywords=claude;chatgpt;clipboard;ai;bridge;
+StartupNotify=true
+NoDisplay=false

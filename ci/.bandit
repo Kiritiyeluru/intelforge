@@ -1,0 +1,13 @@
+exclude_dirs:
+  - tests/
+  - venv/
+  - .venv/
+  - __pycache__/
+  - .git/
+
+skips:
+  - B101  # Skip assert_used test
+  - B603  # Skip subprocess_without_shell_equals_true test
+
+# High severity issues only for initial cleanup
+confidence: medium

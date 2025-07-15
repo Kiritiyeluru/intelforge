@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-07-13T13:49:49.947402",
+  "results": {
+    "timestamp": "2025-07-13T13:49:45.859361",
+    "checks": {
+      "basic_connectivity": {
+        "target": "basic_connectivity",
+        "success": true,
+        "duration": 3.600202798843384,
+        "critical": true,
+        "validation": {
+          "valid": true,
+          "failed_checks": [],
+          "total_checks": 8,
+          "passed_checks": 8,
+          "details": {
+            "title_present": true,
+            "content_size": true,
+            "has_title": true,
+            "has_body": true,
+            "no_access_denied": true,
+            "no_blocked": true,
+            "example_domain": true,
+            "proper_html": true
+          }
+        },
+        "details": {
+          "page_size": 1248,
+          "title": "Example Domain",
+          "passed_checks": 8,
+          "total_checks": 8,
+          "failed_checks": []
+        }
+      }
+    },
+    "summary": {
+      "total_checks": 1,
+      "successful_checks": 1,
+      "success_rate": 1.0,
+      "critical_failures": 0,
+      "overall_status": "excellent",
+      "ready_for_pipeline": true,
+      "total_duration": 4.088021278381348,
+      "validation_timestamp": "2025-07-13T13:49:49.947385",
+      "enhanced_metrics": {
+        "total_validation_checks": 8,
+        "passed_validation_checks": 8,
+        "validation_success_rate": 1.0
+      }
+    },
+    "version": "v2_enhanced"
+  }
+}

@@ -1,0 +1,64 @@
+# Retry Budget Configuration for IntelBotDriver
+# Intelligent retry management with cooldown periods and budget limits
+
+targets:
+  finviz:
+    retry_limit: 3
+    cooldown_seconds: 30
+    max_concurrent: 2
+    budget_reset_hours: 24
+    description: "Finviz stock screener - financial data site with moderate anti-bot"
+  
+  yahoo_finance:
+    retry_limit: 2
+    cooldown_seconds: 45
+    max_concurrent: 1
+    budget_reset_hours: 12
+    description: "Yahoo Finance - high-security financial site"
+  
+  creepjs:
+    retry_limit: 1
+    cooldown_seconds: 60
+    max_concurrent: 1
+    budget_reset_hours: 6
+    description: "CreepJS stealth testing - detection analysis site"
+  
+  httpbin:
+    retry_limit: 5
+    cooldown_seconds: 5
+    max_concurrent: 3
+    budget_reset_hours: 1
+    description: "HTTPBin testing service - minimal restrictions"
+  
+  default:
+    retry_limit: 2
+    cooldown_seconds: 60
+    max_concurrent: 1
+    budget_reset_hours: 6
+    description: "Default configuration for unknown sites"
+
+# Global settings
+global:
+  max_init_retries: 3
+  init_backoff_multiplier: 2
+  max_wait_time: 300  # 5 minutes maximum wait
+  screenshot_on_failure: true
+  page_validation: true
+  ttr_tracking: true
+
+# Validation rules for different site types
+validation_rules:
+  financial_sites:
+    min_page_size: 10000
+    required_elements: ["body"]
+    forbidden_keywords: ["access denied", "blocked", "captcha"]
+  
+  testing_sites:
+    min_page_size: 500
+    required_elements: ["body"]
+    forbidden_keywords: ["error", "not found"]
+  
+  default:
+    min_page_size: 1000
+    required_elements: ["body"]
+    forbidden_keywords: ["access denied", "blocked", "error"]
