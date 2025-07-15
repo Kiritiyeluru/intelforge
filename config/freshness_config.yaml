@@ -1,0 +1,98 @@
+# IntelForge Freshness Tracking Configuration
+# Time-to-recheck (TTR) settings for different content types
+
+# Global default settings
+global:
+  default_ttl_hours: 168  # 7 days
+  max_ttl_hours: 8760     # 1 year
+  min_ttl_hours: 1        # 1 hour
+  staleness_threshold_hours: 720  # 30 days
+
+# Content type specific TTL settings
+content_types:
+  news:
+    ttl_hours: 24        # News articles - daily refresh
+    priority: high
+    patterns:
+      - "news"
+      - "breaking"
+      - "latest"
+      - "today"
+  
+  research:
+    ttl_hours: 168       # Research papers - weekly refresh
+    priority: medium
+    patterns:
+      - "paper"
+      - "study"
+      - "research"
+      - "journal"
+  
+  documentation:
+    ttl_hours: 720       # Documentation - monthly refresh
+    priority: low
+    patterns:
+      - "docs"
+      - "documentation"
+      - "manual"
+      - "guide"
+  
+  reference:
+    ttl_hours: 2160      # Reference materials - quarterly refresh
+    priority: low
+    patterns:
+      - "reference"
+      - "encyclopedia"
+      - "definition"
+
+# Domain-specific freshness rules
+domains:
+  arxiv.org:
+    ttl_hours: 24       # Academic preprints change frequently
+    priority: high
+  
+  sec.gov:
+    ttl_hours: 72       # SEC filings - 3 day refresh
+    priority: high
+  
+  wikipedia.org:
+    ttl_hours: 168      # Wikipedia - weekly refresh
+    priority: medium
+  
+  github.com:
+    ttl_hours: 24       # Code repositories change frequently
+    priority: medium
+
+# Freshness tracking behavior
+tracking:
+  enabled: true
+  update_on_crawl: true
+  update_on_access: false
+  track_metadata_changes: true
+  track_content_hash: true
+  cleanup_old_entries: true
+  cleanup_threshold_days: 365
+
+# Database settings
+database:
+  path: "freshness_tracking.db"
+  table_name: "freshness_tracking"
+  backup_enabled: true
+  backup_interval_hours: 24
+  vacuum_interval_hours: 168  # Weekly database optimization
+
+# Alerting and monitoring
+alerts:
+  stale_content_threshold_days: 30
+  missing_freshness_data_alert: true
+  database_size_warning_mb: 100
+  log_freshness_updates: true
+  log_level: "INFO"
+
+# Performance optimization
+performance:
+  batch_size: 1000
+  cache_enabled: true
+  cache_ttl_minutes: 60
+  index_optimization: true
+  parallel_processing: false  # Set to true for high-volume scenarios

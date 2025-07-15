@@ -1,0 +1,95 @@
+{
+  "finance_urls": [
+    {
+      "url": "https://finviz.com/quote.ashx?t=AAPL",
+      "symbol": "AAPL",
+      "data_type": "stock_quote",
+      "expected_fields": ["price", "volume", "market_cap", "pe_ratio"],
+      "anti_detection_required": true
+    },
+    {
+      "url": "https://finance.yahoo.com/quote/TSLA",
+      "symbol": "TSLA", 
+      "data_type": "stock_quote",
+      "expected_fields": ["current_price", "52_week_range", "dividend_yield"],
+      "anti_detection_required": true
+    },
+    {
+      "url": "https://finviz.com/screener.ashx?v=111&f=cap_mega",
+      "data_type": "stock_screener",
+      "expected_fields": ["ticker", "company", "sector", "industry"],
+      "anti_detection_required": true
+    },
+    {
+      "url": "https://finance.yahoo.com/calendar/earnings",
+      "data_type": "earnings_calendar", 
+      "expected_fields": ["symbol", "company", "earnings_date", "estimate"],
+      "anti_detection_required": true
+    },
+    {
+      "url": "https://finviz.com/crypto.ashx",
+      "data_type": "cryptocurrency",
+      "expected_fields": ["symbol", "price", "change", "volume"],
+      "anti_detection_required": true
+    }
+  ],
+  "anti_detection_config": {
+    "user_agents": [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0"
+    ],
+    "request_delays": {
+      "min_delay": 1.5,
+      "max_delay": 4.0,
+      "human_pattern": true
+    },
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.5",
+      "Accept-Encoding": "gzip, deflate, br",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1"
+    }
+  },
+  "mock_financial_data": {
+    "aapl_quote": {
+      "symbol": "AAPL",
+      "current_price": 185.64,
+      "change": "+2.34",
+      "change_percent": "+1.28%",
+      "volume": "52,847,900",
+      "market_cap": "2.89T",
+      "pe_ratio": 29.85,
+      "52_week_range": "164.08 - 199.62"
+    },
+    "tsla_quote": {
+      "symbol": "TSLA", 
+      "current_price": 248.87,
+      "change": "-3.21",
+      "change_percent": "-1.27%",
+      "volume": "41,234,567",
+      "market_cap": "789.2B",
+      "pe_ratio": 58.42,
+      "52_week_range": "138.80 - 299.29"
+    },
+    "screener_results": [
+      {"ticker": "AAPL", "company": "Apple Inc.", "sector": "Technology", "industry": "Consumer Electronics"},
+      {"ticker": "MSFT", "company": "Microsoft Corporation", "sector": "Technology", "industry": "Software"},
+      {"ticker": "GOOGL", "company": "Alphabet Inc.", "sector": "Communication Services", "industry": "Internet Content & Information"}
+    ]
+  },
+  "strategy_validation": {
+    "momentum_strategy": {
+      "criteria": ["price_above_sma_20", "volume_above_average", "rsi_between_30_70"],
+      "expected_signals": 3,
+      "confidence_threshold": 0.75
+    },
+    "value_strategy": {
+      "criteria": ["pe_ratio_below_15", "pb_ratio_below_2", "debt_to_equity_below_0.5"],
+      "expected_signals": 2,
+      "confidence_threshold": 0.80
+    }
+  }
+}

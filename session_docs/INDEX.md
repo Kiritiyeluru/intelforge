@@ -2,14 +2,32 @@
 
 Quick reference guide to IntelForge session documentation with direct navigation links.
 
-## 🎯 Essential Navigation (Start Here)
+## 🎯 **CRITICAL PROJECT FILES (PROJECT ROOT)**
+
+**⚠️ IMPORTANT: The three essential files have been moved to the project root for maximum visibility:**
 
 | Document | Purpose | Location |
 |----------|---------|----------|
-| **PROJECT_STATUS.md** | Authoritative project dashboard & current state | [active/PROJECT_STATUS.md](active/PROJECT_STATUS.md) |
-| **CURRENT_TASK.md** | Current development focus & implementation details | [active/CURRENT_TASK.md](active/CURRENT_TASK.md) |
-| **NEXT_STEPS.md** | Strategic priorities & immediate actions | [active/NEXT_STEPS.md](active/NEXT_STEPS.md) |
-| **ROADMAP.md** | Long-term vision & phase planning | [active/ROADMAP.md](active/ROADMAP.md) |
+| **STS_A_PROJECT_CURRENT_STATE_20250714_v1_CL.md** | 📋 Single source of truth for project status | [../STS_A_PROJECT_CURRENT_STATE_20250714_v1_CL.md](../STS_A_PROJECT_CURRENT_STATE_20250714_v1_CL.md) |
+| **IMP_A_IMPLEMENTATION_GUIDE_20250714_v1_CL.md** | 🚀 Action-oriented next steps with ready-to-execute commands | [../IMP_A_IMPLEMENTATION_GUIDE_20250714_v1_CL.md](../IMP_A_IMPLEMENTATION_GUIDE_20250714_v1_CL.md) |
+| **ARC_A_TECHNICAL_ARCHIVE_20250714_v1_CL.md** | 📚 Historical achievements and technical decisions | [../ARC_A_TECHNICAL_ARCHIVE_20250714_v1_CL.md](../ARC_A_TECHNICAL_ARCHIVE_20250714_v1_CL.md) |
+
+## 📋 **NEW DOCUMENTATION STANDARDS**
+
+| Document | Purpose | Location |
+|----------|---------|----------|
+| **NAMING_CONVENTION_PLAN** | 🎯 Complete naming convention implementation plan | [PLAN/PLAN_A_NAMING_CONVENTION_IMPLEMENTATION_20250714_v1_CL.md](PLAN/PLAN_A_NAMING_CONVENTION_IMPLEMENTATION_20250714_v1_CL.md) |
+| **NAMING_GUIDE** | 📖 Comprehensive naming convention guide | [IFG_NAMING_GUIDE_20250714_v1_CL.md](IFG_NAMING_GUIDE_20250714_v1_CL.md) |
+
+**⚠️ IMPORTANT**: All future documentation must follow the new naming convention:  
+`[CATEGORY]_[PRIORITY]_[DESCRIPTOR]_[YYYYMMDD]_v[VERSION]_[AUTHOR].md`
+
+## 🗂️ **SESSION DOCUMENTATION ARCHIVE**
+
+**Status:** All files archived on 2025-07-14  
+**Archive Location:** [archive_2025_07_14/](archive_2025_07_14/)
+
+### **Historical Documentation** (Archived)
 
 ## 🚨 Critical Priorities
 

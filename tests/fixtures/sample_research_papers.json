@@ -1,0 +1,61 @@
+{
+  "academic_urls": [
+    {
+      "url": "https://arxiv.org/abs/2106.09685",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "domain": "machine_learning",
+      "expected_keywords": ["low-rank adaptation", "parameter-efficient", "fine-tuning", "language models"],
+      "content_type": "research_paper"
+    },
+    {
+      "url": "https://arxiv.org/abs/1706.03762", 
+      "title": "Attention Is All You Need",
+      "domain": "deep_learning",
+      "expected_keywords": ["transformer", "attention mechanism", "self-attention", "neural networks"],
+      "content_type": "research_paper"
+    },
+    {
+      "url": "https://arxiv.org/abs/2005.14165",
+      "title": "GPT-3: Language Models are Few-Shot Learners",
+      "domain": "natural_language_processing",
+      "expected_keywords": ["few-shot learning", "language model", "scaling", "emergent abilities"],
+      "content_type": "research_paper"
+    },
+    {
+      "url": "https://arxiv.org/abs/2204.02311",
+      "title": "PaLM: Scaling Language Modeling with Pathways",
+      "domain": "machine_learning",
+      "expected_keywords": ["pathways", "scaling", "large language model", "training efficiency"],
+      "content_type": "research_paper"
+    },
+    {
+      "url": "https://arxiv.org/abs/2203.15556",
+      "title": "Training language models to follow instructions with human feedback",
+      "domain": "ai_alignment",
+      "expected_keywords": ["instruction following", "human feedback", "RLHF", "alignment"],
+      "content_type": "research_paper"
+    }
+  ],
+  "mock_content": {
+    "lora_paper": {
+      "abstract": "An important paradigm of natural language processing consists of large-scale pre-training on general domain data and adaptation to particular tasks or domains. As we pre-train larger models, full fine-tuning, which retrains all model parameters, becomes less feasible. Using GPT-3 175B as an example, deploying independent instances of fine-tuned models, each with 175B parameters, is prohibitively expensive. We propose Low-Rank Adaptation, or LoRA, which freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks.",
+      "expected_semantic_similarity": 0.95,
+      "research_gaps": ["Parameter efficiency", "Computational cost reduction", "Model adaptation"],
+      "methodology": "Low-rank matrix decomposition"
+    },
+    "attention_paper": {
+      "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "expected_semantic_similarity": 0.93,
+      "research_gaps": ["Sequential processing limitations", "Parallelization challenges", "Long-range dependencies"],
+      "methodology": "Multi-head self-attention"
+    }
+  },
+  "bulk_processing_config": {
+    "batch_size": 5,
+    "max_concurrent_requests": 3,
+    "timeout_per_url": 30,
+    "retry_attempts": 2,
+    "expected_processing_time": 45,
+    "semantic_similarity_threshold": 0.85
+  }
+}

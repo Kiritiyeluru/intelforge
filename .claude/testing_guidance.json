@@ -5,20 +5,7 @@
     "approach": "Hybrid testing strategy using optimal tools for each scenario"
   },
   
-  "primary_locations": {
-    "main_testing_directory": "session_docs/reorganized_docs/testing/",
-    "testing_strategy": "session_docs/reorganized_docs/testing/test_strategy.md",
-    "tool_selection_reference": ".claude/testing_tools_stack.json",
-    "hybrid_test_runner": "session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py",
-    "configuration": "session_docs/reorganized_docs/testing/config/test_config.yaml"
-  },
   
-  "testing_plans_by_category": {
-    "performance_testing": "session_docs/reorganized_docs/testing/performance_benchmarking.md",
-    "advanced_testing": "session_docs/reorganized_docs/testing/advanced_testing.md",
-    "module_testing": "session_docs/reorganized_docs/testing/module_testing_guide.md",
-    "infrastructure_monitoring": "session_docs/reorganized_docs/testing/infrastructure_monitoring.md",
-    "validation_metrics": "session_docs/reorganized_docs/testing/validation_metrics.md"
   },
   
   "tool_selection_strategy": {
@@ -70,13 +57,7 @@
     ]
   },
   
-  "test_execution_commands": {
-    "hybrid_testing": "python session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py",
-    "rust_performance": "python session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py --type rust-performance",
-    "load_testing": "python session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py --type load-tests",
-    "security_fuzzing": "python session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py --type rust-security",
-    "cli_benchmarks": "python session_docs/reorganized_docs/testing/scripts/hybrid_test_runner.py --type cli-benchmarks --commands \"python scraper.py\"",
-    "direct_k6": "k6 run session_docs/reorganized_docs/testing/scripts/k6_stress_test.js"
+ 
   },
   
   "performance_advantages": {

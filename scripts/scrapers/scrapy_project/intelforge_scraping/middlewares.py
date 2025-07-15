@@ -264,3 +264,96 @@ class IntelforgeScrapingDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+
+class RateLimitingMiddleware:
+    """
+    Phase 4 Rate Limiting Enhancement Middleware
+    Implements content-type checks, circuit breakers, and advanced rate limiting
+    """
+
+    def __init__(self, settings):
+        self.settings = settings
+        self.logger = logging.getLogger(__name__)
+        
+        # Content-type filtering
+        self.allowed_content_types = settings.getlist('ALLOWED_CONTENT_TYPES', [
+            'text/html', 'text/plain', 'application/xhtml+xml', 'application/xml', 'text/xml'
+        ])
+        
+        # Circuit breaker settings
+        self.circuit_breaker_failures = {}  # domain -> failure_count
+        self.circuit_breaker_timeouts = {}  # domain -> timeout_timestamp
+        self.failure_threshold = settings.getint('CIRCUIT_BREAKER_FAILURE_THRESHOLD', 5)
+        self.timeout_duration = settings.getint('CIRCUIT_BREAKER_TIMEOUT', 300)
+        self.success_threshold = settings.getint('CIRCUIT_BREAKER_SUCCESS_THRESHOLD', 3)
+        
+        self.logger.info("RateLimitingMiddleware initialized")
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.settings)
+
+    def process_request(self, request, spider):
+        """Check circuit breaker before processing request"""
+        from urllib.parse import urlparse
+        import time
+        
+        domain = urlparse(request.url).netloc
+        current_time = time.time()
+        
+        # Check if domain is in circuit breaker timeout
+        if domain in self.circuit_breaker_timeouts:
+            if current_time < self.circuit_breaker_timeouts[domain]:
+                spider.logger.warning(f"Circuit breaker active for {domain}, skipping request")
+                from scrapy.exceptions import IgnoreRequest
+                raise IgnoreRequest(f"Circuit breaker active for {domain}")
+            else:
+                # Timeout expired, remove from timeout
+                del self.circuit_breaker_timeouts[domain]
+        
+        return None
+
+    def process_response(self, request, response, spider):
+        """Process response with content-type filtering and circuit breaker logic"""
+        from urllib.parse import urlparse
+        import time
+        
+        domain = urlparse(request.url).netloc
+        
+        # Content-type filtering
+        content_type = response.headers.get('Content-Type', b'').decode('utf-8').lower()
+        
+        # Check if content-type is allowed
+        if not any(allowed_type in content_type for allowed_type in self.allowed_content_types):
+            spider.logger.warning(f"Blocked non-text content: {content_type} from {request.url}")
+            from scrapy.exceptions import IgnoreRequest
+            raise IgnoreRequest(f"Unsupported content type: {content_type}")
+        
+        # Circuit breaker: record success
+        if response.status < 400:
+            if domain in self.circuit_breaker_failures:
+                self.circuit_breaker_failures[domain] -= 1
+                if self.circuit_breaker_failures[domain] <= 0:
+                    del self.circuit_breaker_failures[domain]
+                    spider.logger.info(f"Circuit breaker reset for {domain}")
+        
+        return response
+
+    def process_exception(self, request, exception, spider):
+        """Handle failures and update circuit breaker"""
+        from urllib.parse import urlparse
+        import time
+        
+        domain = urlparse(request.url).netloc
+        
+        # Increment failure count
+        self.circuit_breaker_failures[domain] = self.circuit_breaker_failures.get(domain, 0) + 1
+        
+        # Check if threshold exceeded
+        if self.circuit_breaker_failures[domain] >= self.failure_threshold:
+            timeout_until = time.time() + self.timeout_duration
+            self.circuit_breaker_timeouts[domain] = timeout_until
+            spider.logger.error(f"Circuit breaker activated for {domain} after {self.circuit_breaker_failures[domain]} failures")
+        
+        return None

@@ -1,0 +1,34 @@
+# Robots.txt Whitelist - Pre-approved domains for crawling
+# These domains have been verified for compliance with their robots.txt
+# Format: One domain per line (without protocol)
+#
+# Academic and Research Sources
+arxiv.org
+scholar.google.com
+pubmed.ncbi.nlm.nih.gov
+ieee.org
+acm.org
+
+# News and Media (check individual robots.txt)
+# reuters.com
+# bloomberg.com
+# techcrunch.com
+
+# Documentation and Wikis
+en.wikipedia.org
+stackoverflow.com
+github.com
+
+# Government and Official Sources
+sec.gov
+treasury.gov
+federalreserve.gov
+
+# Finance and Trading Resources
+# investopedia.com
+# morningstar.com
+# yahoo.com
+
+# Note: Always verify robots.txt compliance before adding new domains
+# Use: curl https://domain.com/robots.txt to check current policies
+# Respect rate limits and crawl-delay directives

@@ -200,6 +200,7 @@ class EnhancedCanaryValidator:
             checks.append((f"no_{keyword.replace(' ', '_')}", not has_forbidden))
 
         # Site-specific validations using plugin architecture
+        # Use target_name directly instead of domain extraction for validator lookup
         if target_name in self.validators:
             site_checks = self.validators[target_name](content, title, config)
             checks.extend(site_checks)
@@ -216,7 +217,11 @@ class EnhancedCanaryValidator:
         }
 
     def _extract_domain(self, url: str) -> str:
-        """Extract domain identifier for plugin selection"""
+        """Extract domain identifier for plugin selection - DEPRECATED
+        
+        Use target_name directly instead of domain extraction.
+        This method is kept for backward compatibility but should not be used.
+        """
         url_lower = url.lower()
         if "finviz" in url_lower:
             return "finviz_canary"

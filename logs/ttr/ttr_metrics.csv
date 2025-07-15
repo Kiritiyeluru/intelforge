@@ -1,0 +1,2 @@
+timestamp,incident_id,severity,component,ttr_minutes,sla_target_minutes,sla_met
+2025-07-15T08:22:14.275056,INC-1752547933-DAT,high,database,0.016679016666666668,60,True
