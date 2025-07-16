@@ -23,16 +23,16 @@ test-all:
     source {{venv_path}}/bin/activate
     echo "🧪 Running IntelForge End-to-End Test Suite"
     echo "============================================="
-    
+
     echo "1. CLI Smoke Test..."
     python tests/smoketest_all_cli.py
-    
+
     echo "2. Data Integrity Validation..."
     python -m scripts.validation.data_integrity_validator
-    
+
     echo "3. Health Contract Test..."
     python -m pytest tests/test_health_contract_passes.py -v
-    
+
     echo "4. Security Health Check..."
     python -c "
     from scripts.utils.vector_security_manager import VectorSecurityManager
@@ -42,7 +42,7 @@ test-all:
     for component, status in health.items():
         print(f'  {component}: {status}')
     "
-    
+
     echo "============================================="
     echo "✅ All tests completed successfully!"
 
@@ -51,19 +51,19 @@ security-scan:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🔒 Running multi-tool security scan..."
-    
+
     # Ripgrep for fast pattern matching
     rg --json 'secret|password|token' ./scripts || true
-    
+
     # Gitleaks for Git history scanning
     gitleaks detect --source . --report-format json || true
-    
+
     # Semgrep for context-aware analysis
     semgrep --config p/default . || true
-    
+
     # TruffleHog for entropy-based detection
     trufflehog filesystem --directory . --json || true
-    
+
     # Nuclei vulnerability scanning
     if command -v nuclei &> /dev/null; then
         echo "Running nuclei vulnerability scan..."
@@ -71,7 +71,7 @@ security-scan:
     else
         echo "nuclei not found, skipping vulnerability scan"
     fi
-    
+
     echo "✅ Security scan completed"
 
 # Performance benchmarking
@@ -79,20 +79,20 @@ benchmark-all:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "📊 Running performance benchmarks..."
-    
+
     # CLI benchmarking with hyperfine
     hyperfine --warmup 3 'python scripts/cli.py --help'
-    
+
     # Rust components benchmarking (if available)
     if [ -f "scripts/semantic_crawler/rust_tests/Cargo.toml" ]; then
         cargo bench --manifest-path scripts/semantic_crawler/rust_tests/Cargo.toml
     fi
-    
+
     # Load testing with k6 (if available)
     if [ -f "tests/load/cli_load_test.js" ]; then
         k6 run tests/load/cli_load_test.js
     fi
-    
+
     echo "✅ Benchmarks completed"
 
 # Security fuzzing with cargo-fuzz
@@ -100,7 +100,7 @@ fuzz-test TARGET="fuzz_target_1" DURATION="60s":
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🔍 Running security fuzzing for {{TARGET}}..."
-    
+
     if [ -f "scripts/semantic_crawler/rust_tests/Cargo.toml" ]; then
         cd scripts/semantic_crawler/rust_tests
         cargo fuzz run {{TARGET}} -- -max_total_time={{DURATION}}
@@ -114,23 +114,23 @@ fuzz-all DURATION="30s":
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🔍 Running all fuzz targets..."
-    
+
     if [ -f "scripts/semantic_crawler/rust_tests/Cargo.toml" ]; then
         cd scripts/semantic_crawler/rust_tests
-        
+
         # Initialize fuzz corpus if needed
         if [ ! -d "fuzz/corpus" ]; then
             cargo fuzz init
         fi
-        
+
         # Run each fuzz target
         targets=("fuzz_target_1" "fuzz_url_validation" "fuzz_content_validation" "fuzz_semantic_scoring")
-        
+
         for target in "${targets[@]}"; do
             echo "Running fuzz target: $target"
             timeout {{DURATION}} cargo fuzz run "$target" -- -max_total_time={{DURATION}} || true
         done
-        
+
         echo "✅ All fuzz targets completed"
     else
         echo "❌ Rust project not found"
@@ -141,7 +141,7 @@ proptest CASES="1000":
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🎯 Running property-based tests with {{CASES}} cases..."
-    
+
     if [ -f "scripts/semantic_crawler/rust_tests/Cargo.toml" ]; then
         cd scripts/semantic_crawler/rust_tests
         PROPTEST_CASES={{CASES}} cargo test --test property -- --nocapture
@@ -155,20 +155,20 @@ proptest-comprehensive:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🎯 Running comprehensive property-based tests..."
-    
+
     if [ -f "scripts/semantic_crawler/rust_tests/Cargo.toml" ]; then
         cd scripts/semantic_crawler/rust_tests
-        
+
         # Run with different case counts for thorough testing
         echo "Running basic property tests (1000 cases)..."
         PROPTEST_CASES=1000 cargo test --test property --release
-        
+
         echo "Running extended property tests (10000 cases)..."
         PROPTEST_CASES=10000 cargo test --test property --release
-        
+
         echo "Running stress property tests (100000 cases)..."
         PROPTEST_CASES=100000 cargo test --test property --release
-        
+
         echo "✅ Comprehensive property-based testing completed"
     else
         echo "❌ Rust project not found"
@@ -179,25 +179,25 @@ nuclei-scan TARGET="http://localhost:8080":
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🔍 Running nuclei vulnerability scan on {{TARGET}}..."
-    
+
     if command -v nuclei &> /dev/null; then
         # Update nuclei templates
         nuclei -update-templates
-        
+
         # Run custom templates
         if [ -d "security/nuclei-templates/" ]; then
             echo "Running custom IntelForge security templates..."
             nuclei -t security/nuclei-templates/ -u {{TARGET}} -json -o logs/nuclei_custom_scan.json
         fi
-        
+
         # Run community templates for web apps
         echo "Running community web application templates..."
         nuclei -t web-extensions,exposures,misconfiguration -u {{TARGET}} -json -o logs/nuclei_web_scan.json
-        
+
         # Run API security templates
         echo "Running API security templates..."
         nuclei -t api,graphql -u {{TARGET}} -json -o logs/nuclei_api_scan.json
-        
+
         echo "✅ Nuclei vulnerability scan completed"
         echo "📊 Results saved to logs/nuclei_*.json"
     else
@@ -209,34 +209,34 @@ nuclei-audit:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🔍 Running comprehensive nuclei security audit..."
-    
+
     if command -v nuclei &> /dev/null; then
         # Create results directory
         mkdir -p logs/nuclei_audit
-        
+
         # Update templates
         nuclei -update-templates
-        
+
         # Scan local services
         echo "Scanning local services..."
         nuclei -t security/nuclei-templates/ -u http://localhost:8080 -json -o logs/nuclei_audit/local_scan.json || true
-        
+
         # Scan for common vulnerabilities
         echo "Scanning for common web vulnerabilities..."
         nuclei -t cves,vulnerabilities,exposures -u http://localhost:8080 -json -o logs/nuclei_audit/vulnerability_scan.json || true
-        
+
         # Scan for misconfigurations
         echo "Scanning for misconfigurations..."
         nuclei -t misconfiguration,default-logins -u http://localhost:8080 -json -o logs/nuclei_audit/misconfig_scan.json || true
-        
+
         # Scan for information disclosure
         echo "Scanning for information disclosure..."
         nuclei -t exposures,files,directories -u http://localhost:8080 -json -o logs/nuclei_audit/info_disclosure_scan.json || true
-        
+
         # Generate summary report
         echo "📊 Generating nuclei audit summary..."
         cat logs/nuclei_audit/*.json | jq -s '.' > logs/nuclei_audit/full_report.json
-        
+
         echo "✅ Nuclei security audit completed"
         echo "📁 Full audit results: logs/nuclei_audit/"
     else
@@ -266,10 +266,10 @@ setup-monitoring:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "Setting up IntelForge production monitoring..."
-    
+
     # Create log directories
     mkdir -p logs/cron logs/ttr logs/performance
-    
+
     # Create temporary cron file with proper escaping
     echo "# IntelForge Production Monitoring - Every 5 minutes" > /tmp/intelforge_cron
     echo "*/5 * * * * cd {{project_root}} && ~/.local/bin/just monitor >> logs/cron_monitoring.log 2>&1" >> /tmp/intelforge_cron
@@ -282,7 +282,7 @@ setup-monitoring:
     echo "" >> /tmp/intelforge_cron
     echo "# Daily health report generation - Every day at 8:00 AM" >> /tmp/intelforge_cron
     echo "0 8 * * * cd {{project_root}} && ~/.local/bin/just health-check > logs/daily_health_\$(date +%Y%m%d).json 2>&1" >> /tmp/intelforge_cron
-    
+
     if crontab -l 2>/dev/null | grep -q "IntelForge Production Monitoring"; then
         echo "WARNING: IntelForge monitoring cron jobs already exist"
         echo "Use 'crontab -e' to manually manage existing entries"
@@ -291,7 +291,7 @@ setup-monitoring:
         (crontab -l 2>/dev/null; cat /tmp/intelforge_cron) | crontab -
         echo "✅ Cron jobs added successfully!"
     fi
-    
+
     rm -f /tmp/intelforge_cron
 
 # TTR tracking
@@ -311,19 +311,19 @@ build-all:
     #!/usr/bin/env bash
     source {{venv_path}}/bin/activate
     echo "🚀 Running full build and test pipeline..."
-    
+
     # Run tests
     just test-fast
-    
+
     # Security scanning
     just security-scan
-    
+
     # Performance benchmarking
     just benchmark-all
-    
+
     # Production readiness check
     just production-check
-    
+
     echo "✅ Build pipeline completed successfully!"
 
 # Clean up logs and temporary files
@@ -340,18 +340,18 @@ clean:
 dev-setup:
     #!/usr/bin/env bash
     echo "🔧 Setting up development environment..."
-    
+
     # Activate virtual environment
     source {{venv_path}}/bin/activate
-    
+
     # Install development dependencies
     pip install -r requirements.txt
-    
+
     # Setup Git hooks
     if [ -f "scripts/setup_git_hooks.sh" ]; then
         bash scripts/setup_git_hooks.sh
     fi
-    
+
     echo "✅ Development environment ready"
 
 # Show system status
@@ -360,11 +360,11 @@ status:
     source {{venv_path}}/bin/activate
     echo "📊 IntelForge System Status"
     echo "=========================="
-    
+
     # Health check
     echo "🏥 Health Status:"
     just health-check
-    
+
     echo ""
     echo "🔒 Security Status:"
     python -c "
@@ -374,7 +374,7 @@ status:
     for component, status in health.items():
         print(f'  {component}: {status}')
     "
-    
+
     echo ""
     echo "📈 Performance Status:"
     python scripts/production_readiness_checker.py --quick

@@ -67,10 +67,10 @@ if crontab -l 2>/dev/null | grep -q "IntelForge Production Monitoring"; then
     echo "Use 'crontab -e' to manually manage existing entries"
 else
     echo "Adding cron jobs..."
-    
+
     # Add to existing crontab
     (crontab -l 2>/dev/null; echo "$CRON_ENTRIES") | crontab -
-    
+
     echo "✅ Cron jobs added successfully!"
 fi
 

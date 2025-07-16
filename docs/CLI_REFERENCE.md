@@ -1,9 +1,9 @@
 # IntelForge CLI Reference Guide
 
-**Document Version**: 1.0  
-**Created**: 2025-07-16  
-**Status**: Production-Ready  
-**Audience**: Users and administrators  
+**Document Version**: 1.0
+**Created**: 2025-07-16
+**Status**: Production-Ready
+**Audience**: Users and administrators
 
 ---
 

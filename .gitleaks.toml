@@ -7,7 +7,7 @@ useDefault = true
 description = "Test files and known false positives"
 paths = [
     '''.*test.*''',
-    '''.*mock.*''', 
+    '''.*mock.*''',
     '''.*fixture.*''',
     '''.*example.*''',
     '''.*demo.*''',

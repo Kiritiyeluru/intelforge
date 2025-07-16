@@ -26,10 +26,10 @@ http:
       - "{{BaseURL}}/docs"
       - "{{BaseURL}}/swagger"
       - "{{BaseURL}}/openapi"
-      
+
     headers:
       User-Agent: "IntelForge-Security-Scanner/1.0"
-      
+
     matchers-condition: and
     matchers:
       - type: status
@@ -44,7 +44,7 @@ http:
           - 403
           - 404
           - 500
-          
+
       - type: word
         words:
           - "error"
@@ -66,7 +66,7 @@ http:
           - "stacktrace"
         condition: or
         part: body
-        
+
     extractors:
       - type: regex
         name: sensitive_info
@@ -75,7 +75,7 @@ http:
           - '(?i)(database|db)[\s]*[:=][\s]*["\']?([a-zA-Z0-9_.-]+)["\']?'
           - '(?i)(email|mail)[\s]*[:=][\s]*["\']?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})["\']?'
         part: body
-        
+
       - type: regex
         name: version_info
         regex:

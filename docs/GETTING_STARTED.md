@@ -1,9 +1,9 @@
 # IntelForge v1.0.0 - Getting Started Guide
 
-**Document Version**: 1.0  
-**Created**: 2025-07-16  
-**Status**: Production-Ready  
-**Audience**: New users and system administrators  
+**Document Version**: 1.0
+**Created**: 2025-07-16
+**Status**: Production-Ready
+**Audience**: New users and system administrators
 
 ---
 

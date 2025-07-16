@@ -9,7 +9,7 @@
   - **Cons**: Requires local GPU for faster inference
 
 - **Ollama + Embedding Models**: Run nomic-embed-text locally
-  - **Cost**: ₹0 
+  - **Cost**: ₹0
   - **Setup**: `ollama pull nomic-embed-text`
   - **Performance**: Good for small-medium datasets
 

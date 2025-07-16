@@ -3,7 +3,6 @@ Trafilatura Middleware for Scrapy - Enhanced Content Extraction
 Integrates trafilatura content extraction with Scrapy's processing pipeline
 """
 
-
 import trafilatura
 from scrapy.exceptions import NotConfigured
 from scrapy.http import HtmlResponse

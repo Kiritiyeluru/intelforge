@@ -1,9 +1,9 @@
 # IntelForge Incident Response Runbook
 
-**Document Version**: 1.0  
-**Created**: 2025-07-16  
-**Status**: Production-Ready  
-**Audience**: System administrators and incident response team  
+**Document Version**: 1.0
+**Created**: 2025-07-16
+**Status**: Production-Ready
+**Audience**: System administrators and incident response team
 
 ---
 
@@ -402,42 +402,42 @@ python scripts/cli.py health --json --strict
 # Incident Report - INC-YYYYMMDD-HHMMSS
 
 ## Incident Summary
-- **Date/Time**: 
-- **Severity**: 
-- **Duration**: 
-- **Impact**: 
-- **Root Cause**: 
+- **Date/Time**:
+- **Severity**:
+- **Duration**:
+- **Impact**:
+- **Root Cause**:
 
 ## Timeline
-- **Detection**: 
-- **Response**: 
-- **Resolution**: 
-- **Verification**: 
+- **Detection**:
+- **Response**:
+- **Resolution**:
+- **Verification**:
 
 ## Actions Taken
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Root Cause Analysis
-- **Primary Cause**: 
-- **Contributing Factors**: 
-- **System Weaknesses**: 
+- **Primary Cause**:
+- **Contributing Factors**:
+- **System Weaknesses**:
 
 ## Resolution
-- **Immediate Fix**: 
-- **Verification Steps**: 
-- **Monitoring**: 
+- **Immediate Fix**:
+- **Verification Steps**:
+- **Monitoring**:
 
 ## Prevention Measures
-- **Preventive Actions**: 
-- **Monitoring Improvements**: 
-- **Process Changes**: 
+- **Preventive Actions**:
+- **Monitoring Improvements**:
+- **Process Changes**:
 
 ## Lessons Learned
-- **What Worked Well**: 
-- **What Could Be Improved**: 
-- **Follow-up Actions**: 
+- **What Worked Well**:
+- **What Could Be Improved**:
+- **Follow-up Actions**:
 ```
 
 ### **Post-Incident Review**

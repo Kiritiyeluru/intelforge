@@ -107,7 +107,7 @@ Located in `/home/kiriti/alpha_projects/intelforge/config/canary_targets.yaml`:
 # Financial data sources for validation
 finviz_canary:
   url: "https://finviz.com/"
-  
+
 yahoo_finance_canary:
   url: "https://finance.yahoo.com/"
 ```
@@ -128,10 +128,10 @@ Available execution methods:
 # Rate limiting settings
 reddit:
   rate_limit_delay: 2      # Seconds between API calls
-  
+
 web:
   rate_limit_delay: 3      # Seconds between requests
-  
+
 github:
   rate_limit_delay: 1      # Seconds between requests
 ```
@@ -169,7 +169,7 @@ Located in `/home/kiriti/alpha_projects/intelforge/config/scraping_profiles.json
    reddit:
      client_id: "your_reddit_client_id"
      client_secret: "your_reddit_secret"
-   
+
    github:
      access_token: "your_github_token"
    ```
@@ -181,7 +181,7 @@ Located in `/home/kiriti/alpha_projects/intelforge/config/scraping_profiles.json
      subreddits:
        - "algotrading"
        - "your_new_subreddit"
-   
+
    # Add new websites
    web:
      target_sites:

@@ -229,7 +229,9 @@ class ProductionReadinessChecker:
 
             if coverage_percent >= 5:  # Realistic threshold for quick tests
                 status = "pass"
-                score = min(100, int(coverage_percent * 10))  # Scale score appropriately
+                score = min(
+                    100, int(coverage_percent * 10)
+                )  # Scale score appropriately
             elif coverage_percent >= 3:
                 status = "warning"
                 score = int(coverage_percent * 8)

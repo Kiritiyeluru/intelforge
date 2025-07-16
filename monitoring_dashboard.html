@@ -169,7 +169,7 @@
             <h1>🚀 IntelForge Production Monitoring</h1>
             <p>Real-time system health and performance tracking</p>
         </div>
-        
+
         <div class="refresh-controls">
             <button class="refresh-btn" onclick="refreshData()">🔄 Refresh Now</button>
             <div class="auto-refresh">
@@ -178,14 +178,14 @@
                 </label>
             </div>
         </div>
-        
+
         <div id="content">
             <div class="loading">
                 <h2>Loading monitoring data...</h2>
                 <p>Please wait while we fetch the latest system status.</p>
             </div>
         </div>
-        
+
         <div class="timestamp" id="lastUpdate">
             Last updated: Loading...
         </div>
@@ -194,19 +194,19 @@
     <script>
         let autoRefreshInterval;
         let autoRefreshEnabled = true;
-        
+
         function updateTimestamp() {
             const now = new Date();
-            document.getElementById('lastUpdate').textContent = 
+            document.getElementById('lastUpdate').textContent =
                 `Last updated: ${now.toLocaleString()}`;
         }
-        
+
         function createStatusIndicator(status) {
             const indicator = document.createElement('span');
             indicator.className = `status-indicator status-${status}`;
             return indicator;
         }
-        
+
         function createMetric(label, value, unit = '') {
             return `
                 <div class="metric">
@@ -215,7 +215,7 @@
                 </div>
             `;
         }
-        
+
         function createProgressBar(percentage) {
             return `
                 <div class="progress-bar">
@@ -226,18 +226,18 @@
                 </div>
             `;
         }
-        
+
         function renderMonitoringData(data) {
             const content = document.getElementById('content');
             const healthStatus = data.health_status;
             const healthData = data.health_data;
-            
+
             const systemHealth = healthData.checks.system_health;
             const driftStatus = healthData.checks.drift_status;
             const crawlRate = healthData.checks.crawl_success_rate;
             const piiStatus = healthData.checks.pii_status;
             const storageHealth = healthData.checks.storage_health;
-            
+
             content.innerHTML = `
                 <div class="grid">
                     <!-- Overall Status -->
@@ -254,7 +254,7 @@
                             ${createMetric('Overall Status', healthData.overall_status)}
                         </div>
                     </div>
-                    
+
                     <!-- System Health Details -->
                     <div class="card">
                         <h2>
@@ -267,7 +267,7 @@
                         ${createMetric('Warnings', systemHealth.details.results.warn, ' ⚠️')}
                         ${createMetric('Skipped', systemHealth.details.results.skip, ' ⏭️')}
                     </div>
-                    
+
                     <!-- Performance Metrics -->
                     <div class="card">
                         <h2>
@@ -279,7 +279,7 @@
                         ${createMetric('Crawl Success Rate', crawlRate.details.success_rate, '%')}
                         ${createMetric('Success Threshold', crawlRate.details.threshold, '%')}
                     </div>
-                    
+
                     <!-- Security Status -->
                     <div class="card">
                         <h2>
@@ -291,7 +291,7 @@
                         ${createMetric('Total Entities', piiStatus.details.total_entities)}
                         ${createMetric('Detector Type', piiStatus.details.detector_type)}
                     </div>
-                    
+
                     <!-- Storage Health -->
                     <div class="card">
                         <h2>
@@ -303,7 +303,7 @@
                         ${createMetric('Data Storage', storageHealth.details.data ? 'Healthy' : 'Issues')}
                         ${createMetric('Log Storage', storageHealth.details.logs ? 'Healthy' : 'Issues')}
                     </div>
-                    
+
                     <!-- Alerts -->
                     <div class="card">
                         <h2>🚨 Recent Alerts</h2>
@@ -316,7 +316,7 @@
                 </div>
             `;
         }
-        
+
         function renderError(error) {
             const content = document.getElementById('content');
             content.innerHTML = `
@@ -327,43 +327,43 @@
                 </div>
             `;
         }
-        
+
         async function refreshData() {
             try {
                 const response = await fetch('logs/monitoring_status.json');
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-                
+
                 const data = await response.json();
                 renderMonitoringData(data);
                 updateTimestamp();
-                
+
             } catch (error) {
                 console.error('Error fetching monitoring data:', error);
                 renderError(error.message);
             }
         }
-        
+
         function setupAutoRefresh() {
             const checkbox = document.getElementById('autoRefresh');
-            
+
             checkbox.addEventListener('change', function() {
                 autoRefreshEnabled = this.checked;
-                
+
                 if (autoRefreshEnabled) {
                     autoRefreshInterval = setInterval(refreshData, 30000); // 30 seconds
                 } else {
                     clearInterval(autoRefreshInterval);
                 }
             });
-            
+
             // Start auto-refresh by default
             if (autoRefreshEnabled) {
                 autoRefreshInterval = setInterval(refreshData, 30000);
             }
         }
-        
+
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
             refreshData();

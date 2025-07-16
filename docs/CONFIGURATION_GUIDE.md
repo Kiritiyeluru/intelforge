@@ -1,9 +1,9 @@
 # IntelForge Configuration Guide
 
-**Document Version**: 1.0  
-**Created**: 2025-07-16  
-**Status**: Production-Ready  
-**Audience**: System administrators and advanced users  
+**Document Version**: 1.0
+**Created**: 2025-07-16
+**Status**: Production-Ready
+**Audience**: System administrators and advanced users
 
 ---
 
