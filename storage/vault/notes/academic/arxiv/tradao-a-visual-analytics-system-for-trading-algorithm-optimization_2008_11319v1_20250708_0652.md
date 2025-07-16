@@ -10,18 +10,18 @@ primary_category: cs.HC
 arxiv_id: 2008.11319v1
 url: http://arxiv.org/abs/2008.11319v1
 pdf_url: http://arxiv.org/pdf/2008.11319v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: f75de5532125a49c
 ---
 
 # TradAO: A Visual Analytics System for Trading Algorithm Optimization
 
-**Authors:** Ka Wing Tsang, Haotian Li, Fuk Ming Lam, Yifan Mu, Yong Wang, Huamin Qu  
-**Published:** 2020-08-26  
-**Updated:** 2020-08-26  
-**Primary Category:** cs.HC  
-**ArXiv ID:** 2008.11319v1  
+**Authors:** Ka Wing Tsang, Haotian Li, Fuk Ming Lam, Yifan Mu, Yong Wang, Huamin Qu
+**Published:** 2020-08-26
+**Updated:** 2020-08-26
+**Primary Category:** cs.HC
+**ArXiv ID:** 2008.11319v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2008.11319v1)

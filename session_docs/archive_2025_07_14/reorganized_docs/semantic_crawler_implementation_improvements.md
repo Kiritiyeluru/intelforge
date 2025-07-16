@@ -172,18 +172,18 @@ class SemanticContentTracker:
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         self.similarity_threshold = 0.85
         self.versions = {}
-    
+
     def track_semantic_changes(self, content_id, new_content):
         new_embeddings = self.model.encode([new_content])
-        
+
         if content_id in self.versions:
             old_embeddings = self.versions[content_id]['embeddings']
             similarity = self.model.similarity(new_embeddings, old_embeddings)[0][0]
-            
+
             if similarity < self.similarity_threshold:
                 self.create_version_snapshot(content_id, new_content, new_embeddings)
                 return True, similarity
-        
+
         return False, 1.0
 ```
 
@@ -219,24 +219,24 @@ from datetime import datetime
 class DomainCredibilityScorer:
     def __init__(self, opr_api_key):
         self.opr_api_key = opr_api_key
-        
+
     def score_domain(self, domain):
         # Get PageRank authority score
         opr_url = 'https://openpagerank.com/api/v1.0/getPageRank'
         params = {'domains': [domain]}
         headers = {'API-OPR': self.opr_api_key}
-        
+
         response = requests.get(opr_url, params=params, headers=headers)
         authority_score = response.json()['response'][0]['page_rank_decimal']
-        
+
         # Get domain metadata
         w = whois.whois(domain)
         domain_age = (datetime.now() - w.creation_date[0]).days
         age_score = min(domain_age / 365 * 20, 100)
-        
+
         # Combined credibility score
         credibility = (authority_score * 0.6) + (age_score * 0.4)
-        
+
         return {
             'authority_score': authority_score,
             'domain_age_days': domain_age,
@@ -281,11 +281,11 @@ class ContentValueScorer:
         self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.lightfm_model = LightFM(loss='warp')
         self.user_preferences = []
-        
+
     def predict_value(self, article_text):
         # Fast quality classification
         quality_score = self.fasttext_model.predict(article_text)[1][0]
-        
+
         # Semantic similarity to user preferences
         if self.user_preferences:
             article_embedding = self.sentence_model.encode([article_text])
@@ -293,10 +293,10 @@ class ContentValueScorer:
             similarity_score = self.sentence_model.similarity(article_embedding, pref_embeddings).max().item()
         else:
             similarity_score = 0.5
-        
+
         # Combined prediction
         final_score = (quality_score * 0.6) + (similarity_score * 0.4)
-        
+
         return final_score
 ```
 
@@ -324,7 +324,7 @@ class SemanticCrawlerPipeline:
         self.content_tracker = SemanticContentTracker()
         self.credibility_scorer = DomainCredibilityScorer(api_key)
         self.value_scorer = ContentValueScorer()
-    
+
     def process_article(self, article_data):
         # Pipeline processing with each specialized tool
         pass

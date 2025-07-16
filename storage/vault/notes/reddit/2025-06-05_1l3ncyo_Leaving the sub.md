@@ -12,13 +12,13 @@ post_id: 1l3ncyo
 
 # Leaving the sub
 
-My god the quality of this sub has gotten so low. 
+My god the quality of this sub has gotten so low.
 
 I works at one of the major HFT quant firms, and there’s basically no productive discussions about quant finance, which is really what the sub should be about. Every other post is “I’m XYZ looking to break into quant”.
 
 One Google search and a million posts will pop up. Mods need to step it up and people posting need to stop acting like idiots who can’t bother spending 2 minutes searching for the countless other posts asking the exact same thing. If you can’t do a Google search for the thousands of posts exactly like yours then you certainly won’t figure out “how to break into quant”.
 
-Rant over. 
+Rant over.
 
 ## Comments
 
@@ -46,7 +46,7 @@ I just come here for the lols. There are people who wouldn’t even get hired to
 
 I’ve always loved that “break into” has become the solidified phrase too, almost naturally??
 
-But yes, none of these floozies will ever make it. 
+But yes, none of these floozies will ever make it.
 
 I’m pretty sure quant is pushed a lot by social media “get rich like me” channels.
 
@@ -73,7 +73,7 @@ Ok but what type of posts do you want to see? You havent done an AMA in 5 years,
 **Author:** u/Ok_Sprinkles5597
 
 You get what you give.
-You are worthless as a user, so you get nothing of worth from other users. 
+You are worthless as a user, so you get nothing of worth from other users.
 You are the reason this sub sucks.
 
 ### Comment 9 (Score: 7)

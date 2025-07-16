@@ -99,5 +99,3 @@ which python
 * Always use `pyenv`, `virtualenv`, or `conda` for isolation.
 
 ---
-
-

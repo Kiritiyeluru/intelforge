@@ -8,10 +8,11 @@ Designed for protected financial sites (Finviz, Yahoo Finance, etc.)
 import argparse
 import os
 import sys
-import yaml
 from datetime import datetime
 from pathlib import Path
 from typing import Dict
+
+import yaml
 
 # Botasaurus for stealth browser automation
 try:
@@ -183,12 +184,12 @@ timestamp: {result.get("timestamp", "")}
 
 # {result.get("title", "Untitled Page")}
 
-**URL:** {result.get("url", "")}  
-**Final URL:** {result.get("final_url", "")}  
-**Status:** {status}  
-**Bot Detection:** {"⚠️ WARNING" if bot_detected else "✅ Clear"}  
-**Content Length:** {result.get("content_length", 0):,} characters  
-**Scraped:** {result.get("timestamp", "")}  
+**URL:** {result.get("url", "")}
+**Final URL:** {result.get("final_url", "")}
+**Status:** {status}
+**Bot Detection:** {"⚠️ WARNING" if bot_detected else "✅ Clear"}
+**Content Length:** {result.get("content_length", 0):,} characters
+**Scraped:** {result.get("timestamp", "")}
 
 ## Main Content
 

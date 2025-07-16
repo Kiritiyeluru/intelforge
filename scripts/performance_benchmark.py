@@ -44,9 +44,9 @@ try:
 except ImportError:
     BS4_AVAILABLE = False
 
+from scrapers.github_scraper import GitHubScraper
 # IntelForge modules
 from scrapers.web_scraper import WebScraper
-from scrapers.github_scraper import GitHubScraper
 
 
 class PerformanceBenchmark:

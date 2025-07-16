@@ -55,14 +55,14 @@ const userAgents = [
 
 export default function () {
   const startTime = Date.now();
-  
+
   // Simulate anti-detection mechanisms
   const userAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
   const delay = Math.random() * 2.5 + 1.5; // 1.5-4.0s human-like delay
-  
+
   // Test real-time financial data processing
   const source = financialSources[Math.floor(Math.random() * financialSources.length)];
-  
+
   const tradingResponse = http.post('http://localhost:8000/api/crawl', JSON.stringify({
     url: source,
     persona: 'trader',
@@ -79,19 +79,19 @@ export default function () {
     },
     timeout: '15s',
   });
-  
+
   const tradingCheck = check(tradingResponse, {
     'trading request processed': (r) => r.status === 200 || r.status === 404,
     'response time < 1.5s': (r) => r.timings.duration < 1500,
     'anti-detection headers present': (r) => r.request.headers['User-Agent'] !== undefined,
   });
-  
+
   if (!tradingCheck) {
     errorRate.add(1);
   } else {
     antiDetectionRate.add(1);
   }
-  
+
   // Test strategy validation under load
   const strategyResponse = http.post('http://localhost:8000/api/validate-strategy', JSON.stringify({
     strategies: ['momentum', 'value'],
@@ -104,20 +104,20 @@ export default function () {
     },
     timeout: '10s',
   });
-  
+
   const strategyCheck = check(strategyResponse, {
     'strategy validation responds': (r) => r.status === 200 || r.status === 404,
     'validation time < 10s': (r) => r.timings.duration < 10000,
   });
-  
+
   if (!strategyCheck) {
     errorRate.add(1);
   }
-  
+
   // Measure scenario performance
   const totalTime = Date.now() - startTime;
   console.log(`Trader scenario completed in ${totalTime}ms with ${delay}s delay`);
-  
+
   // Apply anti-detection delay
   sleep(delay);
 }
@@ -131,7 +131,7 @@ export function handleSummary(data) {
 
 function textSummary(data, options = {}) {
   const indent = options.indent || '';
-  
+
   let summary = `${indent}Trader Load Test Summary\n`;
   summary += `${indent}=======================\n`;
   summary += `${indent}Peak VUs: ${data.metrics.vus?.values?.max || 'N/A'}\n`;
@@ -142,6 +142,6 @@ function textSummary(data, options = {}) {
   summary += `${indent}Avg Response Time: ${data.metrics.http_req_duration?.values?.avg || 'N/A'}ms\n`;
   summary += `${indent}95th Percentile: ${data.metrics.http_req_duration?.values?.['p(95)'] || 'N/A'}ms\n`;
   summary += `${indent}Real-time Processing: ${totalTime < 30000 ? 'PASS' : 'FAIL'}\n`;
-  
+
   return summary;
 }

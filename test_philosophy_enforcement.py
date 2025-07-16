@@ -4,6 +4,7 @@
 import scrapy  # Approved framework - should be allowed
 from trafilatura import extract  # Another approved framework
 
+
 def test_approved_approach():
     """Using approved frameworks as per REUSE OVER REBUILD philosophy"""
     spider = scrapy.Spider()

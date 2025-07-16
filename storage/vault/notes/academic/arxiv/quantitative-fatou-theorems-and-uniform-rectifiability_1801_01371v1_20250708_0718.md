@@ -10,18 +10,18 @@ primary_category: math.AP
 arxiv_id: 1801.01371v1
 url: http://arxiv.org/abs/1801.01371v1
 pdf_url: http://arxiv.org/pdf/1801.01371v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: b7403f1df7a70cd8
 ---
 
 # Quantitative Fatou Theorems and Uniform Rectifiability
 
-**Authors:** Simon Bortz, Steve Hofmann  
-**Published:** 2018-01-04  
-**Updated:** 2018-01-04  
-**Primary Category:** math.AP  
-**ArXiv ID:** 1801.01371v1  
+**Authors:** Simon Bortz, Steve Hofmann
+**Published:** 2018-01-04
+**Updated:** 2018-01-04
+**Primary Category:** math.AP
+**ArXiv ID:** 1801.01371v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1801.01371v1)

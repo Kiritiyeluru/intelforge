@@ -19,12 +19,12 @@ Quick reference guide to IntelForge session documentation with direct navigation
 | **NAMING_CONVENTION_PLAN** | 🎯 Complete naming convention implementation plan | [PLAN/PLAN_A_NAMING_CONVENTION_IMPLEMENTATION_20250714_v1_CL.md](PLAN/PLAN_A_NAMING_CONVENTION_IMPLEMENTATION_20250714_v1_CL.md) |
 | **NAMING_GUIDE** | 📖 Comprehensive naming convention guide | [IFG_NAMING_GUIDE_20250714_v1_CL.md](IFG_NAMING_GUIDE_20250714_v1_CL.md) |
 
-**⚠️ IMPORTANT**: All future documentation must follow the new naming convention:  
+**⚠️ IMPORTANT**: All future documentation must follow the new naming convention:
 `[CATEGORY]_[PRIORITY]_[DESCRIPTOR]_[YYYYMMDD]_v[VERSION]_[AUTHOR].md`
 
 ## 🗂️ **SESSION DOCUMENTATION ARCHIVE**
 
-**Status:** All files archived on 2025-07-14  
+**Status:** All files archived on 2025-07-14
 **Archive Location:** [archive_2025_07_14/](archive_2025_07_14/)
 
 ### **Historical Documentation** (Archived)

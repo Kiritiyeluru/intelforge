@@ -16,15 +16,16 @@ Usage:
 
 import argparse
 import json
-import yaml
+import os
+import sys
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any
-import time
-import requests
+from typing import Any, Dict, List
 from urllib.parse import quote_plus
-import sys
-import os
+
+import requests
+import yaml
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -266,9 +267,11 @@ class DiscoveryEngine:
                         "title": paper.title,
                         "url": paper.entry_id,
                         "pdf_url": paper.pdf_url,
-                        "abstract": paper.summary[:500] + "..."
-                        if len(paper.summary) > 500
-                        else paper.summary,
+                        "abstract": (
+                            paper.summary[:500] + "..."
+                            if len(paper.summary) > 500
+                            else paper.summary
+                        ),
                         "authors": [author.name for author in paper.authors],
                         "published": paper.published.isoformat(),
                         "categories": paper.categories,

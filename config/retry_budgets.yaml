@@ -8,28 +8,28 @@ targets:
     max_concurrent: 2
     budget_reset_hours: 24
     description: "Finviz stock screener - financial data site with moderate anti-bot"
-  
+
   yahoo_finance:
     retry_limit: 2
     cooldown_seconds: 45
     max_concurrent: 1
     budget_reset_hours: 12
     description: "Yahoo Finance - high-security financial site"
-  
+
   creepjs:
     retry_limit: 1
     cooldown_seconds: 60
     max_concurrent: 1
     budget_reset_hours: 6
     description: "CreepJS stealth testing - detection analysis site"
-  
+
   httpbin:
     retry_limit: 5
     cooldown_seconds: 5
     max_concurrent: 3
     budget_reset_hours: 1
     description: "HTTPBin testing service - minimal restrictions"
-  
+
   default:
     retry_limit: 2
     cooldown_seconds: 60
@@ -52,12 +52,12 @@ validation_rules:
     min_page_size: 10000
     required_elements: ["body"]
     forbidden_keywords: ["access denied", "blocked", "captcha"]
-  
+
   testing_sites:
     min_page_size: 500
     required_elements: ["body"]
     forbidden_keywords: ["error", "not found"]
-  
+
   default:
     min_page_size: 1000
     required_elements: ["body"]

@@ -51,8 +51,8 @@ Here’s what it does:
 
    ````
    ## Title: Bollinger Band Strategy in Python
-   **Source**: [Medium](link)  
-   **Tags**: bollinger-band, backtesting  
+   **Source**: [Medium](link)
+   **Tags**: bollinger-band, backtesting
    **Summary (GPT)**: This article demonstrates how to use BB with TA-Lib...
    **Snippet**:
    ```py
@@ -189,8 +189,8 @@ Yes, **these suggestions significantly improve the original Automated Knowledge 
   score: 83
   freshness: 2024-06-01
   ---
-  # Bollinger Band Python Strategy  
-  [View Repo](https://github.com/xyz/bollinger)  
+  # Bollinger Band Python Strategy
+  [View Repo](https://github.com/xyz/bollinger)
   Summary: This strategy uses TA-Lib for BB entry/exit...
   ```
 
@@ -422,7 +422,7 @@ for repo in repos[:5]:  # Limit to top 5
     stars = repo["stargazers_count"]
     description = repo.get("description", "No description")
     date = datetime.now().strftime("%Y-%m-%d")
-    
+
     content = f"""---
 tags: [bollinger-band, github]
 source: GitHub
@@ -561,7 +561,7 @@ Suggest ways to. Make this. More ai friendly like,
 **Add These AI-Generation Helpers:**
 - Request a "system health check" script that validates all APIs are working
 - Ask for a "sample data generator" so you can test without real API calls
-- Include a "reset/cleanup" script in case you need to start fresh 
+- Include a "reset/cleanup" script in case you need to start fresh
 
 Here’s a refined version of your “AI-friendly AKM build” strategy. This version is designed to maximize usefulness when working with **AI coding agents** like Claude Code, ChatGPT, or Copilot, making it easier to **auto-generate, debug, and extend** each part of your pipeline.
 
@@ -756,7 +756,7 @@ Let me know if you’d like:
 You’ve already designed a solid system — these enhancements will **unlock it for reliable AI-assisted development.**
 
 
-Should I include the following? 
+Should I include the following?
 ---
 
 ## **General Strategies to Make Your Pipeline AI-Friendly**
@@ -938,4 +938,3 @@ If you like, I can generate:
 * Or even a **ClickUp doc/notion template** version of your pipeline + assistant flow
 
 Would you like one of those next?
-

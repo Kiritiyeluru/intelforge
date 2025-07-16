@@ -12,13 +12,13 @@ post_id: 1l1xcsd
 
 # I tried manual day trading for the first time after years of successful algo trading, and it was an epic fail. Anyone else have no idea how to manually trade.
 
-I've been trading algorithmically, profitably since 2022.  My side strategies are swing but by far my main strategy is a day trading slow HFT (10 ms timeframe ) I run on Rithmic. I've been trying to run a second instrument on rhythmic, but it's not built for that.  You either can create a new account, and maintain separate fees and a separate bank account for each strategy, or you can deal with really heavy C++ programing, which was difficult for me.  But I figure before I give up and pay an extra to $1,200 a year to run a separate instrument, I'm going to try and program it. 
+I've been trading algorithmically, profitably since 2022.  My side strategies are swing but by far my main strategy is a day trading slow HFT (10 ms timeframe ) I run on Rithmic. I've been trying to run a second instrument on rhythmic, but it's not built for that.  You either can create a new account, and maintain separate fees and a separate bank account for each strategy, or you can deal with really heavy C++ programing, which was difficult for me.  But I figure before I give up and pay an extra to $1,200 a year to run a separate instrument, I'm going to try and program it.
 
-After a couple weekends programming, I tried to run it live this morning, epic fail, crashed after attempting the first trade.  I'm not a programmer. 
+After a couple weekends programming, I tried to run it live this morning, epic fail, crashed after attempting the first trade.  I'm not a programmer.
 
-I'm not a manual trader either, I've never done it, I know the different types of trades, and methods of trading, but reading charts and making decisions is not my thing. 
+I'm not a manual trader either, I've never done it, I know the different types of trades, and methods of trading, but reading charts and making decisions is not my thing.
 
-But after my program crashed, I'm not sure what motivated me, I had the day off from work., So I said I would take the dive and trade exactly like my code but on a higher time frame.  I had no idea how to use R traders interface, but googling helped. 
+But after my program crashed, I'm not sure what motivated me, I had the day off from work., So I said I would take the dive and trade exactly like my code but on a higher time frame.  I had no idea how to use R traders interface, but googling helped.
 
 But man all I saw were lines and bars going up and down, my strategy is mean reversion, so when the market moved up really fast, I went short.
 
@@ -44,7 +44,7 @@ Curious OP if you are not a programmer how did you setup algo trading?
 
 **Author:** u/RobertD3277
 
-I don't believe that it is appropriate to say that you can't manually trade. The problem that you are having is translating the algorithm into a manual supposition. 
+I don't believe that it is appropriate to say that you can't manually trade. The problem that you are having is translating the algorithm into a manual supposition.
 
 Realistically, you should use two different accounts in the case of just learning to manual trade from scratch. I say learning to trade manually because ironically, it is an entirely different skill set than algorithmic trading. Go back to the basics with a demo account and start there.
 
@@ -78,7 +78,7 @@ Trading manually vs trading algorithmically requires different skillsets, so tha
 
 **Author:** u/WillieNFinance
 
-You are a professional day trader. 
+You are a professional day trader.
 
 Just because you don't *manually* click buy or sell, doesn't mean you aren't buying and selling.
 

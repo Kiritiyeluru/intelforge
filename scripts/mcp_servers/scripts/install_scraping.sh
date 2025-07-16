@@ -88,7 +88,7 @@ if [ ! -d "servers/scraping/firecrawl/firecrawl-mcp-server" ]; then
     cd servers/scraping/firecrawl
     git clone https://github.com/mendableai/firecrawl-mcp-server.git
     cd firecrawl-mcp-server
-    
+
     if [ -f "package.json" ]; then
         npm install
         success "Firecrawl installed successfully"
@@ -106,7 +106,7 @@ if [ ! -d "servers/scraping/playwright/mcp-playwright" ]; then
     cd servers/scraping/playwright
     git clone https://github.com/executeautomation/mcp-playwright.git
     cd mcp-playwright
-    
+
     if [ -f "package.json" ]; then
         npm install
         # Install Playwright browsers
@@ -126,7 +126,7 @@ if [ ! -d "servers/scraping/scrapling/scrapling-fetch-mcp" ]; then
     cd servers/scraping/scrapling
     git clone https://github.com/cyberchitta/scrapling-fetch-mcp.git
     cd scrapling-fetch-mcp
-    
+
     if [ -f "requirements.txt" ]; then
         pip3 install -r requirements.txt
         success "Scrapling Fetch installed successfully"
@@ -150,7 +150,7 @@ if [ ! -d "servers/scraping/oxylabs/oxylabs-mcp" ]; then
     cd servers/scraping/oxylabs
     git clone https://github.com/oxylabs/oxylabs-mcp.git
     cd oxylabs-mcp
-    
+
     if [ -f "requirements.txt" ]; then
         pip3 install -r requirements.txt
         success "Oxylabs installed successfully"
@@ -215,7 +215,7 @@ scraping:
     concurrent_requests: 3
     timeout: 30000
     user_agent: "IntelForge-Bot/1.0"
-    
+
   puppeteer:
     headless: true
     viewport:
@@ -223,34 +223,34 @@ scraping:
       height: 1080
     wait_for: "networkidle0"
     screenshot: false
-    
+
   playwright:
     browser: "chromium"
     headless: true
     timeout: 30000
     mobile_emulation: false
-    
+
   firecrawl:
     rate_limit: 10
     max_pages: 100
     formats: ["markdown", "html"]
     extract_images: false
-    
+
   fetch:
     follow_redirects: true
     max_redirects: 5
     timeout: 15000
-    
+
   brave_search:
     count: 10
     offset: 0
     freshness: ""
-    
+
 anti_detection:
   rotate_user_agents: true
   random_delays: true
   respect_robots_txt: true
-  
+
 performance:
   cache_responses: true
   cache_duration: "1h"
@@ -369,7 +369,7 @@ echo "======================"
 echo ""
 echo "✅ Installed Official Servers (via npx):"
 echo "   - @modelcontextprotocol/server-puppeteer"
-echo "   - @modelcontextprotocol/server-fetch"  
+echo "   - @modelcontextprotocol/server-fetch"
 echo "   - @modelcontextprotocol/server-brave-search"
 echo ""
 echo "✅ Installed Community Servers:"

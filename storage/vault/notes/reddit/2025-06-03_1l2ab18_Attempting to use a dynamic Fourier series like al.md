@@ -12,11 +12,11 @@ post_id: 1l2ab18
 
 # Attempting to use a dynamic Fourier series like algorithm to model certain period of the stock market
 
-Hey everyone, I am definitely a bit new to the aspect of trading as a whole, being mainly focused on pure mathematics. I am attempting to generate a way to model out certain smooth motions of the stock market, using a fourier series-like function which can adapt to dynamic changes.   
-It follows from using an FFT on a given time period on the market, creating a Discrete Fourier Series from it, with the Fourier coefficient weighted by e\^(alpha\*local drift) and the frequency component with a weightage incorporated of 1+local volatility\*beta, where alpha and beta are weights that can be optimised through learning. So far, I have tested it on Brownian motion sampling and will incorporate it to predict past financial data.   
-Is there any research that has been done on such models that utilise a weighted/modified discrete Fourier series? Do you recommend any adjustments to a beginner like me?  
-Where do you recommend I could go to learn more about trading from a pure mathematical perspective?  
-Any feedback and answers to the above is greatly appreciated  
+Hey everyone, I am definitely a bit new to the aspect of trading as a whole, being mainly focused on pure mathematics. I am attempting to generate a way to model out certain smooth motions of the stock market, using a fourier series-like function which can adapt to dynamic changes.
+It follows from using an FFT on a given time period on the market, creating a Discrete Fourier Series from it, with the Fourier coefficient weighted by e\^(alpha\*local drift) and the frequency component with a weightage incorporated of 1+local volatility\*beta, where alpha and beta are weights that can be optimised through learning. So far, I have tested it on Brownian motion sampling and will incorporate it to predict past financial data.
+Is there any research that has been done on such models that utilise a weighted/modified discrete Fourier series? Do you recommend any adjustments to a beginner like me?
+Where do you recommend I could go to learn more about trading from a pure mathematical perspective?
+Any feedback and answers to the above is greatly appreciated
 
 
 ## Comments

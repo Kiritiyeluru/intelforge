@@ -6,6 +6,7 @@ Demonstrates the TTR tracking system with target <60s recovery time
 
 import json
 import time
+
 from intel_bot_driver import IntelBotDriver, TTRTracker
 
 

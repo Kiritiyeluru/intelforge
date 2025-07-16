@@ -141,7 +141,7 @@ Copied
 
 async def tool_name(param1: str, param2: bool = True) -> str:
     """Tool description for Claude.
-    
+
     Args:
         param1: Description of parameter
         param2: Optional parameter with default
@@ -177,11 +177,11 @@ This teaches us an important principle: Always design tools with output limits i
 
 Copied
 
-async def analyze_file_changes(base_branch: str = "main", 
+async def analyze_file_changes(base_branch: str = "main",
                               include_diff: bool = True,
                               max_diff_lines: int = 500) -> str:
     """Analyze file changes with smart output limiting.
-    
+
     Args:
         base_branch: Branch to compare against
         include_diff: Whether to include the actual diff
@@ -191,33 +191,33 @@ async def analyze_file_changes(base_branch: str = "main",
         # Get the diff
         result = subprocess.run(
             ["git", "diff", f"{base_branch}...HEAD"],
-            capture_output=True, 
+            capture_output=True,
             text=True
         )
-        
+
         diff_output = result.stdout
         diff_lines = diff_output.split('\n')
-        
+
         # Smart truncation if needed
         if len(diff_lines) > max_diff_lines:
             truncated_diff = '\n'.join(diff_lines[:max_diff_lines])
             truncated_diff += f"\n\n... Output truncated. Showing {max_diff_lines} of {len(diff_lines)} lines ..."
             diff_output = truncated_diff
-        
+
         # Get summary statistics
         stats_result = subprocess.run(
             ["git", "diff", "--stat", f"{base_branch}...HEAD"],
             capture_output=True,
             text=True
         )
-        
+
         return json.dumps({
             "stats": stats_result.stdout,
             "total_lines": len(diff_lines),
             "diff": diff_output if include_diff else "Use include_diff=true to see diff",
             "files_changed": self._get_changed_files(base_branch)
         })
-        
+
     except Exception as e:
         return json.dumps({"error": str(e)})
 Best practices for large outputs:
@@ -240,10 +240,10 @@ async def analyze_file_changes(...):
     # Get Claude's working directory from roots
     context = mcp.get_context()
     roots_result = await context.session.list_roots()
-    
+
     # Extract the path from the FileUrl object
     working_dir = roots_result.roots[0].uri.path
-    
+
     # Use it for all git commands
     result = subprocess.run(
         ["git", "diff", "--name-status"],

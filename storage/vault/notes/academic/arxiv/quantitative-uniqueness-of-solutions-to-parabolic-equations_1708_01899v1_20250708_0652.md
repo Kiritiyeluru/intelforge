@@ -10,18 +10,18 @@ primary_category: math.AP
 arxiv_id: 1708.01899v1
 url: http://arxiv.org/abs/1708.01899v1
 pdf_url: http://arxiv.org/pdf/1708.01899v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 0eed92f12360ae92
 ---
 
 # Quantitative uniqueness of solutions to parabolic equations
 
-**Authors:** Jiuyi Zhu  
-**Published:** 2017-08-06  
-**Updated:** 2017-08-06  
-**Primary Category:** math.AP  
-**ArXiv ID:** 1708.01899v1  
+**Authors:** Jiuyi Zhu
+**Published:** 2017-08-06
+**Updated:** 2017-08-06
+**Primary Category:** math.AP
+**ArXiv ID:** 1708.01899v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1708.01899v1)

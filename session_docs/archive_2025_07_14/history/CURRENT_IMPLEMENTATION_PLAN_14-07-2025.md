@@ -18,8 +18,8 @@ estimated_time: 2 hours
 
 # IntelForge Current Implementation Plan
 
-**Last Updated:** 2025-07-14  
-**Purpose:** Strategic migration to prebuilt tools following "reuse over rebuild" philosophy  
+**Last Updated:** 2025-07-14
+**Purpose:** Strategic migration to prebuilt tools following "reuse over rebuild" philosophy
 **Status:** OPTIMIZED - High-value tool integration, focus on simplicity over complexity
 
 > **This plan eliminates 400+ lines of maintenance burden by using battle-tested tools for heavy lifting. Reduces implementation time from 12 hours to 2 hours while avoiding over-engineering.**
@@ -29,7 +29,7 @@ estimated_time: 2 hours
 ## 🎯 **OPTIMIZED EXECUTION PRIORITY**
 
 ### **🟢 HIGH-VALUE TOOL INTEGRATION (90 minutes)**
-1. **Replace Custom Cosine Similarity with sklearn** (5 min) - URGENT  
+1. **Replace Custom Cosine Similarity with sklearn** (5 min) - URGENT
 2. **Use scrapy-trafilatura instead of custom Spider** (30 min) - HIGH
 3. **Replace Qdrant with ChromaDB via LangChain** (30 min) - HIGH
 4. **CLI with typer auto-generation** (25 min) - HIGH
@@ -41,7 +41,7 @@ estimated_time: 2 hours
 ### **📦 SIMPLE TOOL REPLACEMENTS**
 - ❌ **Custom Cosine Similarity** → ✅ **sklearn.metrics.pairwise.cosine_similarity**
 - ❌ **Custom Scrapy Spider/Pipeline** → ✅ **scrapy-trafilatura**
-- ❌ **Custom CLI with argparse** → ✅ **typer auto-generation**  
+- ❌ **Custom CLI with argparse** → ✅ **typer auto-generation**
 - ❌ **Custom vector migration** → ✅ **LangChain adapters**
 - ❌ **Custom dispatch logic** → ✅ **Simple target_name fix**
 
@@ -49,8 +49,8 @@ estimated_time: 2 hours
 
 ## 🔧 **TASK 1: Replace Custom Cosine Similarity with sklearn**
 
-**Priority:** URGENT - Quick win, eliminates edge cases  
-**Duration:** 1 hour  
+**Priority:** URGENT - Quick win, eliminates edge cases
+**Duration:** 1 hour
 **Impact:** Reduces maintenance burden, adds batching and GPU support
 
 ### **Problem Analysis:**
@@ -97,8 +97,8 @@ pip install scikit-learn
 
 ## 🕷️ **TASK 2: Use scrapy-trafilatura (Prebuilt Tool)**
 
-**Priority:** HIGH - Replace custom Spider/Pipeline with existing middleware  
-**Duration:** 30 minutes (vs 4 hours custom)  
+**Priority:** HIGH - Replace custom Spider/Pipeline with existing middleware
+**Duration:** 30 minutes (vs 4 hours custom)
 **Files:** Configuration only, no custom Spider code
 
 ### **Problem Analysis:**
@@ -127,12 +127,12 @@ DOWNLOADER_MIDDLEWARES = {
 # Spider becomes minimal configuration:
 class SemanticSpider(scrapy.Spider):
     name = 'semantic_crawler'
-    
+
     def start_requests(self):
         with open(self.urls_file) as f:
             for url in f:
                 yield scrapy.Request(url.strip())
-    
+
     def parse(self, response):
         # trafilatura middleware handles extraction automatically
         yield response.meta['trafilatura_item']  # Pre-extracted content
@@ -176,8 +176,8 @@ pip install scrapy-trafilatura
 
 ## 💾 **TASK 3: Use LangChain Vectorstore Adapters**
 
-**Priority:** HIGH - Leverage existing migration tools  
-**Duration:** 30 minutes (vs 2 hours custom)  
+**Priority:** HIGH - Leverage existing migration tools
+**Duration:** 30 minutes (vs 2 hours custom)
 **Files:** Configuration change only
 
 ### **Problem Analysis:**
@@ -244,8 +244,8 @@ pip install langchain chromadb
 
 ## 📋 **TASK 4: Implement Pydantic Data Validation**
 
-**Priority:** MEDIUM - Eliminate manual validation, prevent bugs  
-**Duration:** 3 hours  
+**Priority:** MEDIUM - Eliminate manual validation, prevent bugs
+**Duration:** 3 hours
 **Files:** Multiple files with data structures
 
 ### **Problem Analysis:**
@@ -282,7 +282,7 @@ class ContentMetadata(BaseModel):
     captured_at: datetime
     content_hash: str = Field(min_length=16, max_length=64)
     content_length: int = Field(ge=0)
-    
+
     class Config:
         json_encoders = {
             datetime: lambda v: v.isoformat()
@@ -338,8 +338,8 @@ pip install pydantic[email]  # Includes email validation
 
 ## 📄 **TASK 5: Add Jinja2 Template System**
 
-**Priority:** MEDIUM - Cleaner template logic, better maintainability  
-**Duration:** 3 hours  
+**Priority:** MEDIUM - Cleaner template logic, better maintainability
+**Duration:** 3 hours
 **Files:** `scripts/semantic_crawler.py` (lines 342-365)
 
 ### **Problem Analysis:**
@@ -364,9 +364,9 @@ content_hash: "{content_hash}"
 
 # {data["title"]}
 
-**URL**: {data["url"]}  
-**Similarity Score**: {similarity_score:.3f}  
-**Tags**: {", ".join(extracted_tags) if extracted_tags else "None detected"}  
+**URL**: {data["url"]}
+**Similarity Score**: {similarity_score:.3f}
+**Tags**: {", ".join(extracted_tags) if extracted_tags else "None detected"}
 **Extracted**: {data["extracted_at"]}
 
 ---
@@ -391,9 +391,9 @@ content_hash: "{{ content_hash }}"
 
 # {{ title }}
 
-**URL**: {{ url }}  
-**Similarity Score**: {{ score }}  
-**Tags**: {{ tags_display }}  
+**URL**: {{ url }}
+**Similarity Score**: {{ score }}
+**Tags**: {{ tags_display }}
 **Extracted**: {{ extracted_at }}
 
 ---
@@ -465,8 +465,8 @@ pip install jinja2
 
 ## 🖥️ **TASK 6: Use Typer for Auto-Generated CLI**
 
-**Priority:** MEDIUM - Auto-generated interface, zero boilerplate  
-**Duration:** 30 minutes (vs 4 hours custom)  
+**Priority:** MEDIUM - Auto-generated interface, zero boilerplate
+**Duration:** 30 minutes (vs 4 hours custom)
 **Files:** Minimal function decorators only
 
 ### **Problem Analysis:**
@@ -552,8 +552,8 @@ pip install typer[all]  # Includes rich for enhanced output
 
 ## 🔧 **TASK 5: Fix CanaryValidator Dispatch Bug**
 
-**Priority:** URGENT - Simple 5-minute fix  
-**Duration:** 5 minutes  
+**Priority:** URGENT - Simple 5-minute fix
+**Duration:** 5 minutes
 **Files:** `scripts/canary_validation_system_v2.py`
 
 ### **Problem Analysis:**
@@ -581,8 +581,8 @@ if target_name in self.validators:  # Use target_name directly
 
 ## 🔗 **TASK 6: Basic Semantic Module Integration**
 
-**Priority:** MEDIUM - Keep existing approach  
-**Duration:** 25 minutes  
+**Priority:** MEDIUM - Keep existing approach
+**Duration:** 25 minutes
 **Files:** `scripts/semantic_crawler.py`
 
 ### **Problem Analysis:**
@@ -616,8 +616,8 @@ if ENHANCED_MODULES_AVAILABLE:
 
 ## 📊 **TASK 10: Add Prometheus Metrics**
 
-**Priority:** LOW - Observability and monitoring  
-**Duration:** 2 hours  
+**Priority:** LOW - Observability and monitoring
+**Duration:** 2 hours
 **Files:** Add to existing systems
 
 ### **Problem Analysis:**
@@ -707,7 +707,7 @@ cd /home/kiriti/alpha_projects/intelforge
 pip install scikit-learn
 # One-line replacement in semantic_crawler.py
 
-# Task 2: scrapy-trafilatura (30 minutes) 
+# Task 2: scrapy-trafilatura (30 minutes)
 pip install scrapy-trafilatura
 # Configuration-only, no custom Spider code
 
@@ -751,7 +751,7 @@ python -c "import sklearn, scrapy_trafilatura, langchain, chromadb, typer; print
 - ✅ **Semantic Integration:** Keep working try/except vs architectural overhaul
 
 ### **📊 BALANCED ACHIEVEMENTS:**
-- **80% Time Reduction:** 12 hours → 2 hours implementation  
+- **80% Time Reduction:** 12 hours → 2 hours implementation
 - **85% Code Reduction:** 400+ custom lines → 60+ simple integration
 - **High-Value Tools:** Battle-tested libraries for heavy lifting
 - **Simplicity Focus:** Avoid over-engineering, keep what works

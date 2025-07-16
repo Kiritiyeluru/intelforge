@@ -7,13 +7,14 @@ Simpler alternative to browser automation for HTTP-only scraping
 
 import argparse
 import os
-import sys
-import yaml
 import random
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict
+
+import yaml
 
 # HTTP libraries with stealth features
 try:
@@ -214,9 +215,9 @@ def stealth_scrape_url(url: str, session: httpx.Client, delay: int = 3) -> Dict:
             "status": "success" if not bot_detected else "detection_warning",
             "timestamp": datetime.now().isoformat(),
             "headers": dict(response.headers),
-            "stealth_method": "stealth-requests"
-            if STEALTH_AVAILABLE
-            else "httpx+headers",
+            "stealth_method": (
+                "stealth-requests" if STEALTH_AVAILABLE else "httpx+headers"
+            ),
         }
 
         if bot_detected:
@@ -235,9 +236,9 @@ def stealth_scrape_url(url: str, session: httpx.Client, delay: int = 3) -> Dict:
             "status": "error",
             "error": str(e),
             "timestamp": datetime.now().isoformat(),
-            "stealth_method": "stealth-requests"
-            if STEALTH_AVAILABLE
-            else "httpx+headers",
+            "stealth_method": (
+                "stealth-requests" if STEALTH_AVAILABLE else "httpx+headers"
+            ),
         }
 
 
@@ -265,13 +266,13 @@ timestamp: {result.get("timestamp", "")}
 
 # {result.get("title", "Untitled Page")}
 
-**URL:** {result.get("url", "")}  
-**Final URL:** {result.get("final_url", "")}  
-**Status:** {status} (HTTP {result.get("status_code", "N/A")})  
-**Bot Detection:** {"⚠️ WARNING" if bot_detected else "✅ Clear"}  
-**Content Length:** {result.get("content_length", 0):,} characters  
-**Stealth Method:** {result.get("stealth_method", "")}  
-**Scraped:** {result.get("timestamp", "")}  
+**URL:** {result.get("url", "")}
+**Final URL:** {result.get("final_url", "")}
+**Status:** {status} (HTTP {result.get("status_code", "N/A")})
+**Bot Detection:** {"⚠️ WARNING" if bot_detected else "✅ Clear"}
+**Content Length:** {result.get("content_length", 0):,} characters
+**Stealth Method:** {result.get("stealth_method", "")}
+**Scraped:** {result.get("timestamp", "")}
 
 ## Main Content
 

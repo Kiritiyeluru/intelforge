@@ -10,18 +10,18 @@ primary_category: q-fin.TR
 arxiv_id: 2409.05192v1
 url: http://arxiv.org/abs/2409.05192v1
 pdf_url: http://arxiv.org/pdf/2409.05192v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 9c35335da0c3cb38
 ---
 
 # Bellwether Trades: Characteristics of Trades influential in Predicting Future Price Movements in Markets
 
-**Authors:** Tejas Ramdas, Martin T. Wells  
-**Published:** 2024-09-08  
-**Updated:** 2024-09-08  
-**Primary Category:** q-fin.TR  
-**ArXiv ID:** 2409.05192v1  
+**Authors:** Tejas Ramdas, Martin T. Wells
+**Published:** 2024-09-08
+**Updated:** 2024-09-08
+**Primary Category:** q-fin.TR
+**ArXiv ID:** 2409.05192v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2409.05192v1)

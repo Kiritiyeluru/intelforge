@@ -15,15 +15,15 @@ content_hash: 4de8adb628da3024
 timestamp: 2025-07-08T07:15:05.079742
 ---
 
-# 
+#
 
-**URL:** https://www.morningstar.com/stocks/xnas/aapl/quote  
-**Final URL:** https://www.morningstar.com/stocks/xnas/aapl/quote  
-**Status:** detection_warning (HTTP 202)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 450 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:15:05.079742  
+**URL:** https://www.morningstar.com/stocks/xnas/aapl/quote
+**Final URL:** https://www.morningstar.com/stocks/xnas/aapl/quote
+**Status:** detection_warning (HTTP 202)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 450 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:15:05.079742
 
 ## Main Content
 

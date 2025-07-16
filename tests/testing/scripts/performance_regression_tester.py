@@ -4,16 +4,17 @@ IntelForge Performance Regression Testing
 Real scraping workflow performance validation and benchmarking
 """
 
-import sys
-import json
-import time
+import argparse
 import datetime
+import json
+import sqlite3
 import subprocess
+import sys
+import time
 from pathlib import Path
 from typing import Dict, Optional
-import argparse
+
 import psutil
-import sqlite3
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
@@ -64,7 +65,8 @@ class PerformanceRegressionTester:
         conn = sqlite3.connect(self.perf_db_path)
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS performance_benchmarks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -76,9 +78,11 @@ class PerformanceRegressionTester:
                 regression_percent REAL,
                 status TEXT NOT NULL
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS workflow_timings (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -90,9 +94,11 @@ class PerformanceRegressionTester:
                 items_processed INTEGER,
                 throughput_per_second REAL
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS system_metrics (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -102,7 +108,8 @@ class PerformanceRegressionTester:
                 python_version TEXT,
                 test_session_id TEXT
             )
-        """)
+        """
+        )
 
         conn.commit()
         conn.close()
@@ -141,7 +148,7 @@ class PerformanceRegressionTester:
 
         cursor.execute(
             """
-            INSERT INTO performance_benchmarks 
+            INSERT INTO performance_benchmarks
             (timestamp, test_name, metric_name, value, unit, baseline_value, regression_percent, status)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
@@ -186,7 +193,7 @@ class PerformanceRegressionTester:
 
         cursor.execute(
             """
-            INSERT INTO workflow_timings 
+            INSERT INTO workflow_timings
             (timestamp, workflow_name, phase, duration_seconds, memory_mb, cpu_percent, items_processed, throughput_per_second)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
@@ -229,18 +236,18 @@ def benchmark_base_class():
     """Benchmark scraping base class initialization and basic operations"""
     process = psutil.Process()
     start_memory = process.memory_info().rss / 1024 / 1024
-    
+
     # Time class initialization
     start_time = time.time()
     scraper = ScrapingBase()
     init_time = time.time() - start_time
-    
+
     # Test configuration loading
     config_start = time.time()
     for _ in range(100):  # Load config 100 times
         scraper.load_config()
     config_time = (time.time() - config_start) / 100  # Average time
-    
+
     # Test URL validation
     test_urls = [
         "https://example.com",
@@ -250,15 +257,15 @@ def benchmark_base_class():
         "",
         "https://very-long-domain-name-for-testing-performance.example.com/path/to/resource"
     ]
-    
+
     url_start = time.time()
     for url in test_urls * 10:  # Test 60 URLs
         scraper.is_valid_url(url)
     url_time = (time.time() - url_start) / 60
-    
+
     end_memory = process.memory_info().rss / 1024 / 1024
     memory_usage = end_memory - start_memory
-    
+
     return {{
         "init_time": init_time,
         "config_load_time": config_time,
@@ -344,22 +351,22 @@ def benchmark_reddit_workflow():
     """Benchmark Reddit scraper without actual API calls"""
     try:
         from scrapers.reddit_scraper import RedditScraper
-        
+
         process = psutil.Process()
         start_time = time.time()
         start_memory = process.memory_info().rss / 1024 / 1024
-        
+
         # Initialize scraper
         init_start = time.time()
         scraper = RedditScraper()
         init_time = time.time() - init_start
-        
+
         # Test configuration and setup
         config_start = time.time()
         # Simulate configuration loading
         config = scraper.load_config() if hasattr(scraper, 'load_config') else {{}}
         config_time = time.time() - config_start
-        
+
         # Test URL generation (dry run)
         url_gen_start = time.time()
         test_subreddits = ["algotrading", "investing", "SecurityAnalysis"]
@@ -372,7 +379,7 @@ def benchmark_reddit_workflow():
                 f"https://reddit.com/r/{{subreddit}}/top"
             ])
         url_gen_time = time.time() - url_gen_start
-        
+
         # Test data processing simulation
         processing_start = time.time()
         mock_posts = []
@@ -384,7 +391,7 @@ def benchmark_reddit_workflow():
                 "url": f"https://reddit.com/post_{{i}}",
                 "created_utc": time.time() - i * 3600
             }})
-        
+
         # Simulate processing each post
         processed_posts = []
         for post in mock_posts:
@@ -393,12 +400,12 @@ def benchmark_reddit_workflow():
                 "score": post["score"],
                 "relevance": post["score"] / 100  # Simple relevance calculation
             }})
-        
+
         processing_time = time.time() - processing_start
-        
+
         end_memory = process.memory_info().rss / 1024 / 1024
         total_time = time.time() - start_time
-        
+
         return {{
             "total_time": total_time,
             "init_time": init_time,
@@ -537,7 +544,7 @@ def benchmark_ai_workflow():
         process = psutil.Process()
         start_time = time.time()
         start_memory = process.memory_info().rss / 1024 / 1024
-        
+
         # Simulate document processing
         mock_documents = []
         for i in range(20):  # 20 test documents
@@ -547,7 +554,7 @@ def benchmark_ai_workflow():
                 "source": f"https://example.com/article_{{i}}",
                 "tags": ["finance", "analysis", "trading"]
             }})
-        
+
         # Simulate content extraction
         extraction_start = time.time()
         extracted_content = []
@@ -561,7 +568,7 @@ def benchmark_ai_workflow():
             }}
             extracted_content.append(extracted)
         extraction_time = time.time() - extraction_start
-        
+
         # Simulate embedding generation (without actual ML models)
         embedding_start = time.time()
         embeddings = []
@@ -570,14 +577,14 @@ def benchmark_ai_workflow():
             time.sleep(0.01)  # 10ms per embedding
             embeddings.append([0.1] * 384)  # Mock 384-dim embedding
         embedding_time = time.time() - embedding_start
-        
+
         # Simulate vector database operations
         db_start = time.time()
         # Simulate storing embeddings
         stored_embeddings = len(embeddings)
         time.sleep(0.005 * stored_embeddings)  # 5ms per storage operation
         db_time = time.time() - db_start
-        
+
         # Simulate search operations
         search_start = time.time()
         search_results = []
@@ -586,10 +593,10 @@ def benchmark_ai_workflow():
             time.sleep(0.002)  # 2ms per search
             search_results.append({{"score": 0.85, "doc_id": 1}})
         search_time = time.time() - search_start
-        
+
         end_memory = process.memory_info().rss / 1024 / 1024
         total_time = time.time() - start_time
-        
+
         return {{
             "total_time": total_time,
             "extraction_time": extraction_time,
@@ -854,14 +861,14 @@ if __name__ == "__main__":
 
         content = f"""# IntelForge Performance Regression Test Report
 
-**Session ID**: {self.results["session_id"]}  
-**Test Date**: {self.results["start_time"]}  
-**Report Type**: Real Workflow Performance Regression Testing  
+**Session ID**: {self.results["session_id"]}
+**Test Date**: {self.results["start_time"]}
+**Report Type**: Real Workflow Performance Regression Testing
 
 ## 📊 Executive Summary
 
-**Overall Status**: {"✅ HEALTHY" if regressions == 0 else "⚠️ REGRESSIONS DETECTED" if regressions < 3 else "❌ SIGNIFICANT REGRESSIONS"}  
-**Performance Health**: {"Excellent" if regressions == 0 else "Good" if regressions < 3 else "Needs Attention"}  
+**Overall Status**: {"✅ HEALTHY" if regressions == 0 else "⚠️ REGRESSIONS DETECTED" if regressions < 3 else "❌ SIGNIFICANT REGRESSIONS"}
+**Performance Health**: {"Excellent" if regressions == 0 else "Good" if regressions < 3 else "Needs Attention"}
 **Total Benchmarks**: {total_benchmarks}
 
 ## 🎯 Performance Results Overview
@@ -958,13 +965,13 @@ if __name__ == "__main__":
 
 ## 🔗 Technical Details
 
-**Performance Database**: `{self.perf_db_path}`  
-**Report Location**: `{path}`  
-**Baseline File**: `{self.baseline_file}`  
+**Performance Database**: `{self.perf_db_path}`
+**Report Location**: `{path}`
+**Baseline File**: `{self.baseline_file}`
 **System Info**: {self.system_info["platform"]} on {self.system_info["cpu_count"]} cores
 
 ---
-*Generated by IntelForge Performance Regression Tester*  
+*Generated by IntelForge Performance Regression Tester*
 *Framework: Real workflow performance validation with statistical analysis*
 """
 
@@ -992,19 +999,19 @@ def main():
 
     # Run performance benchmarks
     print("\n" + "=" * 70)
-    tester.results["benchmarks"]["scraping_base"] = (
-        tester.benchmark_scraping_base_performance()
-    )
+    tester.results["benchmarks"][
+        "scraping_base"
+    ] = tester.benchmark_scraping_base_performance()
 
     print("\n" + "=" * 70)
-    tester.results["benchmarks"]["reddit_scraper"] = (
-        tester.benchmark_reddit_scraper_workflow()
-    )
+    tester.results["benchmarks"][
+        "reddit_scraper"
+    ] = tester.benchmark_reddit_scraper_workflow()
 
     print("\n" + "=" * 70)
-    tester.results["benchmarks"]["ai_processing"] = (
-        tester.benchmark_ai_processing_workflow()
-    )
+    tester.results["benchmarks"][
+        "ai_processing"
+    ] = tester.benchmark_ai_processing_workflow()
 
     # Generate comprehensive report
     print("\n" + "=" * 70)

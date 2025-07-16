@@ -24,10 +24,9 @@ from pathlib import Path
 import schedule
 import yaml
 from dotenv import load_dotenv
-
+from github_scraper import GitHubScraper
 # Import our scrapers
 from reddit_scraper import RedditScraper
-from github_scraper import GitHubScraper
 from web_scraper import WebScraper
 
 

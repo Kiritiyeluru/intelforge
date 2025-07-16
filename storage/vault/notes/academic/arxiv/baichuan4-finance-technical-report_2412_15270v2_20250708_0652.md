@@ -10,18 +10,18 @@ primary_category: cs.CL
 arxiv_id: 2412.15270v2
 url: http://arxiv.org/abs/2412.15270v2
 pdf_url: http://arxiv.org/pdf/2412.15270v2
-doi: 
+doi:
 journal_ref: ""
 content_hash: 4f890e44a8cd6079
 ---
 
 # Baichuan4-Finance Technical Report
 
-**Authors:** Hanyu Zhang, Boyu Qiu, Yuhao Feng, Shuqi Li, Qian Ma, Xiyuan Zhang, Qiang Ju, Dong Yan, Jian Xie  
-**Published:** 2024-12-17  
-**Updated:** 2025-01-02  
-**Primary Category:** cs.CL  
-**ArXiv ID:** 2412.15270v2  
+**Authors:** Hanyu Zhang, Boyu Qiu, Yuhao Feng, Shuqi Li, Qian Ma, Xiyuan Zhang, Qiang Ju, Dong Yan, Jian Xie
+**Published:** 2024-12-17
+**Updated:** 2025-01-02
+**Primary Category:** cs.CL
+**ArXiv ID:** 2412.15270v2
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2412.15270v2)

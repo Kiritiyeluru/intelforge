@@ -12,13 +12,13 @@ Optimized for high-volume scraping operations with:
 
 import argparse
 import json
+import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
-from typing import List, Dict, Any, Optional
 from datetime import datetime
-import subprocess
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Add project root to path
 project_root = Path(__file__).parent.parent

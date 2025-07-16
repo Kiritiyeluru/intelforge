@@ -10,18 +10,18 @@ primary_category: q-fin.PM
 arxiv_id: 2411.12323v1
 url: http://arxiv.org/abs/2411.12323v1
 pdf_url: http://arxiv.org/pdf/2411.12323v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: ec25ccc24e4fda15
 ---
 
 # Mirror Descent Algorithms for Risk Budgeting Portfolios
 
-**Authors:** Martin Arnaiz Iglesias, Adil Rengim Cetingoz, Noufel Frikha  
-**Published:** 2024-11-19  
-**Updated:** 2024-11-19  
-**Primary Category:** q-fin.PM  
-**ArXiv ID:** 2411.12323v1  
+**Authors:** Martin Arnaiz Iglesias, Adil Rengim Cetingoz, Noufel Frikha
+**Published:** 2024-11-19
+**Updated:** 2024-11-19
+**Primary Category:** q-fin.PM
+**ArXiv ID:** 2411.12323v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2411.12323v1)

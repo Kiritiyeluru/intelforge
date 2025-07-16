@@ -5,8 +5,8 @@ This directory contains production configuration files for IntelForge's Phase 4 
 ## Configuration Files
 
 ### 1. `proxy_pools.txt`
-**Purpose**: Proxy rotation for stealth crawling  
-**Usage**: Add proxy URLs (one per line) when using `--proxy-rotate` flag  
+**Purpose**: Proxy rotation for stealth crawling
+**Usage**: Add proxy URLs (one per line) when using `--proxy-rotate` flag
 **Format**: `protocol://[username:password@]ip:port`
 
 **Example**:
@@ -18,8 +18,8 @@ socks5://user:pass@proxy2.example.com:1080
 **Note**: Ensure proxy providers comply with target websites' Terms of Service.
 
 ### 2. `robots_whitelist.txt`
-**Purpose**: Pre-approved domains for crawling  
-**Usage**: Domains listed here have been verified for robots.txt compliance  
+**Purpose**: Pre-approved domains for crawling
+**Usage**: Domains listed here have been verified for robots.txt compliance
 **Format**: One domain per line (without protocol)
 
 **Example**:
@@ -32,8 +32,8 @@ stackoverflow.com
 **Important**: Always verify current robots.txt before adding new domains.
 
 ### 3. `ban_tracking.json`
-**Purpose**: Track and manage IP/domain bans and circuit breakers  
-**Usage**: Automatically updated by the system to track failed requests  
+**Purpose**: Track and manage IP/domain bans and circuit breakers
+**Usage**: Automatically updated by the system to track failed requests
 **Structure**: JSON format with ban history, settings, and recovery tracking
 
 **Key Settings**:
@@ -42,8 +42,8 @@ stackoverflow.com
 - `circuit_breaker_failure_threshold`: Failures before circuit opens
 
 ### 4. `freshness_config.yaml`
-**Purpose**: Time-to-recheck (TTR) settings for content freshness tracking  
-**Usage**: Defines how often different content types should be refreshed  
+**Purpose**: Time-to-recheck (TTR) settings for content freshness tracking
+**Usage**: Defines how often different content types should be refreshed
 **Format**: YAML with content type and domain-specific rules
 
 **Key Sections**:

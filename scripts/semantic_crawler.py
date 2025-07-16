@@ -5,50 +5,57 @@ Purpose: Intelligent content curation using embeddings and cosine similarity
 Usage: python semantic_crawler.py --url-file urls.txt [--threshold 0.75] [--dry-run]
 """
 
+import asyncio
+
 # Import httpx and asyncio for fallback
 import httpx
-import asyncio
 
 # Scrapy integration for web crawling
 try:
-    from scripts.scrapers.scrapy_integration import run_scrapy_crawler, convert_scrapy_to_semantic_format
+    from scripts.scrapers.scrapy_integration import (
+        convert_scrapy_to_semantic_format, run_scrapy_crawler)
+
     SCRAPY_AVAILABLE = True
     print("✅ Scrapy integration available")
 except ImportError:
     SCRAPY_AVAILABLE = False
     print("⚠️ Scrapy integration not available, falling back to httpx")
+import argparse
+import hashlib
 import json
 import time
-import hashlib
 import uuid
-import argparse
 from pathlib import Path
-from typing import List, Dict, Any, Optional
-import numpy as np
+from typing import Any, Dict, List, Optional
 
-# Core extraction and AI libraries
-from trafilatura import extract
+import numpy as np
 from selectolax.parser import HTMLParser
 from sentence_transformers import SentenceTransformer
+# Core extraction and AI libraries
+from trafilatura import extract
 
 # Vector storage - ChromaDB with Qdrant fallback
 try:
-    from scripts.vector_storage_migration import ChromaVectorStorage, migrate_qdrant_to_chroma
+    from scripts.vector_storage_migration import (ChromaVectorStorage,
+                                                  migrate_qdrant_to_chroma)
+
     CHROMA_AVAILABLE = True
     print("✅ ChromaDB integration available")
 except ImportError:
     CHROMA_AVAILABLE = False
     print("⚠️ ChromaDB not available, falling back to Qdrant")
     from qdrant_client import QdrantClient
-    from qdrant_client.http.models import PointStruct, Distance, VectorParams
+    from qdrant_client.http.models import Distance, PointStruct, VectorParams
 
 # Enhanced semantic analysis modules
 try:
     import sys
-    sys.path.append('./scripts/semantic_crawler/scripts')
+
+    sys.path.append("./scripts/semantic_crawler/scripts")
+    from adaptive_thresholding import IntelligentAdaptiveThresholder
     from enhanced_research_detector import EnhancedResearchGapDetector
     from intelligent_knowledge_graph import IntelligentKnowledgeGraph
-    from adaptive_thresholding import IntelligentAdaptiveThresholder
+
     ENHANCED_MODULES_AVAILABLE = True
     print("✅ Enhanced semantic analysis modules loaded successfully")
 except ImportError as e:
@@ -79,29 +86,29 @@ print(f"✅ Loaded embedding model: {EMBEDDING_MODEL}")
 if CHROMA_AVAILABLE:
     print("🗃️ Using ChromaDB for vector storage")
     vector_storage = ChromaVectorStorage("./chroma_storage", COLLECTION_NAME)
-    
+
     # Try to migrate from Qdrant if it exists
     if Path("./qdrant_storage").exists():
         print("📦 Migrating existing Qdrant data to ChromaDB...")
         migrate_qdrant_to_chroma()
-    
+
     # Create a compatibility layer for Qdrant-style interface
     class VectorStorageAdapter:
         def __init__(self, storage):
             self.storage = storage
-        
+
         def upsert(self, collection_name, points):
             return self.storage.upsert(collection_name, points)
-        
+
         def query(self, vector, top_k=10):
             return self.storage.query(vector, top_k)
-    
+
     qdrant_client = VectorStorageAdapter(vector_storage)
-    
+
 else:
     print("🗃️ Using Qdrant for vector storage")
     qdrant_client = QdrantClient(path="./qdrant_storage")
-    
+
     # Ensure collection exists
     try:
         collections = [c.name for c in qdrant_client.get_collections().collections]
@@ -242,10 +249,13 @@ def parse_content(html: str, url: str) -> Dict[str, Any]:
         # Language detection for content filtering
         detected_language = "unknown"
         language_confidence = 0.0
-        
-        if main_content and len(main_content) > 50:  # Minimum text for reliable detection
+
+        if (
+            main_content and len(main_content) > 50
+        ):  # Minimum text for reliable detection
             try:
                 from langdetect import detect, detect_langs
+
                 detected_language = detect(main_content)
                 # Get confidence score
                 lang_probs = detect_langs(main_content)
@@ -283,12 +293,19 @@ def parse_content(html: str, url: str) -> Dict[str, Any]:
 
 def cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
     """Calculate cosine similarity between two vectors using sklearn"""
-    from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine_similarity
-    return float(sklearn_cosine_similarity(vec1.reshape(1, -1), vec2.reshape(1, -1))[0][0])
+    from sklearn.metrics.pairwise import \
+        cosine_similarity as sklearn_cosine_similarity
+
+    return float(
+        sklearn_cosine_similarity(vec1.reshape(1, -1), vec2.reshape(1, -1))[0][0]
+    )
 
 
 def is_content_relevant(
-    content: str, threshold: float = DEFAULT_THRESHOLD, language: str = "unknown", language_confidence: float = 0.0
+    content: str,
+    threshold: float = DEFAULT_THRESHOLD,
+    language: str = "unknown",
+    language_confidence: float = 0.0,
 ) -> tuple[bool, float]:
     """Determine if content is relevant using enhanced semantic analysis with language filtering"""
 
@@ -298,7 +315,9 @@ def is_content_relevant(
 
     # Language filtering - only accept English content with high confidence
     if language != "en" and language_confidence > 0.8:
-        print(f"⚠️ Filtering out non-English content: {language} (confidence: {language_confidence:.2f})")
+        print(
+            f"⚠️ Filtering out non-English content: {language} (confidence: {language_confidence:.2f})"
+        )
         return False, 0.0
 
     # Use enhanced modules if available
@@ -306,25 +325,25 @@ def is_content_relevant(
         try:
             # Initialize enhanced components with basic config
             enhanced_config = {
-                'threshold': threshold,
-                'method': 'cleanlab',
-                'min_confidence': 0.7
+                "threshold": threshold,
+                "method": "cleanlab",
+                "min_confidence": 0.7,
             }
             adaptive_thresholder = IntelligentAdaptiveThresholder(enhanced_config)
             research_detector = EnhancedResearchGapDetector()
-            
+
             # Use adaptive thresholding for better accuracy
             is_relevant, enhanced_score = adaptive_thresholder.evaluate_content(content)
-            
+
             # Additional research gap detection
             research_score = research_detector.detect_research_gaps([content])
-            
+
             # Combine scores for final decision
             final_score = (enhanced_score + research_score) / 2
             is_relevant = final_score >= threshold
-            
+
             return is_relevant, final_score
-            
+
         except Exception as e:
             print(f"⚠️ Enhanced analysis failed, falling back to basic: {e}")
             # Fall back to basic analysis
@@ -411,9 +430,9 @@ content_hash: "{content_hash}"
 
 # {data["title"]}
 
-**URL**: {data["url"]}  
-**Similarity Score**: {similarity_score:.3f}  
-**Tags**: {", ".join(extracted_tags) if extracted_tags else "None detected"}  
+**URL**: {data["url"]}
+**Similarity Score**: {similarity_score:.3f}
+**Tags**: {", ".join(extracted_tags) if extracted_tags else "None detected"}
 **Extracted**: {data["extracted_at"]}
 
 ---
@@ -451,14 +470,16 @@ def embed_to_qdrant(
                 # Initialize enhanced modules
                 knowledge_graph = IntelligentKnowledgeGraph()
                 research_detector = EnhancedResearchGapDetector()
-                
+
                 # Analyze content with enhanced modules
                 graph_analysis = knowledge_graph.analyze_content(data["content"])
                 research_gaps = research_detector.detect_gaps(data["content"])
-                
+
                 # Log successful integration
-                print(f"🔬 Enhanced analysis completed: {len(graph_analysis)} graph nodes, {len(research_gaps)} research gaps")
-                
+                print(
+                    f"🔬 Enhanced analysis completed: {len(graph_analysis)} graph nodes, {len(research_gaps)} research gaps"
+                )
+
                 # Add enhanced insights to payload
                 enhanced_payload = {
                     "source_file": markdown_file,
@@ -468,13 +489,19 @@ def embed_to_qdrant(
                     "similarity_score": similarity_score,
                     "content_length": data["content_length"],
                     "extracted_at": data["extracted_at"],
-                    "content_preview": data["content"][:300] + "..."
-                    if len(data["content"]) > 300
-                    else data["content"],
+                    "content_preview": (
+                        data["content"][:300] + "..."
+                        if len(data["content"]) > 300
+                        else data["content"]
+                    ),
                     "knowledge_graph": graph_analysis,
                     "research_gaps": research_gaps,
                     "enhanced_processing": True,
-                    "extraction_method": "scrapy-trafilatura" if SCRAPY_AVAILABLE else "httpx-trafilatura",
+                    "extraction_method": (
+                        "scrapy-trafilatura"
+                        if SCRAPY_AVAILABLE
+                        else "httpx-trafilatura"
+                    ),
                     "vector_storage": "ChromaDB" if CHROMA_AVAILABLE else "Qdrant",
                 }
                 payload = enhanced_payload
@@ -489,11 +516,17 @@ def embed_to_qdrant(
                     "similarity_score": similarity_score,
                     "content_length": data["content_length"],
                     "extracted_at": data["extracted_at"],
-                    "content_preview": data["content"][:300] + "..."
-                    if len(data["content"]) > 300
-                    else data["content"],
+                    "content_preview": (
+                        data["content"][:300] + "..."
+                        if len(data["content"]) > 300
+                        else data["content"]
+                    ),
                     "enhanced_processing": False,
-                    "extraction_method": "scrapy-trafilatura" if SCRAPY_AVAILABLE else "httpx-trafilatura",
+                    "extraction_method": (
+                        "scrapy-trafilatura"
+                        if SCRAPY_AVAILABLE
+                        else "httpx-trafilatura"
+                    ),
                     "vector_storage": "ChromaDB" if CHROMA_AVAILABLE else "Qdrant",
                 }
         else:
@@ -506,11 +539,15 @@ def embed_to_qdrant(
                 "similarity_score": similarity_score,
                 "content_length": data["content_length"],
                 "extracted_at": data["extracted_at"],
-                "content_preview": data["content"][:300] + "..."
-                if len(data["content"]) > 300
-                else data["content"],
+                "content_preview": (
+                    data["content"][:300] + "..."
+                    if len(data["content"]) > 300
+                    else data["content"]
+                ),
                 "enhanced_processing": False,
-                "extraction_method": "scrapy-trafilatura" if SCRAPY_AVAILABLE else "httpx-trafilatura",
+                "extraction_method": (
+                    "scrapy-trafilatura" if SCRAPY_AVAILABLE else "httpx-trafilatura"
+                ),
                 "vector_storage": "ChromaDB" if CHROMA_AVAILABLE else "Qdrant",
             }
 
@@ -522,14 +559,18 @@ def embed_to_qdrant(
             # ChromaDB format
             qdrant_client.upsert(
                 collection_name=COLLECTION_NAME,
-                points=[{"id": unique_id, "vector": content_vector, "payload": payload}],
+                points=[
+                    {"id": unique_id, "vector": content_vector, "payload": payload}
+                ],
             )
             storage_type = "ChromaDB"
         else:
             # Qdrant format
             qdrant_client.upsert(
                 collection_name=COLLECTION_NAME,
-                points=[PointStruct(id=unique_id, vector=content_vector, payload=payload)],
+                points=[
+                    PointStruct(id=unique_id, vector=content_vector, payload=payload)
+                ],
             )
             storage_type = "Qdrant"
 
@@ -546,8 +587,12 @@ def embed_to_qdrant(
         except Exception as meta_error:
             print(f"⚠️ Failed to update metadata: {meta_error}")
 
-        processing_type = "Enhanced" if payload.get("enhanced_processing", False) else "Basic"
-        print(f"🔍 {processing_type} embedding to {storage_type}: {data['title'][:50]}...")
+        processing_type = (
+            "Enhanced" if payload.get("enhanced_processing", False) else "Basic"
+        )
+        print(
+            f"🔍 {processing_type} embedding to {storage_type}: {data['title'][:50]}..."
+        )
 
     except Exception as e:
         print(f"❌ Vector storage embedding error: {e}")
@@ -558,14 +603,14 @@ def embed_to_qdrant(
 
 
 def run_semantic_crawler(
-    urls: List[str], 
-    threshold: float = DEFAULT_THRESHOLD, 
+    urls: List[str],
+    threshold: float = DEFAULT_THRESHOLD,
     dry_run: bool = False,
     limit_domains: Optional[str] = None,
     save_raw: bool = False,
     proxy_rotate: bool = False,
     max_retries: int = 3,
-    ignore_robots: bool = False
+    ignore_robots: bool = False,
 ):
     """Main crawler function with AI filtering"""
 
@@ -573,30 +618,31 @@ def run_semantic_crawler(
     print(f"📊 URLs to process: {len(urls)}")
     print(f"🎯 Similarity threshold: {threshold}")
     print(f"🧪 Dry run mode: {dry_run}")
-    
+
     # Phase 4 Production Configuration
     if limit_domains:
-        allowed_domains = [d.strip() for d in limit_domains.split(',')]
+        allowed_domains = [d.strip() for d in limit_domains.split(",")]
         print(f"🔒 Domain filtering: {allowed_domains}")
     else:
         allowed_domains = None
-    
+
     if save_raw:
         print("💾 Raw HTML saving: enabled")
         raw_html_dir = Path("./raw_html_debug")
         raw_html_dir.mkdir(exist_ok=True)
-    
+
     if proxy_rotate:
         print("🔄 Proxy rotation: enabled")
-    
+
     print(f"🔁 Max retries: {max_retries}")
     print(f"🤖 Robots.txt respect: {not ignore_robots}")
-    
+
     print("-" * 60)
 
     # Phase 4: Domain filtering
     if allowed_domains:
         from urllib.parse import urlparse
+
         filtered_urls = []
         for url in urls:
             domain = urlparse(url).netloc
@@ -616,26 +662,30 @@ def run_semantic_crawler(
                 save_raw=save_raw,
                 proxy_rotate=proxy_rotate,
                 max_retries=max_retries,
-                ignore_robots=ignore_robots
+                ignore_robots=ignore_robots,
             )
             results = convert_scrapy_to_semantic_format(scrapy_results)
-            
+
             # Convert to format expected by rest of function
             formatted_results = []
             for item in results:
-                formatted_results.append((item, item['url']))
-            
+                formatted_results.append((item, item["url"]))
+
             print(f"✅ Scrapy extracted content from {len(formatted_results)} URLs")
         except Exception as e:
             print(f"⚠️ Scrapy extraction failed: {e}")
             print("📱 Falling back to httpx")
             results = asyncio.run(fetch_all_urls(urls))
-            formatted_results = [(parse_content(html, url), url) for html, url in results if html]
+            formatted_results = [
+                (parse_content(html, url), url) for html, url in results if html
+            ]
     else:
         # Fallback to httpx
         print("📱 Using httpx for content extraction")
         results = asyncio.run(fetch_all_urls(urls))
-        formatted_results = [(parse_content(html, url), url) for html, url in results if html]
+        formatted_results = [
+            (parse_content(html, url), url) for html, url in results if html
+        ]
 
     # Process each result
     processed_count = 0
@@ -655,15 +705,18 @@ def run_semantic_crawler(
 
         # Check relevance with AI including language filtering
         is_relevant, similarity_score = is_content_relevant(
-            parsed_data["content"], threshold, 
-            parsed_data.get("language", "unknown"), 
-            parsed_data.get("language_confidence", 0.0)
+            parsed_data["content"],
+            threshold,
+            parsed_data.get("language", "unknown"),
+            parsed_data.get("language_confidence", 0.0),
         )
         similarity_scores.append(similarity_score)
 
         print(f"  🧠 Similarity score: {similarity_score:.3f}")
         print(f"  📏 Content length: {parsed_data['content_length']} chars")
-        print(f"  🌐 Language: {parsed_data.get('language', 'unknown')} (confidence: {parsed_data.get('language_confidence', 0.0):.2f})")
+        print(
+            f"  🌐 Language: {parsed_data.get('language', 'unknown')} (confidence: {parsed_data.get('language_confidence', 0.0):.2f})"
+        )
 
         if is_relevant:
             relevant_count += 1
@@ -810,14 +863,14 @@ Examples:
 
     # Run semantic crawler
     run_semantic_crawler(
-        urls, 
-        args.threshold, 
+        urls,
+        args.threshold,
         args.dry_run,
         args.limit_domains,
         args.save_raw,
         args.proxy_rotate,
         args.max_retries,
-        args.ignore_robots
+        args.ignore_robots,
     )
 
 

@@ -8,7 +8,7 @@ Time Period: Last 24 hours
 🏦 **MARKET CONTEXT**
 
    Market Sentiment: MIXED
-   
+
    📈 Key Market Indicators:
    📉 SPY: $620.68 (-0.75%)
    📉 QQQ: $552.03 (-0.75%)

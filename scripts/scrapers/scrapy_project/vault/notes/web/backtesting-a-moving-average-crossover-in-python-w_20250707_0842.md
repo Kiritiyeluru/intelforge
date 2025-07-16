@@ -11,8 +11,8 @@ extraction_method: trafilatura
 
 # Backtesting a Moving Average Crossover in Python with pandas
 
-**Source:** [quantstart.com](https://www.quantstart.com/articles/Backtesting-a-Moving-Average-Crossover-in-Python-with-pandas/)  
-**Author:** Unknown Author  
+**Source:** [quantstart.com](https://www.quantstart.com/articles/Backtesting-a-Moving-Average-Crossover-in-Python-with-pandas/)
+**Author:** Unknown Author
 **Scraped:** 2025-07-07
 
 ---
@@ -21,5 +21,5 @@ In the previous article on Research Backtesting Environments In Python With Pand
 
 ---
 
-**Keywords:** algorithmic trading, backtesting  
+**Keywords:** algorithmic trading, backtesting
 **URL:** https://www.quantstart.com/articles/Backtesting-a-Moving-Average-Crossover-in-Python-with-pandas/

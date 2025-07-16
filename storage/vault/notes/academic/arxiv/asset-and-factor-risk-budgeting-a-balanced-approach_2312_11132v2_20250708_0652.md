@@ -10,18 +10,18 @@ primary_category: q-fin.PM
 arxiv_id: 2312.11132v2
 url: http://arxiv.org/abs/2312.11132v2
 pdf_url: http://arxiv.org/pdf/2312.11132v2
-doi: 
+doi:
 journal_ref: ""
 content_hash: 90d0f8511d1d2f1a
 ---
 
 # Asset and Factor Risk Budgeting: A Balanced Approach
 
-**Authors:** Adil Rengim Cetingoz, Olivier Guéant  
-**Published:** 2023-12-18  
-**Updated:** 2024-05-24  
-**Primary Category:** q-fin.PM  
-**ArXiv ID:** 2312.11132v2  
+**Authors:** Adil Rengim Cetingoz, Olivier Guéant
+**Published:** 2023-12-18
+**Updated:** 2024-05-24
+**Primary Category:** q-fin.PM
+**ArXiv ID:** 2312.11132v2
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2312.11132v2)

@@ -4,17 +4,17 @@ Rebuild AI Embeddings for Financial Content
 Processes all content in vault/notes/ including new stealth-scraped financial data
 """
 
-import json
-from pathlib import Path
-from datetime import datetime
-from typing import List, Dict
 import hashlib
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List
 
 # Will install these if needed
 try:
-    from sentence_transformers import SentenceTransformer
     import faiss
     import numpy as np
+    from sentence_transformers import SentenceTransformer
 except ImportError:
     print(
         "Required packages not installed. Run: pip install sentence-transformers faiss-cpu"

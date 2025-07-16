@@ -10,18 +10,18 @@ primary_category: q-fin.CP
 arxiv_id: 2506.06653v1
 url: http://arxiv.org/abs/2506.06653v1
 pdf_url: http://arxiv.org/pdf/2506.06653v1
-doi: 
+doi:
 journal_ref: "Quantitative Finance, 2025"
 content_hash: d1d26502dfe862d4
 ---
 
 # Explaining Risks: Axiomatic Risk Attributions for Financial Models
 
-**Authors:** Dangxing Chen  
-**Published:** 2025-06-07  
-**Updated:** 2025-06-07  
-**Primary Category:** q-fin.CP  
-**ArXiv ID:** 2506.06653v1  
+**Authors:** Dangxing Chen
+**Published:** 2025-06-07
+**Updated:** 2025-06-07
+**Primary Category:** q-fin.CP
+**ArXiv ID:** 2506.06653v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2506.06653v1)

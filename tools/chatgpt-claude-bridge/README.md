@@ -160,7 +160,7 @@ gsettings list-recursively | grep claude
 # For Wayland users
 sudo apt install wl-clipboard
 
-# For X11 users  
+# For X11 users
 sudo apt install xclip
 
 # For notifications
@@ -177,7 +177,7 @@ which claude
 
 ### Workflow Optimization
 1. **Enable auto-cleanup** for cleaner Claude input
-2. **Turn on notifications** for immediate feedback  
+2. **Turn on notifications** for immediate feedback
 3. **Use archives** to track your AI conversations
 4. **Enable safety checks** to prevent data leaks
 

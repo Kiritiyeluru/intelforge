@@ -287,5 +287,3 @@ def map_qdrant_to_chroma(qconf: QdrantConfig) -> ChromaConfig:
    * Can be expanded to support CLI/ENV overrides easily
 
 ---
-
-

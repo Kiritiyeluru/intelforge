@@ -23,11 +23,11 @@ fn semantic_scoring_benchmarks(c: &mut Criterion) {
     let mut group = c.benchmark_group("semantic_scoring");
     group.measurement_time(Duration::from_secs(10));
     group.sample_size(1000);
-    
+
     // Test different content sizes
     for content_size in [100, 1000, 5000, 10000].iter() {
         let test_content = generate_test_content(*content_size);
-        
+
         group.bench_with_input(
             BenchmarkId::new("cosine_similarity", content_size),
             content_size,
@@ -40,7 +40,7 @@ fn semantic_scoring_benchmarks(c: &mut Criterion) {
                 });
             },
         );
-        
+
         group.bench_with_input(
             BenchmarkId::new("semantic_classification", content_size),
             content_size,
@@ -56,11 +56,11 @@ fn semantic_scoring_benchmarks(c: &mut Criterion) {
 
 fn adaptive_thresholding_benchmarks(c: &mut Criterion) {
     let mut group = c.benchmark_group("adaptive_thresholding");
-    
+
     // Test different score distribution sizes
     for score_count in [100, 500, 1000, 5000].iter() {
         let scores = generate_test_scores(*score_count);
-        
+
         group.bench_with_input(
             BenchmarkId::new("statistical_method", score_count),
             &scores,
@@ -70,7 +70,7 @@ fn adaptive_thresholding_benchmarks(c: &mut Criterion) {
                 });
             },
         );
-        
+
         group.bench_with_input(
             BenchmarkId::new("hdbscan_method", score_count),
             &scores,
@@ -80,7 +80,7 @@ fn adaptive_thresholding_benchmarks(c: &mut Criterion) {
                 });
             },
         );
-        
+
         group.bench_with_input(
             BenchmarkId::new("ensemble_method", score_count),
             &scores,
@@ -97,11 +97,11 @@ fn adaptive_thresholding_benchmarks(c: &mut Criterion) {
 fn knowledge_graph_benchmarks(c: &mut Criterion) {
     let mut group = c.benchmark_group("knowledge_graph");
     group.measurement_time(Duration::from_secs(15));
-    
+
     // Test graph construction with different document counts
     for doc_count in [50, 100, 500, 1000].iter() {
         let documents = generate_test_documents(*doc_count);
-        
+
         group.bench_with_input(
             BenchmarkId::new("graph_construction", doc_count),
             &documents,
@@ -111,7 +111,7 @@ fn knowledge_graph_benchmarks(c: &mut Criterion) {
                 });
             },
         );
-        
+
         // Benchmark graph traversal
         let graph = build_knowledge_graph(&documents);
         group.bench_with_input(
@@ -129,9 +129,9 @@ fn knowledge_graph_benchmarks(c: &mut Criterion) {
 
 fn url_processing_benchmarks(c: &mut Criterion) {
     let mut group = c.benchmark_group("url_processing");
-    
+
     let test_urls = generate_test_urls(1000);
-    
+
     group.bench_function("url_validation", |b| {
         b.iter(|| {
             for url in &test_urls {
@@ -139,7 +139,7 @@ fn url_processing_benchmarks(c: &mut Criterion) {
             }
         });
     });
-    
+
     group.bench_function("domain_extraction", |b| {
         b.iter(|| {
             for url in &test_urls {
@@ -147,13 +147,13 @@ fn url_processing_benchmarks(c: &mut Criterion) {
             }
         });
     });
-    
+
     group.bench_function("robots_txt_check", |b| {
         b.iter(|| {
             check_robots_txt_compliance(black_box(&test_urls[0]))
         });
     });
-    
+
     group.finish();
 }
 
@@ -171,7 +171,7 @@ fn custom_criterion() -> Criterion {
 criterion_group!(
     name = benches;
     config = custom_criterion();
-    targets = 
+    targets =
         semantic_scoring_benchmarks,
         adaptive_thresholding_benchmarks,
         knowledge_graph_benchmarks,
@@ -305,7 +305,7 @@ export default function() {
     urls: ['https://example.com/financial-article'],
     options: { threshold_method: 'ensemble' }
   });
-  
+
   check(response, {
     'status is 200': (r) => r.status === 200,
     'response time < 2s': (r) => r.timings.duration < 2000,
@@ -332,7 +332,7 @@ proptest! {
         let processed = normalize_score(score);
         prop_assert!(processed >= 0.0 && processed <= 1.0);
     }
-    
+
     #[test]
     fn threshold_calculation_stable(scores in prop::collection::vec(0.0f32..1.0, 10..1000)) {
         let threshold = calculate_adaptive_threshold(&scores);
@@ -371,15 +371,15 @@ async fn test_concurrent_crawling() {
         "https://example2.com",
         "https://example3.com",
     ];
-    
+
     let handles: Vec<_> = urls.into_iter().map(|url| {
         tokio::spawn(async move {
             crawl_url_async(url).await
         })
     }).collect();
-    
+
     let results = futures::future::join_all(handles).await;
-    
+
     for result in results {
         assert!(result.is_ok());
         let crawl_result = result.unwrap();
@@ -398,7 +398,7 @@ use insta::assert_yaml_snapshot;
 fn test_semantic_output_format() {
     let test_url = "https://example.com/test-article";
     let result = process_semantic_extraction(test_url);
-    
+
     // Snapshot the structured output
     assert_yaml_snapshot!(result, @r###"
     ---
@@ -447,7 +447,7 @@ rust_tests/
 ```bash
 # Core testing tools
 cargo add criterion --dev
-cargo add proptest --dev  
+cargo add proptest --dev
 cargo add insta --dev
 cargo add tokio --dev --features full
 
@@ -493,7 +493,7 @@ hyperfine --warmup 3 \
 # Valgrind (Linux)
 valgrind --tool=massif cargo test --release
 
-# Instruments (macOS)  
+# Instruments (macOS)
 instruments -t "Allocations" cargo test --release
 
 # Built-in Rust profiling

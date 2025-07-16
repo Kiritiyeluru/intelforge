@@ -44,7 +44,7 @@ mcp_servers/
 | **[Firecrawl](#firecrawl)** | Local/git | ⭐ Premium | Production-grade scraping |
 | **[Oxylabs](#oxylabs)** | Remote/API | 💼 Enterprise | Professional proxy scraping |
 
-#### 🔧 Core Automation Servers  
+#### 🔧 Core Automation Servers
 | Server | Transport | Status | Use Case |
 |--------|-----------|---------|----------|
 | **[Puppeteer](#puppeteer)** | Local/npx | ✅ Recommended | JavaScript-heavy trading sites |
@@ -76,7 +76,7 @@ mcp_servers/
 | **[Markdownify](#markdownify)** | Local/git | ✅ Recommended | Multi-format to Markdown |
 | **[Unstructured](#unstructured)** | Local/git | 💼 Enterprise | Enterprise document processing |
 
-#### 🧠 RAG & Knowledge Management  
+#### 🧠 RAG & Knowledge Management
 | Server | Transport | Status | Use Case |
 |--------|-----------|---------|----------|
 | **[Needle](#needle)** | Local/git | ⭐ Premium | Production-ready RAG |
@@ -1189,39 +1189,39 @@ scraping:
     viewport:
       width: 1920
       height: 1080
-  
+
   playwright:
     browsers: ["chromium", "firefox"]
     mobile_emulation: false
     network_idle: 500
-  
+
   # Enterprise-grade
   firecrawl:
     rate_limit: 10
     max_pages: 100
     formats: ["markdown", "html"]
-    
+
   agentql:
     timeout: 45000
     max_retries: 3
     output_format: "structured"
-    
+
   apify:
     max_concurrent: 5
     timeout: 60000
     storage_days: 7
-    
+
   browserbase:
     session_timeout: 300
     keep_alive: true
     debug_mode: false
-  
+
   # Anti-detection
   rquest:
     proxy_rotation: true
     fingerprint_randomization: true
     success_threshold: 0.95
-    
+
   scrapling_fetch:
     stealth_mode: true
     js_rendering: true
@@ -1234,24 +1234,24 @@ search:
     max_results: 20
     include_domains: []
     exclude_domains: []
-    
+
   tavily:
     search_depth: "advanced"
     include_answer: true
     include_raw_content: false
     max_results: 10
-    
+
   perplexity:
     model: "sonar-small-online"
     return_citations: true
     return_images: false
-  
+
   # Traditional
   kagi_search:
     safe_search: "moderate"
     region: "us-en"
     freshness: "week"
-    
+
   searxng:
     engines: ["google", "bing", "duckduckgo"]
     safe_search: 1
@@ -1264,41 +1264,41 @@ content_processing:
     chunk_size: 1000
     chunk_overlap: 200
     output_format: "markdown"
-    
+
   pandoc:
     input_formats: ["html", "pdf", "docx", "csv"]
     output_format: "markdown"
     preserve_structure: true
-    
+
   markdownify:
     clean_output: true
     preserve_links: true
     include_metadata: true
-    
+
   unstructured:
     chunking_strategy: "by_title"
     max_characters: 1500
     combine_under_n_chars: 200
     new_after_n_chars: 2000
-    
+
   # RAG & knowledge management
   needle:
     indexing_strategy: "semantic"
     chunk_size: 512
     similarity_threshold: 0.8
     max_results: 20
-    
+
   chroma:
     collection_name: "intelforge_knowledge"
     embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
     distance_metric: "cosine"
     persist_directory: "/home/kiriti/alpha_projects/intelforge/vault/vectors"
-    
+
   basic_memory:
     graph_storage: "/home/kiriti/alpha_projects/intelforge/vault/knowledge_graph"
     auto_link_threshold: 0.7
     max_entities: 50000
-    
+
   inkeep:
     search_mode: "semantic"
     return_snippets: true
@@ -1308,7 +1308,7 @@ data:
   sqlite:
     database_path: "/home/kiriti/alpha_projects/intelforge/vault/data"
     backup_interval: "1h"
-  
+
   memory:
     persistence: true
     max_entities: 10000
@@ -1419,12 +1419,12 @@ performance:
   concurrent_requests: 5
   timeout: 30000
   memory_limit: "512MB"
-  
+
   scraping:
     delay_between_requests: 1000
     max_retries: 3
     cache_responses: true
-    
+
   data:
     batch_size: 100
     index_frequency: "5m"
@@ -1447,10 +1447,10 @@ logrotate -f /etc/logrotate.d/mcp-servers
 
 ### Current Coverage Status
 
-✅ **Phase 1: Essential Scraping** - 15+ servers implemented  
-✅ **Phase 2: Enterprise & Anti-Detection** - AgentQL, Apify, Rquest, etc.  
-✅ **Phase 3: AI Search & Discovery** - Exa, Tavily, Perplexity, etc.  
-🔄 **Phase 4: Specialized Integration** - In progress  
+✅ **Phase 1: Essential Scraping** - 15+ servers implemented
+✅ **Phase 2: Enterprise & Anti-Detection** - AgentQL, Apify, Rquest, etc.
+✅ **Phase 3: AI Search & Discovery** - Exa, Tavily, Perplexity, etc.
+🔄 **Phase 4: Specialized Integration** - In progress
 
 ### Planned Additions
 
@@ -1463,7 +1463,7 @@ logrotate -f /etc/logrotate.d/mcp-servers
 ### Integration Roadmap
 
 1. **Phase 1**: Essential scraping servers (✅ Complete - 6 servers)
-2. **Phase 2**: Enterprise & anti-detection (✅ Complete - 9 additional servers)  
+2. **Phase 2**: Enterprise & anti-detection (✅ Complete - 9 additional servers)
 3. **Phase 3**: AI search & discovery (✅ Complete - 7 additional servers)
 4. **Phase 4**: Specialized domains (📋 Planned - Financial, social, cloud)
 5. **Phase 5**: Enterprise deployment (🔄 Infrastructure scaling, monitoring)
@@ -1486,16 +1486,16 @@ logrotate -f /etc/logrotate.d/mcp-servers
 4. **Anti-Detection**: Set up Rquest and Scrapling for protected sites
 5. **Performance**: Monitor and optimize with the comprehensive server suite
 
-**📊 Current Status:** 
+**📊 Current Status:**
 - **30+ MCP servers** available across all categories
-- **Enterprise-grade** scraping infrastructure 
+- **Enterprise-grade** scraping infrastructure
 - **AI-powered** search and discovery
 - **Professional content processing** with automatic chunking
 - **Production-ready** for comprehensive web intelligence workflows
 
 **🚀 Capability Overview:**
 - **Basic Scraping**: Fetch, Puppeteer, Playwright (✅)
-- **Enterprise Scraping**: AgentQL, Apify, Firecrawl, Browserbase (✅) 
+- **Enterprise Scraping**: AgentQL, Apify, Firecrawl, Browserbase (✅)
 - **Anti-Detection**: Rquest, Scrapling Fetch (✅)
 - **Content Processing**: Vectorize, Pandoc, Markdownify, Unstructured (✅)
 - **RAG & Knowledge**: Needle, Chroma, Basic Memory (✅)

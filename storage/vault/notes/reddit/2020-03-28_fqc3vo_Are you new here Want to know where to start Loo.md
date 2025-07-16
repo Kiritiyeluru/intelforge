@@ -14,9 +14,9 @@ post_id: fqc3vo
 
 Hello and welcome to the /r/AlgoTrading Community!
 
-**Please do not post a new thread until you have read through** [**our WIKI/FAQ.**](https://www.reddit.com/r/algotrading/wiki/index) It is highly likely that your questions are already answered there.  
+**Please do not post a new thread until you have read through** [**our WIKI/FAQ.**](https://www.reddit.com/r/algotrading/wiki/index) It is highly likely that your questions are already answered there.
 
-All members are expected to follow our sidebar rules. Some rules have a zero tolerance policy, so be sure to read through them to avoid being perma-banned without the ability to appeal. (Mobile users, click the info tab at the top of our subreddit to view the sidebar rules.)  
+All members are expected to follow our sidebar rules. Some rules have a zero tolerance policy, so be sure to read through them to avoid being perma-banned without the ability to appeal. (Mobile users, click the info tab at the top of our subreddit to view the sidebar rules.)
 
 **Don't forget to join our live** **trading chatrooms!**
 

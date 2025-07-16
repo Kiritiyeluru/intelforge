@@ -200,4 +200,3 @@ There’s no value in delaying use for polish-only tasks.
 
 Let it run. Let the system **prove itself in the field.**
 That’s where the last 2% refinement will reveal itself organically.
-

@@ -237,12 +237,12 @@ class UniversalScraper:
     def __init__(self):
         self.academic_scraper = arxivscraper.Scraper()
         self.stealth_fetcher = StealthyFetcher()
-    
+
     def extract_article(self, url):
         # Try multiple extraction methods
         content = self.stealth_fetcher.fetch(url)
         return extract(content.html)
-    
+
     def get_academic_papers(self, category, date_range):
         return self.academic_scraper.scrape()
 ```
@@ -329,11 +329,11 @@ Below are the top GitHub repositories that provide robust, production-ready, and
 
 ## Recommendations
 
-- **For general-purpose, multi-language, and extensible news scraping:**  
+- **For general-purpose, multi-language, and extensible news scraping:**
   **Newspaper4k** and **news-please** are the most comprehensive and actively maintained options.
-- **For large-scale or research-grade news archiving:**  
+- **For large-scale or research-grade news archiving:**
   **Fundus** is highly recommended for its performance and quality.
-- **For publisher-specific or US-centric scraping:**  
+- **For publisher-specific or US-centric scraping:**
   **The DataFace Newspaper Scrapers** provide ready-to-use modules for major outlets.
 
 These repositories offer robust starting points for building or extending news article scraping pipelines, with strong community support and ongoing development[1][2][7][3][5][6].
@@ -389,16 +389,16 @@ Several modular, Python-based frameworks and libraries support scraping arXiv an
 
 ## Recommendations
 
-- **For multi-source academic scraping:**  
+- **For multi-source academic scraping:**
   **paperscraper** is the most comprehensive and modular, supporting arXiv, bioRxiv, medRxiv, chemRxiv, and PubMed with harmonized interfaces and batch processing[1][2][3].
 
-- **For arXiv-only workflows:**  
+- **For arXiv-only workflows:**
   **arxivscraper** is lightweight, modular, and easy to integrate into custom pipelines[4].
 
-- **For SSRN and other sources:**  
+- **For SSRN and other sources:**
   Use dedicated modular scrapers or extend frameworks like paperscraper to add new sources[7][8].
 
-- **For highly customizable or research-driven needs:**  
+- **For highly customizable or research-driven needs:**
   Consider frameworks like **AutoScraper** or build on top of modular Python libraries for maximum flexibility[9][10].
 
 These frameworks enable robust, scalable, and maintainable academic data collection pipelines, supporting both targeted and large-scale literature mining.
@@ -476,16 +476,16 @@ Below are the leading open-source repositories and frameworks for extracting blo
 
 ## Recommendations
 
-- **For general-purpose, high-accuracy blog extraction:**  
+- **For general-purpose, high-accuracy blog extraction:**
   **Trafilatura** is the top choice for its precision, extensibility, and robust output options.
 
-- **For multi-language or NLP-powered extraction:**  
+- **For multi-language or NLP-powered extraction:**
   **Newspaper4k** offers advanced features and broad language support.
 
-- **For rapid, no-selector extraction on similar blog layouts:**  
+- **For rapid, no-selector extraction on similar blog layouts:**
   **AutoScraper** is ideal for quick setup and extensibility.
 
-- **For platform-specific needs:**  
+- **For platform-specific needs:**
   Use **WPExtractor** for WordPress and **blogger-scrapper** for Blogger blogs.
 
 These repositories provide strong foundations for extensible blog post extraction, supporting both simple and advanced workflows with active community support and ongoing development.
@@ -533,5 +533,5 @@ Modern news sites often load content dynamically using JavaScript, requiring scr
 - **Playwright** is generally preferred for new projects due to its speed, reliability, and ease of handling modern web apps[6][7][8].
 - **Static-only scrapers** (like Fundus) are not suitable for sites where news content is loaded or updated via JavaScript.
 
-**In summary:**  
+**In summary:**
 To robustly scrape news from JS-heavy or dynamic sites, combine a browser automation tool (Playwright or Selenium) with your preferred extraction library. This hybrid approach is well-documented and widely used in the web scraping community[-----------------------------------------

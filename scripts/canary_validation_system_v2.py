@@ -5,13 +5,14 @@ Lightweight validation system with improved assertion patterns and plugin archit
 for site-specific validation rules.
 """
 
-import time
 import json
 import logging
-import yaml
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+import yaml
 from intel_bot_driver_v2 import IntelBotDriverV2
 
 # Configure logging
@@ -218,7 +219,7 @@ class EnhancedCanaryValidator:
 
     def _extract_domain(self, url: str) -> str:
         """Extract domain identifier for plugin selection - DEPRECATED
-        
+
         Use target_name directly instead of domain extraction.
         This method is kept for backward compatibility but should not be used.
         """
@@ -615,10 +616,10 @@ class EnhancedCanaryValidator:
                 "total_validation_checks": total_validation_checks,
                 "passed_validation_checks": total_passed_validation_checks,
                 "validation_success_rate": (
-                    total_passed_validation_checks / total_validation_checks
-                )
-                if total_validation_checks > 0
-                else 0,
+                    (total_passed_validation_checks / total_validation_checks)
+                    if total_validation_checks > 0
+                    else 0
+                ),
             },
         }
 

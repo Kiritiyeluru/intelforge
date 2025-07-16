@@ -15,12 +15,12 @@ timestamp: 2025-07-08T06:22:38.311455
 
 # Yahoo Finance - Stock Market Live, Quotes, Business & Finance News
 
-**URL:** https://finance.yahoo.com  
-**Final URL:** https://finance.yahoo.com/  
-**Status:** success  
-**Bot Detection:** ✅ Clear  
-**Content Length:** 5,906 characters  
-**Scraped:** 2025-07-08T06:22:38.311455  
+**URL:** https://finance.yahoo.com
+**Final URL:** https://finance.yahoo.com/
+**Status:** success
+**Bot Detection:** ✅ Clear
+**Content Length:** 5,906 characters
+**Scraped:** 2025-07-08T06:22:38.311455
 
 ## Main Content
 
@@ -167,7 +167,7 @@ VIX
 17.79 +0.31 (+1.77%)
 Gold
 3,342.20 -0.60 (-0.02%)
- 
+
 Portfolio
 Portfolio
 
@@ -193,7 +193,7 @@ TSLA Tesla, Inc. 293.94 -21.41 (-6.79%)
 CORZ Core Scientific, Inc. 14.83 -3.17 (-17.61%)
 SOFI SoFi Technologies, Inc. 19.24 +0.67 (+3.61%)
 Earnings events
- 
+
 Upcoming
 No earnings events for this period.
 Trending tickers

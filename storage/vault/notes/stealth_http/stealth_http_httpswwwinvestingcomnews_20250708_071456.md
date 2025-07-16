@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:56.664524
 
 # Financial News | Stock Market and Forex News
 
-**URL:** https://www.investing.com/news/  
-**Final URL:** https://www.investing.com/news  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 2,148 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:56.664524  
+**URL:** https://www.investing.com/news/
+**Final URL:** https://www.investing.com/news
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 2,148 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:56.664524
 
 ## Main Content
 

@@ -121,14 +121,14 @@ run_test_suite() {
     local suite_name="$1"
     local command="$2"
     local timeout_minutes="${3:-10}"
-    
+
     test_count=$((test_count + 1))
     log_info "Running $suite_name..."
-    
+
     if $VERBOSE; then
         echo "Command: $command"
     fi
-    
+
     # Run test with timeout
     if timeout "${timeout_minutes}m" bash -c "$command" >> "$TEST_LOG" 2>&1; then
         test_results["$suite_name"]="PASS"
@@ -138,7 +138,7 @@ run_test_suite() {
         test_results["$suite_name"]="FAIL"
         failed_count=$((failed_count + 1))
         log_error "$suite_name failed"
-        
+
         if $FAIL_FAST; then
             log_error "Fail-fast mode enabled. Stopping test execution."
             exit 1
@@ -149,13 +149,13 @@ run_test_suite() {
 # Function to check dependencies
 check_dependencies() {
     log_info "Checking dependencies..."
-    
+
     # Check Python
     if ! command -v python3 &> /dev/null; then
         log_error "Python 3 is required but not installed"
         exit 1
     fi
-    
+
     # Check pip packages
     local required_packages=("pytest" "pytest-cov")
     for package in "${required_packages[@]}"; do
@@ -167,7 +167,7 @@ check_dependencies() {
             }
         fi
     done
-    
+
     # Check k6 for load tests
     if ! $SKIP_LOAD_TESTS && ! $QUICK_MODE; then
         if ! command -v k6 &> /dev/null; then
@@ -175,28 +175,28 @@ check_dependencies() {
             SKIP_LOAD_TESTS=true
         fi
     fi
-    
+
     log_success "Dependencies check completed"
 }
 
 # Function to setup test environment
 setup_test_environment() {
     log_info "Setting up test environment..."
-    
+
     # Create log directory
     mkdir -p "$LOG_DIR"
-    
+
     # Change to project root
     cd "$PROJECT_ROOT"
-    
+
     # Create test report header
     cat > "$REPORT_FILE" << EOF
 # IntelForge Test Suite Report
 **Generated**: $(date)
 **Test Run ID**: $TIMESTAMP
-**Configuration**: 
+**Configuration**:
 - Quick Mode: $QUICK_MODE
-- Skip Load Tests: $SKIP_LOAD_TESTS  
+- Skip Load Tests: $SKIP_LOAD_TESTS
 - Skip Persona Tests: $SKIP_PERSONA_TESTS
 - Coverage Threshold: $COVERAGE_THRESHOLD%
 - Fail Fast: $FAIL_FAST
@@ -204,29 +204,29 @@ setup_test_environment() {
 ---
 
 EOF
-    
+
     log_success "Test environment setup completed"
 }
 
 # Function to run core test suites
 run_core_tests() {
     log_info "=== Running Core Test Suites ==="
-    
+
     # Health & Safety Checks
     run_test_suite "Health Contract Tests" \
         "python -m pytest tests/test_health_contract_passes.py -v" 5
-    
+
     run_test_suite "Health Schema Validation" \
         "python -m pytest tests/test_health_schema.py -v" 5
-    
+
     # Security Baseline
     run_test_suite "Security Baseline Tests" \
         "python -m pytest tests/security/test_security_baseline.py -v" 10
-    
+
     # CLI Testing
     run_test_suite "CLI Regression Tests" \
         "python -m pytest tests/test_cli_regression.py -v" 15
-    
+
     run_test_suite "CLI Workflow Tests" \
         "python -m pytest tests/test_cli_workflows.py -v" 15
 }
@@ -237,19 +237,19 @@ run_advanced_tests() {
         log_info "Skipping advanced tests in quick mode"
         return
     fi
-    
+
     log_info "=== Running Advanced Test Suites ==="
-    
+
     # Performance & ML Tests
     run_test_suite "ML Component Validation" \
         "python -m pytest tests/ml/test_ml_component_validation.py -v" 15
-    
+
     run_test_suite "Embedding Stability Tests" \
         "python -m pytest tests/ml/test_embedding_stability.py -v" 15
-    
+
     run_test_suite "Academic Tools Integration" \
         "python -m pytest tests/integration/test_academic_tools_integration.py -v" 15
-    
+
     # Performance regression (if hyperfine available)
     if command -v hyperfine &> /dev/null; then
         run_test_suite "Performance Regression Tests" \
@@ -265,18 +265,18 @@ run_persona_tests() {
         log_info "Skipping persona tests"
         return
     fi
-    
+
     log_info "=== Running Persona Test Suites ==="
-    
+
     run_test_suite "Researcher Persona Tests" \
         "python -m pytest tests/persona/test_researcher_scenario.py -v --tb=short" 20
-    
+
     run_test_suite "Trader Persona Tests" \
         "python -m pytest tests/persona/test_trader_scenario.py -v --tb=short" 20
-    
+
     run_test_suite "Developer Persona Tests" \
         "python -m pytest tests/persona/test_developer_scenario.py -v --tb=short" 20
-    
+
     run_test_suite "E2E Workflow Templates" \
         "python -m pytest tests/persona/test_e2e_workflow_templates.py -v --tb=short" 25
 }
@@ -287,9 +287,9 @@ run_load_tests() {
         log_info "Skipping load tests"
         return
     fi
-    
+
     log_info "=== Running Load Test Suites ==="
-    
+
     run_test_suite "Load Testing Suite" \
         "python tests/load/run_load_tests.py --suite quick" 15
 }
@@ -297,16 +297,16 @@ run_load_tests() {
 # Function to run coverage analysis
 run_coverage_analysis() {
     log_info "=== Running Coverage Analysis ==="
-    
+
     local coverage_cmd="python scripts/coverage_analyzer.py"
     if $QUICK_MODE; then
         coverage_cmd="$coverage_cmd --quick"
     else
         coverage_cmd="$coverage_cmd --full"
     fi
-    
+
     run_test_suite "Coverage Analysis" "$coverage_cmd" 10
-    
+
     # Check coverage threshold
     if [ -f "coverage.json" ]; then
         local coverage_percent
@@ -316,7 +316,7 @@ with open('coverage.json') as f:
     data = json.load(f)
     print(int(data['totals']['percent_covered']))
 " 2>/dev/null || echo "0")
-        
+
         if [ "$coverage_percent" -ge "$COVERAGE_THRESHOLD" ]; then
             log_success "Coverage $coverage_percent% meets threshold of $COVERAGE_THRESHOLD%"
         else
@@ -332,9 +332,9 @@ generate_report() {
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
     local duration_formatted=$(printf "%02d:%02d:%02d" $((duration/3600)) $((duration%3600/60)) $((duration%60)))
-    
+
     log_info "=== Generating Test Report ==="
-    
+
     # Add results to report
     cat >> "$REPORT_FILE" << EOF
 ## Test Results Summary
@@ -350,7 +350,7 @@ generate_report() {
 | Test Suite | Result | Status |
 |------------|--------|--------|
 EOF
-    
+
     # Add individual results
     for suite in "${!test_results[@]}"; do
         local status="${test_results[$suite]}"
@@ -360,14 +360,14 @@ EOF
         fi
         echo "| $suite | $status | $icon |" >> "$REPORT_FILE"
     done
-    
+
     # Add overall verdict
     cat >> "$REPORT_FILE" << EOF
 
 ## Overall Verdict
 
 EOF
-    
+
     if [ $failed_count -eq 0 ]; then
         echo "🎉 **ALL TESTS PASSED** - Production Ready!" >> "$REPORT_FILE"
         log_success "All tests passed! IntelForge is production ready."
@@ -375,7 +375,7 @@ EOF
         echo "⚠️ **$failed_count TEST(S) FAILED** - Review required" >> "$REPORT_FILE"
         log_error "$failed_count test suite(s) failed. Review required before production deployment."
     fi
-    
+
     # Add configuration info
     cat >> "$REPORT_FILE" << EOF
 
@@ -392,7 +392,7 @@ EOF
 ---
 *Generated by IntelForge Test Suite v1.0*
 EOF
-    
+
     log_info "Test report generated: $REPORT_FILE"
 }
 
@@ -407,22 +407,22 @@ cleanup() {
 main() {
     log_info "Starting IntelForge Comprehensive Test Suite"
     log_info "Test Run ID: $TIMESTAMP"
-    
+
     # Setup
     setup_test_environment
     check_dependencies
-    
+
     # Run test suites
     run_core_tests
     run_advanced_tests
     run_persona_tests
     run_load_tests
     run_coverage_analysis
-    
+
     # Generate report and cleanup
     generate_report
     cleanup
-    
+
     # Exit with appropriate code
     if [ $failed_count -eq 0 ]; then
         log_success "Test suite completed successfully!"

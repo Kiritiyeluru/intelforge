@@ -9,7 +9,7 @@
 # Check Node.js version
 node --version  # Should be 18+
 
-# Check Python version  
+# Check Python version
 python3 --version  # Should be 3.8+
 
 # Update npm
@@ -58,7 +58,7 @@ git config --global url.https://github.com/.insteadOf git@github.com:
 # For npx servers
 npx -y @modelcontextprotocol/server-puppeteer --help
 
-# For uvx servers  
+# For uvx servers
 uvx mcp-server-git --help
 
 # Install missing tools

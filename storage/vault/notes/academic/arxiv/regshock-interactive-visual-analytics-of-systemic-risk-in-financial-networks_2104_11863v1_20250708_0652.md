@@ -10,18 +10,18 @@ primary_category: cs.HC
 arxiv_id: 2104.11863v1
 url: http://arxiv.org/abs/2104.11863v1
 pdf_url: http://arxiv.org/pdf/2104.11863v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: bb618caa5a32898a
 ---
 
 # Regshock: Interactive Visual Analytics of Systemic Risk in Financial Networks
 
-**Authors:** Zhibin Niu, Junqi Wu, Dawei Cheng, Jiawan Zhang  
-**Published:** 2021-04-24  
-**Updated:** 2021-04-24  
-**Primary Category:** cs.HC  
-**ArXiv ID:** 2104.11863v1  
+**Authors:** Zhibin Niu, Junqi Wu, Dawei Cheng, Jiawan Zhang
+**Published:** 2021-04-24
+**Updated:** 2021-04-24
+**Primary Category:** cs.HC
+**ArXiv ID:** 2104.11863v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2104.11863v1)

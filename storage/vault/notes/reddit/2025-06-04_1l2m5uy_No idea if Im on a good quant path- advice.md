@@ -28,7 +28,7 @@ My mathematics background from high school spans Multivar/Vector, Proof-based Li
 
 **Author:** u/Illustrious-Big6845
 
-Cambridge CS is probably the best for Quant Dev in the UK. I have friends in first-year (freshman) CS at Cambridge who are interning at Citadel and GSA for Quant Dev this summer. 
+Cambridge CS is probably the best for Quant Dev in the UK. I have friends in first-year (freshman) CS at Cambridge who are interning at Citadel and GSA for Quant Dev this summer.
 
 It gets to the point where Ocaml is taught in first-year CS because Jane Street sponsor so much research into it at Cambridge. Many Jane Street devs are from Cambridge.
 

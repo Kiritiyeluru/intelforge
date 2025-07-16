@@ -12,28 +12,28 @@ Brief summary of test execution and overall results.
 
 ## Test Environment
 
-- **Python Version**: 
-- **Operating System**: 
-- **Dependencies**: 
-- **Configuration**: 
+- **Python Version**:
+- **Operating System**:
+- **Dependencies**:
+- **Configuration**:
 
 ## Test Cases Executed
 
 ### Test Case 1: [Test Name]
-- **Objective**: 
-- **Input**: 
-- **Expected Output**: 
-- **Actual Output**: 
+- **Objective**:
+- **Input**:
+- **Expected Output**:
+- **Actual Output**:
 - **Status**: [PASS/FAIL/WARN]
-- **Notes**: 
+- **Notes**:
 
 ### Test Case 2: [Test Name]
-- **Objective**: 
-- **Input**: 
-- **Expected Output**: 
-- **Actual Output**: 
+- **Objective**:
+- **Input**:
+- **Expected Output**:
+- **Actual Output**:
 - **Status**: [PASS/FAIL/WARN]
-- **Notes**: 
+- **Notes**:
 
 ## Performance Metrics
 

@@ -12,8 +12,8 @@ post_id: 1l26ycd
 
 # Getting started with QuantConnect
 
-Hi, I'm a highschooler from the bay looking to get into algotrading this summer, I have a fair amount of experience in the math and physics olympiads (USAMO/USAPhO) and am particularly interested in Markov Models (specifically Hidden Markov Models) for price prediction. I'm looking to build on some previous research in that area.  
-  
+Hi, I'm a highschooler from the bay looking to get into algotrading this summer, I have a fair amount of experience in the math and physics olympiads (USAMO/USAPhO) and am particularly interested in Markov Models (specifically Hidden Markov Models) for price prediction. I'm looking to build on some previous research in that area.
+
 Is there any solid free software for getting started with the programming aspect or should quantconnect be just fine (it seems to be a widely reccommended one)? Additionally, are there any other resources that would be good for getting started as a somewhat rookie.
 
 Thanks.
@@ -50,15 +50,15 @@ Python is free - my recomendation is to try and replicate an article that you li
 
 **Author:** u/thegratefulshread
 
-Lmao. Using hmm for price prediction not only introduces a huge black box issue but it’s a super noob method of using it. 
+Lmao. Using hmm for price prediction not only introduces a huge black box issue but it’s a super noob method of using it.
 
-We want to try to predict stationary data.  Not un stationary like price data. 
+We want to try to predict stationary data.  Not un stationary like price data.
 
 Look into statistical arbitrage, correlation / cointegration test and try to make a trading script from that.
 
-Trying to predict shit with a free easy to access library/ model like hmm will not generate alpha. 
+Trying to predict shit with a free easy to access library/ model like hmm will not generate alpha.
 
-Research papers are just meant to show the theory not actual alpha generation methods. 
+Research papers are just meant to show the theory not actual alpha generation methods.
 
 At that point just replicate the papers from arxiv.org
 

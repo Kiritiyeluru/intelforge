@@ -1,7 +1,7 @@
 # IntelForge Technical Reference
 
-**Last Updated:** 2025-07-12  
-**Purpose:** Comprehensive technical specifications, implementation details, and system architecture documentation  
+**Last Updated:** 2025-07-12
+**Purpose:** Comprehensive technical specifications, implementation details, and system architecture documentation
 **Status:** ✅ Production-Ready Technical Foundation
 
 ---
@@ -74,12 +74,12 @@
 def run_subprocess(cmd: List[str], desc: str, capture_output: bool = True) -> subprocess.CompletedProcess:
     """
     Centralized subprocess execution with consistent error handling
-    
+
     Args:
         cmd: Command and arguments list
         desc: Human-readable description for logging
         capture_output: Whether to capture stdout/stderr
-    
+
     Returns:
         CompletedProcess object with standardized error handling
     """

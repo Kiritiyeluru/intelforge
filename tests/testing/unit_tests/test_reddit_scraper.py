@@ -3,10 +3,11 @@
 Unit tests for Reddit scraper module
 """
 
-import pytest
 import sys
 from pathlib import Path
 from unittest.mock import Mock, patch
+
+import pytest
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent

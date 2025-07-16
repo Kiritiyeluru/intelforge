@@ -6,7 +6,7 @@
 source = scripts, scrapers
 
 # Files and directories to omit from coverage
-omit = 
+omit =
     */tests/*
     */test_*
     */__pycache__/*
@@ -47,36 +47,36 @@ fail_under = 70
 exclude_lines =
     # Have to re-enable the standard pragma
     pragma: no cover
-    
+
     # Don't complain about missing debug-only code
     def __repr__
     if self\.debug
-    
+
     # Don't complain if tests don't hit defensive assertion code
     raise AssertionError
     raise NotImplementedError
-    
+
     # Don't complain if non-runnable code isn't run
     if 0:
     if __name__ == .__main__.:
     if __name__ == "__main__":
-    
+
     # Don't complain about abstract methods
     @(abc\.)?abstractmethod
-    
+
     # Don't complain about protocol classes
     class .*\bProtocol\):
-    
+
     # Don't complain about type checking imports
     if TYPE_CHECKING:
-    
+
     # Don't complain about platform-specific code
     if sys\.platform
-    
+
     # Don't complain about error handling
     except ImportError:
     except.*Error:
-    
+
     # Don't complain about logging and debug statements
     logger\.debug
     log\.debug

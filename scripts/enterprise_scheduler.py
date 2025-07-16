@@ -8,27 +8,27 @@ Advanced orchestration for regular financial data collection with:
 - Automated scheduling with cron-like functionality
 """
 
+import argparse
 import json
+import logging
+import random
+import sqlite3
+import subprocess
 import sys
 import time
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Dict, List, Any, Optional
-import sqlite3
-import argparse
-from dataclasses import dataclass
-from enum import Enum
-import subprocess
-import logging
 from concurrent.futures import ThreadPoolExecutor
-import random
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 # Import our monitoring system
-from scripts.monitoring_dashboard import ScrapingLogger, ScrapingEvent
+from scripts.monitoring_dashboard import ScrapingEvent, ScrapingLogger
 
 
 class JobPriority(Enum):
@@ -124,7 +124,8 @@ class JobQueue:
     def init_database(self):
         """Initialize SQLite database for job persistence."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
+            conn.execute(
+                """
                 CREATE TABLE IF NOT EXISTS jobs (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,
@@ -140,7 +141,8 @@ class JobQueue:
                     retry_count INTEGER DEFAULT 0,
                     metadata TEXT
                 )
-            """)
+            """
+            )
 
             conn.execute("CREATE INDEX IF NOT EXISTS idx_priority ON jobs(priority)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_next_run ON jobs(next_run)")
@@ -151,8 +153,8 @@ class JobQueue:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
-                INSERT OR REPLACE INTO jobs 
-                (id, name, job_type, priority, schedule_expression, config, 
+                INSERT OR REPLACE INTO jobs
+                (id, name, job_type, priority, schedule_expression, config,
                  retry_policy, created_at, next_run, last_run, status, retry_count, metadata)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
@@ -181,7 +183,7 @@ class JobQueue:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 """
-                SELECT * FROM jobs 
+                SELECT * FROM jobs
                 WHERE next_run <= ? AND status IN ('pending', 'retrying')
                 ORDER BY priority DESC, next_run ASC
             """,
@@ -204,9 +206,11 @@ class JobQueue:
                     last_run=job_data["last_run"],
                     status=JobStatus(job_data["status"]),
                     retry_count=job_data["retry_count"],
-                    metadata=json.loads(job_data["metadata"])
-                    if job_data["metadata"]
-                    else None,
+                    metadata=(
+                        json.loads(job_data["metadata"])
+                        if job_data["metadata"]
+                        else None
+                    ),
                 )
                 jobs.append(job)
 
@@ -236,7 +240,7 @@ class JobQueue:
 
             conn.execute(
                 f"""
-                UPDATE jobs 
+                UPDATE jobs
                 SET {", ".join(updates)}
                 WHERE id = ?
             """,
@@ -401,9 +405,11 @@ class EnterpriseScheduler:
                 timestamp=datetime.now().isoformat(),
                 event_type="start",
                 scraper_type=job.job_type,
-                url=job.config.get("urls", ["scheduled_job"])[0]
-                if job.config.get("urls")
-                else "scheduled_job",
+                url=(
+                    job.config.get("urls", ["scheduled_job"])[0]
+                    if job.config.get("urls")
+                    else "scheduled_job"
+                ),
                 metadata={"job_id": job.id, "job_name": job.name},
             )
         )
@@ -435,9 +441,11 @@ class EnterpriseScheduler:
                 timestamp=datetime.now().isoformat(),
                 event_type="success" if success else "failure",
                 scraper_type=job.job_type,
-                url=job.config.get("urls", ["scheduled_job"])[0]
-                if job.config.get("urls")
-                else "scheduled_job",
+                url=(
+                    job.config.get("urls", ["scheduled_job"])[0]
+                    if job.config.get("urls")
+                    else "scheduled_job"
+                ),
                 execution_time=execution_time,
                 error_message=error_message,
                 metadata={"job_id": job.id, "job_name": job.name},

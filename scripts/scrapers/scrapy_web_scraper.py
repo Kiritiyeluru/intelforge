@@ -24,10 +24,9 @@ sys.path.insert(0, str(scrapy_project_path))
 # Change to Scrapy project directory for proper config resolution
 os.chdir(scrapy_project_path)
 
+from intelforge_scraping.spiders.web_spider import WebSpider
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-
-from intelforge_scraping.spiders.web_spider import WebSpider
 
 
 def main():

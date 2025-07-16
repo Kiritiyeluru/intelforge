@@ -16,7 +16,7 @@ https://preview.redd.it/1yoenagl6s4f1.png?width=820&format=png&auto=webp&s=3b1e3
 
 I'm a second year in Australia looking to crack into some pre-pen programs and hopefully soon after some internships for quant firms in Australia and Asia. Wondering if I could get any feedback/advice on my resume, both low level (resume syntax/strategy I should be mindful for) and high level (things to focus on big picture moving forward to try stand out). Pretty new to this so any advice is really appreciated.
 
-  
+
 Thanks in advance.
 
 ## Comments

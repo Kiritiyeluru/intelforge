@@ -48,7 +48,7 @@ Send him to me
 
 **Author:** u/UL_Paper
 
-What I would do in your shoes is to ask him to analyze a trading opportunity in a screen recording or on a call. Then think critically through if this is possible to instruct a program to do the exact same, or if there are any discretionary parts to trading this. 
+What I would do in your shoes is to ask him to analyze a trading opportunity in a screen recording or on a call. Then think critically through if this is possible to instruct a program to do the exact same, or if there are any discretionary parts to trading this.
 
 As well as ask him to prove the live performance through a account statement from his broker
 

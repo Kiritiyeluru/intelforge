@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:55.087557
 
 # Finance News: Wall Street, financial markets, stocks, securities and more from Yahoo Finance
 
-**URL:** https://finance.yahoo.com/news/  
-**Final URL:** https://finance.yahoo.com/news/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 3,035 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:55.087557  
+**URL:** https://finance.yahoo.com/news/
+**Final URL:** https://finance.yahoo.com/news/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 3,035 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:55.087557
 
 ## Main Content
 

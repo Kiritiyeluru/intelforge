@@ -74,7 +74,7 @@ Instead of remembering to manually:
 **Hook Configuration**:
 ```json
 {
-  "name": "module_structure_guardian", 
+  "name": "module_structure_guardian",
   "type": "PostToolUse",
   "matchers": [{"tool": "Write", "path": "**/*.py"}],
   "command": "python scripts/hooks/module_structure_guardian.py \"$CLAUDE_FILE_PATHS\""
@@ -101,7 +101,7 @@ Instead of remembering to manually:
 ```json
 {
   "name": "documentation_sync_engine",
-  "type": "PostToolUse", 
+  "type": "PostToolUse",
   "matchers": [
     {"tool": "Write", "path": "scrapers/*.py"},
     {"tool": "Write", "path": "scripts/*.py"},
@@ -202,7 +202,7 @@ Instead of remembering to manually:
 **Hook Configuration**:
 ```json
 {
-  "name": "config_change_propagator", 
+  "name": "config_change_propagator",
   "type": "PostToolUse",
   "matchers": [{"tool": "Edit", "path": "config/config.yaml"}],
   "command": "python scripts/hooks/config_change_propagator.py \"$CLAUDE_FILE_PATHS\""
@@ -226,7 +226,7 @@ Instead of remembering to manually:
 ```json
 {
   "name": "knowledge_base_optimizer",
-  "type": "PostToolUse", 
+  "type": "PostToolUse",
   "matchers": [
     {"tool": "Write", "path": "vault/notes/**/*.md"},
     {"tool": "Edit", "path": "vault/notes/**/*.md"}
@@ -280,7 +280,7 @@ docs/                                   # Auto-generated documentation
 3. **Module Structure Guardian** - Enforce patterns on new files
 4. Create supporting scripts and test with existing codebase
 
-### Phase 2: IntelForge-Specific Automation (Week 2)  
+### Phase 2: IntelForge-Specific Automation (Week 2)
 1. **Config Change Propagator** - Prevent config-related breakage
 2. **Documentation Sync Engine** - Automate README/docs updates
 3. **Session Context Maintainer** - Keep session files current

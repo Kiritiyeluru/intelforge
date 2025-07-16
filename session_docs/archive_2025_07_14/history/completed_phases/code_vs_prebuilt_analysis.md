@@ -57,19 +57,19 @@ class TTRTracker:
         if use_sentry:
             import sentry_sdk
             self.sentry = sentry_sdk
-    
+
     def end_operation(self, operation_data, success, error=None):
         ttr = time.time() - operation_data["start_time"]
-        
+
         # Our existing tracking
         self._save_session(operation_data)
-        
+
         # Optional Sentry integration
         if self.use_sentry:
             self.sentry.set_tag("operation_type", operation_data["operation_type"])
             self.sentry.set_tag("target_url", operation_data["target_url"])
             self.sentry.set_measurement("ttr_seconds", ttr)
-        
+
         return ttr
 ```
 
@@ -120,11 +120,11 @@ class TenacityBudgetManager:
     def __init__(self, config_file="config/retry_budgets.yaml"):
         with open(config_file, 'r') as f:
             self.config = yaml.safe_load(f)
-    
+
     def get_retry_decorator(self, url):
         domain = self._extract_domain(url)
         budget = self.config['targets'].get(domain, self.config['targets']['default'])
-        
+
         return retry(
             stop=stop_after_attempt(budget['retry_limit']),
             wait=wait_exponential(min=budget['cooldown_seconds'], max=300),
@@ -134,12 +134,12 @@ class TenacityBudgetManager:
 # Usage in IntelBotDriver:
 def get(self, url):
     retry_decorator = self.retry_budget.get_retry_decorator(url)
-    
+
     @retry_decorator
     def _attempt_get():
         # Actual page load logic
         pass
-    
+
     return _attempt_get()
 ```
 
@@ -196,17 +196,17 @@ Our canary validator is perfectly suited for web scraping pre-flight checks:
 def _validate_page_content(self, title, content, url):
     """Enhanced with assertion-style checks"""
     checks = []
-    
+
     # Basic checks
     checks.append(("title_present", bool(title.strip())))
     checks.append(("content_size", len(content) > self.min_content_size))
-    
+
     # Site-specific checks
     if "finviz" in url.lower():
         checks.append(("finviz_elements", "screener" in content.lower()))
-    
+
     failed_checks = [name for name, passed in checks if not passed]
-    
+
     return {
         "valid": len(failed_checks) == 0,
         "failed_checks": failed_checks,
@@ -258,17 +258,17 @@ class VersionedTestMatrix:
     def __init__(self, use_sacred=False):
         self.csv_file = Path("reports/anti_detection_matrix.csv")
         self.use_sacred = use_sacred
-        
+
         if use_sacred:
             from sacred import Experiment
             self.ex = Experiment("stealth_regression")
-    
-    def log_test_result(self, chrome_version, botasaurus_version, target, 
+
+    def log_test_result(self, chrome_version, botasaurus_version, target,
                        stealth_pass_percent, avg_ttr, budget_exceeded_count):
-        
+
         # Always log to CSV (lightweight, git-trackable)
         self._log_to_csv(...)
-        
+
         # Optional Sacred logging (rich analytics)
         if self.use_sacred:
             with self.ex.run():
@@ -305,7 +305,7 @@ class VersionedTestMatrix:
 ```python
 # Phase C Integration Tasks (Updated):
 1. Replace retry logic in IntelBotDriver with Tenacity        # HIGH PRIORITY
-2. Add optional Sentry integration to TTRTracker             # MEDIUM PRIORITY  
+2. Add optional Sentry integration to TTRTracker             # MEDIUM PRIORITY
 3. Enhance canary validation with better assertions          # LOW PRIORITY
 4. Add Sacred integration to test matrix                     # LOW PRIORITY
 ```
@@ -318,7 +318,7 @@ class VersionedTestMatrix:
 - ✅ Solo developer friendly
 - ❌ Some reinventing of proven patterns (retry logic)
 
-**Expert Recommendations Rating:** **7.5/10**  
+**Expert Recommendations Rating:** **7.5/10**
 - ✅ Industry best practices
 - ✅ Battle-tested solutions
 - ❌ Over-engineered for solo developer

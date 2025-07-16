@@ -4,12 +4,13 @@ Pytest configuration file for IntelForge testing
 Shared fixtures and configuration for all tests
 """
 
-import pytest
+import shutil
 import sys
 import tempfile
-import shutil
 from pathlib import Path
 from unittest.mock import Mock, patch
+
+import pytest
 import yaml
 
 # Add project root to path
@@ -152,9 +153,11 @@ def mock_config_file(mock_config, temp_dir):
 
     with patch(
         "builtins.open",
-        side_effect=lambda path, *args, **kwargs: open(config_path, *args, **kwargs)
-        if "config.yaml" in str(path)
-        else open(path, *args, **kwargs),
+        side_effect=lambda path, *args, **kwargs: (
+            open(config_path, *args, **kwargs)
+            if "config.yaml" in str(path)
+            else open(path, *args, **kwargs)
+        ),
     ):
         yield config_path
 

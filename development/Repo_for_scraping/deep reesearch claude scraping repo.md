@@ -82,7 +82,7 @@ The research revealed that **trafilatura consistently outperforms** newspaper3k,
 ### Most Effective Python Libraries
 Based on benchmark testing across repositories:
 1. **trafilatura**: F1 score 0.945 (best overall)
-2. **readability-lxml**: F1 score 0.922 
+2. **readability-lxml**: F1 score 0.922
 3. **newspaper3k**: F1 score 0.912
 4. **BeautifulSoup + lxml**: Reliable baseline
 5. **dragnet**: F1 score 0.907

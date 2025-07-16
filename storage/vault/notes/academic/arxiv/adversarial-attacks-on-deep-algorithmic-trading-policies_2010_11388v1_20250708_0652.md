@@ -10,18 +10,18 @@ primary_category: cs.LG
 arxiv_id: 2010.11388v1
 url: http://arxiv.org/abs/2010.11388v1
 pdf_url: http://arxiv.org/pdf/2010.11388v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 68680405600a88cc
 ---
 
 # Adversarial Attacks on Deep Algorithmic Trading Policies
 
-**Authors:** Yaser Faghan, Nancirose Piazza, Vahid Behzadan, Ali Fathi  
-**Published:** 2020-10-22  
-**Updated:** 2020-10-22  
-**Primary Category:** cs.LG  
-**ArXiv ID:** 2010.11388v1  
+**Authors:** Yaser Faghan, Nancirose Piazza, Vahid Behzadan, Ali Fathi
+**Published:** 2020-10-22
+**Updated:** 2020-10-22
+**Primary Category:** cs.LG
+**ArXiv ID:** 2010.11388v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2010.11388v1)

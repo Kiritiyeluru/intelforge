@@ -5,11 +5,12 @@ Tests anti-detection capabilities against actual financial sites (Finviz, Yahoo 
 with comprehensive stealth scoring and failure analysis.
 """
 
-import time
 import json
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
+
 from intel_bot_driver import IntelBotDriver
 
 

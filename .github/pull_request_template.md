@@ -7,7 +7,7 @@ Brief description of what this PR accomplishes and why it was needed.
 ## Phase Information
 
 - **Target Phase:** `phase_XX_module.py` (if applicable)
-- **Type of Change:** 
+- **Type of Change:**
   - [ ] New phase implementation
   - [ ] Enhancement to existing phase
   - [ ] Bug fix

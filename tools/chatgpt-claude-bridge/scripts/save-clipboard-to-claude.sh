@@ -85,7 +85,7 @@ if [[ "$ARCHIVE_ENABLED" = "true" ]]; then
     ARCHIVE_DATE=$(date '+%Y-%m-%d')
     DAILY_ARCHIVE="$ARCHIVE_DIR/$ARCHIVE_DATE"
     mkdir -p "$DAILY_ARCHIVE"
-    
+
     timestamp=$(date +%Y%m%d_%H%M%S)
     cp "$TARGET" "$DAILY_ARCHIVE/task_$timestamp.md"
     echo "📁 Archived as $ARCHIVE_DATE/task_$timestamp.md"

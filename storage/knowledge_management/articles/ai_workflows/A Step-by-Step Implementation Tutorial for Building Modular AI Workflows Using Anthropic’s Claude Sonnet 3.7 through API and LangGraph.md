@@ -64,12 +64,12 @@ class LangGraph:
                 self.api_key = input("Please enter your Anthropic API key: ")
                 if not self.api_key:
                     raise ValueError("Please provide an Anthropic API key")
-       
+
         self.client = Anthropic(api_key=self.api_key)
         self.graph = nx.DiGraph()
         self.nodes = {}
         self.state = {}
-   
+
     def add_node(self, node_config: NodeConfig):
         self.nodes[node_config.name] = node_config
         self.graph.add_node(node_config.name)
@@ -77,31 +77,31 @@ class LangGraph:
             if input_node in self.nodes:
                 self.graph.add_edge(input_node, node_config.name)
         return self
-   
+
     def claude_node(self, name: str, prompt_template: str, model: str = "claude-3-7-sonnet-20250219",
                    inputs: List[str] = None, outputs: List[str] = None, system_prompt: str = None):
         """Convenience method to create a Claude API node"""
         inputs = inputs or []
         outputs = outputs or [name + "_response"]
-       
+
         def claude_fn(state, **kwargs):
             prompt = prompt_template
             for k, v in state.items():
                 if isinstance(v, str):
                     prompt = prompt.replace(f"{{{k}}}", v)
-           
+
             message_params = {
                 "model": model,
                 "max_tokens": 1000,
                 "messages": [{"role": "user", "content": prompt}]
             }
-           
+
             if system_prompt:
                 message_params["system"] = system_prompt
-               
+
             response = self.client.messages.create(**message_params)
             return response.content[0].text
-       
+
         node_config = NodeConfig(
             name=name,
             function=claude_fn,
@@ -110,13 +110,13 @@ class LangGraph:
             config={"model": model, "prompt_template": prompt_template}
         )
         return self.add_node(node_config)
-   
+
     def transform_node(self, name: str, transform_fn: Callable,
                       inputs: List[str] = None, outputs: List[str] = None):
         """Add a data transformation node"""
         inputs = inputs or []
         outputs = outputs or [name + "_output"]
-       
+
         node_config = NodeConfig(
             name=name,
             function=transform_fn,
@@ -124,7 +124,7 @@ class LangGraph:
             outputs=outputs
         )
         return self.add_node(node_config)
-   
+
     def visualize(self):
         """Visualize the graph"""
         plt.figure(figsize=(10, 6))
@@ -134,7 +134,7 @@ class LangGraph:
         plt.title("LangGraph Flow")
         plt.tight_layout()
         plt.show()
-       
+
         print("\nGraph Structure:")
         for node in self.graph.nodes():
             successors = list(self.graph.successors(node))
@@ -143,34 +143,34 @@ class LangGraph:
             else:
                 print(f"  {node} (endpoint)")
         print()
-   
+
     def _get_execution_order(self):
         """Determine execution order based on dependencies"""
         try:
             return list(nx.topological_sort(self.graph))
         except nx.NetworkXUnfeasible:
             raise ValueError("Graph contains a cycle")
-   
+
     def execute(self, initial_state: Dict[str, Any] = None):
         """Execute the graph in topological order"""
         self.state = initial_state or {}
         execution_order = self._get_execution_order()
-       
+
         print("Executing LangGraph flow:")
-       
+
         for node_name in execution_order:
             print(f"- Running node: {node_name}")
             node = self.nodes[node_name]
             inputs = {k: self.state.get(k) for k in node.inputs if k in self.state}
-           
+
             result = node.function(self.state, **inputs)
-           
+
             if len(node.outputs) == 1:
                 self.state[node.outputs[0]] = result
             elif isinstance(result, (list, tuple)) and len(result) == len(node.outputs):
                 for i, output_name in enumerate(node.outputs):
                     self.state[output_name] = result[i]
-       
+
         print("Execution completed!")
         return self.state
 
@@ -178,18 +178,18 @@ class LangGraph:
 def run_example(question="What are the key benefits of using a graph-based architecture for AI workflows?"):
     """Run an example LangGraph flow with a predefined question"""
     print(f"Running example with question: '{question}'")
-   
+
     graph = LangGraph()
-   
+
     def question_provider(state, **kwargs):
         return question
-   
+
     graph.transform_node(
         name="question_provider",
         transform_fn=question_provider,
         outputs=["user_question"]
     )
-   
+
     graph.claude_node(
         name="question_answerer",
         prompt_template="Answer this question clearly and concisely: {user_question}",
@@ -197,7 +197,7 @@ def run_example(question="What are the key benefits of using a graph-based archi
         outputs=["answer"],
         system_prompt="You are a helpful AI assistant."
     )
-   
+
     graph.claude_node(
         name="answer_analyzer",
         prompt_template="Analyze if this answer addresses the question well: Question: {user_question}\nAnswer: {answer}",
@@ -205,11 +205,11 @@ def run_example(question="What are the key benefits of using a graph-based archi
         outputs=["analysis"],
         system_prompt="You are a critical evaluator. Be brief but thorough."
     )
-   
+
     graph.visualize()
-   
+
     result = graph.execute()
-   
+
     print("\n" + "="*50)
     print("EXECUTION RESULTS:")
     print("="*50)
@@ -217,7 +217,7 @@ def run_example(question="What are the key benefits of using a graph-based archi
     print(f"📝 ANSWER:\n{result.get('answer')}\n")
     print(f"✅ ANALYSIS:\n{result.get('analysis')}")
     print("="*50 + "\n")
-   
+
     return graph
 The LangGraph class implements a lightweight framework for constructing and executing graph-based AI workflows using Claude from Anthropic. It allows users to define modular nodes, either Claude-powered prompts or custom transformation functions, connect them via dependencies, visualize the entire pipeline, and execute them in topological order. The run_example function demonstrates this by building a simple question-answering and evaluation flow, showcasing the clarity and modularity of LangGraph’s architecture.
 
@@ -225,16 +225,16 @@ Copy Code
 def run_advanced_example():
     """Run a more advanced example with multiple nodes for content generation"""
     graph = LangGraph()
-   
+
     def topic_selector(state, **kwargs):
         return "Graph-based AI systems"
-   
+
     graph.transform_node(
         name="topic_selector",
         transform_fn=topic_selector,
         outputs=["topic"]
     )
-   
+
     graph.claude_node(
         name="outline_generator",
         prompt_template="Create a brief outline for a technical blog post about {topic}. Include 3-4 main sections only.",
@@ -242,7 +242,7 @@ def run_advanced_example():
         outputs=["outline"],
         system_prompt="You are a technical writer specializing in AI technologies."
     )
-   
+
     graph.claude_node(
         name="intro_writer",
         prompt_template="Write an engaging introduction for a blog post with this outline: {outline}\nTopic: {topic}",
@@ -250,7 +250,7 @@ def run_advanced_example():
         outputs=["introduction"],
         system_prompt="You are a technical writer. Write in a clear, engaging style."
     )
-   
+
     graph.claude_node(
         name="conclusion_writer",
         prompt_template="Write a conclusion for a blog post with this outline: {outline}\nTopic: {topic}",
@@ -258,26 +258,26 @@ def run_advanced_example():
         outputs=["conclusion"],
         system_prompt="You are a technical writer. Summarize key points and include a forward-looking statement."
     )
-   
+
     def assembler(state, introduction, outline, conclusion, **kwargs):
         return f"# {state['topic']}\n\n{introduction}\n\n## Outline\n{outline}\n\n## Conclusion\n{conclusion}"
-   
+
     graph.transform_node(
         name="content_assembler",
         transform_fn=assembler,
         inputs=["topic", "introduction", "outline", "conclusion"],
         outputs=["final_content"]
     )
-   
+
     graph.visualize()
     result = graph.execute()
-   
+
     print("\n" + "="*50)
     print("BLOG POST GENERATED:")
     print("="*50 + "\n")
     print(result.get("final_content"))
     print("\n" + "="*50)
-   
+
     return graph
 The run_advanced_example function showcases a more sophisticated use of LangGraph by orchestrating multiple Claude-powered nodes to generate a complete blog post. It starts by selecting a topic, then creates an outline, an introduction, and a conclusion, all using structured Claude prompts. Finally, a transformation node assembles the content into a formatted blog post. This example demonstrates how LangGraph can automate complex, multi-step content generation tasks using modular, connected nodes in a clear and executable flow.
 

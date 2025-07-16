@@ -15,8 +15,8 @@ Example:
 """
 
 import argparse
-import sqlite3
 import shutil
+import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -70,22 +70,26 @@ class DataOrganizer:
                 print(f"  {source}: {count} articles")
 
             # Recent content
-            cursor = conn.execute("""
-                SELECT title, source, scraped_at 
-                FROM scraped_content 
-                ORDER BY scraped_at DESC 
+            cursor = conn.execute(
+                """
+                SELECT title, source, scraped_at
+                FROM scraped_content
+                ORDER BY scraped_at DESC
                 LIMIT 5
-            """)
+            """
+            )
             recent = cursor.fetchall()
             print("\nMost recent articles:")
             for title, source, scraped_at in recent:
                 print(f"  [{source}] {title[:50]}... ({scraped_at})")
 
             # Content size stats
-            cursor = conn.execute("""
+            cursor = conn.execute(
+                """
                 SELECT AVG(LENGTH(content)), MIN(LENGTH(content)), MAX(LENGTH(content))
                 FROM scraped_content
-            """)
+            """
+            )
             avg_len, min_len, max_len = cursor.fetchone()
             if avg_len:
                 print("\nContent size:")
@@ -102,12 +106,14 @@ class DataOrganizer:
 
         with sqlite3.connect(self.db_path) as conn:
             # Find duplicate content hashes
-            cursor = conn.execute("""
+            cursor = conn.execute(
+                """
                 SELECT content_hash, COUNT(*) as count
-                FROM scraped_content 
-                GROUP BY content_hash 
+                FROM scraped_content
+                GROUP BY content_hash
                 HAVING count > 1
-            """)
+            """
+            )
 
             duplicate_hashes = cursor.fetchall()
 
@@ -116,7 +122,7 @@ class DataOrganizer:
                 cursor = conn.execute(
                     """
                     SELECT id, url, title, source, scraped_at
-                    FROM scraped_content 
+                    FROM scraped_content
                     WHERE content_hash = ?
                     ORDER BY scraped_at
                 """,
@@ -207,11 +213,13 @@ class DataOrganizer:
         index_path = self.output_dir / "index.md"
 
         with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute("""
+            cursor = conn.execute(
+                """
                 SELECT source, title, url, scraped_at, metadata
-                FROM scraped_content 
+                FROM scraped_content
                 ORDER BY source, scraped_at DESC
-            """)
+            """
+            )
 
             content = cursor.fetchall()
 
@@ -249,7 +257,7 @@ class DataOrganizer:
             cursor = conn.execute(
                 """
                 SELECT title, url, source, scraped_at
-                FROM scraped_content 
+                FROM scraped_content
                 WHERE title LIKE ? OR content LIKE ?
                 ORDER BY scraped_at DESC
             """,

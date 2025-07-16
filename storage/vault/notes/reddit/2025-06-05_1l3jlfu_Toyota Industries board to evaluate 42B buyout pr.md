@@ -49,7 +49,7 @@ Just industries, to eliminate awkward interconnectivity between the two public e
 
 **Author:** u/ImmodestPolitician
 
-If Toyota's solid state battery moves into production it will be a game changer for EVs. 
+If Toyota's solid state battery moves into production it will be a game changer for EVs.
 
 It's been 3 years away for the last 10 years.
 
@@ -75,7 +75,7 @@ Toyota's one full EV here in the states is booming since Musk alienated his larg
 
 **Author:** u/SaulMalone_Geologist
 
-Those plugin hybrids of theirs are *great*. 
+Those plugin hybrids of theirs are *great*.
 
 They're *basically* full EVs til you need to go out of town for a weekend or something.
 

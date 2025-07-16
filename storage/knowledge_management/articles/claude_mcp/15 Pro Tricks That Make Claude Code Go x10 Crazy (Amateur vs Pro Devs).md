@@ -207,7 +207,7 @@ What Pros Orchestrate:
       "args": ["./custom-servers/code-analyzer.js"]
     },
     "testRunner": {
-      "command": "node", 
+      "command": "node",
       "args": ["./custom-servers/test-orchestrator.js"]
     },
     "deploymentPipeline": {

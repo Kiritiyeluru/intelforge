@@ -30,7 +30,7 @@ Been reading Burton Malkiel have you?
 
 It's true that candlestick patterns are complete bullshit, but a truly efficient market would be violation of the laws of physics since we cannot have instant and perfect dissemination of information.  Another term for "chop" is "price discovery", after all.
 
-Similarly we observe real behaviors that are not in line with EMH like momentum.  
+Similarly we observe real behaviors that are not in line with EMH like momentum.
 
 All that to say, yes you can make money, but not by looking at the same "indicators" or chart patterns that every other retail traders is looking at.  Use math and statistics, or just trend follow tbh.
 
@@ -62,7 +62,7 @@ As I understand, EMH basically states you’re not gonna find a random $50 bill 
 
 Before being "aware of the Efficient Market Hypothesis and the Random Walk Theory," I recommend that you investigate the difference between a theory, a hypothesis, and a law.
 
-There's a reason neither of these are considered laws in economics. 
+There's a reason neither of these are considered laws in economics.
 
 For starters, if the efficient market hypothesis holds true for the stock market, then stock prices are explainable and, therefore, not random. Random walks are also testable. There are multiple papers and books that dig into the math. (Look for the econometrics papers, not the quantitative finance ones.) The math doesn't support the random walk theory enough to elevate it to a law.
 
@@ -80,8 +80,8 @@ Edit: Since you asked... Low frequency algo trading with real money since 2002 w
 
 How do you think markets get to be efficient?
 
-Some actor has to discount the novel news by trading on it.  If the market were 100% efficient, we'd see sawtooth waves in the market.    
-  
+Some actor has to discount the novel news by trading on it.  If the market were 100% efficient, we'd see sawtooth waves in the market.
+
 EMH and RWT are models/simplifications of the market;  they make the mathematics tractable; as for how WELL they model the market, that's something up for debate.
 
 ### Comment 8 (Score: 5)
@@ -102,9 +102,9 @@ My understanding is that EMH is a perfect model of the imperfect world. Same wit
 
 **Author:** u/NameG3N
 
-I think for the most part, in lower time frames, the market behaves more like a random walk (as stated in some good resources about market behavior). In the long term, the market behaves less of a random walk. You can see this by a consistent up trend in the general market. 
+I think for the most part, in lower time frames, the market behaves more like a random walk (as stated in some good resources about market behavior). In the long term, the market behaves less of a random walk. You can see this by a consistent up trend in the general market.
 
-For EMH, this might impact retail traders the most. We don't have the latest information compared to politicians or executives. 
+For EMH, this might impact retail traders the most. We don't have the latest information compared to politicians or executives.
 
 I think there are still areas where beating the market is possible for retailers like following politicians and mean reversion. We do have some advantages over bigger institutions who move the market.
 

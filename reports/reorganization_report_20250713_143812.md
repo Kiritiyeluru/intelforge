@@ -7,7 +7,7 @@
 ### Core Modules (7 files)
 - **core/validation/** (5 files):
   - test_browser_reuse.py
-  - test_external_config.py  
+  - test_external_config.py
   - phase_3_infrastructure_demo_complete.py
   - framework_comparison_suite.py
   - phase_3_infrastructure_demo.py
@@ -55,4 +55,3 @@ Repository is now properly organized and ready for:
 2. Better module isolation
 3. Cleaner import structures
 4. Enhanced maintainability
-

@@ -65,7 +65,7 @@ Below is a comprehensive, **Ubuntu/Linux-focused overview** of the top tools, li
 | thirtyfour     | Rust     | Chrome, Firefox, Edge | Yes           | Yes           | Rust Selenium client, async, Docker-friendly[7][12]   |
 | fantoccini     | Rust     | Chrome, Firefox       | Yes           | Yes           | Async WebDriver client[7][12]                         |
 
-**Setup on Ubuntu/Docker:**  
+**Setup on Ubuntu/Docker:**
 - All major tools support Ubuntu and Docker. Example Dockerfiles for Selenium projects are widely available[13].
 - Headless mode is enabled via command-line flags or options in Python/Rust APIs[6][12].
 
@@ -76,25 +76,25 @@ Below is a comprehensive, **Ubuntu/Linux-focused overview** of the top tools, li
     - **SQLAlchemy**: ORM for Python, supports SQLite/PostgreSQL.
     - **psycopg2**: PostgreSQL driver for Python.
     - **serde**: Rust serialization library, supports JSON/CSV output.
-- **Long-term/Automated Jobs:**  
+- **Long-term/Automated Jobs:**
     - **Apache Airflow**: Orchestrates complex scraping pipelines, schedules jobs, manages dependencies, integrates with PostgreSQL[14].
     - **cron/systemd**: Native Ubuntu task scheduling for regular scraping.
     - **Docker Compose**: For deploying multi-container scraping/data stacks.
 
 ## Anti-Detection/Stealth Tools
 
-- **User-Agent Rotation:**  
+- **User-Agent Rotation:**
     - **fake-useragent** (Python) for dynamic User-Agent strings.
     - **Scrapy middlewares** for rotating User-Agents and proxies[5].
-- **Proxy Support:**  
+- **Proxy Support:**
     - **requests/httpx/Scrapy**: Native proxy support.
     - **Selenium/Playwright**: Set proxies via browser options.
-- **Cookie/Session Management:**  
+- **Cookie/Session Management:**
     - **requests.Session**, **httpx.AsyncClient** (Python).
     - **reqwest::Client** (Rust).
-- **Commercial APIs:**  
+- **Commercial APIs:**
     - **ZenRows**: Built-in anti-bot, proxy rotation, CAPTCHA solving[1].
-- **Middleware:**  
+- **Middleware:**
     - **scrapy-user-agents**, **scrapy-rotating-proxies** for Scrapy.
 
 ## Starter Projects & Templates
@@ -111,7 +111,7 @@ Below is a comprehensive, **Ubuntu/Linux-focused overview** of the top tools, li
 
 - **cron/systemd**: For scheduled scraping tasks.
 - **Docker**: Containerize scraping agents for reproducibility and deployment. Example Dockerfile for Python/Selenium[13].
-- **CLI Tools**:  
+- **CLI Tools**:
     - **jq**: JSON parsing and filtering.
     - **xargs**, **fd**, **grep**, **awk**: For shell-based data processing.
 - **Airflow**: Production-grade pipeline orchestration, scheduling, error handling, and database integration[14].
@@ -149,4 +149,3 @@ Below is a comprehensive, **Ubuntu/Linux-focused overview** of the top tools, li
 - **For orchestration and automation:** Use **Apache Airflow**, **cron/systemd**, and containerize with **Docker** for reproducibility and deployment.
 
 All tools listed are **actively maintained, well-documented, and compatible with Ubuntu/Linux and Docker environments**. For finance/trading-specific scraping, see the referenced starter repos and articles for real-world, production-ready templates[16][15][17][18].
-

@@ -10,18 +10,18 @@ primary_category: math.NA
 arxiv_id: 1305.3352v1
 url: http://arxiv.org/abs/1305.3352v1
 pdf_url: http://arxiv.org/pdf/1305.3352v1
-doi: 
+doi:
 journal_ref: "Int. J. Math. Anal. Vol. 6, No. 10 (2012), 481-491"
 content_hash: 13b52654d62aad66
 ---
 
 # The quantitative Morse theorem
 
-**Authors:** Ta Le Loi, Phan Phien  
-**Published:** 2013-05-15  
-**Updated:** 2013-05-15  
-**Primary Category:** math.NA  
-**ArXiv ID:** 1305.3352v1  
+**Authors:** Ta Le Loi, Phan Phien
+**Published:** 2013-05-15
+**Updated:** 2013-05-15
+**Primary Category:** math.NA
+**ArXiv ID:** 1305.3352v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1305.3352v1)

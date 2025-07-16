@@ -1,0 +1,8 @@
+{
+  "timestamp": "2025-07-16T07:53:24.059188",
+  "collection_name": "semantic_capture",
+  "storage_type": "ChromaDB",
+  "record_count": 0,
+  "snapshot_path": "test_snapshot_phase1",
+  "source_path": "chroma_storage"
+}

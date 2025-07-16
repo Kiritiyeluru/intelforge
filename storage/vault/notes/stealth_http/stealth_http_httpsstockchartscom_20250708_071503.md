@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:15:03.021380
 
 # StockCharts.com | Advanced Financial Charts & Technical Analysis Tools
 
-**URL:** https://stockcharts.com/  
-**Final URL:** https://stockcharts.com/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 10,221 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:15:03.021380  
+**URL:** https://stockcharts.com/
+**Final URL:** https://stockcharts.com/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 10,221 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:15:03.021380
 
 ## Main Content
 

@@ -4,15 +4,15 @@ IntelForge End-to-End Workflow Testing
 Complete pipeline validation from input to final output
 """
 
-import sys
-import json
-import time
+import argparse
 import datetime
+import json
 import shutil
+import sqlite3
+import sys
+import time
 from pathlib import Path
 from typing import Dict
-import argparse
-import sqlite3
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
@@ -63,7 +63,8 @@ class EndToEndWorkflowTester:
         conn = sqlite3.connect(self.e2e_db_path)
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS workflow_tests (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -75,9 +76,11 @@ class EndToEndWorkflowTester:
                 output_size INTEGER,
                 error_message TEXT
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS data_flow_validation (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -88,9 +91,11 @@ class EndToEndWorkflowTester:
                 transformation_accuracy REAL,
                 status TEXT NOT NULL
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS file_operations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -100,7 +105,8 @@ class EndToEndWorkflowTester:
                 success BOOLEAN,
                 error_message TEXT
             )
-        """)
+        """
+        )
 
         conn.commit()
         conn.close()
@@ -195,7 +201,7 @@ class EndToEndWorkflowTester:
 
         cursor.execute(
             """
-            INSERT INTO workflow_tests 
+            INSERT INTO workflow_tests
             (timestamp, workflow_name, phase, status, duration_seconds, input_size, output_size, error_message)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
@@ -229,7 +235,7 @@ class EndToEndWorkflowTester:
 
         cursor.execute(
             """
-            INSERT INTO data_flow_validation 
+            INSERT INTO data_flow_validation
             (timestamp, test_name, input_format, output_format, data_integrity_score, transformation_accuracy, status)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
@@ -435,12 +441,14 @@ class EndToEndWorkflowTester:
                         ]
                     ),
                     "readability_score": min(100, max(0, 100 - len(content) / 50)),
-                    "financial_relevance": 0.85
-                    if any(
-                        term in content.lower()
-                        for term in ["trading", "finance", "investment"]
-                    )
-                    else 0.3,
+                    "financial_relevance": (
+                        0.85
+                        if any(
+                            term in content.lower()
+                            for term in ["trading", "finance", "investment"]
+                        )
+                        else 0.3
+                    ),
                 }
 
                 article["analysis"] = analysis
@@ -528,11 +536,11 @@ class EndToEndWorkflowTester:
                 article["quality"] = {
                     "overall_score": overall_quality,
                     "components": quality_components,
-                    "grade": "high"
-                    if overall_quality >= 0.7
-                    else "medium"
-                    if overall_quality >= 0.4
-                    else "low",
+                    "grade": (
+                        "high"
+                        if overall_quality >= 0.7
+                        else "medium" if overall_quality >= 0.4 else "low"
+                    ),
                 }
 
                 scored_articles.append(article)
@@ -786,11 +794,11 @@ class EndToEndWorkflowTester:
                 "embedding_dimension": 384,
                 "search_queries": len(search_queries),
                 "average_search_similarity": avg_similarity,
-                "ai_performance": "excellent"
-                if avg_similarity >= 0.7
-                else "good"
-                if avg_similarity >= 0.5
-                else "needs_improvement",
+                "ai_performance": (
+                    "excellent"
+                    if avg_similarity >= 0.7
+                    else "good" if avg_similarity >= 0.5 else "needs_improvement"
+                ),
                 "output_file": str(output_file),
             }
 
@@ -888,12 +896,12 @@ class EndToEndWorkflowTester:
             phase_start = time.time()
 
             markdown_content = f"""# IntelForge Analysis Report
-            
+
 ## Executive Summary
 
-**Processing Date**: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}  
-**Documents Processed**: {summary_report["executive_summary"]["total_documents_processed"]}  
-**Content Chunks**: {summary_report["executive_summary"]["total_content_chunks"]}  
+**Processing Date**: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+**Documents Processed**: {summary_report["executive_summary"]["total_documents_processed"]}
+**Content Chunks**: {summary_report["executive_summary"]["total_content_chunks"]}
 **Search Performance**: {summary_report["executive_summary"]["search_performance"]:.2f}
 
 ## Content Analysis
@@ -1073,11 +1081,11 @@ class EndToEndWorkflowTester:
             }
 
             return {
-                "status": "✅ PASS"
-                if overall_integrity >= 0.8
-                else "⚠️ PARTIAL"
-                if overall_integrity >= 0.6
-                else "❌ FAIL",
+                "status": (
+                    "✅ PASS"
+                    if overall_integrity >= 0.8
+                    else "⚠️ PARTIAL" if overall_integrity >= 0.6 else "❌ FAIL"
+                ),
                 "integrity_results": integrity_results,
                 "overall_score": overall_integrity,
             }
@@ -1142,14 +1150,14 @@ class EndToEndWorkflowTester:
 
         content = f"""# IntelForge End-to-End Workflow Test Report
 
-**Session ID**: {self.results["session_id"]}  
-**Test Date**: {self.results["start_time"]}  
-**Report Type**: Complete Pipeline Validation  
+**Session ID**: {self.results["session_id"]}
+**Test Date**: {self.results["start_time"]}
+**Report Type**: Complete Pipeline Validation
 
 ## 📊 Executive Summary
 
-**Overall Status**: {"✅ EXCELLENT" if success_rate >= 90 else "✅ GOOD" if success_rate >= 75 else "⚠️ NEEDS ATTENTION" if success_rate >= 60 else "❌ CRITICAL ISSUES"}  
-**Pipeline Health**: {"Excellent" if success_rate >= 90 else "Good" if success_rate >= 75 else "Needs Attention"}  
+**Overall Status**: {"✅ EXCELLENT" if success_rate >= 90 else "✅ GOOD" if success_rate >= 75 else "⚠️ NEEDS ATTENTION" if success_rate >= 60 else "❌ CRITICAL ISSUES"}
+**Pipeline Health**: {"Excellent" if success_rate >= 90 else "Good" if success_rate >= 75 else "Needs Attention"}
 **Success Rate**: {success_rate:.1f}% ({passed}/{total_tests} tests passed)
 
 ## 🎯 Workflow Results Overview
@@ -1253,9 +1261,9 @@ class EndToEndWorkflowTester:
 
 ## 🔗 Technical Details
 
-**Test Database**: `{self.e2e_db_path}`  
-**Test Data Directory**: `{self.test_data_dir}`  
-**Output Directory**: `{self.test_output_dir}`  
+**Test Database**: `{self.e2e_db_path}`
+**Test Data Directory**: `{self.test_data_dir}`
+**Output Directory**: `{self.test_output_dir}`
 **Report Location**: `{path}`
 
 **Generated Files:**
@@ -1264,7 +1272,7 @@ class EndToEndWorkflowTester:
 - Comprehensive analysis reports
 
 ---
-*Generated by IntelForge End-to-End Testing Framework*  
+*Generated by IntelForge End-to-End Testing Framework*
 *Framework: Complete pipeline validation with data integrity checks*
 """
 
@@ -1291,22 +1299,22 @@ def main():
 
     # Run complete workflow pipeline
     print("\n" + "=" * 80)
-    tester.results["workflows"]["data_ingestion"] = (
-        tester.test_data_ingestion_workflow()
-    )
+    tester.results["workflows"][
+        "data_ingestion"
+    ] = tester.test_data_ingestion_workflow()
 
     print("\n" + "=" * 80)
-    tester.results["workflows"]["content_processing"] = (
-        tester.test_content_processing_workflow()
-    )
+    tester.results["workflows"][
+        "content_processing"
+    ] = tester.test_content_processing_workflow()
 
     print("\n" + "=" * 80)
     tester.results["workflows"]["ai_pipeline"] = tester.test_ai_pipeline_workflow()
 
     print("\n" + "=" * 80)
-    tester.results["workflows"]["output_generation"] = (
-        tester.test_output_generation_workflow()
-    )
+    tester.results["workflows"][
+        "output_generation"
+    ] = tester.test_output_generation_workflow()
 
     print("\n" + "=" * 80)
     tester.results["integrity_checks"] = tester.validate_data_integrity()

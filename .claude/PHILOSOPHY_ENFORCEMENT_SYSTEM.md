@@ -46,7 +46,7 @@ This system implements **ZERO TOLERANCE** enforcement of the "REUSE OVER REBUILD
 def\s+(?:scrape|extract|parse|fetch|crawl|download)_\w+
 class\s+\w*(?:Scraper|Parser|Crawler|Extractor)
 
-# Manual implementations  
+# Manual implementations
 BeautifulSoup\(
 requests\.get\(
 selenium\.
@@ -60,9 +60,9 @@ from\s+scratch
 
 ### Approved Frameworks (ALLOWED)
 ```
-scrapy, trafilatura, scrapy-playwright, nodriver, camoufox, 
-scrapling, paperscraper, autoscraper, stealth-requests, 
-news-please, playwright-python, arxiv.py, feedparser, 
+scrapy, trafilatura, scrapy-playwright, nodriver, camoufox,
+scrapling, paperscraper, autoscraper, stealth-requests,
+news-please, playwright-python, arxiv.py, feedparser,
 botasaurus, selectolax, httpx, polars, praw, pygithub
 ```
 
@@ -77,7 +77,7 @@ botasaurus, selectolax, httpx, polars, praw, pygithub
       "hooks": [{"command": "philosophy_reminder.py"}]
     },
     {
-      "matcher": "Write|Edit|MultiEdit", 
+      "matcher": "Write|Edit|MultiEdit",
       "hooks": [{"command": "philosophy_enforcer.py"}]
     }
   ],

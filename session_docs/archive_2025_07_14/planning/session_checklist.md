@@ -4,7 +4,7 @@
 
 ### Context Loading
 - [ ] Read `docs/automation/current_task.md` - What's actively being worked on
-- [ ] Read `docs/automation/next_task.md` - Planned priorities  
+- [ ] Read `docs/automation/next_task.md` - Planned priorities
 - [ ] Read `docs/automation/session_summary.md` - Recent progress and decisions
 - [ ] Check `docs/automation/decision_log.md` - Recent architectural choices
 - [ ] Review `cline_docs/currentTask.md` if exists - AI assistant context
@@ -83,7 +83,7 @@ If session must end abruptly:
 After each session, rate these areas (1-5 scale):
 
 - **Context Preservation:** Could next developer continue seamlessly? ___/5
-- **Decision Documentation:** Are architectural choices clear? ___/5  
+- **Decision Documentation:** Are architectural choices clear? ___/5
 - **Code Quality:** Follows IntelForge standards? ___/5
 - **Documentation Currency:** All files reflect current state? ___/5
 

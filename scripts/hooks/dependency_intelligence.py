@@ -4,12 +4,12 @@ Dependency Intelligence Hook for IntelForge
 Automatically tracks and manages Python imports and dependencies
 """
 
+import ast
 import json
 import sys
-import ast
-from pathlib import Path
-from datetime import datetime
 from collections import defaultdict
+from datetime import datetime
+from pathlib import Path
 
 # Configure paths
 HOOKS_DIR = Path(__file__).parent

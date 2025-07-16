@@ -4,9 +4,10 @@ Screenshot-on-Detection Debugging Test
 Tests the automatic screenshot capture functionality when detection or failures occur.
 """
 
-import time
 import os
+import time
 from pathlib import Path
+
 from intel_bot_driver import IntelBotDriver
 
 

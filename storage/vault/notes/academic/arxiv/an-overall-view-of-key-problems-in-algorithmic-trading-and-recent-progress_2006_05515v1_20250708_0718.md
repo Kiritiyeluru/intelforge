@@ -10,18 +10,18 @@ primary_category: q-fin.TR
 arxiv_id: 2006.05515v1
 url: http://arxiv.org/abs/2006.05515v1
 pdf_url: http://arxiv.org/pdf/2006.05515v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 4e045679d7a2e23f
 ---
 
 # An overall view of key problems in algorithmic trading and recent progress
 
-**Authors:** Michaël Karpe  
-**Published:** 2020-06-09  
-**Updated:** 2020-06-09  
-**Primary Category:** q-fin.TR  
-**ArXiv ID:** 2006.05515v1  
+**Authors:** Michaël Karpe
+**Published:** 2020-06-09
+**Updated:** 2020-06-09
+**Primary Category:** q-fin.TR
+**ArXiv ID:** 2006.05515v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2006.05515v1)

@@ -1,10 +1,10 @@
 # IntelForge Analysis Report
-            
+
 ## Executive Summary
 
-**Processing Date**: 2025-07-12 19:15:00  
-**Documents Processed**: 5  
-**Content Chunks**: 5  
+**Processing Date**: 2025-07-12 19:15:00
+**Documents Processed**: 5
+**Content Chunks**: 5
 **Search Performance**: 0.02
 
 ## Content Analysis

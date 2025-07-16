@@ -4,12 +4,12 @@ Enhanced Monitoring Dashboard for IntelForge Financial Intelligence Platform
 Provides real-time market data, financial analysis, and comprehensive monitoring
 """
 
-import sys
-import json
 import argparse
+import json
+import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 # Add project root to path
 project_root = Path(__file__).parent.parent

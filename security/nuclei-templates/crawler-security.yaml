@@ -1,0 +1,128 @@
+id: crawler-security-scan
+
+info:
+  name: Crawler Security Scan
+  author: IntelForge
+  severity: high
+  description: Security scan for web crawling and scraping components
+  classification:
+    cwe-id: CWE-20
+  metadata:
+    verified: true
+    max-request: 4
+  tags: security,crawler,scraping,intelforge
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/scrape"
+      - "{{BaseURL}}/crawl"
+      - "{{BaseURL}}/extract"
+      - "{{BaseURL}}/fetch"
+      - "{{BaseURL}}/parse"
+      - "{{BaseURL}}/analyze"
+      
+    headers:
+      User-Agent: "IntelForge-Crawler-Scanner/1.0"
+      
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 400
+          - 403
+          - 404
+          - 500
+          
+      - type: word
+        words:
+          - "scrape"
+          - "crawl"
+          - "extract"
+          - "parse"
+          - "fetch"
+          - "bot"
+          - "spider"
+          - "user-agent"
+          - "rate-limit"
+          - "timeout"
+          - "proxy"
+          - "selenium"
+          - "playwright"
+          - "scrapy"
+          - "beautifulsoup"
+          - "lxml"
+          - "html"
+          - "xpath"
+          - "css"
+          - "selector"
+        condition: or
+        part: body
+        
+  - method: POST
+    path:
+      - "{{BaseURL}}/scrape"
+      - "{{BaseURL}}/crawl"
+      - "{{BaseURL}}/extract"
+      
+    headers:
+      User-Agent: "IntelForge-Crawler-Scanner/1.0"
+      Content-Type: "application/json"
+      
+    body: |
+      {
+        "url": "http://example.com",
+        "selector": "div.content",
+        "depth": 2,
+        "follow_links": true
+      }
+      
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 400
+          - 422
+          - 500
+          
+      - type: word
+        words:
+          - "url"
+          - "selector"
+          - "xpath"
+          - "css"
+          - "html"
+          - "content"
+          - "links"
+          - "crawled"
+          - "scraped"
+          - "extracted"
+          - "parsed"
+          - "error"
+          - "timeout"
+          - "rate_limit"
+          - "blocked"
+          - "banned"
+          - "captcha"
+          - "robot"
+          - "bot"
+        condition: or
+        part: body
+        
+    extractors:
+      - type: regex
+        name: crawl_config
+        regex:
+          - '(?i)(url|target)[\s]*[:=][\s]*["\']?(https?://[^"\'\\s]+)["\']?'
+          - '(?i)(selector|xpath|css)[\s]*[:=][\s]*["\']?([^"\']+)["\']?'
+          - '(?i)(depth|limit|max)[\s]*[:=][\s]*([0-9]+)'
+        part: body
+        
+      - type: regex
+        name: security_headers
+        regex:
+          - '(?i)(user-agent|proxy|timeout|rate)[\s]*[:=][\s]*["\']?([^"\']+)["\']?'
+          - '(?i)(cookie|session|auth)[\s]*[:=][\s]*["\']?([^"\']+)["\']?'
+        part: body

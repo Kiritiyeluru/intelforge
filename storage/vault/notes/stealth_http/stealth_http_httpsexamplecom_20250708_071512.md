@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:15:12.778429
 
 # Example Domain
 
-**URL:** https://example.com  
-**Final URL:** https://example.com/  
-**Status:** success (HTTP 200)  
-**Bot Detection:** ✅ Clear  
-**Content Length:** 187 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:15:12.778429  
+**URL:** https://example.com
+**Final URL:** https://example.com/
+**Status:** success (HTTP 200)
+**Bot Detection:** ✅ Clear
+**Content Length:** 187 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:15:12.778429
 
 ## Main Content
 

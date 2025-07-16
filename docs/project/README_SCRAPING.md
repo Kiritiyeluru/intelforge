@@ -21,7 +21,7 @@ cp config/config.yaml.example config/config.yaml
 # Reddit scraper - extract from trading subreddits
 python reddit_scraper.py --dry-run --subreddit algotrading --limit 5
 
-# GitHub scraper - find trading algorithm repositories  
+# GitHub scraper - find trading algorithm repositories
 python github_scraper.py --dry-run --query "algorithmic trading python" --limit 5
 
 # Web scraper - extract articles from blogs
@@ -132,7 +132,7 @@ python scraping_scheduler.py --crontab
 # Daily Reddit scraping at 9 AM
 0 9 * * * cd /path/to/intelforge && python reddit_scraper.py
 
-# Weekly GitHub scraping on Mondays at 10 AM  
+# Weekly GitHub scraping on Mondays at 10 AM
 0 10 * * 1 cd /path/to/intelforge && python github_scraper.py
 
 # Daily web scraping at 2 PM
@@ -180,7 +180,7 @@ python data_organizer.py --action backup
 export REDDIT_CLIENT_ID="your_client_id"
 export REDDIT_CLIENT_SECRET="your_client_secret"
 
-# GitHub  
+# GitHub
 export GITHUB_TOKEN="your_github_token"
 
 # Framework settings
@@ -232,7 +232,7 @@ tail -f vault/logs/reddit_*.log
 
 **Typical Performance** (personal use):
 - Reddit: ~20 posts/minute
-- GitHub: ~10 repositories/minute  
+- GitHub: ~10 repositories/minute
 - Web: ~5 articles/minute
 
 **Designed for:**

@@ -4,11 +4,12 @@ IntelForge Performance Improvement Test
 Tests the performance improvements from newly installed optimization tools
 """
 
-import time
 import json
-import pandas as pd
-import numpy as np
 import logging
+import time
+
+import numpy as np
+import pandas as pd
 
 # Test new performance tools
 try:

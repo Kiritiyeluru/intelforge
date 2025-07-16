@@ -5,10 +5,10 @@ Automatically tracks all scraping activities and performance metrics
 """
 
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
-import re
 
 # Configure paths
 HOOKS_DIR = Path(__file__).parent

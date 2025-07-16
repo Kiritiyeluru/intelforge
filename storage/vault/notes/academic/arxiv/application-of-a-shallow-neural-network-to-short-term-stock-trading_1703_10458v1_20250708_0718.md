@@ -10,18 +10,18 @@ primary_category: cs.NE
 arxiv_id: 1703.10458v1
 url: http://arxiv.org/abs/1703.10458v1
 pdf_url: http://arxiv.org/pdf/1703.10458v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 711ca12305cc9c12
 ---
 
 # Application of a Shallow Neural Network to Short-Term Stock Trading
 
-**Authors:** Abhinav Madahar, Yuze Ma, Kunal Patel  
-**Published:** 2017-03-30  
-**Updated:** 2017-03-30  
-**Primary Category:** cs.NE  
-**ArXiv ID:** 1703.10458v1  
+**Authors:** Abhinav Madahar, Yuze Ma, Kunal Patel
+**Published:** 2017-03-30
+**Updated:** 2017-03-30
+**Primary Category:** cs.NE
+**ArXiv ID:** 1703.10458v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1703.10458v1)

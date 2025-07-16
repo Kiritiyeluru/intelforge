@@ -14,7 +14,7 @@ post_id: 1kzlkra
 
 I'm working on a scalping strategy and finding that works well most days but performs so poorly on those relentless rally/crash days that it wipes out the profits. So in attempting to learn about and filter those regimes I tried a few things and thought i'd share for any thoughts.
 
-\- Looking at QQQ dataset 5min candles from the last year, with gamma and spotvol index values  
+\- Looking at QQQ dataset 5min candles from the last year, with gamma and spotvol index values
 \- [CBOE:GAMMA](https://cdn.cboe.com/resources/indices/documents/GAMMA_Methodology.pdf) index: "is a total return index designed to express the performance of a delta hedged portfolio of the five shortest-dated SP500 Index weekly straddles (SPXW) established daily and held to maturity."
 
 \- [CBOE:SPOTVOL](https://cdn.cboe.com/api/global/us_indices/governance/Cboe_SnP_500_Spot_Volatility_Index_Methodology.pdf) index: "aims to provide a jump-robust, unbiased estimator of S&P 500 spot volatility. The Index attempts to minimize the upward bias in the Black-Scholes implied volatility (BSIV) and Cboe Volatility Index (VIX) that is attributable to the volatility risk premium"
@@ -91,8 +91,8 @@ Which computer are you using to run these? Windows or mac?
 
 I hear good things about spot gamma! this is slightly different but "GAMMA" and "SPOTVOL" are viewable on tradingview if you wanna take a look, they're indexes like the VIX.
 
-If i was to oversimplify i'd say spotvol is like the VIX but for daily 0dte options and a much more short term measure of how "overpriced" options are.   
-  
+If i was to oversimplify i'd say spotvol is like the VIX but for daily 0dte options and a much more short term measure of how "overpriced" options are.
+
 And gamma tracks how much buying a call and put at open would profit throughout the day (it's delta neutral so it would only profit off gamma if there's bigger moves than expected, or lose to theta if it's a calm day).
 
 So i'm just seeing if their values from the first 30min of the day (compared to past day's first 30min) can tell me if the rest of the day will be calmer or crazier so I know when to avoid my mean reversion strategy.

@@ -13,30 +13,27 @@ Strategy: Python orchestration + Rust performance for optimal development speed 
 """
 
 import asyncio
-import time
-from pathlib import Path
-from typing import List, Dict
+import json
 import logging
+import time
 from dataclasses import dataclass
 from datetime import datetime
-import json
+from pathlib import Path
+from typing import Dict, List
 
-# High-performance imports
-import polars as pl
 import duckdb
-from tokenizers import Tokenizer
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams
-from qdrant_client.models import PointStruct
-
+import faiss
+import numpy as np
 # Standard performance imports
 import pandas as pd
-import numpy as np
-from sentence_transformers import SentenceTransformer
-import faiss
-
+# High-performance imports
+import polars as pl
 # Configuration
 import yaml
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, PointStruct, VectorParams
+from sentence_transformers import SentenceTransformer
+from tokenizers import Tokenizer
 
 
 @dataclass
@@ -335,18 +332,20 @@ class RustEnhancedPipeline:
             )
 
             # Complex analytical queries
-            self.duckdb_conn.execute("""
-                SELECT 
+            self.duckdb_conn.execute(
+                """
+                SELECT
                     category,
                     AVG(score) as avg_score,
                     COUNT(*) as count,
                     MAX(score) as max_score,
                     MIN(score) as min_score
-                FROM test_data 
+                FROM test_data
                 WHERE score > 0.5
                 GROUP BY category
                 ORDER BY avg_score DESC
-            """).fetchall()
+            """
+            ).fetchall()
 
         except Exception as e:
             self.logger.warning(f"DuckDB operations failed: {e}")

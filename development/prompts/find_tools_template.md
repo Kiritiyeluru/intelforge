@@ -8,11 +8,11 @@ Use this template to prompt Claude, ChatGPT, or any AI assistant to **search for
 ## 🔁 Prompt Template
 
 > I am building a system that needs to perform the following function:
-> 
+>
 > ```
 > [Describe function in one sentence. e.g., "Scrape Reddit posts from r/algotrading and extract posts with backtest code."]
 > ```
-> 
+>
 > Please:
 > 1. Search for **prebuilt libraries, GitHub repos, APIs, or tools** that already solve this problem.
 > 2. Prioritize options that:
@@ -40,4 +40,3 @@ Use this template to prompt Claude, ChatGPT, or any AI assistant to **search for
 - Save this prompt in `/prompts/` for reuse across all modules.
 - Use it **before** each new phase.
 - Pair with `/docs/find_vs_build.md` as a discipline.
-

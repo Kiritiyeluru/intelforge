@@ -12,8 +12,8 @@ from typing import List
 from urllib.parse import urlparse
 
 import scrapy
-import yaml
 import trafilatura
+import yaml
 
 from ..items import ArticleItem
 

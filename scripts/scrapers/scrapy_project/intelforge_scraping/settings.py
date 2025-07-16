@@ -20,7 +20,7 @@ ADDONS = {}
 
 # Fake User-Agent settings
 RANDOM_UA_PER_PROXY = True
-RANDOM_UA_TYPE = 'desktop'  # Options: 'desktop', 'mobile', 'tablet'
+RANDOM_UA_TYPE = "desktop"  # Options: 'desktop', 'mobile', 'tablet'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -108,7 +108,9 @@ STEALTH_ENABLED = True
 NODRIVER_ENABLED = False  # Enable only for JavaScript-heavy sites
 
 # Rotating Proxies Settings
-ROTATING_PROXY_LIST_PATH = 'config/proxy_pools.txt'  # Path to proxy list file (optional)
+ROTATING_PROXY_LIST_PATH = (
+    "config/proxy_pools.txt"  # Path to proxy list file (optional)
+)
 ROTATING_PROXY_LOGSTATS_INTERVAL = 30  # Log stats every N seconds
 ROTATING_PROXY_CLOSE_SPIDER_ON_BAN = False  # Don't close spider on ban
 ROTATING_PROXY_PAGE_RETRY_TIMES = 5  # Retry times for banned proxies
@@ -123,13 +125,13 @@ BAN_CODE_RANGES = [
 
 # Advanced headers for stealth
 DEFAULT_REQUEST_HEADERS = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.5',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'DNT': '1',
-    'Connection': 'keep-alive',
-    'Upgrade-Insecure-Requests': '1',
-    'Cache-Control': 'max-age=0',
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "DNT": "1",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Cache-Control": "max-age=0",
 }
 
 # Production compliance and safety settings
@@ -151,11 +153,11 @@ RETRY_HTTP_CODES = [500, 502, 503, 504, 408, 429]
 # Phase 4 Rate Limiting Enhancements
 # Content-type filtering to block large files
 ALLOWED_CONTENT_TYPES = [
-    'text/html',
-    'text/plain',
-    'application/xhtml+xml',
-    'application/xml',
-    'text/xml'
+    "text/html",
+    "text/plain",
+    "application/xhtml+xml",
+    "application/xml",
+    "text/xml",
 ]
 
 # Max links per page limit to prevent crawl explosions
@@ -177,5 +179,5 @@ MEMUSAGE_LIMIT_MB = 2048
 MEMUSAGE_WARNING_MB = 1024
 
 # Logging configuration
-LOG_LEVEL = 'INFO'
-LOG_FILE = 'logs/scrapy.log'
+LOG_LEVEL = "INFO"
+LOG_FILE = "logs/scrapy.log"

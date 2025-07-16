@@ -113,4 +113,3 @@ Runs:
 | **Final Gaps**            | ⚠️ 1–2 tiny optional items | Covered above (QA runner, CLI categories)   |
 
 ---
-

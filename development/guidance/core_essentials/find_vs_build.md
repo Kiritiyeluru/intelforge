@@ -54,8 +54,7 @@ Before building anything new, this checklist helps you evaluate:
 
 ## 🧠 Reminder
 
-> The smartest systems are not built from scratch.  
+> The smartest systems are not built from scratch.
 > They are **assembled** from the best of what already works.
 
 Save time. Reuse. Wrap. Move forward.
-

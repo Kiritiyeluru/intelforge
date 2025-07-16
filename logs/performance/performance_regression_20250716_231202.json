@@ -1,0 +1,136 @@
+{
+  "timestamp": "2025-07-16T23:12:02.822787",
+  "system_info": {
+    "platform": "Linux",
+    "release": "6.11.0-29-generic",
+    "python_version": "3.12.3",
+    "machine": "x86_64"
+  },
+  "config": {
+    "performance_baselines": {
+      "cli_commands": {
+        "status_quick": {
+          "command": "python -m scripts.cli status --skip-validation",
+          "baseline_mean": 0.5,
+          "baseline_stddev": 0.1,
+          "timeout_seconds": 10,
+          "tolerance_factor": 1.5
+        },
+        "status_detailed": {
+          "command": "python -m scripts.cli status --detailed",
+          "baseline_mean": 2.0,
+          "baseline_stddev": 0.3,
+          "timeout_seconds": 30,
+          "tolerance_factor": 2.0
+        },
+        "status_json": {
+          "command": "python -m scripts.cli status --json",
+          "baseline_mean": 1.0,
+          "baseline_stddev": 0.2,
+          "timeout_seconds": 15,
+          "tolerance_factor": 1.8
+        },
+        "validate_quick": {
+          "command": "python -m scripts.cli validate --skip-expensive",
+          "baseline_mean": 1.5,
+          "baseline_stddev": 0.2,
+          "timeout_seconds": 20,
+          "tolerance_factor": 2.0
+        }
+      },
+      "core_operations": {
+        "vector_health_check": {
+          "command": "python -c \"from scripts.validation.vector_health_validator import VectorHealthValidator; v = VectorHealthValidator(); print(v.validate_all_stores())\"",
+          "baseline_mean": 0.8,
+          "baseline_stddev": 0.15,
+          "timeout_seconds": 15,
+          "tolerance_factor": 2.0
+        },
+        "claude_integrity_check": {
+          "command": "python -c \"from scripts.validation.claude_integrity_validator import ClaudeIntegrityValidator; v = ClaudeIntegrityValidator(); print(v.validate_json_syntax('{}'))\"",
+          "baseline_mean": 0.1,
+          "baseline_stddev": 0.02,
+          "timeout_seconds": 5,
+          "tolerance_factor": 3.0
+        },
+        "fail_fast_validation": {
+          "command": "python -c \"from scripts.validation.fail_fast_validator import FailFastValidator; v = FailFastValidator(); print(v.validate_system_health())\"",
+          "baseline_mean": 1.2,
+          "baseline_stddev": 0.2,
+          "timeout_seconds": 20,
+          "tolerance_factor": 2.5
+        }
+      }
+    },
+    "performance_thresholds": {
+      "regression_threshold": 0.2,
+      "critical_regression_threshold": 0.5,
+      "improvement_threshold": 0.1,
+      "warmup_runs": 3,
+      "measurement_runs": 10,
+      "max_runs": 50
+    },
+    "reporting": {
+      "output_formats": [
+        "json",
+        "markdown",
+        "csv"
+      ],
+      "export_directory": "logs/performance",
+      "include_system_info": true,
+      "include_git_info": true
+    }
+  },
+  "results": [
+    {
+      "command": "python -m scripts.cli status --skip-validation",
+      "mean_time": 0.1794156437775,
+      "std_dev": 0.004170295201615361,
+      "min_time": 0.17112498834000003,
+      "max_time": 0.18481912334000003,
+      "median_time": 0.17950786534000002,
+      "runs": 16,
+      "baseline_mean": 0.5,
+      "baseline_stddev": 0.1,
+      "regression_factor": 0.358831287555,
+      "verdict": "\u2705 IMPROVED",
+      "tolerance_factor": 1.5
+    },
+    {
+      "command": "python -m scripts.cli status --detailed",
+      "mean_time": 0.17978896437333336,
+      "std_dev": 0.005615279875356036,
+      "min_time": 0.17042417764000004,
+      "max_time": 0.19329561364000003,
+      "median_time": 0.18022747864000002,
+      "runs": 15,
+      "baseline_mean": 2.0,
+      "baseline_stddev": 0.3,
+      "regression_factor": 0.08989448218666668,
+      "verdict": "\u2705 IMPROVED",
+      "tolerance_factor": 2.0
+    },
+    {
+      "command": "python -m scripts.cli status --json",
+      "mean_time": 0.17161687838500003,
+      "std_dev": 0.003862072849056435,
+      "min_time": 0.16643105626000002,
+      "max_time": 0.17987352426,
+      "median_time": 0.17030569126,
+      "runs": 16,
+      "baseline_mean": 1.0,
+      "baseline_stddev": 0.2,
+      "regression_factor": 0.17161687838500003,
+      "verdict": "\u2705 IMPROVED",
+      "tolerance_factor": 1.8
+    }
+  ],
+  "summary": {
+    "total_tests": 3,
+    "passed": 0,
+    "improved": 3,
+    "degraded": 0,
+    "regressed": 0,
+    "no_baseline": 0
+  }
+}

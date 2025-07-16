@@ -14,43 +14,47 @@ Version: 1.0.0
 import json
 import time
 import traceback
-from typing import Dict, Any
 from datetime import datetime
+from typing import Any, Dict
 
 # Enhanced Core Libraries
 try:
-    import tenacity
-    from deepdiff import DeepDiff
     import datacompy
     import invoke
+    import tenacity
     from capsolver_python import RecaptchaV2Task
+    from deepdiff import DeepDiff
 except ImportError as e:
     print(f"Enhanced core library import failed: {e}")
 
 # Anti-Detection Libraries
 try:
-    from botasaurus_driver import Driver
     import selenium_stealth
-    from scrapy.downloadermiddlewares.rotating_proxies import RotatingProxiesMiddleware
+    from botasaurus_driver import Driver
+    from scrapy.downloadermiddlewares.rotating_proxies import \
+        RotatingProxiesMiddleware
 except ImportError as e:
     print(f"Anti-detection library import failed: {e}")
 
 # Observability Stack
 try:
-    from rich.console import Console
-    from rich.table import Table
-    from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn
-    from rich.panel import Panel
-    from rich.text import Text
     import loguru
     import structlog
-    from prometheus_client import CollectorRegistry, Counter, Histogram, generate_latest
+    from prometheus_client import (CollectorRegistry, Counter, Histogram,
+                                   generate_latest)
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.progress import (BarColumn, Progress, TextColumn,
+                               TimeElapsedColumn)
+    from rich.table import Table
+    from rich.text import Text
 except ImportError as e:
     print(f"Observability library import failed: {e}")
 
+import os
+
 # Standard Libraries
 import requests
-import os
 
 
 class InfrastructureValidator:
@@ -384,9 +388,7 @@ class InfrastructureValidator:
         overall_status = (
             "✅ READY"
             if overall_success_rate >= 80
-            else "⚠️ PARTIAL"
-            if overall_success_rate >= 60
-            else "❌ NOT READY"
+            else "⚠️ PARTIAL" if overall_success_rate >= 60 else "❌ NOT READY"
         )
         table.add_row(
             "[bold]OVERALL SYSTEM[/bold]",

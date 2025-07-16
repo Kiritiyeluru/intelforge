@@ -53,14 +53,14 @@ def count_issues(file_path, key_path):
     try:
         with open(file_path) as f:
             data = json.load(f)
-        
+
         # Navigate through key path
         current = data
         for key in key_path:
             if isinstance(current, list):
                 return len(current)
             current = current.get(key, [])
-        
+
         return len(current) if isinstance(current, list) else 0
     except:
         return 0

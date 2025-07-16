@@ -167,25 +167,25 @@ class ResearchGapDetector:
             nr_topics="auto"
         )
         self.existing_topics = set()
-    
+
     def initialize_knowledge_base(self, existing_documents):
         """Initialize with existing vault content"""
         topics, probabilities = self.topic_model.fit_transform(existing_documents)
         self.existing_topics = set(topics)
         return topics, probabilities
-    
+
     def detect_novel_content(self, new_documents):
         """Detect content that fills knowledge gaps"""
         new_topics, probabilities = self.topic_model.transform(new_documents)
-        
+
         novel_indices = []
         for idx, (topic, prob) in enumerate(zip(new_topics, probabilities)):
             # Novel topic detection with confidence threshold
             if topic not in self.existing_topics and prob > 0.3:
                 novel_indices.append(idx)
-        
+
         return novel_indices
-    
+
     def enhance_relevance_scoring(self, content, base_score):
         """Combine semantic score with novelty detection"""
         is_novel = len(self.detect_novel_content([content])) > 0
@@ -215,7 +215,7 @@ class IntelligentKnowledgeGraph:
             }
         })
         self.indexed = False
-    
+
     def build_graph(self, documents):
         """Build semantic knowledge graph from documents"""
         # Prepare data with metadata
@@ -226,28 +226,28 @@ class IntelligentKnowledgeGraph:
                 "text": doc['content'],
                 "metadata": doc.get('metadata', {})
             })
-        
+
         # Index documents
         self.embeddings.index(data)
         self.indexed = True
-        
+
         # Generate semantic graph
         return self.embeddings.graph(data)
-    
+
     def find_related_content(self, query, limit=5):
         """Find semantically related content"""
         if not self.indexed:
             return []
         return self.embeddings.search(query, limit)
-    
+
     def graph_search(self, query, traverse=True):
         """Advanced graph-based search"""
         if not self.indexed:
             return []
-        
+
         # Get initial results
         results = self.embeddings.search(query, limit=10)
-        
+
         # Traverse graph for related concepts if enabled
         if traverse and results:
             related_ids = []
@@ -255,14 +255,14 @@ class IntelligentKnowledgeGraph:
                 # Find connected nodes in semantic graph
                 connected = self.embeddings.graph([result], traverse=2)
                 related_ids.extend(connected)
-            
+
             # Search for related content
             if related_ids:
                 related_results = self.embeddings.search(
                     query, limit=5, ids=related_ids
                 )
                 results.extend(related_results)
-        
+
         return results
 
 # Integration with existing pipeline
@@ -278,16 +278,16 @@ knowledge_graph = IntelligentKnowledgeGraph()
 @click.option('--initialize-topics', is_flag=True, help='Initialize BERTopic with existing vault')
 def smart_crawl(url_file, detect_gaps, build_graph, initialize_topics):
     """🧠 AI-powered semantic crawling with BERTopic + txtai intelligence"""
-    
+
     if initialize_topics:
         existing_docs = load_existing_vault_content()
         research_gap_detector.initialize_knowledge_base(existing_docs)
         click.echo(f"Initialized topic model with {len(existing_docs)} documents")
-    
+
     if detect_gaps:
         novel_content = research_gap_detector.detect_novel_content(crawled_content)
         click.echo(f"Found {len(novel_content)} novel research areas using BERTopic")
-    
+
     if build_graph:
         graph = knowledge_graph.build_graph(processed_content)
         click.echo(f"Built txtai knowledge graph with semantic relationships")
@@ -304,12 +304,12 @@ def enhanced_search(query, use_graph, show_topics):
     else:
         results = knowledge_graph.find_related_content(query)
         click.echo(f"Vector search found {len(results)} results")
-    
+
     if show_topics:
         topic_info = research_gap_detector.topic_model.get_topic_info()
         relevant_topics = [t for t in topic_info if query.lower() in str(t).lower()]
         click.echo(f"Related topics: {len(relevant_topics)}")
-    
+
     for result in results:
         click.echo(f"Score: {result['score']:.3f} - {result['title']}")
 
@@ -317,19 +317,19 @@ def enhanced_search(query, use_graph, show_topics):
 def analyze_knowledge_gaps():
     """🔍 Analyze research gaps in current knowledge base using BERTopic"""
     existing_docs = load_existing_vault_content()
-    
+
     if not existing_docs:
         click.echo("No existing content found. Run smart-crawl first.")
         return
-    
+
     topics, probabilities = research_gap_detector.initialize_knowledge_base(existing_docs)
     topic_info = research_gap_detector.topic_model.get_topic_info()
-    
+
     click.echo(f"Analysis complete:")
     click.echo(f"  - Documents analyzed: {len(existing_docs)}")
     click.echo(f"  - Topics discovered: {len(topic_info)}")
     click.echo(f"  - Research areas identified: {len(set(topics))}")
-    
+
     # Show top topics
     click.echo("\nTop research topics in your knowledge base:")
     for i, topic in enumerate(topic_info.head(10).iterrows()):
@@ -404,7 +404,7 @@ tools/
 # Core intelligence stack
 pip install bertopic[all] txtai cleanlab hdbscan
 
-# Advanced graph capabilities  
+# Advanced graph capabilities
 pip install pygraft graphbrain networkx[all]
 
 # Content evolution and version control
@@ -437,23 +437,23 @@ modules:
     enabled: true
     methods: ["cleanlab", "hdbscan", "statistical"]
     confidence_threshold: 0.85
-    
+
   semantic_graph:
     mode: "multi_modal"  # txtai + pygraft + graphbrain
     max_links: 15
     min_score: 0.1
     ontology_generation: true
-    
+
   research_gap_detection:
     temporal_analysis: true  # Dynamic Topic Modeling
     outlier_threshold: 0.9
     topic_evolution_tracking: true
-    
+
   content_evolution:
     semantic_chunking: true
     version_control: "lakefs"
     diff_threshold: 0.15
-    
+
   credibility_scoring:
     multi_signal: true
     api_providers: ["virustotal", "domaintools"]
@@ -462,7 +462,7 @@ modules:
       authority: 0.3
       infrastructure: 0.2
       domain_age: 0.1
-      
+
   value_prediction:
     hybrid_mode: true  # LightFM + LLM-as-a-Judge
     llm_provider: "openai"
@@ -473,7 +473,7 @@ performance:
   vector_database: "chromadb"  # Options: chromadb, qdrant, milvus
   embedding_cache_size: "2GB"
   batch_processing: true
-  
+
   # Enhanced GPU Acceleration Configuration
   gpu_acceleration:
     enabled: true
@@ -483,7 +483,7 @@ performance:
     transformer_gpu: true
     embedding_batch_size: 512  # GPU optimized batching
     torch_compile: true  # PyTorch 2.0 optimization
-    
+
   # Vector Database Selection and Configuration
   vector_databases:
     chromadb:
@@ -498,7 +498,7 @@ performance:
       collection_name: "semantic_embeddings"
       index_type: "IVF_FLAT"
       metric_type: "IP"  # Inner Product for cosine similarity
-      
+
   # Advanced Caching Configuration
   caching:
     joblib_enabled: true
@@ -517,13 +517,13 @@ performance:
 api_keys:
   # OpenPageRank (FREE 10K requests/hour)
   openpagerank: "YOUR_OPR_API_KEY"  # Sign up at openpagerank.com
-  
+
   # Domain Reputation APIs
   domain_reputation: "YOUR_WHOISXML_API_KEY"  # 120+ reputation parameters
-  
+
   # Security Intelligence
   virustotal: "YOUR_VT_API_KEY"
-  
+
   # Domain Analysis (Optional Commercial)
   domaintools: "YOUR_DT_API_KEY"  # Professional domain intelligence
   moz: "YOUR_MOZ_ACCESS_ID"  # Domain Authority metrics
@@ -534,11 +534,11 @@ endpoints:
     base_url: "https://openpagerank.com/api/v1.0"
     rate_limit: 10000  # requests per hour
     retry_attempts: 3
-    
+
   domain_reputation:
     base_url: "https://domain-reputation.whoisxmlapi.com/api/v1"
     rate_limit: 1000  # adjust based on plan
-    
+
   virustotal:
     base_url: "https://www.virustotal.com/vtapi/v2"
     rate_limit: 4  # requests per minute (free tier)
@@ -564,44 +564,44 @@ class EnhancedCachingManager:
     def __init__(self, cache_dir="./cache", memory_limit="4GB"):
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(exist_ok=True)
-        
+
         # Initialize joblib memory with compression
         self.memory = Memory(
-            location=str(self.cache_dir), 
+            location=str(self.cache_dir),
             verbose=0,
             compress=6  # Good compression vs speed balance
         )
-        
+
         # Cache decorators for expensive operations
         self.cache_embeddings = self.memory.cache(self._generate_embeddings)
         self.cache_clustering = self.memory.cache(self._perform_clustering)
         self.cache_similarity = self.memory.cache(self._calculate_similarity_matrix)
         self.cache_topic_modeling = self.memory.cache(self._fit_topic_model)
-        
+
     def _generate_embeddings(self, texts, model_name):
         """Cache expensive embedding generation"""
         from sentence_transformers import SentenceTransformer
         model = SentenceTransformer(model_name)
         return model.encode(texts)
-    
+
     def _perform_clustering(self, embeddings, min_cluster_size=10):
         """Cache expensive HDBSCAN clustering operations"""
         import hdbscan
         clusterer = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size)
         return clusterer.fit_predict(embeddings)
-    
+
     def _calculate_similarity_matrix(self, embeddings):
         """Cache expensive similarity matrix calculations"""
         from sklearn.metrics.pairwise import cosine_similarity
         return cosine_similarity(embeddings)
-    
+
     def _fit_topic_model(self, documents, embeddings):
         """Cache expensive BERTopic model fitting"""
         from bertopic import BERTopic
         topic_model = BERTopic()
         topics, probabilities = topic_model.fit_transform(documents, embeddings)
         return topic_model, topics, probabilities
-    
+
     def clear_cache(self, pattern=None):
         """Clear cache files matching pattern"""
         if pattern:
@@ -609,7 +609,7 @@ class EnhancedCachingManager:
                 cache_file.unlink()
         else:
             self.memory.clear()
-    
+
     def get_cache_size(self):
         """Get current cache size in MB"""
         total_size = sum(f.stat().st_size for f in self.cache_dir.rglob('*') if f.is_file())
@@ -619,22 +619,22 @@ class EnhancedCachingManager:
 class SemanticCrawlerWithCaching:
     def __init__(self):
         self.cache_manager = EnhancedCachingManager()
-        
+
     def process_documents(self, documents):
         # Use cached embedding generation
         embeddings = self.cache_manager.cache_embeddings(
-            documents, 
+            documents,
             "sentence-transformers/all-MiniLM-L6-v2"
         )
-        
+
         # Use cached clustering
         clusters = self.cache_manager.cache_clustering(embeddings)
-        
+
         # Use cached topic modeling
         topic_model, topics, probs = self.cache_manager.cache_topic_modeling(
             documents, embeddings
         )
-        
+
         return {
             'embeddings': embeddings,
             'clusters': clusters,
@@ -686,54 +686,54 @@ import librosa
 class MultiModalProcessor:
     def __init__(self, enable_gpu=True):
         self.device = "cuda" if enable_gpu and torch.cuda.is_available() else "cpu"
-        
+
         # Image processing (BLIP model for image captioning)
         self.image_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
         self.image_model = BlipForConditionalGeneration.from_pretrained(
             "Salesforce/blip-image-captioning-base"
         ).to(self.device)
-        
+
         # Audio processing (Wav2Vec2 for speech recognition)
         self.audio_processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
         self.audio_model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h").to(self.device)
-    
+
     def process_image(self, image_path):
         """Extract text description from images"""
         image = Image.open(image_path).convert('RGB')
         inputs = self.image_processor(image, return_tensors="pt").to(self.device)
-        
+
         with torch.no_grad():
             generated_ids = self.image_model.generate(**inputs, max_length=50)
-        
+
         caption = self.image_processor.decode(generated_ids[0], skip_special_tokens=True)
         return {
             'type': 'image',
             'content': caption,
             'metadata': {'path': image_path, 'model': 'blip-image-captioning'}
         }
-    
+
     def process_audio(self, audio_path):
         """Extract text transcription from audio"""
         audio_array, sampling_rate = librosa.load(audio_path, sr=16000)
         inputs = self.audio_processor(
-            audio_array, 
-            sampling_rate=sampling_rate, 
-            return_tensors="pt", 
+            audio_array,
+            sampling_rate=sampling_rate,
+            return_tensors="pt",
             padding=True
         ).to(self.device)
-        
+
         with torch.no_grad():
             logits = self.audio_model(inputs.input_values).logits
-        
+
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = self.audio_processor.batch_decode(predicted_ids)[0]
-        
+
         return {
             'type': 'audio',
             'content': transcription,
             'metadata': {'path': audio_path, 'model': 'wav2vec2-base-960h'}
         }
-    
+
     def process_video(self, video_path):
         """Extract frames and audio from video for processing"""
         # This would require additional video processing libraries
@@ -744,7 +744,7 @@ class MultiModalProcessor:
 class EnhancedSemanticCrawler:
     def __init__(self):
         self.multimodal_processor = MultiModalProcessor()
-        
+
     def process_content(self, url, content_type="text"):
         """Enhanced content processing with multi-modal support"""
         if content_type == "image":
@@ -761,7 +761,7 @@ class EnhancedSemanticCrawler:
 #### **Strategic Benefits of BERTopic + txtai Integration**
 
 **Development Time**: Additional 75% reduction through proven tool integration
-**Maintenance**: 80% reduction in custom logic maintenance burden  
+**Maintenance**: 80% reduction in custom logic maintenance burden
 **Capabilities**: Enterprise-grade semantic analysis with research intelligence
 **Risk**: Very low - proven tools with active communities and extensive documentation
 **Community Support**: Access to specialized optimization guides and plugin ecosystems
@@ -806,19 +806,19 @@ class IntelligentThresholder:
     def __init__(self):
         self.outlier_detector = OutOfDistribution(k=10, t=1.0)
         self.clusterer = hdbscan.HDBSCAN(min_cluster_size=10)
-    
+
     def adaptive_threshold(self, similarity_scores, embeddings):
         # Method 1: cleanlab outlier detection on embeddings
         outlier_scores = self.outlier_detector.score(embeddings)
-        
+
         # Method 2: hdbscan density-based outlier scores
         self.clusterer.fit(embeddings)
         density_outliers = self.clusterer.outlier_scores_
-        
+
         # Dynamic threshold from upper quantiles
         threshold_cleanlab = np.percentile(outlier_scores, 85)
         threshold_hdbscan = np.percentile(density_outliers, 85)
-        
+
         # Combine approaches for robustness
         final_threshold = np.mean([threshold_cleanlab, threshold_hdbscan])
         return final_threshold
@@ -846,25 +846,25 @@ class AdvancedSemanticGraph:
                 "topics": {"algorithm": "lda", "labels": True}
             }
         })
-        
+
         # PyGraft for formal ontologies
         self.ontology_builder = pygraft.SchemaGenerator()
-        
+
         # Graphbrain for semantic hypergraphs
         self.hypergraph = GraphBrain()
-    
+
     def build_multi_modal_graph(self, documents):
         # Layer 1: Embedding-driven semantic relationships
         semantic_data = [{"id": i, "text": doc['content']} for i, doc in enumerate(documents)]
         self.embeddings.index(semantic_data)
-        
+
         # Layer 2: Formal ontological structure
         ontology = self.ontology_builder.generate_schema(documents)
-        
+
         # Layer 3: Linguistic hypergraph relationships
         for doc in documents:
             self.hypergraph.add_text(doc['content'])
-        
+
         return {
             "semantic_graph": self.embeddings.graph(),
             "ontology": ontology,
@@ -885,26 +885,26 @@ class SemanticContentEvolution:
     def __init__(self):
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         self.splitter = semantic_text_splitter.SentenceTextSplitter()
-        
+
     def semantic_diff(self, old_content, new_content):
         # Split into semantic chunks
         old_chunks = self.splitter.split(old_content)
         new_chunks = self.splitter.split(new_content)
-        
+
         # Custom semantic comparison function
         def semantic_compare(chunk1, chunk2):
             emb1 = self.model.encode([chunk1])
             emb2 = self.model.encode([chunk2])
             similarity = self.model.similarity(emb1, emb2)[0][0]
             return similarity > 0.85  # Semantic similarity threshold
-        
+
         # DeepDiff with semantic awareness
         diff = DeepDiff(
-            old_chunks, 
+            old_chunks,
             new_chunks,
             iterable_compare_func=semantic_compare
         )
-        
+
         return {
             "semantic_changes": diff,
             "change_magnitude": self._calculate_change_magnitude(diff),
@@ -931,16 +931,16 @@ class ComprehensiveCredibilityScorer:
         self.virustotal_key = api_keys['virustotal']
         self.openpagerank_key = api_keys['openpagerank']  # Free 10K requests/hour
         self.domain_reputation_client = DomainReputationClient(api_keys['domain_reputation'])
-        
+
     def comprehensive_score(self, domain):
         scores = {}
-        
+
         # Signal 1: Enhanced WHOIS/Infrastructure data
         whois_data = self.whois.lookup_rdap(domain)
         python_whois_data = self.python_whois.whois(domain)  # More comprehensive
         scores['domain_age'] = self._calculate_domain_age(python_whois_data)
         scores['registrant_info'] = self._analyze_registrant(python_whois_data)
-        
+
         # Signal 2: OpenPageRank Authority (FREE 10K requests/hour)
         opr_response = requests.get(
             "https://openpagerank.com/api/v1.0/getPageRank",
@@ -948,30 +948,30 @@ class ComprehensiveCredibilityScorer:
             headers={'API-OPR': self.openpagerank_key}
         )
         scores['pagerank_score'] = opr_response.json()['response'][0]['page_rank_decimal']
-        
+
         # Signal 3: Domain Reputation (120+ parameters)
         reputation_data = self.domain_reputation_client.get(domain)
         scores['reputation_score'] = reputation_data.reputation_score
         scores['malware_score'] = reputation_data.malware_score
         scores['phishing_score'] = reputation_data.phishing_score
-        
+
         # Signal 4: Security reputation (VirusTotal)
         vt_response = requests.get(
             f"https://www.virustotal.com/vtapi/v2/domain/report",
             params={'apikey': self.virustotal_key, 'domain': domain}
         )
         scores['security_score'] = self._parse_virustotal(vt_response.json())
-        
+
         # Signal 5: Domain authority (DomainTools API)
         domain_metrics = self.domain_tools.risk_score(domain)
         scores['domain_tools_score'] = domain_metrics.get('risk_score', 50)
-        
+
         # Signal 6: Infrastructure analysis
         scores['infrastructure_score'] = self._analyze_infrastructure(domain)
-        
+
         # Enhanced weighted composite score (multiple professional signals)
         weights = {
-            'domain_age': 0.15, 
+            'domain_age': 0.15,
             'pagerank_score': 0.25,  # Industry standard authority
             'reputation_score': 0.20,  # 120+ reputation parameters
             'security_score': 0.20,  # VirusTotal threat intelligence
@@ -979,7 +979,7 @@ class ComprehensiveCredibilityScorer:
             'infrastructure_score': 0.10
         }
         composite_score = sum(scores[signal] * weights[signal] for signal in scores)
-        
+
         return {
             'composite_score': composite_score,
             'individual_signals': scores,
@@ -999,38 +999,38 @@ class AdvancedContentValuePredictor:
     def __init__(self):
         self.lightfm_model = LightFM(loss='warp')
         self.llm_evaluator = openai.OpenAI()
-        
+
     def predict_value(self, content, user_features, content_features):
         # Quantitative prediction via LightFM
         quantitative_score = self.lightfm_model.predict(
             user_features, content_features
         )
-        
+
         # Qualitative evaluation via LLM-as-a-Judge
         qualitative_prompt = f"""
         Evaluate this content for a financial research context:
-        
+
         Content: {content[:1000]}...
-        
+
         Rate on a scale of 1-10 for:
         1. Technical depth and insight
         2. Practical applicability
         3. Novelty and uniqueness
         4. Evidence quality
-        
+
         Provide scores and brief reasoning.
         """
-        
+
         llm_evaluation = self.llm_evaluator.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": qualitative_prompt}]
         )
-        
+
         qualitative_score = self._parse_llm_scores(llm_evaluation)
-        
+
         # Hybrid score combining quantitative and qualitative
         final_score = (quantitative_score * 0.6) + (qualitative_score * 0.4)
-        
+
         return {
             'final_score': final_score,
             'quantitative_component': quantitative_score,
@@ -1049,7 +1049,7 @@ class SemanticCrawlerPipeline:
     def __init__(self):
         # Core embedding model shared across all modules
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-        
+
         # Enhanced modules with research-validated tools
         self.adaptive_thresholder = IntelligentThresholder()
         self.semantic_graph = AdvancedSemanticGraph()
@@ -1057,11 +1057,11 @@ class SemanticCrawlerPipeline:
         self.content_evolution = SemanticContentEvolution()
         self.credibility_scorer = ComprehensiveCredibilityScorer(api_keys)
         self.value_predictor = AdvancedContentValuePredictor()
-        
+
     def process_content(self, raw_content, metadata):
         # Generate embeddings once, use everywhere
         embeddings = self.embedding_model.encode([raw_content])
-        
+
         # Parallel processing with shared embeddings
         results = {
             'relevance_score': self.adaptive_thresholder.adaptive_threshold(
@@ -1078,7 +1078,7 @@ class SemanticCrawlerPipeline:
                 raw_content, user_features, content_features
             )
         }
-        
+
         return results
 ```
 
@@ -1185,7 +1185,7 @@ This implementation plan is based on:
 
 **Missing High-Value Tools:**
 - ❌ **OpenPageRank API** - Industry-standard PageRank authority scores (free 10K requests/hour)
-- ❌ **python-whois** - More comprehensive than ipwhois for domain metadata  
+- ❌ **python-whois** - More comprehensive than ipwhois for domain metadata
 - ❌ **domain-reputation-py** - WhoisXML API client for 120+ reputation parameters
 
 **Implementation Addition:**
@@ -1213,7 +1213,7 @@ pip install python-whois domain-reputation-py requests
 
 **Implementation Addition:**
 ```bash
-# Performance optimization stack  
+# Performance optimization stack
 pip install onnxruntime-gpu joblib pymilvus fastembed
 
 # GPU acceleration configuration for transformer models

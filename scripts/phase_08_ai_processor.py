@@ -5,18 +5,18 @@ Process organized articles with embeddings and semantic search capabilities.
 Uses free/open-source tools: sentence-transformers + FAISS
 """
 
+import hashlib
 import json
 import re
-from pathlib import Path
 from datetime import datetime
-from typing import List, Dict, Any
-import hashlib
+from pathlib import Path
+from typing import Any, Dict, List
 
 # Will install these if needed
 try:
-    from sentence_transformers import SentenceTransformer
     import faiss
     import numpy as np
+    from sentence_transformers import SentenceTransformer
 except ImportError:
     print(
         "Required packages not installed. Run: pip install sentence-transformers faiss-cpu"

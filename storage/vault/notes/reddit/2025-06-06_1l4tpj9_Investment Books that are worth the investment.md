@@ -12,15 +12,15 @@ post_id: 1l4tpj9
 
 # Investment Books that are worth ...the investment
 
-I have been following this subreddit and r/dividends for a while and have a a few shares of SCHD, SPHD, FDRR, and WMT but I don't have a bunch of money, just been taking a few bucks every paycheck and buying a share here and there. I'm wondering if there is a good book that gives solid advice about better ways to invest for growth.  
+I have been following this subreddit and r/dividends for a while and have a a few shares of SCHD, SPHD, FDRR, and WMT but I don't have a bunch of money, just been taking a few bucks every paycheck and buying a share here and there. I'm wondering if there is a good book that gives solid advice about better ways to invest for growth.
 
-There are tons of videos online and I think warren buffet credits a book he read to help him early on but Im not sure if any of them are valid and want to find some real advice on wasy to make more money with stock. Day trading sounds like it's an intense and highly concentrated effort. I don't want to get lost into a YouTube mix of "do this to become rich". My end goal is to be able to look at my account in 1-2 years and possible use that money to pay for my cell phone bill $125 a month. 
+There are tons of videos online and I think warren buffet credits a book he read to help him early on but Im not sure if any of them are valid and want to find some real advice on wasy to make more money with stock. Day trading sounds like it's an intense and highly concentrated effort. I don't want to get lost into a YouTube mix of "do this to become rich". My end goal is to be able to look at my account in 1-2 years and possible use that money to pay for my cell phone bill $125 a month.
 
-To make $125 a month I may need somewhere around 40k invested in dividend stocks to possibly generate that but is there a book that would give me a solid approach on growing what I currently have and turn %10 profit every year? Should I just find another rstrema of income and invest more and be patient or is there some code that I haven't cracked that could be learned in a book. 
+To make $125 a month I may need somewhere around 40k invested in dividend stocks to possibly generate that but is there a book that would give me a solid approach on growing what I currently have and turn %10 profit every year? Should I just find another rstrema of income and invest more and be patient or is there some code that I haven't cracked that could be learned in a book.
 
-Any advice is greatly appreciated. 
+Any advice is greatly appreciated.
 
-TLDR: im looking to find solid knowledge to grow my stock account wisely and hopefully see returns with dividend stocks. 
+TLDR: im looking to find solid knowledge to grow my stock account wisely and hopefully see returns with dividend stocks.
 
 
 
@@ -75,9 +75,9 @@ Just invest in VOO and chill. 
 
 **Author:** u/max_strength_placebo
 
-Peter Lynch's books are still excellent, and you don't need an MBA or CFA certification to follow the content. He was bit skeptical of academic thinking, anyway. 
+Peter Lynch's books are still excellent, and you don't need an MBA or CFA certification to follow the content. He was bit skeptical of academic thinking, anyway.
 
-Joel Tillinghast wrote an excellent book called *Big Money Thinks Small* He was hired at Fidelity based on a recommendation from Lynch. 
+Joel Tillinghast wrote an excellent book called *Big Money Thinks Small* He was hired at Fidelity based on a recommendation from Lynch.
 
 Nassim Taleb's books, not directly and entirely about investing but very relevant to investing.
 
@@ -91,7 +91,7 @@ Read the simple path to wealth by jl collins
 
 **Author:** u/RN_Geo
 
-"If You Can" is a free booklet and covers about 98% of investors.  And it takes less than an hour to read.  
+"If You Can" is a free booklet and covers about 98% of investors.  And it takes less than an hour to read.
 
 That will be $100 for consulting fee, thanks.
 
@@ -99,13 +99,13 @@ That will be $100 for consulting fee, thanks.
 
 **Author:** u/anusbarber
 
-I really don't think you need to read Intelligent Investor.  I've read it twice and I think if you want to trade stocks its a great test of "do I got the "it" muscle to trade stocks".  (basically sound single stock investing requires learning to read a balance sheet, financial statements, etc a la Warren Buffett....i didnt' want to do that) 
+I really don't think you need to read Intelligent Investor.  I've read it twice and I think if you want to trade stocks its a great test of "do I got the "it" muscle to trade stocks".  (basically sound single stock investing requires learning to read a balance sheet, financial statements, etc a la Warren Buffett....i didnt' want to do that)
 
-Random walk down wallstreet by burton malkiel is a great "tour" of the history of the market.  
-Where are all the customers yachts by Fred Schwed  
-One Up on wallstreet by Peter Lynch - guy was a workhorse trader one of the greatest.  
-Investor Manifesto - Bill Bernstein  
-Thinking Fast and Slow - Daniel Kahnamen  
+Random walk down wallstreet by burton malkiel is a great "tour" of the history of the market.
+Where are all the customers yachts by Fred Schwed
+One Up on wallstreet by Peter Lynch - guy was a workhorse trader one of the greatest.
+Investor Manifesto - Bill Bernstein
+Thinking Fast and Slow - Daniel Kahnamen
 Common Sense Investing - Jack Bogle
 
 These books really gave me a foundation is thinking about money, thinking about the markets, and thinking of how to tackle my money in the market.

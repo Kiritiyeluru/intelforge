@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:51.166135
 
 # Motley Fool News & Analysis | The Motley Fool
 
-**URL:** https://www.fool.com/investing/  
-**Final URL:** https://www.fool.com/investing-news/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 32,734 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:51.166135  
+**URL:** https://www.fool.com/investing/
+**Final URL:** https://www.fool.com/investing-news/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 32,734 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:51.166135
 
 ## Main Content
 

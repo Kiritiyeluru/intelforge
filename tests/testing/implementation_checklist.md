@@ -167,10 +167,10 @@
   def validate_semantic_accuracy():
       accuracy = test_filtering_accuracy()
       assert accuracy >= 0.90
-      
+
       novelty_rate = test_novelty_detection()
       assert novelty_rate >= 0.95
-      
+
       relevance = test_graph_traversal()
       assert relevance >= 0.85
   ```
@@ -272,7 +272,7 @@ def validate_deployment_readiness():
         ("Resource usage", lambda: test_resource_limits()),
         ("Data integrity", lambda: test_data_consistency())
     ]
-    
+
     return all(check() for name, check in checks)
 ```
 

@@ -12,25 +12,25 @@ post_id: 1kzov27
 
 # Your favorite trading books? I'll go first !
 
-Hey algo trading friends, I've listened to and read dozens (or more) trading books over the last couple years, and I wanted to share some of my favorites and get your recommendations for continued reading (and listening). 
+Hey algo trading friends, I've listened to and read dozens (or more) trading books over the last couple years, and I wanted to share some of my favorites and get your recommendations for continued reading (and listening).
 
-Even though I algo trade only crypto (and only very part time when life allows me to work on it), I've learned a ton from these books. I'm not going to give specifics about why I liked EVERY single book, particularly because some of them I read over two years ago and don't remember all the details. I just know I rated all of these highly and got something of value from them. 
+Even though I algo trade only crypto (and only very part time when life allows me to work on it), I've learned a ton from these books. I'm not going to give specifics about why I liked EVERY single book, particularly because some of them I read over two years ago and don't remember all the details. I just know I rated all of these highly and got something of value from them.
 
-1) The whole Market Wizards series by Jack Schwager, particularly Hedge Fund Market Wizards (but they've all got tons of gems). I know these are some of the most ubiquitous books on trading but still wanted to mention them for anyone who hasn't read them. A gold mine of insights, inspiration, and cautionary tales  from master traders. 
+1) The whole Market Wizards series by Jack Schwager, particularly Hedge Fund Market Wizards (but they've all got tons of gems). I know these are some of the most ubiquitous books on trading but still wanted to mention them for anyone who hasn't read them. A gold mine of insights, inspiration, and cautionary tales  from master traders.
 
-2) High Probability Trading by Marcel Link. This book will be particularly helpful to noobies trying to formulate strategies, but it's just a great refresher and primer on dozens of different trading ideas, best practices, and strategies regardless. You may just nod along and go "yup" but  I really like the way he lays it all out and feel it's an excellent resource. 
+2) High Probability Trading by Marcel Link. This book will be particularly helpful to noobies trying to formulate strategies, but it's just a great refresher and primer on dozens of different trading ideas, best practices, and strategies regardless. You may just nod along and go "yup" but  I really like the way he lays it all out and feel it's an excellent resource.
 
-3) the All Weather Trade by Tom Basso. It's just hard not to like this guy, and he gives some good, if fairly simplistic, information about his trend following and diversification strategies. I first heard of him through Market Wizards of course. 
+3) the All Weather Trade by Tom Basso. It's just hard not to like this guy, and he gives some good, if fairly simplistic, information about his trend following and diversification strategies. I first heard of him through Market Wizards of course.
 
-4) The Complete Turtle Trader by Michael Covel. Whether you learn anything of significant substance from this book is up in the air, but as someone  running primarily trend following strats I found it reaffirming, and it's a pretty good story. 
+4) The Complete Turtle Trader by Michael Covel. Whether you learn anything of significant substance from this book is up in the air, but as someone  running primarily trend following strats I found it reaffirming, and it's a pretty good story.
 
-5) Not a book, but I've gotten a lot of value from the Better System Trader podcast. Sadly I think they're no longer producing new episodes (most recent is August '24) but it's an invaluable resource. 
+5) Not a book, but I've gotten a lot of value from the Better System Trader podcast. Sadly I think they're no longer producing new episodes (most recent is August '24) but it's an invaluable resource.
 
-I could list many more, and I know some of these are very general and rudimentary, but as someone coming from a purely programming background with no trading experience they've been incredibly informative. 
+I could list many more, and I know some of these are very general and rudimentary, but as someone coming from a purely programming background with no trading experience they've been incredibly informative.
 
 I'd love to hear suggestions from you guys. . Particularly dealing with systematic and algorithmic trading obviously but also general market / trading strategy books. I like hearing stories from ultra successful traders (a la Market Wizards) but open to all of it, from high level math and algo stuff I won't fully comprehend to memoires. What are your favorites?
 
-Ps: yes, I also have a soft spot for Reminiscences of a Stock Operator... I've read it twice, it's required reading for all degens IMHO 😁 
+Ps: yes, I also have a soft spot for Reminiscences of a Stock Operator... I've read it twice, it's required reading for all degens IMHO 😁
 
 ## Comments
 

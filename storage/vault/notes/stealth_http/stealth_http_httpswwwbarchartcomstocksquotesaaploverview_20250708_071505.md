@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:15:05.975852
 
 # AAPL - Apple Stock Price - Barchart.com
 
-**URL:** https://www.barchart.com/stocks/quotes/AAPL/overview  
-**Final URL:** https://www.barchart.com/stocks/quotes/AAPL/overview  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 29,441 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:15:05.975852  
+**URL:** https://www.barchart.com/stocks/quotes/AAPL/overview
+**Final URL:** https://www.barchart.com/stocks/quotes/AAPL/overview
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 29,441 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:15:05.975852
 
 ## Main Content
 

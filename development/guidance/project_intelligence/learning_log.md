@@ -8,59 +8,59 @@ Capture important discoveries, insights, and lessons learned during development 
 ## 2025-01-06: Documentation System Design
 
 ### Key Insight: Documentation Decay Prevention
-**Discovery:** User has burned multiple repositories due to documentation decay  
-**Implication:** Documentation is not optional - it's critical infrastructure  
-**Lesson:** Treat documentation updates as non-negotiable part of development workflow  
-**Application:** Built comprehensive handover system with mandatory session checklist  
+**Discovery:** User has burned multiple repositories due to documentation decay
+**Implication:** Documentation is not optional - it's critical infrastructure
+**Lesson:** Treat documentation updates as non-negotiable part of development workflow
+**Application:** Built comprehensive handover system with mandatory session checklist
 
 ### Insight: AI-Assisted Development Patterns
-**Discovery:** Solo development with AI assistance requires different documentation patterns  
+**Discovery:** Solo development with AI assistance requires different documentation patterns
 **Key Requirements:**
 - Context must be immediately accessible (3-5 minute session startup)
 - Decisions need rationale, not just implementation
 - Handovers must be complete enough for different AI assistants
-**Application:** Created decision_log.md and comprehensive session_summary.md  
+**Application:** Created decision_log.md and comprehensive session_summary.md
 
 ### Technical Learning: GitHub CLI Limitations
-**Discovery:** GitHub CLI version doesn't support project management commands  
-**Workaround:** Manual project board setup via web interface  
-**Future:** Monitor GitHub CLI updates for project automation features  
-**Documentation:** Added to troubleshooting_guide.md  
+**Discovery:** GitHub CLI version doesn't support project management commands
+**Workaround:** Manual project board setup via web interface
+**Future:** Monitor GitHub CLI updates for project automation features
+**Documentation:** Added to troubleshooting_guide.md
 
 ---
 
 ## Development Philosophy Insights
 
 ### Simplicity vs. Completeness Balance
-**Observation:** IntelForge aims for "lab notebook" simplicity, not SaaS complexity  
-**Tension:** Comprehensive documentation can feel like over-engineering  
-**Resolution:** Documentation serves the core goal - preventing project abandonment  
-**Principle:** If it prevents burning the repo, it's not over-engineering  
+**Observation:** IntelForge aims for "lab notebook" simplicity, not SaaS complexity
+**Tension:** Comprehensive documentation can feel like over-engineering
+**Resolution:** Documentation serves the core goal - preventing project abandonment
+**Principle:** If it prevents burning the repo, it's not over-engineering
 
 ### Phase-Based Development Benefits
-**Discovery:** phase_XX naming convention provides natural organization  
+**Discovery:** phase_XX naming convention provides natural organization
 **Benefits:**
 - Clear progression tracking
 - Easy to regenerate individual modules
 - Natural commit message convention
 - Supports "reuse over rebuild" philosophy
-**Application:** Integrated into all templates and automation  
+**Application:** Integrated into all templates and automation
 
 ---
 
 ## Research and Tool Discovery
 
 ### Effective Tool Research Patterns
-**Template:** prompts/find_tools_template.md approach prevents wheel reinvention  
-**Best Practice:** Always research before building custom solutions  
-**Time Investment:** 30-60 minutes research saves days of implementation  
-**Documentation:** Must capture tool selection rationale in decision_log.md  
+**Template:** prompts/find_tools_template.md approach prevents wheel reinvention
+**Best Practice:** Always research before building custom solutions
+**Time Investment:** 30-60 minutes research saves days of implementation
+**Documentation:** Must capture tool selection rationale in decision_log.md
 
 ### Configuration Management Insights
-**Learning:** API key management is critical from day one  
-**Pattern:** config.yaml with .gitignore + config.yaml.template pattern  
-**Security:** Never commit secrets, even in private repos  
-**Tracking:** config_changelog.md prevents breaking changes  
+**Learning:** API key management is critical from day one
+**Pattern:** config.yaml with .gitignore + config.yaml.template pattern
+**Security:** Never commit secrets, even in private repos
+**Tracking:** config_changelog.md prevents breaking changes
 
 ---
 
@@ -95,16 +95,16 @@ Capture important discoveries, insights, and lessons learned during development 
 ## Technical Architecture Learnings
 
 ### Obsidian Integration Requirements
-**Format:** Markdown with YAML frontmatter  
-**Key Fields:** source, date, tags, content_hash, author  
-**Linking:** Use [[wikilinks]] and #tags for connectivity  
-**Storage:** vault/notes/ directory structure  
+**Format:** Markdown with YAML frontmatter
+**Key Fields:** source, date, tags, content_hash, author
+**Linking:** Use [[wikilinks]] and #tags for connectivity
+**Storage:** vault/notes/ directory structure
 
 ### Error Handling Patterns
-**Principle:** Graceful degradation over hard failures  
-**Implementation:** Comprehensive logging to vault/logs/  
-**User Experience:** --dry-run mode for safe testing  
-**Monitoring:** Clear error messages with actionable guidance  
+**Principle:** Graceful degradation over hard failures
+**Implementation:** Comprehensive logging to vault/logs/
+**User Experience:** --dry-run mode for safe testing
+**Monitoring:** Clear error messages with actionable guidance
 
 ---
 
@@ -151,11 +151,11 @@ Capture important discoveries, insights, and lessons learned during development 
 
 ### [Date]: [Topic/Area]
 
-**Discovery:** [What you learned]  
-**Context:** [Situation that led to this insight]  
-**Implication:** [Why this matters for the project]  
-**Application:** [How this changes development approach]  
-**Related:** [Links to relevant documentation or issues]  
+**Discovery:** [What you learned]
+**Context:** [Situation that led to this insight]
+**Implication:** [Why this matters for the project]
+**Application:** [How this changes development approach]
+**Related:** [Links to relevant documentation or issues]
 **Follow-up:** [Any additional research or action needed]
 
 ---
@@ -163,16 +163,16 @@ Capture important discoveries, insights, and lessons learned during development 
 ## 2025-01-06: AKM (Automated Knowledge Miner) Vision Integration
 
 ### Discovery: Comprehensive Enhancement Roadmap
-**Context:** Extracted insights from detailed AKM discussion for future IntelForge development  
-**Key Finding:** IntelForge can evolve from Reddit scraper to comprehensive knowledge mining system  
-**Insight:** Current Phase 1 implementation provides perfect foundation for AKM architecture  
-**Application:** Created actionable roadmap for Phases 2-6 development  
+**Context:** Extracted insights from detailed AKM discussion for future IntelForge development
+**Key Finding:** IntelForge can evolve from Reddit scraper to comprehensive knowledge mining system
+**Insight:** Current Phase 1 implementation provides perfect foundation for AKM architecture
+**Application:** Created actionable roadmap for Phases 2-6 development
 
 ### Technical Learning: Multi-Source Pipeline Architecture
-**Discovery:** Unified schema approach enables seamless multi-source integration  
+**Discovery:** Unified schema approach enables seamless multi-source integration
 **Key Components:**
 - Query Builder for automated content discovery
-- Relevance Filter with ML-based scoring  
+- Relevance Filter with ML-based scoring
 - Content Deduplication using embeddings
 - Research Thread Tracking for knowledge connections
 - Gap Detection for identifying missing research areas
@@ -186,7 +186,7 @@ Capture important discoveries, insights, and lessons learned during development 
 - Leverage existing tools (FAISS, sentence-transformers) over custom solutions
 
 ### AI-Friendly Development Patterns
-**Discovery:** Specific patterns that enhance AI code generation effectiveness  
+**Discovery:** Specific patterns that enhance AI code generation effectiveness
 **Implementation Guidelines:**
 - Detailed docstrings with AI_HINT comments for context
 - Explicit error handling instructions in comments
@@ -195,7 +195,7 @@ Capture important discoveries, insights, and lessons learned during development 
 - Helper scripts for testing, validation, and cleanup
 
 ### Future Potential: Personal Research Assistant
-**Long-term Vision:** Evolution toward LLM-powered research assistant  
+**Long-term Vision:** Evolution toward LLM-powered research assistant
 **Capabilities:**
 - Semantic search: "What strategies for range-bound markets?"
 - Gap analysis: "Missing backtests for momentum indicators?"
@@ -220,16 +220,16 @@ Capture important discoveries, insights, and lessons learned during development 
 ## 2025-01-06: Perplexity MCP Integration and Enhanced Research
 
 ### Discovery: Real-time Tool Validation
-**Context:** Installed Perplexity MCP server to enhance tool research capabilities  
-**Key Finding:** Real-time search confirms 2025 changes in Reddit API landscape  
-**Insight:** Reddit has become "very restrictive" with API access, making PRAW even more valuable  
-**Application:** Our tool selection was validated and enhanced with current best practices  
+**Context:** Installed Perplexity MCP server to enhance tool research capabilities
+**Key Finding:** Real-time search confirms 2025 changes in Reddit API landscape
+**Insight:** Reddit has become "very restrictive" with API access, making PRAW even more valuable
+**Application:** Our tool selection was validated and enhanced with current best practices
 
 ### Technical Learning: MCP Server Installation Process
-**Discovery:** Successfully installed official Perplexity MCP server  
-**Installation Path:** `/home/kiriti/alpha_projects/intelforge/modelcontextprotocol/perplexity-ask/`  
-**Configuration:** Uses .env file for secure API key management  
-**Integration:** Now available as search capability in Claude Code sessions  
+**Discovery:** Successfully installed official Perplexity MCP server
+**Installation Path:** `/home/kiriti/alpha_projects/intelforge/modelcontextprotocol/perplexity-ask/`
+**Configuration:** Uses .env file for secure API key management
+**Integration:** Now available as search capability in Claude Code sessions
 
 ### Research Validation Insights
 **Key 2025 Updates:**
@@ -240,9 +240,9 @@ Capture important discoveries, insights, and lessons learned during development 
 - AI-powered scraping tools exist but PRAW remains optimal for Reddit
 
 ### Workflow Enhancement
-**New Capability:** Real-time research during development sessions  
-**Use Cases:** Tool validation, best practice verification, current trend analysis  
-**Integration:** Perplexity search complements existing find_tools_template.md approach  
+**New Capability:** Real-time research during development sessions
+**Use Cases:** Tool validation, best practice verification, current trend analysis
+**Integration:** Perplexity search complements existing find_tools_template.md approach
 **Future Potential:** Content validation, strategy verification, market research
 
 ---
@@ -250,10 +250,10 @@ Capture important discoveries, insights, and lessons learned during development 
 ## 2025-01-06: Remote MCP Capabilities Discovery
 
 ### Discovery: Cloud-Based MCP Integration
-**Context:** Anthropic announced remote MCP server support in Claude Code  
-**Key Finding:** No longer need to manage local MCP servers for third-party integrations  
-**Insight:** Cloud-based MCP servers provide enterprise-grade tool integration  
-**Application:** Future phases can leverage remote servers for Linear, Sentry, and other tools  
+**Context:** Anthropic announced remote MCP server support in Claude Code
+**Key Finding:** No longer need to manage local MCP servers for third-party integrations
+**Insight:** Cloud-based MCP servers provide enterprise-grade tool integration
+**Application:** Future phases can leverage remote servers for Linear, Sentry, and other tools
 
 ### Technical Learning: Remote vs Local MCP Architecture
 **Local MCP Servers (Current Setup):**
@@ -287,9 +287,9 @@ Capture important discoveries, insights, and lessons learned during development 
 - Explore Sentry for production monitoring of scraping operations
 
 ### Custom Remote MCP Integration Assessment
-**Context:** Analyzed custom remote MCP integration documentation for IntelForge applicability  
-**Key Finding:** Local MCP setup sufficient for current Phase 1 needs  
-**Insight:** Remote MCP valuable for external API integrations in future phases  
+**Context:** Analyzed custom remote MCP integration documentation for IntelForge applicability
+**Key Finding:** Local MCP setup sufficient for current Phase 1 needs
+**Insight:** Remote MCP valuable for external API integrations in future phases
 
 **Technical Comparison:**
 - **Local MCP (Current):** Runs on laptop, full control, 6 servers installed
@@ -309,9 +309,9 @@ Capture important discoveries, insights, and lessons learned during development 
 - Prioritize security and privacy for personal knowledge extraction
 
 ### Remote MCP Implementation Details
-**Context:** Detailed analysis of remote MCP setup and performance from Medium article  
-**Key Finding:** Remote MCP provides significant setup simplification and performance benefits  
-**Technical Details:** Server-Sent Events (SSE) for real-time updates, OAuth authentication  
+**Context:** Detailed analysis of remote MCP setup and performance from Medium article
+**Key Finding:** Remote MCP provides significant setup simplification and performance benefits
+**Technical Details:** Server-Sent Events (SSE) for real-time updates, OAuth authentication
 
 **Setup Commands:**
 ```bash
@@ -363,8 +363,8 @@ claude mcp add sse --name "server-name" --url "vendor-endpoint" --scope project
 ## 2025-01-06: MCP Server Management Commands
 
 ### MCP Server Removal Process
-**Context:** Successfully removed all local MCP servers for reinstallation with updated methods  
-**Key Commands:** Complete workflow for managing MCP server lifecycle  
+**Context:** Successfully removed all local MCP servers for reinstallation with updated methods
+**Key Commands:** Complete workflow for managing MCP server lifecycle
 
 **List Configured Servers:**
 ```bash
@@ -386,7 +386,7 @@ claude mcp remove server1 && claude mcp remove server2 && claude mcp remove serv
 - perplexity-ask (Node.js server)
 - sqlite-server (Python/uv server)
 - puppeteer-server (Node.js server)
-- github-server (Node.js server)  
+- github-server (Node.js server)
 - brave-search (Node.js server)
 
 **Verification:**
@@ -405,9 +405,9 @@ claude mcp list
 ## 2025-01-06: Comprehensive MCP Documentation Analysis
 
 ### Discovery: Official MCP Command Reference
-**Context:** Analyzed complete official Anthropic MCP documentation  
-**Key Finding:** Comprehensive command set with advanced features not previously documented  
-**Insight:** MCP provides much richer functionality than initially understood  
+**Context:** Analyzed complete official Anthropic MCP documentation
+**Key Finding:** Comprehensive command set with advanced features not previously documented
+**Insight:** MCP provides much richer functionality than initially understood
 
 **Complete Command Syntax:**
 ```bash
@@ -415,7 +415,7 @@ claude mcp list
 claude mcp add <name> <command> [args...]
 claude mcp add my-server -e API_KEY=123 -- /path/to/server arg1 arg2
 
-# Remote SSE servers  
+# Remote SSE servers
 claude mcp add --transport sse <name> <url>
 claude mcp add --transport sse api-server https://api.example.com/mcp --header "X-API-Key: key"
 

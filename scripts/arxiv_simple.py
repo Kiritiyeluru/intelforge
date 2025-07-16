@@ -8,13 +8,13 @@ Simple wrapper for academic paper extraction from ArXiv
 import argparse
 import os
 import sys
-import yaml
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 # Direct arxiv.py usage (official API wrapper)
 import arxiv
+import yaml
 
 
 def load_config(config_path: str = "config/config.yaml") -> Dict:
@@ -64,9 +64,9 @@ def search_arxiv_papers(query: str, limit: int = 20) -> List[Dict]:
                 "authors": [author.name for author in result.authors],
                 "abstract": result.summary,
                 "published": result.published.strftime("%Y-%m-%d"),
-                "updated": result.updated.strftime("%Y-%m-%d")
-                if result.updated
-                else "",
+                "updated": (
+                    result.updated.strftime("%Y-%m-%d") if result.updated else ""
+                ),
                 "url": result.entry_id,
                 "pdf_url": result.pdf_url,
                 "categories": result.categories,
@@ -109,11 +109,11 @@ content_hash: {generate_content_hash(paper.get("abstract", ""))}
 
 # {paper.get("title", "Untitled")}
 
-**Authors:** {authors_str}  
-**Published:** {paper.get("published", "Unknown")}  
-**Updated:** {paper.get("updated", "N/A")}  
-**Primary Category:** {paper.get("primary_category", "")}  
-**ArXiv ID:** {paper.get("id", "").split("/")[-1]}  
+**Authors:** {authors_str}
+**Published:** {paper.get("published", "Unknown")}
+**Updated:** {paper.get("updated", "N/A")}
+**Primary Category:** {paper.get("primary_category", "")}
+**ArXiv ID:** {paper.get("id", "").split("/")[-1]}
 
 **Links:**
 - [ArXiv Abstract]({paper.get("url", "")})

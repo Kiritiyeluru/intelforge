@@ -9,7 +9,7 @@
     },
     {
       "url": "https://finance.yahoo.com/quote/TSLA",
-      "symbol": "TSLA", 
+      "symbol": "TSLA",
       "data_type": "stock_quote",
       "expected_fields": ["current_price", "52_week_range", "dividend_yield"],
       "anti_detection_required": true
@@ -22,7 +22,7 @@
     },
     {
       "url": "https://finance.yahoo.com/calendar/earnings",
-      "data_type": "earnings_calendar", 
+      "data_type": "earnings_calendar",
       "expected_fields": ["symbol", "company", "earnings_date", "estimate"],
       "anti_detection_required": true
     },
@@ -65,7 +65,7 @@
       "52_week_range": "164.08 - 199.62"
     },
     "tsla_quote": {
-      "symbol": "TSLA", 
+      "symbol": "TSLA",
       "current_price": 248.87,
       "change": "-3.21",
       "change_percent": "-1.27%",

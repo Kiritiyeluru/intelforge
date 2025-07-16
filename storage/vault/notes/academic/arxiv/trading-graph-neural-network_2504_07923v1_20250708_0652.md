@@ -10,18 +10,18 @@ primary_category: q-fin.TR
 arxiv_id: 2504.07923v1
 url: http://arxiv.org/abs/2504.07923v1
 pdf_url: http://arxiv.org/pdf/2504.07923v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: c2b5f139b60c3f68
 ---
 
 # Trading Graph Neural Network
 
-**Authors:** Xian Wu  
-**Published:** 2025-04-10  
-**Updated:** 2025-04-10  
-**Primary Category:** q-fin.TR  
-**ArXiv ID:** 2504.07923v1  
+**Authors:** Xian Wu
+**Published:** 2025-04-10
+**Updated:** 2025-04-10
+**Primary Category:** q-fin.TR
+**ArXiv ID:** 2504.07923v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2504.07923v1)

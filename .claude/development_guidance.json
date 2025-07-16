@@ -7,7 +7,7 @@
     "during_development": [
       "Update session_docs/CURRENT_PROJECT_PLAN.md with progress and blockers",
       "Log decisions in guidance/project_intelligence/decision_log.md with rationale",
-      "Document solutions in guidance/core_essentials/troubleshooting_guide.md", 
+      "Document solutions in guidance/core_essentials/troubleshooting_guide.md",
       "Track config changes in guidance/operations/config_changelog.md"
     ],
     "end_of_session": [
@@ -36,7 +36,7 @@
     ],
     "design_check": [
       "Would I understand this in 3 months?",
-      "Can this live in one file instead of three?", 
+      "Can this live in one file instead of three?",
       "Would this make AI-generated fixes harder?",
       "Is it adding value or just structure?"
     ]
@@ -64,7 +64,7 @@
   },
   "quality_standards": {
     "session_completion": "Each session should complete logical unit of work",
-    "decision_documentation": "All decisions documented with rationale", 
+    "decision_documentation": "All decisions documented with rationale",
     "testing": "Code tested and working before commit",
     "handover": "Session handover files updated before ending",
     "priorities": "Next session priorities clearly defined"

@@ -46,7 +46,7 @@ uv add requests beautifulsoup4 pandas numpy matplotlib        # 0.62s
 ```bash
 # Benchmark: Search for "import" in all Python files
 grep -r "import" --include="*.py" .    # 1.86s
-rg "import" --type py                  # 0.014s  
+rg "import" --type py                  # 0.014s
 # Result: 132x faster with ripgrep
 ```
 
@@ -71,7 +71,7 @@ rg "import" --type py                  # 0.014s
   },
   "rust_tool_aliases": {
     "grep": "rg",
-    "find": "fd", 
+    "find": "fd",
     "cat": "bat",
     "ls": "exa",
     "htop": "btm",
@@ -86,7 +86,7 @@ rg "import" --type py                  # 0.014s
       "Bash(uv *)",
       "Bash(rg *)",
       "Bash(fd *)",
-      "Bash(bat *)", 
+      "Bash(bat *)",
       "Bash(exa *)",
       "Bash(btm *)"
     ]
@@ -112,7 +112,7 @@ rg "import" --type py                  # 0.014s
 ```python
 # Preferred high-performance imports
 import httpx          # instead of requests
-import selectolax     # instead of BeautifulSoup  
+import selectolax     # instead of BeautifulSoup
 import polars as pl   # instead of pandas
 from playwright import async_api  # instead of selenium
 ```

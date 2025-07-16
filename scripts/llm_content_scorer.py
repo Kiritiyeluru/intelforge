@@ -10,13 +10,14 @@ Usage:
 
 import argparse
 import json
-import yaml
-from pathlib import Path
-from typing import Dict, List, Any
-import openai
-from anthropic import Anthropic
-import sys
 import os
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+import openai
+import yaml
+from anthropic import Anthropic
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))

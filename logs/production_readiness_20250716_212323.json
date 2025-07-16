@@ -1,0 +1,141 @@
+{
+  "timestamp": "2025-07-16T21:23:23.542325",
+  "overall_score": 64,
+  "overall_status": "Not Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "warning",
+      "score": 80,
+      "message": "Missing: 1, Invalid: 0",
+      "details": {
+        "missing": [
+          "requirements.txt"
+        ],
+        "invalid": []
+      },
+      "recommendations": [
+        "Create missing files: requirements.txt"
+      ]
+    },
+    {
+      "name": "Security Baseline",
+      "status": "fail",
+      "score": 30,
+      "message": "Security tests failed",
+      "details": {
+        "stdout": "",
+        "stderr": "Command timed out after 45s"
+      },
+      "recommendations": [
+        "Fix security test failures",
+        "Review security scanning results",
+        "Address identified vulnerabilities"
+      ]
+    },
+    {
+      "name": "Test Coverage",
+      "status": "skip",
+      "score": 75,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for detailed coverage analysis"
+      ]
+    },
+    {
+      "name": "Performance Benchmarks",
+      "status": "skip",
+      "score": 70,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for performance analysis"
+      ]
+    },
+    {
+      "name": "CLI Functionality",
+      "status": "warning",
+      "score": 70,
+      "message": "1 CLI commands failed",
+      "details": {
+        "failed_commands": [
+          "CLI help"
+        ]
+      },
+      "recommendations": [
+        "Fix failing CLI commands"
+      ]
+    },
+    {
+      "name": "Documentation",
+      "status": "warning",
+      "score": 60,
+      "message": "Missing: 2 docs",
+      "details": null,
+      "recommendations": [
+        "Create missing documentation: README.md, CURRENT_IMPLEMENTATION_PLAN.md"
+      ]
+    },
+    {
+      "name": "Infrastructure Health",
+      "status": "pass",
+      "score": 100,
+      "message": "8/8 checks passed",
+      "details": {
+        "checks": {
+          "Python 3.x": true,
+          "Package: pytest": true,
+          "Package: loguru": true,
+          "Package: rich": true,
+          "Package: typer": true,
+          "Directory: scripts": true,
+          "Directory: tests": true,
+          "Directory: logs": true
+        }
+      },
+      "recommendations": []
+    },
+    {
+      "name": "Budget Tracking",
+      "status": "skip",
+      "score": 70,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for budget analysis"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Create missing files: requirements.txt",
+    "Fix security test failures",
+    "Review security scanning results",
+    "Address identified vulnerabilities",
+    "Run full check for detailed coverage analysis",
+    "Run full check for performance analysis",
+    "Fix failing CLI commands",
+    "Create missing documentation: README.md, CURRENT_IMPLEMENTATION_PLAN.md",
+    "Run full check for budget analysis",
+    "Address 1 failing checks before deployment",
+    "Review 3 warning checks for production optimization"
+  ],
+  "deployment_ready": false,
+  "summary": {
+    "total_checks": 8,
+    "passed": 1,
+    "warnings": 3,
+    "failed": 1,
+    "duration_seconds": 60.71,
+    "check_details": {
+      "Critical Files": 80,
+      "Security Baseline": 30,
+      "Test Coverage": 75,
+      "Performance Benchmarks": 70,
+      "CLI Functionality": 70,
+      "Documentation": 60,
+      "Infrastructure Health": 100,
+      "Budget Tracking": 70
+    }
+  }
+}

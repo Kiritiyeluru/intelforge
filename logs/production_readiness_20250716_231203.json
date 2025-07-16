@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-07-16T23:12:03.689236",
+  "overall_score": 86,
+  "overall_status": "Deployment Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "pass",
+      "score": 100,
+      "message": "All critical files present and valid",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Security Baseline",
+      "status": "pass",
+      "score": 100,
+      "message": "Security tests pass",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Test Coverage",
+      "status": "fail",
+      "score": 30,
+      "message": "Coverage: 2.8%",
+      "details": {
+        "coverage_percent": 2.775299831499653
+      },
+      "recommendations": [
+        "Improve test coverage to 80%+"
+      ]
+    },
+    {
+      "name": "Performance Benchmarks",
+      "status": "pass",
+      "score": 100,
+      "message": "Performance tests pass",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "CLI Functionality",
+      "status": "pass",
+      "score": 100,
+      "message": "All CLI commands working",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Documentation",
+      "status": "pass",
+      "score": 100,
+      "message": "Missing: 0 docs",
+      "details": null,
+      "recommendations": []
+    },
+    {
+      "name": "Infrastructure Health",
+      "status": "pass",
+      "score": 100,
+      "message": "8/8 checks passed",
+      "details": {
+        "checks": {
+          "Python 3.x": true,
+          "Package: pytest": true,
+          "Package: loguru": true,
+          "Package: rich": true,
+          "Package: typer": true,
+          "Directory: scripts": true,
+          "Directory: tests": true,
+          "Directory: logs": true
+        }
+      },
+      "recommendations": []
+    },
+    {
+      "name": "Budget Tracking",
+      "status": "pass",
+      "score": 100,
+      "message": "Budget within limits",
+      "details": null,
+      "recommendations": null
+    }
+  ],
+  "recommendations": [
+    "Improve test coverage to 80%+",
+    "Address 1 failing checks before deployment"
+  ],
+  "deployment_ready": true,
+  "summary": {
+    "total_checks": 8,
+    "passed": 7,
+    "warnings": 0,
+    "failed": 1,
+    "duration_seconds": 46.35,
+    "check_details": {
+      "Critical Files": 100,
+      "Security Baseline": 100,
+      "Test Coverage": 30,
+      "Performance Benchmarks": 100,
+      "CLI Functionality": 100,
+      "Documentation": 100,
+      "Infrastructure Health": 100,
+      "Budget Tracking": 100
+    }
+  }
+}

@@ -11,10 +11,11 @@ Follows:
 Usage: python phase_02_github.py [--dry-run]
 """
 
-import os
-import yaml
-import logging
 import argparse
+import logging
+import os
+
+import yaml
 
 
 def load_config(config_path="config/config.yaml"):

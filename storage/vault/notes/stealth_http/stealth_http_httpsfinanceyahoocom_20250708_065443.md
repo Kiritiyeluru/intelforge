@@ -17,13 +17,13 @@ timestamp: 2025-07-08T06:54:43.498263
 
 # Yahoo Finance - Stock Market Live, Quotes, Business & Finance News
 
-**URL:** https://finance.yahoo.com  
-**Final URL:** https://finance.yahoo.com/  
-**Status:** success (HTTP 200)  
-**Bot Detection:** ✅ Clear  
-**Content Length:** 5,523 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T06:54:43.498263  
+**URL:** https://finance.yahoo.com
+**Final URL:** https://finance.yahoo.com/
+**Status:** success (HTTP 200)
+**Bot Detection:** ✅ Clear
+**Content Length:** 5,523 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T06:54:43.498263
 
 ## Main Content
 

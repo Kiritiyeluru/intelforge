@@ -5,7 +5,7 @@
 **ZERO TOLERANCE FOR CUSTOM CODE WHEN ALTERNATIVES EXIST:**
 
 - **REUSE OVER REBUILD**: NEVER write custom code when existing libraries/tools exist
-- **CHECK FIRST, BUILD NEVER**: Always search for existing solutions before coding  
+- **CHECK FIRST, BUILD NEVER**: Always search for existing solutions before coding
 - **FRAMEWORK OVER CUSTOM**: Use established frameworks rather than custom implementations
 - **TOOL RESEARCH MANDATORY**: Use find_tools_template.md before any development
 - **PROVEN OVER NOVEL**: Prefer battle-tested tools over custom logic
@@ -64,7 +64,7 @@
 
 **Phase 1: Core Foundation (Week 1-2)**
 - **Primary**: scrapy + trafilatura + scrapy-playwright
-- **Academic**: paperscraper + arxivscraper  
+- **Academic**: paperscraper + arxivscraper
 - **Anti-Detection**: Stealth-Requests for HTTP, nodriver for browser
 
 **Phase 2: Intelligence Enhancement (Week 3-4)**
@@ -277,7 +277,7 @@ Content with [[wikilinks]] and #tags
 
 ## Current Project Status
 
-**Project Status:** Phase 2C Complete → **Pre-Built Framework Integration Achieved**  
+**Project Status:** Phase 2C Complete → **Pre-Built Framework Integration Achieved**
 **Current Phase:** Phase 3 Ready - Anti-Detection & Performance Optimization
 
 ### 🎯 **LATEST ACHIEVEMENT: Phase 2C - Pre-Built Framework Integration Complete (2025)**
@@ -291,7 +291,7 @@ Content with [[wikilinks]] and #tags
 
 ### ✅ **COMPLETED & OPERATIONAL**
 - **Unified Scraping Framework** - Complete modular scraping system ✅ COMPLETE
-- **Phase 1: Reddit Scraping** - PRAW-based extraction from trading subreddits ✅ COMPLETE  
+- **Phase 1: Reddit Scraping** - PRAW-based extraction from trading subreddits ✅ COMPLETE
 - **Phase 2: GitHub Mining** - PyGitHub-based repository and documentation extraction ✅ COMPLETE
 - **Phase 2A-2C: Enterprise Framework Migration** - Scrapy + trafilatura + pre-built academic tools ✅ COMPLETE
 - **Phase 3: Web Scraping** - httpx + selectolax for blogs and articles ✅ COMPLETE
@@ -300,9 +300,9 @@ Content with [[wikilinks]] and #tags
 - **Rust Performance Stack** - 40-132x performance improvements with proven benchmarks ✅ COMPLETE
 
 ### 🚀 **CURRENT FOCUS: Phase 3 Ready - Anti-Detection & Performance**
-**Pre-Built Framework Integration:** ✅ COMPLETE (Academic research tools operational)  
-**Next:** Anti-detection capabilities with botasaurus framework  
-**Priority:** READY - Install and configure botasaurus (5/5 stars) for advanced stealth  
+**Pre-Built Framework Integration:** ✅ COMPLETE (Academic research tools operational)
+**Next:** Anti-detection capabilities with botasaurus framework
+**Priority:** READY - Install and configure botasaurus (5/5 stars) for advanced stealth
 **Secondary:** Performance optimization and concurrent processing
 **Advanced:** Integration testing with protected financial sites
 
@@ -335,7 +335,7 @@ Content with [[wikilinks]] and #tags
 
 **Specialized Scrapers**:
 - `reddit_scraper.py` - PRAW + base framework for r/algotrading, r/investing
-- `github_scraper.py` - PyGitHub + base framework for algorithm repositories  
+- `github_scraper.py` - PyGitHub + base framework for algorithm repositories
 - `web_scraper.py` - httpx + selectolax for Medium, Dev.to, blogs
 
 **Automation & Organization**:
@@ -348,7 +348,7 @@ Content with [[wikilinks]] and #tags
 Use `@guidance/development/Reusable_Development_Checklist_for_Each_Module.md` for every module:
 
 1. Reuse over rebuild
-2. Clear interfaces & modularity  
+2. Clear interfaces & modularity
 3. Resilience by default
 4. AI-friendliness
 5. Configuration, not hardcoding
@@ -463,10 +463,10 @@ claude mcp add-from-claude-desktop  # Import from Claude Desktop
    ```bash
    # Test server startup
    claude mcp list
-   
+
    # Test basic functionality
    # (Send test query to verify server responds)
-   
+
    # Check logs for errors
    tail -f ~/.claude/logs/mcp_servers.log
    ```
@@ -475,10 +475,10 @@ claude mcp add-from-claude-desktop  # Import from Claude Desktop
    ```bash
    # Monitor resource usage during testing
    htop -p $(pgrep -f "mcp-server")
-   
+
    # Test response times with sample queries
    time <test-command>
-   
+
    # Check memory consumption
    ps aux | grep mcp-server | awk '{print $4, $11}'
    ```
@@ -603,7 +603,7 @@ claude mcp add-from-claude-desktop  # Import from Claude Desktop
 - **Phase File Validation**: Enforces naming conventions (PreToolUse)
 - **Knowledge Auto-Organization**: Auto-triggers article organizer (PostToolUse)
 - **Scraping Session Logger**: Tracks scraping activities and performance metrics (PostToolUse)
-- **Dependency Intelligence**: Auto-tracks imports and updates requirements (PostToolUse)  
+- **Dependency Intelligence**: Auto-tracks imports and updates requirements (PostToolUse)
 - **Module Structure Guardian**: Enforces consistent code patterns (PostToolUse)
 - **Config Change Propagator**: Propagates config changes automatically (PostToolUse)
 

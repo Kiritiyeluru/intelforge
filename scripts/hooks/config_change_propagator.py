@@ -6,9 +6,10 @@ Automatically propagates config.yaml changes to related files and maintains cons
 
 import json
 import sys
-import yaml
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import yaml
 
 # Configure paths
 HOOKS_DIR = Path(__file__).parent

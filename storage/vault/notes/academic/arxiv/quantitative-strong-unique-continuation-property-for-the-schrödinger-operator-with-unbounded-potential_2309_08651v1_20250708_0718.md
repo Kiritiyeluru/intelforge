@@ -10,18 +10,18 @@ primary_category: math.AP
 arxiv_id: 2309.08651v1
 url: http://arxiv.org/abs/2309.08651v1
 pdf_url: http://arxiv.org/pdf/2309.08651v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 093a093cf5e2fe28
 ---
 
 # Quantitative strong unique continuation property for the Schrödinger operator with unbounded potential
 
-**Authors:** Mourad Choulli  
-**Published:** 2023-09-15  
-**Updated:** 2023-09-15  
-**Primary Category:** math.AP  
-**ArXiv ID:** 2309.08651v1  
+**Authors:** Mourad Choulli
+**Published:** 2023-09-15
+**Updated:** 2023-09-15
+**Primary Category:** math.AP
+**ArXiv ID:** 2309.08651v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2309.08651v1)

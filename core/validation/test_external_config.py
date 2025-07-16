@@ -4,8 +4,9 @@ Test script to verify external configuration support in CanaryValidator v2
 """
 
 import sys
-import yaml
 from pathlib import Path
+
+import yaml
 
 sys.path.append("/home/kiriti/alpha_projects/intelforge/scripts")
 

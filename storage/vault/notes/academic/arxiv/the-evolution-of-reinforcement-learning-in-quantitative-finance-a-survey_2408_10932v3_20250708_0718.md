@@ -17,11 +17,11 @@ content_hash: 5141c3f4c5833b40
 
 # The Evolution of Reinforcement Learning in Quantitative Finance: A Survey
 
-**Authors:** Nikolaos Pippas, Elliot A. Ludvig, Cagatay Turkay  
-**Published:** 2024-08-20  
-**Updated:** 2025-05-06  
-**Primary Category:** cs.AI  
-**ArXiv ID:** 2408.10932v3  
+**Authors:** Nikolaos Pippas, Elliot A. Ludvig, Cagatay Turkay
+**Published:** 2024-08-20
+**Updated:** 2025-05-06
+**Primary Category:** cs.AI
+**ArXiv ID:** 2408.10932v3
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2408.10932v3)

@@ -10,18 +10,18 @@ primary_category: q-fin.TR
 arxiv_id: 2401.14761v1
 url: http://arxiv.org/abs/2401.14761v1
 pdf_url: http://arxiv.org/pdf/2401.14761v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 7ca5ec546daf9342
 ---
 
 # ESG driven pairs algorithm for sustainable trading: Analysis from the Indian market
 
-**Authors:** Eeshaan Dutta, Sarthak Diwan, Siddhartha P. Chakrabarty  
-**Published:** 2024-01-26  
-**Updated:** 2024-01-26  
-**Primary Category:** q-fin.TR  
-**ArXiv ID:** 2401.14761v1  
+**Authors:** Eeshaan Dutta, Sarthak Diwan, Siddhartha P. Chakrabarty
+**Published:** 2024-01-26
+**Updated:** 2024-01-26
+**Primary Category:** q-fin.TR
+**ArXiv ID:** 2401.14761v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2401.14761v1)

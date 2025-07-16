@@ -4,11 +4,12 @@ Python 3.10 Performance Validation Script
 Tests the high-performance tools: vectorbt, numba, ta-lib, polars
 """
 
+import logging
 import sys
 import time
+
 import numpy as np
 import pandas as pd
-import logging
 
 # Configure logging
 logging.basicConfig(
@@ -59,11 +60,11 @@ def test_numba_performance():
             "jit_time": f"{jit_time:.4f}s",
             "speedup": f"{speedup:.2f}x",
             "result_match": result_python == result_jit,
-            "status": "✅ EXCELLENT"
-            if speedup > 50
-            else "✅ GOOD"
-            if speedup > 10
-            else "⚠️ MINIMAL",
+            "status": (
+                "✅ EXCELLENT"
+                if speedup > 50
+                else "✅ GOOD" if speedup > 10 else "⚠️ MINIMAL"
+            ),
         }
 
     except ImportError:
@@ -236,11 +237,11 @@ def test_polars_performance():
             "pandas_time": f"{pandas_time:.4f}s",
             "polars_time": f"{polars_time:.4f}s",
             "speedup": f"{speedup:.2f}x",
-            "status": "✅ EXCELLENT"
-            if speedup > 5
-            else "✅ GOOD"
-            if speedup > 2
-            else "⚠️ MINIMAL",
+            "status": (
+                "✅ EXCELLENT"
+                if speedup > 5
+                else "✅ GOOD" if speedup > 2 else "⚠️ MINIMAL"
+            ),
         }
 
     except ImportError:

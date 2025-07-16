@@ -29,7 +29,7 @@ DISCLAIMER:
 * I do not have any position in TSLA beyond through an S&P500 index fund
 * I sold my TSLA stock at a 6% loss yesterday after holding for a year. Might buy again if I see progress and if it dips below 225 (or maybe below 185)
 
-EDIT: Clarification on last disclaimer - I bought TSLA about a year ago but bought some more in late 2024 which raised my average costs basis up by a lot 
+EDIT: Clarification on last disclaimer - I bought TSLA about a year ago but bought some more in late 2024 which raised my average costs basis up by a lot
 
 ## Comments
 

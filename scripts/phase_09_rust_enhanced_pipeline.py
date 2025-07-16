@@ -10,23 +10,22 @@ Features:
 - Integration with existing IntelForge architecture
 """
 
-import time
 import json
-from pathlib import Path
-from typing import Dict, List, Any
+import time
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List
 
-# Rust-backed performance libraries
-import polars as pl
-from tokenizers import Tokenizer, models, pre_tokenizers
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
 import numpy as np
-
 # Standard libraries
 import pandas as pd
-from sentence_transformers import SentenceTransformer
+# Rust-backed performance libraries
+import polars as pl
 import yaml
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, PointStruct, VectorParams
+from sentence_transformers import SentenceTransformer
+from tokenizers import Tokenizer, models, pre_tokenizers
 
 
 class RustEnhancedIntelForge:

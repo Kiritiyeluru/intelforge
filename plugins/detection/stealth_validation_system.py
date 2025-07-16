@@ -5,14 +5,15 @@ Automated CreepJS and Pixelscan validation for anti-detection effectiveness
 """
 
 import asyncio
-import time
 import json
 import logging
+import time
 from datetime import datetime
 from pathlib import Path
-from playwright.async_api import async_playwright
+
 import undetected_chromedriver as uc
 from botasaurus_driver import Driver
+from playwright.async_api import async_playwright
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -306,11 +307,11 @@ class StealthValidator:
                     numeric_score = float(score.replace("%", ""))
                     summary["framework_scores"][framework] = {
                         "creepjs_score": numeric_score,
-                        "grade": "EXCELLENT"
-                        if numeric_score >= 70
-                        else "GOOD"
-                        if numeric_score >= 50
-                        else "NEEDS_IMPROVEMENT",
+                        "grade": (
+                            "EXCELLENT"
+                            if numeric_score >= 70
+                            else "GOOD" if numeric_score >= 50 else "NEEDS_IMPROVEMENT"
+                        ),
                     }
                 except:
                     summary["framework_scores"][framework] = {
@@ -322,9 +323,11 @@ class StealthValidator:
         if summary["framework_scores"]:
             best_framework = max(
                 summary["framework_scores"].items(),
-                key=lambda x: x[1].get("creepjs_score", 0)
-                if isinstance(x[1].get("creepjs_score"), (int, float))
-                else 0,
+                key=lambda x: (
+                    x[1].get("creepjs_score", 0)
+                    if isinstance(x[1].get("creepjs_score"), (int, float))
+                    else 0
+                ),
             )
             summary["recommendations"].append(
                 f"Best performing framework: {best_framework[0]} with score {best_framework[1].get('creepjs_score', 'N/A')}"
@@ -350,16 +353,16 @@ from stealth_validation_system import StealthValidator
 async def main():
     validator = StealthValidator()
     results = await validator.run_comprehensive_validation()
-    
+
     # Check if any framework scores below 70%
     alert_threshold = 70.0
     alerts = []
-    
+
     for framework, data in results["summary"]["framework_scores"].items():
         score = data.get("creepjs_score", 0)
         if isinstance(score, (int, float)) and score < alert_threshold:
             alerts.append(f"⚠️ {framework}: {score}% (below {alert_threshold}% threshold)")
-    
+
     if alerts:
         print("🚨 STEALTH ALERTS:")
         for alert in alerts:

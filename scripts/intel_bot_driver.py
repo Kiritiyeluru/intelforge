@@ -5,14 +5,15 @@ Advanced wrapper for Botasaurus Driver with comprehensive error handling,
 retry logic, TTR tracking, and operational intelligence.
 """
 
-import time
+import hashlib
 import json
 import logging
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict, Any, List
+from typing import Any, Dict, List, Optional
+
 from botasaurus_driver import Driver
-import hashlib
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

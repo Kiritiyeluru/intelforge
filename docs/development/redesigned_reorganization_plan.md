@@ -1,7 +1,7 @@
 # IntelForge Repository Reorganization Plan - Redesigned with Superior Tools
 
-**Status**: Ready for implementation  
-**Version**: 2.0 - High-Performance Tool Integration  
+**Status**: Ready for implementation
+**Version**: 2.0 - High-Performance Tool Integration
 **Target**: Transform 40+ root-level files using Rust-based and AI-powered tools
 
 ## 🚀 **Key Improvements Over Original Plan**
@@ -31,8 +31,8 @@
 ## 📋 **4-Phase Redesigned Implementation**
 
 ### **Phase 1: Ultra-Fast Safe Cleanup (Complete Rust Stack)**
-**Tools**: ruff (primary), dprint, pylyzer, fd, ripgrep, hyperfine  
-**Performance**: 100x faster than traditional 5-tool chain  
+**Tools**: ruff (primary), dprint, pylyzer, fd, ripgrep, hyperfine
+**Performance**: 100x faster than traditional 5-tool chain
 **Safety**: High - formatting only, fully reversible
 
 ```bash
@@ -62,7 +62,7 @@ hyperfine 'ruff check . && pylyzer check .' 'traditional_5_tool_chain.sh'
 **Expected Impact**: 95% chaos reduction in <15 seconds vs 5+ minutes (20x total improvement)
 
 ### **Phase 2: AI-Enhanced Analysis (Rust + Intelligence)**
-**Tools**: tree-sitter, refact.ai, vulture, pydeps, bowler, fd, ripgrep  
+**Tools**: tree-sitter, refact.ai, vulture, pydeps, bowler, fd, ripgrep
 **Purpose**: AI-powered structural understanding and intelligent reorganization planning
 
 ```bash
@@ -88,7 +88,7 @@ fd "\.py$" -x python -c "
 import ast, sys
 with open(sys.argv[1]) as f:
     tree = ast.parse(f.read())
-    imports = [n.module or n.name for n in ast.walk(tree) 
+    imports = [n.module or n.name for n in ast.walk(tree)
                if isinstance(n, (ast.Import, ast.ImportFrom)) and n.module]
     print(f'{sys.argv[1]}: {imports}')
 " > reports/fast_dependency_analysis.txt
@@ -104,13 +104,13 @@ with open(sys.argv[1]) as f:
 " > reports/structural_complexity.txt
 ```
 
-**Expected Outputs**: 
+**Expected Outputs**:
 - Comprehensive structural analysis in seconds vs minutes
 - AI-suggested reorganization patterns
 - Performance bottleneck identification
 
 ### **Phase 3: AI-Powered Structural Reorganization (Bowler-Safe)**
-**Tools**: bowler (primary), libcst, fd, git, ripgrep  
+**Tools**: bowler (primary), libcst, fd, git, ripgrep
 **Safety**: High - Bowler ensures all imports are automatically updated during moves
 **Key Advantage**: Zero manual import fixing required
 
@@ -180,7 +180,7 @@ bowler do move_module \
   --new-module core.validation.validator \
   --file canary_validation_system_v2.py
 
-# Move intelligence files with automatic import fixing  
+# Move intelligence files with automatic import fixing
 bowler do move_module \
   --old-module intel_bot_driver_v2 \
   --new-module core.intelligence.driver \
@@ -202,7 +202,7 @@ python -c "import ast; [ast.parse(open(f).read()) for f in __import__('glob').gl
 
 **Why Bowler is Essential:**
 - **Automatic Import Updates**: Changes `from canary_validation_system_v2 import X` to `from core.validation.validator import X`
-- **Cross-File References**: Updates all files that import moved modules  
+- **Cross-File References**: Updates all files that import moved modules
 - **Safe AST Transformation**: Preserves code logic, only updates imports
 - **Rollback Capability**: Can reverse transformations if needed
 - **Dependency Aware**: Understands import chains and updates them correctly
@@ -214,13 +214,13 @@ from canary_validation_system_v2 import EnhancedCanaryValidator
 from intel_bot_driver_v2 import IntelBotDriverV2
 
 # After Bowler move - AUTOMATICALLY UPDATED
-from core.validation.validator import EnhancedCanaryValidator  
+from core.validation.validator import EnhancedCanaryValidator
 from core.intelligence.driver import IntelBotDriverV2
 ```
 ```
 
 ### **Phase 4: Continuous Performance Enforcement**
-**Tools**: ruff, pre-commit, hyperfine, cargo-nextest  
+**Tools**: ruff, pre-commit, hyperfine, cargo-nextest
 **Purpose**: Maintain organization with performance monitoring
 
 ```bash
@@ -238,13 +238,13 @@ repos:
         entry: ruff format
         language: system
         types: [python]
-      
+
       - id: ruff-check
         name: Lint with Ruff
         entry: ruff check --fix
         language: system
         types: [python]
-      
+
       - id: performance-check
         name: Performance Validation
         entry: hyperfine --warmup 1 --max-runs 3 'python -m pytest tests/ --quiet'
@@ -264,7 +264,7 @@ hyperfine 'fd "\.py$" | wc -l' 'find . -name "*.py" | wc -l'
 echo "🧹 Format Performance"
 hyperfine --warmup 2 'ruff format --check .' 'black --check .'
 
-echo "📈 Test Performance" 
+echo "📈 Test Performance"
 hyperfine 'cargo nextest run' 'python -m pytest'
 
 echo "💾 Storage Analysis"
@@ -283,7 +283,7 @@ pip install ruff
 
 # What it replaces:
 # - black (formatting)
-# - isort (import sorting) 
+# - isort (import sorting)
 # - flake8 (linting)
 # - pylint (code analysis)
 # - autoflake (unused import removal)
@@ -298,7 +298,7 @@ cargo install pylyzer
 
 # 10x faster than mypy for:
 # - Type checking
-# - Dead code detection  
+# - Dead code detection
 # - Undefined variable detection
 # - Unreachable code analysis
 ```
@@ -321,7 +321,7 @@ pip install refact-ai  # For intelligent code suggestions
 ```bash
 # Performance and analysis
 cargo install tokei          # Code statistics (Rust-fast)
-cargo install git-delta      # Better git diffs  
+cargo install git-delta      # Better git diffs
 pip install pydeps           # Modern dependency visualization
 
 # Advanced formatting
@@ -394,20 +394,20 @@ class IntelligentCategorizer:
             'tests': ['test_', 'Test', 'pytest', 'unittest'],
             'automation': ['script', 'schedule', 'auto', 'cron']
         }
-    
+
     def categorize_file(self, filepath):
         """AI-powered file categorization based on AST analysis"""
         try:
             with open(filepath) as f:
                 content = f.read()
                 tree = ast.parse(content)
-            
+
             # Analyze AST for patterns
             classes = [n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)]
             functions = [n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)]
-            imports = [n.module or n.name for n in ast.walk(tree) 
+            imports = [n.module or n.name for n in ast.walk(tree)
                       if isinstance(n, (ast.Import, ast.ImportFrom)) and hasattr(n, 'module')]
-            
+
             # Score each category
             scores = defaultdict(int)
             for category, keywords in self.categories.items():
@@ -415,47 +415,47 @@ class IntelligentCategorizer:
                     # File name scoring
                     if keyword.lower() in filepath.lower():
                         scores[category] += 3
-                    
+
                     # Class name scoring
                     for cls in classes:
                         if keyword.lower() in cls.lower():
                             scores[category] += 5
-                    
+
                     # Function name scoring
                     for func in functions:
                         if keyword.lower() in func.lower():
                             scores[category] += 2
-                    
+
                     # Content scoring
                     if keyword.lower() in content.lower():
                         scores[category] += 1
-            
+
             # Return highest scoring category
             if scores:
                 return max(scores, key=scores.get)
             return 'automation'  # Default category
-            
+
         except Exception as e:
             print(f"Error categorizing {filepath}: {e}")
             return 'automation'
-    
+
     def generate_migration_plan(self, dry_run=True):
         """Generate intelligent migration plan"""
         root_files = list(Path('.').glob('*.py'))
         migration_plan = defaultdict(list)
-        
+
         for file in root_files:
             if file.name.startswith('.'):
                 continue
             category = self.categorize_file(file)
             migration_plan[category].append(file)
-        
+
         # Generate commands
         commands = []
         for category, files in migration_plan.items():
             if not dry_run:
                 os.makedirs(category, exist_ok=True)
-            
+
             for file in files:
                 cmd = f"git mv {file} {category}/"
                 commands.append(cmd)
@@ -463,17 +463,17 @@ class IntelligentCategorizer:
                     print(f"[DRY-RUN] {cmd}")
                 else:
                     os.system(cmd)
-        
+
         return migration_plan, commands
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--dry-run', action='store_true', help='Show plan without executing')
     args = parser.parse_args()
-    
+
     categorizer = IntelligentCategorizer()
     plan, commands = categorizer.generate_migration_plan(dry_run=args.dry_run)
-    
+
     print(f"\n📊 Migration Summary:")
     for category, files in plan.items():
         print(f"  {category}: {len(files)} files")
@@ -486,7 +486,7 @@ Based on analysis of `.claude/*.json` configurations:
 
 #### **Rust Environment (100% Complete)**
 - ripgrep (rg) - Ultra-fast text search
-- fd - Fast file discovery  
+- fd - Fast file discovery
 - bat - Enhanced file viewing
 - exa - Modern ls replacement
 - bottom (btm) - System monitoring
@@ -513,7 +513,7 @@ cargo install pylyzer                    # COMPLETE
 
 **Installation Results:**
 - **ruff**: ✅ Ultra-fast linter/formatter (replaces 5 tools)
-- **refurb**: ✅ AI-powered refactoring suggestions  
+- **refurb**: ✅ AI-powered refactoring suggestions
 - **bowler**: ✅ Safe file moves with automatic import fixing
 - **libcst**: ✅ AST-based transformations
 - **pylyzer**: ✅ Rust-powered type checker (10x faster than mypy)
@@ -533,7 +533,7 @@ pip install snakefood3 graphviz
 pip install pre-commit
 ```
 
-#### **Specialized Tools (Low Priority)**  
+#### **Specialized Tools (Low Priority)**
 ```bash
 # Financial analysis (project-specific)
 pip install yfinance pandas-datareader alpha_vantage
@@ -614,7 +614,7 @@ hyperfine --warmup 2 'ruff check . && ruff format .' 'black . && isort . && flak
 
 ### **Performance Monitoring Integration**
 - **hyperfine**: Statistical performance validation
-- **cargo-nextest**: 50% faster test execution  
+- **cargo-nextest**: 50% faster test execution
 - **Real-time metrics**: Performance regression detection
 
 ### **AI-Enhanced Decision Making**

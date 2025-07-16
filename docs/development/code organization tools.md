@@ -1,7 +1,7 @@
 # IntelForge Repository Organization Plan
 
-**Status**: Ready for implementation  
-**Configuration**: `.claude/repository_organization_tools.json`  
+**Status**: Ready for implementation
+**Configuration**: `.claude/repository_organization_tools.json`
 **Target**: Transform chaotic 40+ root-level files into clean, maintainable structure
 
 ## 🎯 **Organization Strategy Overview**
@@ -11,8 +11,8 @@ IntelForge has grown organically with 40+ loose files at root level. This plan u
 ## 📋 **4-Phase Implementation Plan**
 
 ### **Phase 1: Safe Cleanup (Immediate, Reversible)**
-**Status**: Ready to execute  
-**Tools**: black, isort, autoflake  
+**Status**: Ready to execute
+**Tools**: black, isort, autoflake
 **Safety**: High - formatting only, no logic changes
 
 ```bash
@@ -21,14 +21,14 @@ pip install black isort autoflake
 
 # Execute safe cleanup
 black .                                                    # Format all Python files
-isort .                                                    # Sort imports consistently  
+isort .                                                    # Sort imports consistently
 autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive .
 ```
 
 **Expected Impact**: 80% visual chaos reduction, consistent formatting
 
 ### **Phase 2: Analysis & Understanding (Safe, Read-Only)**
-**Tools**: vulture, snakefood, unimport  
+**Tools**: vulture, snakefood, unimport
 **Purpose**: Understand current structure before changes
 
 ```bash
@@ -44,7 +44,7 @@ unimport --check --diff > reports/unused_imports.txt
 **Expected Outputs**: Dependency visualization, dead code report, import cleanup suggestions
 
 ### **Phase 3: Structural Reorganization (Careful, Planned)**
-**Tools**: git mv, bowler, libcst  
+**Tools**: git mv, bowler, libcst
 **Safety**: Medium - requires testing after each move
 
 **Target Structure:**
@@ -52,7 +52,7 @@ unimport --check --diff > reports/unused_imports.txt
 intelforge/
 ├── core/              # Core validation, driver, config modules
 │   ├── validation.py  # EnhancedCanaryValidator → canary_validation_system_v2.py
-│   ├── driver.py      # IntelBotDriverV2 → intel_bot_driver_v2.py  
+│   ├── driver.py      # IntelBotDriverV2 → intel_bot_driver_v2.py
 │   ├── config.py      # Configuration management
 │   └── __init__.py
 ├── plugins/           # Site-specific validation plugins
@@ -90,7 +90,7 @@ bowler do update_imports --old-module canary_validation_system_v2 --new-module c
 ```
 
 ### **Phase 4: Enforcement & Maintenance (Ongoing)**
-**Tools**: flake8, pylint, pre-commit hooks  
+**Tools**: flake8, pylint, pre-commit hooks
 **Purpose**: Maintain organization standards
 
 ```bash
@@ -112,7 +112,7 @@ pylint core/ plugins/ tools/
 # Core formatting tools
 pip install black isort autoflake
 
-# Analysis tools  
+# Analysis tools
 pip install vulture snakefood3 unimport
 sudo apt install graphviz  # For dependency graphs
 
@@ -829,6 +829,3 @@ split_file("your_big_script.py")
 ---
 
 Would you like all these bundled into a `scripts/` directory with a setup script and Makefile? I can auto-generate the project scaffold.
-
-
-

@@ -16,10 +16,10 @@ estimated_time: 4-6 hours
 
 # IntelForge Naming Convention Implementation Plan
 
-**Created:** 2025-07-14  
-**Category:** PLAN (Planning)  
-**Priority:** A (Critical/Urgent)  
-**Author:** CL  
+**Created:** 2025-07-14
+**Category:** PLAN (Planning)
+**Priority:** A (Critical/Urgent)
+**Author:** CL
 **Estimated Time:** 4-6 hours total implementation
 
 ## Overview

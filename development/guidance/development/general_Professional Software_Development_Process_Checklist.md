@@ -103,5 +103,3 @@ Write a Python script that:
 ```
 
 ---
-
-

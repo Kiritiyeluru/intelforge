@@ -100,27 +100,27 @@ $ python cli.py --input ./session_docs --output plan.md --detail high
 ## /active/
 
 ### PROJECT_STATUS.md
-**Contents**: Project dashboard with current status  
+**Contents**: Project dashboard with current status
 **Key Details**:
-- Current phase: Repository Reorganization COMPLETE  
-- Performance metrics: 72x improvement achieved  
-- System capabilities: Enterprise scraping platform operational  
-- Strategic options: 3 immediate next steps available  
+- Current phase: Repository Reorganization COMPLETE
+- Performance metrics: 72x improvement achieved
+- System capabilities: Enterprise scraping platform operational
+- Strategic options: 3 immediate next steps available
 
 ### CURRENT_TASK.md
-**Contents**: Detailed focus document for current work  
+**Contents**: Detailed focus document for current work
 **Key Details**:
-- Phase 2 Testing Foundation COMPLETE  
-- Focus: Phase 3 Advanced Observability  
-- Duration: 6.5 hours, 7 core components  
+- Phase 2 Testing Foundation COMPLETE
+- Focus: Phase 3 Advanced Observability
+- Duration: 6.5 hours, 7 core components
 
 ## /planning/
 
 ### IMPLEMENTATION_PLAN.md
-**Contents**: Architecture blueprint for next-gen scraper  
+**Contents**: Architecture blueprint for next-gen scraper
 **Key Details**:
-- Language: Python + Rust  
-- Focus: Anti-detection layer, distributed orchestration  
+- Language: Python + Rust
+- Focus: Anti-detection layer, distributed orchestration
 - Milestone: Multi-core scraping harness in progress
 ```
 
@@ -290,5 +290,3 @@ These traditional tools do more than list filenames:
 They're ideal if your documentation needs are tied to structured source or markup—but not full scanning of arbitrary markdown or code without comments.
 
 ---
-
-

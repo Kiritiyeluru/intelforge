@@ -1,0 +1,3 @@
+incident_id,title,description,severity,component,detection_time,resolution_time,status,ttr_minutes,sla_target_minutes,sla_met,root_cause,tags
+INC-1752547933-DAT,Database connection failure,Unable to connect to primary database,high,database,2025-07-15T08:22:13.273640,2025-07-15T08:22:14.274381,resolved,0.016679016666666668,60,True,Database service crashed due to memory exhaustion,database;connectivity
+INC-1752653206-DAT,Database connection failure,Unable to connect to primary database,high,database,2025-07-16T13:36:46.203773,2025-07-16T13:36:47.204950,resolved,0.016686283333333333,60,True,Database service crashed due to memory exhaustion,database;connectivity

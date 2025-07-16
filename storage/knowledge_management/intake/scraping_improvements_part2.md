@@ -80,10 +80,10 @@ def scrape_page(url):
 ```yaml
 reddit_scraper:
   delay: 3
-  user_agents: 
+  user_agents:
     - "Mozilla/5.0..."
   output: "data/reddit/"
-  
+
 github_scraper:
   delay: 2
   api_key: "your_key"
@@ -108,7 +108,7 @@ github_scraper:
 
 ### **Total Time: 4-5 hours max**
 - 1 hour: Basic framework
-- 1 hour: Reddit scraper  
+- 1 hour: Reddit scraper
 - 1 hour: GitHub scraper
 - 1 hour: Web scraper
 - 30 mins: Setup cron jobs

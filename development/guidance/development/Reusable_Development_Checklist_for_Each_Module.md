@@ -134,4 +134,3 @@ Would you like this as:
 * 📋 A **printable PDF** (for desk reference)
 
 Let me know and I’ll generate it instantly.
-

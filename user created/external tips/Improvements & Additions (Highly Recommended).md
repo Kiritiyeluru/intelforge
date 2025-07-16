@@ -244,4 +244,3 @@ Let me know if you’d like:
 * Drift scoring summarizer
 
 You're now ready to ship **like a pro SaaS team.**
-

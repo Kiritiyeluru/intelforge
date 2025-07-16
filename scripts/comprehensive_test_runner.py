@@ -5,13 +5,13 @@ Systematically tests all features with detailed reporting and success metrics
 """
 
 import os
+import subprocess
 import sys
 import time
 import traceback
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple
-import subprocess
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
@@ -397,9 +397,9 @@ class ComprehensiveTestRunner:
         # Generate summary
         report = f"""# IntelForge Phase 7: Comprehensive Testing & Validation Report
 
-**Generated:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}  
-**Total Duration:** {total_duration:.2f} seconds  
-**Environment:** {os.name} {sys.platform}  
+**Generated:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+**Total Duration:** {total_duration:.2f} seconds
+**Environment:** {os.name} {sys.platform}
 
 ## 📊 Test Summary
 
@@ -513,7 +513,8 @@ class ComprehensiveTestRunner:
 def main():
     """Main entry point"""
     if len(sys.argv) > 1 and sys.argv[1] == "--help":
-        print("""
+        print(
+            """
 IntelForge Comprehensive Test Runner
 
 Usage:
@@ -523,13 +524,14 @@ Options:
     --help          Show this help message
     --suite N       Run specific test suite (1-4)
     --quick         Run quick validation tests only
-    
+
 Test Suites:
     1. Financial Libraries Integration
-    2. Enhanced Monitoring Dashboard  
+    2. Enhanced Monitoring Dashboard
     3. AI Processing Pipeline Enhancement
     4. Integration & Performance Tests
-        """)
+        """
+        )
         return
 
     runner = ComprehensiveTestRunner()

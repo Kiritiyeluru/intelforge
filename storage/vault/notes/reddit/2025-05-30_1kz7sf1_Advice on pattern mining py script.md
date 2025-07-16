@@ -18,9 +18,9 @@ https://preview.redd.it/anerltcfxx3f1.png?width=1304&format=png&auto=webp&s=ead4
 
 These aren't meant to be tradeable signals in and of themselves, but I'm looking at accumulating dozens or hundreds of high quality patterns that might inform a broader strategy.
 
-In this specific example, this is looking at yang-zhang volatility changes in the underlying over specific time frames. 
+In this specific example, this is looking at yang-zhang volatility changes in the underlying over specific time frames.
 
-Looking for specifics on how the specific metrics I'm looking at might be flawed or if I'm missing something that should be factored in. For example, Is there an assessment metric that I should include here? Is there a fundamental flaw in this approach? Are there metrics I'm looking at that are meaningless in this context? 
+Looking for specifics on how the specific metrics I'm looking at might be flawed or if I'm missing something that should be factored in. For example, Is there an assessment metric that I should include here? Is there a fundamental flaw in this approach? Are there metrics I'm looking at that are meaningless in this context?
 
 I can provide any actual py logic as needed.
 

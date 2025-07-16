@@ -183,7 +183,7 @@ Analysis: Replacing the Remaining 10% Without Overengineering
   def cosine_similarity(vec1, vec2):
       # Custom implementation...
 
-  # REPLACE: 1 line with battle-tested library  
+  # REPLACE: 1 line with battle-tested library
   from sklearn.metrics.pairwise import cosine_similarity
   similarity = cosine_similarity(vec1.reshape(1, -1), vec2.reshape(1, -1))[0][0]
   Perfect example of "reuse over rebuild" - eliminates edge cases, adds batching, GPU support.

@@ -13,7 +13,7 @@ export let options = {
     { duration: '5m', target: 50 },   // Scale to 50 concurrent scrapers
     { duration: '2m', target: 0 },    // Ramp down
   ],
-  
+
   // Performance thresholds based on IntelForge requirements
   thresholds: {
     http_req_duration: ['p(95)<5000'],  // 95% of requests under 5s
@@ -45,13 +45,13 @@ const endpoints = [
 export default function() {
   // Select random endpoint
   const endpoint = endpoints[Math.floor(Math.random() * endpoints.length)];
-  
+
   // Add realistic delay between requests (anti-detection)
   const delay = Math.random() * 2 + 1; // 1-3 seconds
-  
+
   // Make request with anti-detection headers
   let response = http.get(endpoint, { headers: headers });
-  
+
   // Comprehensive checks
   let success = check(response, {
     'status is 200': (r) => r.status === 200,
@@ -60,10 +60,10 @@ export default function() {
     'response size > 0': (r) => r.body.length > 0,
     'no server errors': (r) => r.status < 500,
   });
-  
+
   // Track custom error rate
   errorRate.add(!success);
-  
+
   // Anti-detection: Random delay between requests
   sleep(delay);
 }

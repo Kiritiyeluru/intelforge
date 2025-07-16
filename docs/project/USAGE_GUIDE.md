@@ -54,7 +54,7 @@
 ### **High-Performance Financial Computing**
 - **Institutional-Grade Performance**: Python 3.10.18 with specialized financial libraries
 - **Advanced Backtesting**: VectorBT at 794 days/second processing speed
-- **JIT Acceleration**: Numba providing 18.07x speedup for mathematical computations  
+- **JIT Acceleration**: Numba providing 18.07x speedup for mathematical computations
 - **Professional Technical Analysis**: TA-Lib processing 9,047 indicators/second
 - **Ultra-Fast Calculations**: 3.9M portfolios/second financial analysis
 - **Dual Environment Support**: Seamless switching between Python 3.10 (performance) and 3.12 (compatibility)

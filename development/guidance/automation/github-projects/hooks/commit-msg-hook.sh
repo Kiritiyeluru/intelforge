@@ -21,7 +21,7 @@ if ! grep -qE "$pattern" "$commit_msg_file"; then
   echo ""
   echo "Examples:"
   echo "  phase_01: implement reddit scraping with PRAW"
-  echo "  docs: update session handover documentation" 
+  echo "  docs: update session handover documentation"
   echo "  config: add reddit API configuration"
   echo "  fix: handle rate limiting in reddit module"
   echo ""

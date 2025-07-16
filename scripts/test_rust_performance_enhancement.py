@@ -5,12 +5,13 @@ Tests performance improvements from Rust-backed libraries
 """
 
 import time
-import polars as pl
-import pandas as pd
-from transformers import AutoTokenizer
-import numpy as np
-from typing import Dict, Any
 from pathlib import Path
+from typing import Any, Dict
+
+import numpy as np
+import pandas as pd
+import polars as pl
+from transformers import AutoTokenizer
 
 
 class RustPerformanceEnhancementTest:
@@ -145,7 +146,8 @@ class RustPerformanceEnhancementTest:
 
         try:
             from qdrant_client import QdrantClient
-            from qdrant_client.models import Distance, VectorParams, PointStruct
+            from qdrant_client.models import (Distance, PointStruct,
+                                              VectorParams)
 
             # Test in-memory client
             start_time = time.time()

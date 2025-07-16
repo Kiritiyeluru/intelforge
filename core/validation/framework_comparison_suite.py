@@ -4,21 +4,21 @@ Phase 3 Framework Comparison Suite
 Comprehensive evaluation of multi-tool orchestration vs Botasaurus framework
 """
 
-import time
-import json
-import psutil
 import asyncio
+import json
 import logging
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
+import psutil
 # Import frameworks for testing
 import undetected_chromedriver as uc
-from selenium_stealth import stealth
-from selenium.webdriver.chrome.options import Options as ChromeOptions
 from botasaurus_driver import Driver
 from playwright.async_api import async_playwright
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium_stealth import stealth
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -687,9 +687,9 @@ class FrameworkComparison:
         if botasaurus_total > multi_tool_total:
             recommendation = {
                 "choice": "botasaurus",
-                "confidence": "high"
-                if botasaurus_total - multi_tool_total > 5
-                else "medium",
+                "confidence": (
+                    "high" if botasaurus_total - multi_tool_total > 5 else "medium"
+                ),
                 "rationale": f"Botasaurus scores {botasaurus_total:.1f} vs Multi-tool {multi_tool_total:.1f}. Better integration and maintenance profile.",
                 "next_steps": [
                     "Migrate existing scrapers to Botasaurus framework",
@@ -701,9 +701,9 @@ class FrameworkComparison:
         else:
             recommendation = {
                 "choice": "multi_tool",
-                "confidence": "high"
-                if multi_tool_total - botasaurus_total > 5
-                else "medium",
+                "confidence": (
+                    "high" if multi_tool_total - botasaurus_total > 5 else "medium"
+                ),
                 "rationale": f"Multi-tool scores {multi_tool_total:.1f} vs Botasaurus {botasaurus_total:.1f}. Better performance and flexibility.",
                 "next_steps": [
                     "Complete multi-tool orchestration setup",

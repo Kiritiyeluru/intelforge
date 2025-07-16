@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:45.135625
 
 # Apple Inc. (AAPL) Stock Price, News, Quote & History - Yahoo Finance
 
-**URL:** https://finance.yahoo.com/quote/AAPL  
-**Final URL:** https://finance.yahoo.com/quote/AAPL/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 12,539 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:45.135625  
+**URL:** https://finance.yahoo.com/quote/AAPL
+**Final URL:** https://finance.yahoo.com/quote/AAPL/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 12,539 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:45.135625
 
 ## Main Content
 

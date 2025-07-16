@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:reddit.com)",
-      "WebFetch(domain:github.com)", 
+      "WebFetch(domain:github.com)",
       "WebFetch(domain:api.github.com)",
       "WebFetch(domain:medium.com)",
       "WebFetch(domain:dev.to)",
@@ -63,7 +63,7 @@
     "gpu_acceleration": {
       "enabled": true,
       "device": "cuda",
-      "gpu_model": "RTX_3060", 
+      "gpu_model": "RTX_3060",
       "cuda_version": "auto_detect",
       "memory_optimization": true,
       "frameworks": ["torch", "tensorflow", "cudf", "rapids"]

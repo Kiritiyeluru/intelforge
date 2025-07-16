@@ -16,7 +16,7 @@ Hi all,
 
 I'm optimising a breakout strategy using an MT5 EA and need to do extensive backtesting on multiple stock indices like US500 (S&P500) and USTEC. It has a very aggressive trailing stop so I need high res tick data to backtest. My broker (IC Markets) only has a few months of high res data at any one time. I've tried downloading Dukascopy tick data from QuantDataManager for free but I have not found it to be reliable when comparing with the recent ICM broker supplied data.
 
-I'm prepared to pay for the data if it's reliable, any recommendations? 
+I'm prepared to pay for the data if it's reliable, any recommendations?
 
 ## Comments
 
@@ -36,7 +36,7 @@ Databento
 
 **Author:** u/alphaQ314
 
-If i understand correctly, CFDs are an OTC product, provided by your broker. They're the only ones who would have that data. 
+If i understand correctly, CFDs are an OTC product, provided by your broker. They're the only ones who would have that data.
 
 The recommendations in this thread point to data for the underlying, not the CFD itself.
 

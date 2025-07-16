@@ -2,12 +2,12 @@
 
 ## 📊 Repository Overview
 
-**Repository**: `megadose/toutatis`  
-**GitHub Stars**: 2,747 stars  
-**Language**: Python  
-**License**: GNU General Public License v3.0  
-**Last Updated**: December 5, 2024  
-**Primary Purpose**: Instagram OSINT tool for extracting contact information and metadata  
+**Repository**: `megadose/toutatis`
+**GitHub Stars**: 2,747 stars
+**Language**: Python
+**License**: GNU General Public License v3.0
+**Last Updated**: December 5, 2024
+**Primary Purpose**: Instagram OSINT tool for extracting contact information and metadata
 
 ## 🎯 Primary Purpose
 
@@ -161,11 +161,11 @@ toutatis -i instagramID -s instagramsessionid
 
 ## 📊 Final Assessment
 
-**Overall Rating**: ⭐⭐⭐⭐⭐ (4/5)  
-**Instagram Capability**: ⭐⭐⭐⭐⭐ (5/5)  
-**Data Quality**: ⭐⭐⭐⭐⭐ (4/5)  
-**Ease of Use**: ⭐⭐⭐⭐⭐ (5/5)  
-**Legal Risk**: ⭐⭐⭐⭐⭐ (2/5)  
-**Ethical Considerations**: ⭐⭐⭐⭐⭐ (2/5)  
+**Overall Rating**: ⭐⭐⭐⭐⭐ (4/5)
+**Instagram Capability**: ⭐⭐⭐⭐⭐ (5/5)
+**Data Quality**: ⭐⭐⭐⭐⭐ (4/5)
+**Ease of Use**: ⭐⭐⭐⭐⭐ (5/5)
+**Legal Risk**: ⭐⭐⭐⭐⭐ (2/5)
+**Ethical Considerations**: ⭐⭐⭐⭐⭐ (2/5)
 
 **Recommendation**: **OSINT SPECIALIST TOOL** - Toutatis is a powerful and well-respected OSINT tool for Instagram intelligence gathering. However, it requires careful consideration of legal compliance, ethical usage guidelines, and proper authorization frameworks. Best suited for legitimate security research, investigations, and intelligence operations with proper legal oversight.

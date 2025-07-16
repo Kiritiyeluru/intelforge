@@ -209,11 +209,11 @@ def main():
         tool_name = input_data.get("tool_name", "")
         tool_input = input_data.get("tool_input", {})
         file_path = tool_input.get("file_path", "")
-        
+
         # Only process JavaScript/TypeScript files
         if not file_path.endswith(('.js', '.jsx', '.ts', '.tsx')):
             sys.exit(0)  # Success, but do nothing
-            
+
         # Check if file exists and run ESLint
         if os.path.exists(file_path):
             result = subprocess.run(
@@ -221,13 +221,13 @@ def main():
                 capture_output=True,
                 text=True
             )
-            
+
             if result.returncode != 0:
                 # Parse ESLint output
                 try:
                     lint_results = json.loads(result.stdout)
                     if lint_results and lint_results[0].get('messages'):
-                        errors = [msg for msg in lint_results[0]['messages'] 
+                        errors = [msg for msg in lint_results[0]['messages']
                                 if msg['severity'] == 2]
                         if errors:
                             error_summary = f"ESLint found {len(errors)} error(s) in {file_path}:\n"
@@ -237,9 +237,9 @@ def main():
                             sys.exit(2)  # Block the operation
                 except json.JSONDecodeError:
                     pass
-                    
+
         sys.exit(0)  # Success
-        
+
     except Exception as e:
         print(f"Hook error: {e}", file=sys.stderr)
         sys.exit(1)  # Non-blocking error
@@ -289,19 +289,19 @@ tool_name=$(echo "$input" | jq -r '.tool_name // empty')
 
 # Only process API files
 if [[ "$file_path" =~ \.(py|js|ts)$ ]] && [[ "$file_path" =~ (api|service|controller) ]]; then
-    
+
     # Generate documentation
     doc_file="${file_path%.*}.md"
-    
+
     echo "Generating documentation for $file_path..."
-    
+
     # Use a documentation tool (example with a Python script)
     if [[ "$file_path" =~ \.py$ ]]; then
         python3 ~/scripts/py-to-docs.py "$file_path" > "$doc_file"
     elif [[ "$file_path" =~ \.(js|ts)$ ]]; then
         npx jsdoc2md "$file_path" > "$doc_file"
     fi
-    
+
     # Return success with feedback
     cat << EOF
 {
@@ -309,7 +309,7 @@ if [[ "$file_path" =~ \.(py|js|ts)$ ]] && [[ "$file_path" =~ (api|service|contro
     "continue": true
 }
 EOF
-    
+
     echo "Documentation generated: $doc_file" >&2
 fi
 Configuration for the documentation hook:
@@ -320,7 +320,7 @@ Configuration for the documentation hook:
         "matcher": "Write|Edit",
         "hooks": [
           {
-            "type": "command", 
+            "type": "command",
             "command": "~/scripts/doc-generator.sh"
           }
         ]

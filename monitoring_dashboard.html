@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelForge Production Monitoring Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-healthy {
+            background-color: #4caf50;
+        }
+        .status-warning {
+            background-color: #ff9800;
+        }
+        .status-critical {
+            background-color: #f44336;
+        }
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .metric:last-child {
+            border-bottom: none;
+        }
+        .metric-value {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .alerts {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .alert {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .alert-critical {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .refresh-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .refresh-btn {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .refresh-btn:hover {
+            background: #1b5e20;
+        }
+        .auto-refresh {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+            transition: width 0.3s ease;
+        }
+        .health-details {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 IntelForge Production Monitoring</h1>
+            <p>Real-time system health and performance tracking</p>
+        </div>
+        
+        <div class="refresh-controls">
+            <button class="refresh-btn" onclick="refreshData()">🔄 Refresh Now</button>
+            <div class="auto-refresh">
+                <label>
+                    <input type="checkbox" id="autoRefresh" checked> Auto-refresh (30s)
+                </label>
+            </div>
+        </div>
+        
+        <div id="content">
+            <div class="loading">
+                <h2>Loading monitoring data...</h2>
+                <p>Please wait while we fetch the latest system status.</p>
+            </div>
+        </div>
+        
+        <div class="timestamp" id="lastUpdate">
+            Last updated: Loading...
+        </div>
+    </div>
+
+    <script>
+        let autoRefreshInterval;
+        let autoRefreshEnabled = true;
+        
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = 
+                `Last updated: ${now.toLocaleString()}`;
+        }
+        
+        function createStatusIndicator(status) {
+            const indicator = document.createElement('span');
+            indicator.className = `status-indicator status-${status}`;
+            return indicator;
+        }
+        
+        function createMetric(label, value, unit = '') {
+            return `
+                <div class="metric">
+                    <span>${label}:</span>
+                    <span class="metric-value">${value}${unit}</span>
+                </div>
+            `;
+        }
+        
+        function createProgressBar(percentage) {
+            return `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${percentage}%"></div>
+                </div>
+                <div style="text-align: center; margin-top: 5px;">
+                    ${percentage.toFixed(1)}%
+                </div>
+            `;
+        }
+        
+        function renderMonitoringData(data) {
+            const content = document.getElementById('content');
+            const healthStatus = data.health_status;
+            const healthData = data.health_data;
+            
+            const systemHealth = healthData.checks.system_health;
+            const driftStatus = healthData.checks.drift_status;
+            const crawlRate = healthData.checks.crawl_success_rate;
+            const piiStatus = healthData.checks.pii_status;
+            const storageHealth = healthData.checks.storage_health;
+            
+            content.innerHTML = `
+                <div class="grid">
+                    <!-- Overall Status -->
+                    <div class="card">
+                        <h2>
+                            ${createStatusIndicator(healthStatus.status).outerHTML}
+                            Overall System Status
+                        </h2>
+                        <div class="health-details">
+                            <strong>${healthStatus.message}</strong>
+                            ${createProgressBar(healthStatus.health_percentage)}
+                            ${createMetric('Version', healthData.intelforge_version)}
+                            ${createMetric('Critical Failures', healthStatus.critical_failures)}
+                            ${createMetric('Overall Status', healthData.overall_status)}
+                        </div>
+                    </div>
+                    
+                    <!-- System Health Details -->
+                    <div class="card">
+                        <h2>
+                            ${createStatusIndicator(systemHealth.status).outerHTML}
+                            System Health Checks
+                        </h2>
+                        ${createMetric('Total Checks', systemHealth.details.total_checks)}
+                        ${createMetric('Passed', systemHealth.details.results.pass, ' ✅')}
+                        ${createMetric('Failed', systemHealth.details.results.fail, ' ❌')}
+                        ${createMetric('Warnings', systemHealth.details.results.warn, ' ⚠️')}
+                        ${createMetric('Skipped', systemHealth.details.results.skip, ' ⏭️')}
+                    </div>
+                    
+                    <!-- Performance Metrics -->
+                    <div class="card">
+                        <h2>
+                            ${createStatusIndicator(driftStatus.status).outerHTML}
+                            Performance Metrics
+                        </h2>
+                        ${createMetric('Drift Percentage', driftStatus.details.drift_percentage, '%')}
+                        ${createMetric('Drift Threshold', driftStatus.details.threshold, '%')}
+                        ${createMetric('Crawl Success Rate', crawlRate.details.success_rate, '%')}
+                        ${createMetric('Success Threshold', crawlRate.details.threshold, '%')}
+                    </div>
+                    
+                    <!-- Security Status -->
+                    <div class="card">
+                        <h2>
+                            ${createStatusIndicator(piiStatus.status).outerHTML}
+                            Security & Privacy
+                        </h2>
+                        ${createMetric('PII Detected', piiStatus.details.pii_detected ? 'Yes' : 'No')}
+                        ${createMetric('Risk Score', piiStatus.details.risk_score)}
+                        ${createMetric('Total Entities', piiStatus.details.total_entities)}
+                        ${createMetric('Detector Type', piiStatus.details.detector_type)}
+                    </div>
+                    
+                    <!-- Storage Health -->
+                    <div class="card">
+                        <h2>
+                            ${createStatusIndicator(storageHealth.status).outerHTML}
+                            Storage Systems
+                        </h2>
+                        ${createMetric('ChromaDB', storageHealth.details.chromadb ? 'Online' : 'Offline')}
+                        ${createMetric('Qdrant', storageHealth.details.qdrant ? 'Online' : 'Offline')}
+                        ${createMetric('Data Storage', storageHealth.details.data ? 'Healthy' : 'Issues')}
+                        ${createMetric('Log Storage', storageHealth.details.logs ? 'Healthy' : 'Issues')}
+                    </div>
+                    
+                    <!-- Alerts -->
+                    <div class="card">
+                        <h2>🚨 Recent Alerts</h2>
+                        <div id="alerts">
+                            <div class="alerts">
+                                <p>No active alerts - System operating normally</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderError(error) {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <div class="error">
+                    <h2>❌ Error Loading Monitoring Data</h2>
+                    <p>${error}</p>
+                    <button class="refresh-btn" onclick="refreshData()">Try Again</button>
+                </div>
+            `;
+        }
+        
+        async function refreshData() {
+            try {
+                const response = await fetch('logs/monitoring_status.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                renderMonitoringData(data);
+                updateTimestamp();
+                
+            } catch (error) {
+                console.error('Error fetching monitoring data:', error);
+                renderError(error.message);
+            }
+        }
+        
+        function setupAutoRefresh() {
+            const checkbox = document.getElementById('autoRefresh');
+            
+            checkbox.addEventListener('change', function() {
+                autoRefreshEnabled = this.checked;
+                
+                if (autoRefreshEnabled) {
+                    autoRefreshInterval = setInterval(refreshData, 30000); // 30 seconds
+                } else {
+                    clearInterval(autoRefreshInterval);
+                }
+            });
+            
+            // Start auto-refresh by default
+            if (autoRefreshEnabled) {
+                autoRefreshInterval = setInterval(refreshData, 30000);
+            }
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            setupAutoRefresh();
+        });
+    </script>
+</body>
+</html>

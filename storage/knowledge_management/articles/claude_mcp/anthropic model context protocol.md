@@ -258,8 +258,8 @@ Suppose you have already configured MCP servers in Claude Desktop and want to us
 <Steps>
   <Step title="Import servers from Claude Desktop">
     ```bash
-    # Basic syntax 
-    claude mcp add-from-claude-desktop 
+    # Basic syntax
+    claude mcp add-from-claude-desktop
     ```
   </Step>
 
@@ -269,7 +269,7 @@ Suppose you have already configured MCP servers in Claude Desktop and want to us
 
   <Step title="Verify the servers were imported">
     ```bash
-    claude mcp list 
+    claude mcp list
     ```
   </Step>
 </Steps>

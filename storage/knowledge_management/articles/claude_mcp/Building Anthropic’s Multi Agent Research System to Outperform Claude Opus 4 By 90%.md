@@ -124,8 +124,8 @@ class ResearchQuery(BaseModel):
     query: str
     max_subagents: int = Field(default=3, ge=1, le=10)
     max_iterations: int = Field(default=5, ge=1, le=20)
-    
-    
+
+
 class SubAgentTask(BaseModel):
     """Task definition for a subagent"""
     task_id: UUID = Field(default_factory=uuid4)
@@ -188,25 +188,25 @@ load_dotenv()
 class Settings:
     # API Keys
     ANTHROPIC_API_KEY: str = os.getenv("ANTHROPIC_API_KEY", "")
-    
+
     # Model Configuration
     LEAD_AGENT_MODEL: str = "claude-3-opus-20240229"
     SUBAGENT_MODEL: str = "claude-3-sonnet-20240229"
     CITATION_MODEL: str = "claude-3-haiku-20240307"
-    
+
     # Agent Configuration
     MAX_THINKING_LENGTH: int = 50000
     MAX_CONTEXT_LENGTH: int = 200000
     MAX_PARALLEL_SUBAGENTS: int = 5
-    
+
     # Tool Configuration
     SEARCH_TIMEOUT: int = 30
     MAX_SEARCH_RESULTS: int = 10
-    
+
     # Memory Configuration
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379")
     MEMORY_TTL: int = 3600  # 1 hour
-    
+
     # Rate Limiting
     MAX_TOKENS_PER_REQUEST: int = 100000
 
@@ -231,19 +231,19 @@ import json
 
 class BaseAgent(ABC):
     """Base class for all agents in the system"""
-    
+
     def __init__(self, model: str, name: str):
         self.model = model
         self.name = name
         self.client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY)
         self.conversation_history: List[Dict[str, str]] = []
         self.total_tokens = 0
-        
+
     @abstractmethod
     def get_system_prompt(self) -> str:
         """Return the system prompt for this agent"""
         pass
-        
+
     async def think(self, context: str) -> Dict[str, Any]:
         """
         Use extended thinking mode to plan approach
@@ -252,13 +252,13 @@ class BaseAgent(ABC):
         thinking_prompt = f"""
         <thinking>
         Context: {context}
-        
+
         Please analyze this situation and plan your approach. Consider:
         1. What is the main objective?
         2. What tools or resources do I need?
         3. What steps should I take?
         4. What potential challenges might I face?
-        
+
         Output your thinking as a JSON object with keys:
         - objective: string
         - approach: string
@@ -266,9 +266,9 @@ class BaseAgent(ABC):
         - challenges: list of strings
         </thinking>
         """
-        
+
         response = await self._call_llm(thinking_prompt, max_tokens=2000)
-        
+
         # Parse thinking output
         try:
             thinking_text = response.split("<thinking>")[1].split("</thinking>")[0]
@@ -281,7 +281,7 @@ class BaseAgent(ABC):
                 "steps": ["Analyze query", "Search for information", "Synthesize results"],
                 "challenges": ["Unknown"]
             }
-    
+
     async def _call_llm(self, prompt: str, max_tokens: int = 4000) -> str:
         """Make a call to the LLM"""
         try:
@@ -292,20 +292,20 @@ class BaseAgent(ABC):
                 system=self.get_system_prompt(),
                 messages=self.conversation_history + [{"role": "user", "content": prompt}]
             )
-            
+
             response = message.content[0].text
             self.total_tokens += message.usage.total_tokens
-            
+
             # Update conversation history
             self.conversation_history.append({"role": "user", "content": prompt})
             self.conversation_history.append({"role": "assistant", "content": response})
-            
+
             return response
-            
+
         except Exception as e:
             print(f"Error calling LLM: {e}")
             raise
-            
+
     def reset_conversation(self):
         """Reset the conversation history"""
         self.conversation_history = []
@@ -439,7 +439,7 @@ from app.agents.base_agent import BaseAgent
 from app.agents.citation_agent import CitationAgent
 from app.agents.search_agent import SearchSubAgent
 from app.models.schemas import (
-    ResearchQuery, ResearchPlan, SubAgentTask, 
+    ResearchQuery, ResearchPlan, SubAgentTask,
     SubAgentResult, ResearchResult, CitationInfo
 )
 from app.core.prompts import LEAD_AGENT_PROMPT
@@ -448,7 +448,7 @@ from app.tools.memory_tools import MemoryStore
 
 class LeadResearchAgent(BaseAgent):
     """Lead agent that orchestrates the research process"""
-    
+
     def __init__(self):
         super().__init__(
             model=settings.LEAD_AGENT_MODEL,
@@ -456,35 +456,35 @@ class LeadResearchAgent(BaseAgent):
         )
         self.memory_store = MemoryStore()
         self.active_subagents: Dict[str, SearchSubAgent] = {}
-        
+
     def get_system_prompt(self) -> str:
         return LEAD_AGENT_PROMPT
-        
+
     async def conduct_research(self, query: ResearchQuery) -> ResearchResult:
         """Main entry point for conducting research"""
         start_time = time.time()
 
         research_id = uuid4()
-        
+
         # Save initial context
         await self.memory_store.save_context(
-            research_id, 
+            research_id,
             {"query": query.dict(), "status": "planning"}
         )
-        
+
         # Phase 1: Analyze query and create research plan
         plan = await self._create_research_plan(query)
         await self.memory_store.save_context(
             research_id,
             {"plan": plan.dict(), "status": "executing"}
         )
-        
+
         # Phase 2: Execute research plan with subagents
         results = await self._execute_research_plan(plan, query.max_iterations)
-        
+
         # Phase 3: Synthesize results into final report
         final_report = await self._synthesize_results(query.query, results)
-        
+
         # Phase 4: Add citations (simplified for this example)
         # After adding citations, before creating ResearchResult
         cited_report = await self._add_citations(final_report, results)
@@ -497,12 +497,12 @@ class LeadResearchAgent(BaseAgent):
             CitationInfo(**citation)
             for citation in self.citation_list
         ]
-        
+
         # Compile final result
         all_sources = []
         for result in results:
             all_sources.extend(result.sources)
-            
+
         research_result = ResearchResult(
             research_id=research_id,
             query=query.query,
@@ -515,34 +515,34 @@ class LeadResearchAgent(BaseAgent):
             # iteration_count=iterations_used,  # Track this in execute_research_plan
             report_sections=sections
         )
-        
+
         # Save final result
         await self.memory_store.save_result(research_id, research_result)
-        
+
         return research_result
-        
+
     async def _create_research_plan(self, query: ResearchQuery) -> ResearchPlan:
         """Create a research plan based on the query"""
-        
+
         # Use thinking to analyze the query
         thinking_result = await self.think(f"Research query: {query.query}")
-        
+
         # Create planning prompt
         planning_prompt = f"""
         Create a research plan for the following query:
-        
+
         Query: {query.query}
-        
+
         Based on your analysis, create a detailed research plan with:
         1. Overall strategy
         2. Specific subtasks for search agents (max {query.max_subagents})
         3. Complexity assessment
-        
+
         For each subtask, specify:
         - Clear objective
         - Search focus area
         - Expected output format
-        
+
         Output as JSON:
         {{
             "strategy": "...",
@@ -556,13 +556,13 @@ class LeadResearchAgent(BaseAgent):
             ]
         }}
         """
-        
+
         response = await self._call_llm(planning_prompt)
-        
+
         # Parse response (simplified - in production use proper JSON parsing)
         try:
             plan_data = json.loads(response)
-            
+
             subtasks = [
                 SubAgentTask(
                     objective=task["objective"],
@@ -571,13 +571,13 @@ class LeadResearchAgent(BaseAgent):
                 )
                 for task in plan_data["subtasks"]
             ]
-            
+
             return ResearchPlan(
                 strategy=plan_data["strategy"],
                 subtasks=subtasks,
                 estimated_complexity=plan_data["complexity"]
             )
-            
+
         except Exception as e:
             # Fallback plan
             return ResearchPlan(
@@ -591,36 +591,36 @@ class LeadResearchAgent(BaseAgent):
                 ],
                 estimated_complexity="simple"
             )
-            
+
     async def _execute_research_plan(
-        self, 
-        plan: ResearchPlan, 
+        self,
+        plan: ResearchPlan,
         max_iterations: int
     ) -> List[SubAgentResult]:
         """Execute the research plan using subagents"""
-        
+
         results = []
         remaining_tasks = plan.subtasks.copy()
         iteration = 0
-        
+
         while remaining_tasks and iteration < max_iterations:
             iteration += 1
-            
+
             # Process tasks in batches (parallel execution)
             batch_size = min(len(remaining_tasks), settings.MAX_PARALLEL_SUBAGENTS)
             current_batch = remaining_tasks[:batch_size]
             remaining_tasks = remaining_tasks[batch_size:]
-            
+
             # Create subagents for this batch
             batch_tasks = []
             for task in current_batch:
                 subagent = SearchSubAgent(task_id=task.task_id)
                 self.active_subagents[str(task.task_id)] = subagent
                 batch_tasks.append(subagent.execute_task(task))
-                
+
             # Execute batch in parallel
             batch_results = await asyncio.gather(*batch_tasks, return_exceptions=True)
-            
+
             # Process results
             for i, result in enumerate(batch_results):
                 if isinstance(result, Exception):
@@ -628,52 +628,52 @@ class LeadResearchAgent(BaseAgent):
                     # Could retry or handle error
                 else:
                     results.append(result)
-                    
+
             # Check if we need more research based on results
             if await self._needs_more_research(results, plan.strategy):
                 # Create additional tasks if needed
                 new_tasks = await self._create_followup_tasks(results)
                 remaining_tasks.extend(new_tasks)
-                
+
         return results
-        
+
     async def _needs_more_research(
-        self, 
-        current_results: List[SubAgentResult], 
+        self,
+        current_results: List[SubAgentResult],
         strategy: str
     ) -> bool:
         """Determine if more research is needed"""
-        
+
         # Simple heuristic - in production would be more sophisticated
         if not current_results:
             return True
-            
+
         total_sources = sum(len(r.sources) for r in current_results)
         avg_relevance = sum(
-            sum(s.relevance_score for s in r.sources) / len(r.sources) 
+            sum(s.relevance_score for s in r.sources) / len(r.sources)
             for r in current_results if r.sources
         ) / len(current_results)
-        
+
         # Need more research if we have few sources or low relevance
         return total_sources < 10 or avg_relevance < 0.7
-        
+
     async def _create_followup_tasks(
-        self, 
+        self,
         current_results: List[SubAgentResult]
     ) -> List[SubAgentTask]:
         """Create follow-up tasks based on current results"""
-        
+
         # Analyze what we've found and what's missing
         summary = "\n".join(r.summary for r in current_results)
-        
+
         prompt = f"""
         Based on the current research findings, identify gaps or areas that need more investigation.
-        
+
         Current findings summary:
         {summary}
-        
+
         Create up to 2 follow-up tasks that address gaps or dive deeper into important areas.
-        
+
         Output as JSON:
         {{
             "followup_tasks": [
@@ -685,9 +685,9 @@ class LeadResearchAgent(BaseAgent):
             ]
         }}
         """
-        
+
         response = await self._call_llm(prompt)
-        
+
         try:
             data = json.loads(response)
             return [
@@ -700,101 +700,101 @@ class LeadResearchAgent(BaseAgent):
             ]
         except:
             return []
-            
+
     async def _synthesize_results(
-        self, 
+        self,
         original_query: str,
         results: List[SubAgentResult]
     ) -> str:
         """Synthesize all results into a coherent report"""
-        
+
         # Compile all findings
         all_findings = []
         for result in results:
             all_findings.extend(result.findings)
-            
+
         synthesis_prompt = f"""
         Synthesize the following research findings into a comprehensive report.
-        
+
         Original Query: {original_query}
-        
+
         Research Findings:
         {json.dumps(all_findings, indent=2)}
-        
+
         Create a well-structured report that:
         1. Directly answers the user's query
         2. Organizes information logically
         3. Highlights key insights
         4. Notes any limitations or gaps in the research
-        
+
         Format the report with clear sections and subsections as appropriate.
         """
-        
+
         report = await self._call_llm(synthesis_prompt, max_tokens=8000)
         return report
-        
+
     async def _add_citations(
-    self, 
-    report: str, 
+    self,
+    report: str,
     results: List[SubAgentResult]
 ) -> str:
         """Add citations to the report using the Citation Agent"""
-        
+
         # Initialize citation agent
         citation_agent = CitationAgent()
-        
+
         # Compile all sources and findings
         all_sources = []
         all_findings = []
-        
+
         for result in results:
             all_sources.extend(result.sources)
             all_findings.extend(result.findings)
-            
+
         # Remove duplicate sources
         unique_sources = []
         seen_urls = set()
-        
+
         for source in all_sources:
             if source.url not in seen_urls:
                 seen_urls.add(source.url)
                 unique_sources.append(source)
-                
+
         # Add citations to the report
         cited_report, citation_list = await citation_agent.add_citations(
             report,
             unique_sources,
             all_findings
         )
-        
+
         # Generate bibliography
         bibliography = await citation_agent.generate_bibliography(
             unique_sources,
             citation_list,
             style="MLA"
         )
-        
+
         # Append bibliography to report
         final_report = cited_report + bibliography
-        
+
         # Update the research result with citation information
         self.citation_list = citation_list
-        
+
         return final_report
-    
+
     def _extract_report_sections(self, report: str) -> List[str]:
         """Extract main sections from the report"""
-        
+
         # Find headers (lines starting with #)
         headers = re.findall(r'^#+\s+(.+)$', report, re.MULTILINE)
-        
+
         # Clean and return unique headers
         sections = []
         for header in headers:
             clean_header = header.strip()
             if clean_header and clean_header not in sections:
                 sections.append(clean_header)
-                
+
         return sections
 Step 7: Search Subagent and Citation Agent Implementation
 
@@ -826,7 +826,7 @@ from app.tools.search_tools import WebSearchTool
 
 class SearchSubAgent(BaseAgent):
     """Subagent specialized in searching for specific information"""
-    
+
     def __init__(self, task_id: UUID):
         super().__init__(
             model=settings.SUBAGENT_MODEL,
@@ -834,58 +834,58 @@ class SearchSubAgent(BaseAgent):
         )
         self.task_id = task_id
         self.search_tool = WebSearchTool()
-        
+
     def get_system_prompt(self) -> str:
         return SEARCH_SUBAGENT_PROMPT
-        
+
     async def execute_task(self, task: SubAgentTask) -> SubAgentResult:
         """Execute the assigned research task"""
-        
+
         # Think about approach
         thinking = await self.think(
             f"Task: {task.objective}\nFocus: {task.search_focus}"
         )
-        
+
         # Execute searches based on plan
         all_results = []
         findings = []
-        
+
         for step in thinking.get("steps", [])[:task.max_searches]:
             # Generate search query
             query = await self._generate_search_query(
-                task.objective, 
+                task.objective,
                 task.search_focus,
                 step,
                 all_results
             )
-            
+
             # Perform search
             search_results = await self.search_tool.search(query)
-            
+
             # Evaluate results
             relevant_results = await self._evaluate_results(
-                search_results, 
+                search_results,
                 task.objective
             )
-            
+
             all_results.extend(relevant_results)
-            
+
             # Extract findings from relevant results
             extracted = await self._extract_findings(
                 relevant_results,
                 task.objective,
                 task.expected_output_format
             )
-            
+
             findings.extend(extracted)
-            
+
             # Check if we have enough information
             if await self._has_sufficient_information(findings, task.objective):
                 break
-                
+
         # Summarize findings
         summary = await self._summarize_findings(findings, task.objective)
-        
+
         return SubAgentResult(
             task_id=self.task_id,
             findings=findings,
@@ -893,7 +893,7 @@ class SearchSubAgent(BaseAgent):
             summary=summary,
             token_count=self.total_tokens
         )
-        
+
     async def _generate_search_query(
         self,
         objective: str,
@@ -902,57 +902,57 @@ class SearchSubAgent(BaseAgent):
         previous_results: List[SearchResult]
     ) -> str:
         """Generate an effective search query"""
-        
+
         prompt = f"""
         Generate a search query for the following:
-        
+
         Objective: {objective}
         Focus Area: {focus}
         Current Step: {step}
-        
+
         Previous searches found {len(previous_results)} results.
-        
+
         Create a search query that:
         - Is concise (2-5 words preferred)
         - Targets the specific information needed
         - Avoids redundancy with previous searches
-        
+
         Output only the search query, nothing else.
         """
-        
+
         query = await self._call_llm(prompt, max_tokens=100)
         return query.strip()
-        
+
     async def _evaluate_results(
         self,
         results: List[SearchResult],
         objective: str
     ) -> List[SearchResult]:
         """Evaluate search results for relevance"""
-        
+
         if not results:
             return []
-            
+
         # Create evaluation prompt
         results_summary = "\n".join([
             f"{i+1}. {r.title} - {r.snippet[:200]}..."
             for i, r in enumerate(results[:10])
         ])
-        
+
         prompt = f"""
         Evaluate these search results for relevance to the objective.
-        
+
         Objective: {objective}
-        
+
         Search Results:
         {results_summary}
-        
+
         For each result, rate its relevance from 0.0 to 1.0.
         Consider:
         - Direct relevance to the objective
         - Quality of the source
         - Uniqueness of information
-        
+
         Output as JSON:
         {{
             "evaluations": [
@@ -960,26 +960,26 @@ class SearchSubAgent(BaseAgent):
             ]
         }}
         """
-        
+
         response = await self._call_llm(prompt, max_tokens=2000)
-        
+
         # Parse evaluations and update relevance scores
         try:
             import json
             data = json.loads(response)
-            
+
             for eval in data.get("evaluations", []):
                 idx = eval["index"] - 1
                 if 0 <= idx < len(results):
                     results[idx].relevance_score = eval["relevance"]
-                    
+
             # Return only relevant results
             return [r for r in results if r.relevance_score >= 0.6]
-            
+
         except:
             # If parsing fails, return top results
             return results[:5]
-            
+
     async def _extract_findings(
         self,
         results: List[SearchResult],
@@ -987,27 +987,27 @@ class SearchSubAgent(BaseAgent):
         output_format: str
     ) -> List[Dict[str, Any]]:
         """Extract key findings from search results"""
-        
+
         if not results:
             return []
-            
+
         # Compile content from results
         content_summary = "\n\n".join([
             f"Source: {r.title}\nURL: {r.url}\nContent: {r.snippet}"
             for r in results
         ])
-        
+
         prompt = f"""
         Extract key findings from these sources related to the objective.
-        
+
         Objective: {objective}
         Expected Format: {output_format}
-        
+
         Sources:
         {content_summary}
-        
+
         Extract specific, factual findings that address the objective.
-        
+
         Output as JSON:
         {{
             "findings": [
@@ -1020,67 +1020,67 @@ class SearchSubAgent(BaseAgent):
             ]
         }}
         """
-        
+
         response = await self._call_llm(prompt, max_tokens=3000)
-        
+
         try:
             import json
             data = json.loads(response)
             return data.get("findings", [])
         except:
             return []
-            
+
     async def _has_sufficient_information(
         self,
         findings: List[Dict[str, Any]],
         objective: str
     ) -> bool:
         """Determine if we have enough information"""
-        
+
         if len(findings) < 3:
             return False
-            
+
         prompt = f"""
         Assess if we have sufficient information to address the objective.
-        
+
         Objective: {objective}
-        
+
         We have found {len(findings)} pieces of information.
-        
+
         Do we have enough high-quality, relevant information to comprehensively address the objective?
         Answer with YES or NO and a brief reason.
         """
-        
+
         response = await self._call_llm(prompt, max_tokens=200)
-        
+
         return "YES" in response.upper()
-        
+
     async def _summarize_findings(
         self,
         findings: List[Dict[str, Any]],
         objective: str
     ) -> str:
         """Create a summary of all findings"""
-        
+
         findings_text = "\n".join([
             f"- {f.get('fact', 'Unknown')} (Source: {f.get('source_title', 'Unknown')})"
             for f in findings
         ])
-        
+
         prompt = f"""
         Summarize these research findings in relation to the objective.
-        
+
         Objective: {objective}
-        
+
         Findings:
         {findings_text}
-        
+
         Create a concise summary (2-3 paragraphs) that:
         1. Addresses the main objective
         2. Highlights the most important findings
         3. Notes any gaps or limitations
         """
-        
+
         summary = await self._call_llm(prompt, max_tokens=1000)
         return summary
 app/agents/citation_agent.py:
@@ -1109,91 +1109,91 @@ class Citation:
 
 class CitationAgent(BaseAgent):
     """Agent responsible for adding citations to research reports"""
-    
+
     def __init__(self):
         super().__init__(
             model=settings.CITATION_MODEL,
             name="Citation Agent"
         )
-        
+
     def get_system_prompt(self) -> str:
         return CITATION_AGENT_PROMPT
-        
+
     async def add_citations(
-        self, 
-        report: str, 
+        self,
+        report: str,
         sources: List[SearchResult],
         findings: List[Dict[str, Any]] = None
     ) -> Tuple[str, List[Dict[str, Any]]]:
         """
         Add citations to a research report
-        
+
         Args:
             report: The research report text
             sources: List of sources used in the research
             findings: Optional list of specific findings with their sources
-            
+
         Returns:
             Tuple of (cited_report, citation_list)
         """
-        
+
         # First, create a source index
         source_index = self._create_source_index(sources)
-        
+
         # Identify claims that need citations
         claims = await self._identify_claims(report)
-        
+
         # Match claims to sources
         citations = await self._match_claims_to_sources(
-            claims, 
-            sources, 
+            claims,
+            sources,
             findings
         )
-        
+
         # Insert citations into the report
         cited_report = await self._insert_citations(report, citations)
-        
+
         # Generate citation list
         citation_list = self._generate_citation_list(citations, source_index)
-        
+
         return cited_report, citation_list
-        
+
     def _create_source_index(self, sources: List[SearchResult]) -> Dict[int, SearchResult]:
         """Create an index of sources for easy reference"""
         return {i + 1: source for i, source in enumerate(sources)}
-        
+
     async def _identify_claims(self, report: str) -> List[Dict[str, Any]]:
         """Identify factual claims in the report that need citations"""
-        
+
         # Split report into sentences for analysis
         sentences = self._split_into_sentences(report)
-        
+
         # Batch sentences for efficient processing
         batch_size = 20
         all_claims = []
-        
+
         for i in range(0, len(sentences), batch_size):
             batch = sentences[i:i + batch_size]
             batch_text = "\n".join([f"{j+1}. {sent}" for j, sent in enumerate(batch)])
-            
+
             prompt = f"""
             Identify factual claims in these sentences that require citations.
-            
+
             Sentences:
             {batch_text}
-            
+
             For each sentence containing a factual claim, identify:
             1. The sentence number
             2. The specific claim that needs citation
             3. The type of claim (statistic, fact, quote, finding, comparison)
             4. How important citation is (high/medium/low)
-            
+
             Skip:
             - General knowledge or common facts
             - Transitional sentences
             - Questions or hypotheticals
             - Section headers
-            
+
             Output as JSON:
             {{
                 "claims": [
@@ -1207,25 +1207,25 @@ class CitationAgent(BaseAgent):
                 ]
             }}
             """
-            
+
             response = await self._call_llm(prompt, max_tokens=2000)
-            
+
             try:
                 data = json.loads(response)
-                
+
                 # Adjust sentence numbers to global position
                 for claim in data.get("claims", []):
                     claim["sentence_num"] = i + claim["sentence_num"] - 1
                     claim["text"] = sentences[claim["sentence_num"]]
-                    
+
                 all_claims.extend(data.get("claims", []))
-                
+
             except Exception as e:
                 print(f"Error parsing claims: {e}")
                 continue
-                
+
         return all_claims
-        
+
     async def _match_claims_to_sources(
         self,
         claims: List[Dict[str, Any]],
@@ -1233,9 +1233,9 @@ class CitationAgent(BaseAgent):
         findings: List[Dict[str, Any]] = None
     ) -> List[Citation]:
         """Match identified claims to appropriate sources"""
-        
+
         citations = []
-        
+
         # If we have findings with explicit source mappings, use those first
         finding_map = {}
         if findings:
@@ -1244,13 +1244,13 @@ class CitationAgent(BaseAgent):
                 source_url = finding.get("source_url", "")
                 if fact and source_url:
                     finding_map[fact.lower()] = source_url
-                    
+
         # Process claims in batches
         for claim in claims:
             # First check if this claim matches a known finding
             claim_text = claim["claim"].lower()
             matched_source = None
-            
+
             # Check finding map
             for fact_text, source_url in finding_map.items():
                 if self._text_similarity(claim_text, fact_text) > 0.8:
@@ -1260,7 +1260,7 @@ class CitationAgent(BaseAgent):
                             matched_source = (i + 1, source, 0.9)
                             break
                     break
-                    
+
             # If no direct match, search all sources
             if not matched_source:
                 source_matches = await self._find_best_source_match(
@@ -1269,17 +1269,17 @@ class CitationAgent(BaseAgent):
                 )
                 if source_matches:
                     matched_source = source_matches[0]
-                    
+
             # Create citation if match found
             if matched_source:
                 source_idx, source, confidence = matched_source
-                
+
                 # Find position in original text
                 position = self._find_text_position(
                     claim["text"],
                     claims[0]["text"] if claims else ""
                 )
-                
+
                 citations.append(Citation(
                     claim_text=claim["text"],
                     source_index=source_idx,
@@ -1288,38 +1288,38 @@ class CitationAgent(BaseAgent):
                     confidence=confidence,
                     position=position
                 ))
-                
+
         return citations
-        
+
     async def _find_best_source_match(
         self,
         claim: Dict[str, Any],
         sources: List[SearchResult]
     ) -> List[Tuple[int, SearchResult, float]]:
         """Find the best source match for a claim"""
-        
+
         # Create a batch prompt to evaluate all sources at once
         sources_summary = "\n\n".join([
             f"Source {i+1}:\nTitle: {s.title}\nURL: {s.url}\nContent: {s.snippet[:200]}..."
             for i, s in enumerate(sources)
         ])
-        
+
         prompt = f"""
         Match this claim to the most appropriate source.
-        
+
         Claim: "{claim['claim']}"
         Type: {claim['type']}
         Full sentence: "{claim['text']}"
-        
+
         Available sources:
         {sources_summary}
-        
+
         Evaluate which sources best support this claim. Consider:
         1. Direct mention of the fact/statistic
         2. Relevance to the claim
         3. Authority of the source
         4. Specificity of the match
-        
+
         Output as JSON:
         {{
             "matches": [
@@ -1330,16 +1330,16 @@ class CitationAgent(BaseAgent):
                 }}
             ]
         }}
-        
+
         Only include sources with confidence > 0.6.
         """
-        
+
         response = await self._call_llm(prompt, max_tokens=1000)
-        
+
         try:
             data = json.loads(response)
             matches = []
-            
+
             for match in data.get("matches", []):
                 source_idx = match["source_num"]
                 if 1 <= source_idx <= len(sources):
@@ -1348,25 +1348,25 @@ class CitationAgent(BaseAgent):
                         sources[source_idx - 1],
                         match["confidence"]
                     ))
-                    
+
             # Sort by confidence
             matches.sort(key=lambda x: x[2], reverse=True)
             return matches
-            
+
         except Exception as e:
             print(f"Error parsing source matches: {e}")
             return []
-            
+
     async def _insert_citations(
         self,
         report: str,
         citations: List[Citation]
     ) -> str:
         """Insert citations into the report text"""
-        
+
         # Sort citations by position (reverse order to maintain positions)
         citations.sort(key=lambda x: x.position, reverse=True)
-        
+
         # Group citations by claim to handle multiple sources
         claim_citations = {}
         for citation in citations:
@@ -1374,19 +1374,19 @@ class CitationAgent(BaseAgent):
             if key not in claim_citations:
                 claim_citations[key] = []
             claim_citations[key].append(citation)
-            
+
         # Process the report
         cited_report = report
         processed_claims = set()
-        
+
         for claim_text, cite_list in claim_citations.items():
             if claim_text in processed_claims:
                 continue
-                
+
             # Find all occurrences of this claim in the report
             pattern = re.escape(claim_text)
             matches = list(re.finditer(pattern, cited_report))
-            
+
             if not matches:
                 # Try finding partial match
                 sentences = self._split_into_sentences(cited_report)
@@ -1397,11 +1397,11 @@ class CitationAgent(BaseAgent):
                         if matches:
                             claim_text = sentence
                             break
-                            
+
             # Insert citations after each occurrence
             for match in reversed(matches):  # Reverse to maintain positions
                 end_pos = match.end()
-                
+
                 # Build citation string
                 if len(cite_list) == 1:
                     citation_str = f"[{cite_list[0].source_index}]"
@@ -1409,28 +1409,28 @@ class CitationAgent(BaseAgent):
                     # Multiple sources
                     indices = sorted(set(c.source_index for c in cite_list))
                     citation_str = "[" + ",".join(str(i) for i in indices) + "]"
-                    
+
                 # Insert citation
                 cited_report = (
-                    cited_report[:end_pos] + 
-                    " " + citation_str + 
+                    cited_report[:end_pos] +
+                    " " + citation_str +
                     cited_report[end_pos:]
                 )
-                
+
             processed_claims.add(claim_text)
-            
+
         return cited_report
-        
+
     def _generate_citation_list(
         self,
         citations: List[Citation],
         source_index: Dict[int, SearchResult]
     ) -> List[Dict[str, Any]]:
         """Generate a formatted citation list"""
-        
+
         # Get unique sources that were cited
         cited_indices = sorted(set(c.source_index for c in citations))
-        
+
         citation_list = []
         for idx in cited_indices:
             source = source_index.get(idx)
@@ -1441,48 +1441,48 @@ class CitationAgent(BaseAgent):
                     "url": source.url,
                     "times_cited": sum(1 for c in citations if c.source_index == idx)
                 })
-                
+
         return citation_list
-        
+
     def _split_into_sentences(self, text: str) -> List[str]:
         """Split text into sentences"""
         # Simple sentence splitter - in production use nltk or spacy
         sentences = re.split(r'(?<=[.!?])\s+', text)
-        
+
         # Clean up sentences
         cleaned = []
         for sent in sentences:
             sent = sent.strip()
             if sent and len(sent) > 10:  # Skip very short fragments
                 cleaned.append(sent)
-                
+
         return cleaned
-        
+
     def _text_similarity(self, text1: str, text2: str) -> float:
         """Calculate simple text similarity (0-1)"""
         # Simple implementation - in production use better similarity metrics
         text1_lower = text1.lower()
         text2_lower = text2.lower()
-        
+
         if text1_lower == text2_lower:
             return 1.0
-            
+
         # Check if one contains the other
         if text1_lower in text2_lower or text2_lower in text1_lower:
             return 0.8
-            
+
         # Count common words
         words1 = set(text1_lower.split())
         words2 = set(text2_lower.split())
-        
+
         if not words1 or not words2:
             return 0.0
-            
+
         common = len(words1.intersection(words2))
         total = len(words1.union(words2))
-        
+
         return common / total if total > 0 else 0.0
-        
+
     def _find_text_position(self, text: str, reference: str) -> int:
         """Find the position of text in the report"""
         # Simple position finder
@@ -1490,7 +1490,7 @@ class CitationAgent(BaseAgent):
             return reference.index(text)
         except ValueError:
             return 0
-            
+
     async def generate_bibliography(
         self,
         sources: List[SearchResult],
@@ -1498,13 +1498,13 @@ class CitationAgent(BaseAgent):
         style: str = "MLA"
     ) -> str:
         """Generate a formatted bibliography"""
-        
+
         bibliography = "\n\n## References\n\n"
-        
+
         for citation in citation_list:
             idx = citation["index"]
             source = next((s for s in sources if s.url == citation["url"]), None)
-            
+
             if source:
                 if style == "MLA":
                     # Simple MLA-style citation
@@ -1515,9 +1515,9 @@ class CitationAgent(BaseAgent):
                 else:
                     # Default simple format
                     entry = f"[{idx}] {source.title}. {source.url}"
-                    
+
                 bibliography += entry + "\n\n"
-                
+
         return bibliography
 Step 8: Search Tools Implementation
 
@@ -1546,42 +1546,42 @@ from app.core.config import settings
 
 class WebSearchTool:
     """Tool for performing web searches"""
-    
+
     def __init__(self):
         self.client = httpx.AsyncClient(timeout=settings.SEARCH_TIMEOUT)
-        
+
     async def search(self, query: str) -> List[SearchResult]:
         """
         Perform a web search and return results
-        
+
         Note: This is a mock implementation. In production, you would:
         1. Use a real search API (Google, Bing, etc.)
         2. Implement proper rate limiting
         3. Handle API errors gracefully
         """
-        
+
         # Mock search results for demonstration
         # In production, replace with actual API calls
         mock_results = await self._mock_search(query)
-        
+
         # Process results in parallel
         tasks = [self._fetch_content(result) for result in mock_results]
         enriched_results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         # Filter out failed fetches
         valid_results = [
-            r for r in enriched_results 
+            r for r in enriched_results
             if isinstance(r, SearchResult)
         ]
-        
+
         return valid_results
-        
+
     async def _mock_search(self, query: str) -> List[Dict[str, Any]]:
         """Mock search function for demonstration"""
-        
+
         # In production, this would call a real search API
         # For now, return mock data based on query keywords
-        
+
         base_results = [
             {
                 "url": f"https://example.com/ai-agents-{i}",
@@ -1590,16 +1590,16 @@ class WebSearchTool:
             }
             for i in range(1, 6)
         ]
-        
+
         return base_results
-        
+
     async def _fetch_content(self, result: Dict[str, Any]) -> SearchResult:
         """Fetch and parse content from a URL"""
-        
+
         try:
             # In production, actually fetch the URL
             # For mock, just create a SearchResult
-            
+
             return SearchResult(
                 url=result["url"],
                 title=result["title"],
@@ -1607,11 +1607,11 @@ class WebSearchTool:
                 content=f"Full content about {result['title']}...",  # Mock content
                 relevance_score=0.8  # Will be updated by agent
             )
-            
+
         except Exception as e:
             print(f"Error fetching {result.get('url', 'unknown')}: {e}")
             raise
-            
+
     async def close(self):
         """Clean up resources"""
         await self.client.aclose()
@@ -1643,52 +1643,52 @@ from app.core.config import settings
 class MemoryStore:
     """
     In-memory store for agent context and results
-    
+
     In production, this would use Redis or another persistent store
     """
-    
+
     def __init__(self):
         self._store: Dict[str, Dict[str, Any]] = {}
         self._ttl: Dict[str, datetime] = {}
-        
+
     async def save_context(self, research_id: UUID, context: Dict[str, Any]):
         """Save research context"""
         key = f"context:{research_id}"
         self._store[key] = context
         self._ttl[key] = datetime.utcnow() + timedelta(seconds=settings.MEMORY_TTL)
-        
+
     async def get_context(self, research_id: UUID) -> Optional[Dict[str, Any]]:
         """Retrieve research context"""
         key = f"context:{research_id}"
-        
+
         # Check if expired
         if key in self._ttl and datetime.utcnow() > self._ttl[key]:
             del self._store[key]
             del self._ttl[key]
             return None
-            
+
         return self._store.get(key)
-        
+
     async def save_result(self, research_id: UUID, result: ResearchResult):
         """Save final research result"""
         key = f"result:{research_id}"
         self._store[key] = result.dict()
         self._ttl[key] = datetime.utcnow() + timedelta(seconds=settings.MEMORY_TTL)
-        
+
     async def get_result(self, research_id: UUID) -> Optional[ResearchResult]:
         """Retrieve research result"""
         key = f"result:{research_id}"
-        
+
         if key in self._ttl and datetime.utcnow() > self._ttl[key]:
             del self._store[key]
             del self._ttl[key]
             return None
-            
+
         data = self._store.get(key)
         if data:
             return ResearchResult(**data)
         return None
-        
+
     async def cleanup_expired(self):
         """Remove expired entries"""
         now = datetime.utcnow()
@@ -1696,7 +1696,7 @@ class MemoryStore:
             key for key, expiry in self._ttl.items()
             if now > expiry
         ]
-        
+
         for key in expired_keys:
             del self._store[key]
             del self._ttl[key]
@@ -1723,31 +1723,31 @@ from app.tools.memory_tools import MemoryStore
 
 class ResearchService:
     """Service layer for research operations"""
-    
+
     def __init__(self):
         self.memory_store = MemoryStore()
         self._active_research: Dict[UUID, asyncio.Task] = {}
-        
+
     async def start_research(self, query: ResearchQuery) -> UUID:
         """Start a new research task"""
-        
+
         # Create lead agent
         lead_agent = LeadResearchAgent()
-        
+
         # Start research task
         task = asyncio.create_task(
             lead_agent.conduct_research(query)
         )
-        
+
         # Track active research
         research_id = UUID()  # This will be set by the agent
         self._active_research[research_id] = task
-        
+
         return research_id
-        
+
     async def get_research_status(self, research_id: UUID) -> Dict[str, Any]:
         """Get the status of a research task"""
-        
+
         # Check if research is still active
         if research_id in self._active_research:
             task = self._active_research[research_id]
@@ -1758,7 +1758,7 @@ class ResearchService:
                     "status": context.get("status", "unknown") if context else "running",
                     "message": "Research in progress"
                 }
-                
+
         # Check for completed result
         result = await self.memory_store.get_result(research_id)
         if result:
@@ -1766,12 +1766,12 @@ class ResearchService:
                 "status": "completed",
                 "result": result
             }
-            
+
         return {
             "status": "not_found",
             "message": "Research ID not found"
         }
-        
+
     async def get_research_result(self, research_id: UUID) -> Optional[ResearchResult]:
         """Get the result of a completed research task"""
         return await self.memory_store.get_result(research_id)
@@ -1831,34 +1831,34 @@ async def start_research(
 ) -> Dict[str, Any]:
     """
     Start a new research task
-    
+
     This endpoint initiates a research process that runs asynchronously.
     Returns a research_id that can be used to check status and retrieve results.
     """
-    
+
     try:
         # Validate query
         if not query.query.strip():
             raise HTTPException(status_code=400, detail="Query cannot be empty")
-            
+
         # Start research asynchronously
         async def run_research():
             lead_agent = LeadResearchAgent()
             result = await lead_agent.conduct_research(query)
             return result
-            
+
         # Create task
         task = asyncio.create_task(run_research())
-        
+
         # Generate research ID (in production, this would be handled differently)
         research_id = UUID('12345678-1234-5678-1234-567812345678')  # Mock ID
-        
+
         return {
             "research_id": str(research_id),
             "status": "started",
             "message": "Research task initiated successfully"
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -1866,53 +1866,53 @@ async def start_research(
 async def get_research_status(research_id: UUID) -> Dict[str, Any]:
     """
     Get the status of a research task
-    
+
     Returns the current status and any available intermediate results
     """
-    
+
     status = await research_service.get_research_status(research_id)
-    
+
     if status["status"] == "not_found":
         raise HTTPException(status_code=404, detail="Research ID not found")
-        
+
     return status
 
 @app.get("/research/{research_id}/result")
 async def get_research_result(research_id: UUID) -> ResearchResult:
     """
     Get the final result of a completed research task
-    
+
     Returns the full research report with citations and sources
     """
-    
+
     result = await research_service.get_research_result(research_id)
-    
+
     if not result:
         raise HTTPException(
-            status_code=404, 
+            status_code=404,
             detail="Research result not found or not yet completed"
         )
-        
+
     return result
 
 @app.post("/research/demo")
 async def demo_research() -> Dict[str, Any]:
     """
     Run a demo research task synchronously for testing
-    
+
     This endpoint is for demonstration purposes and runs a simplified research task
     """
-    
+
     # Create a demo query
     demo_query = ResearchQuery(
         query="What are the top 5 AI agent companies in 2025?",
         max_subagents=2,
         max_iterations=2
     )
-    
+
     # Run research synchronously for demo
     lead_agent = LeadResearchAgent()
-    
+
     # For demo, we'll return a mock result
     return {
         "status": "completed",
@@ -1959,33 +1959,33 @@ These companies are leading the development of sophisticated AI agent systems th
 async def test_citations() -> Dict[str, Any]:
     """
     Test the citation agent functionality
-    
+
     This endpoint demonstrates how the citation agent adds citations to a report
     """
-    
+
     # Sample report without citations
     sample_report = """
     # AI Agents in 2025: A Comprehensive Overview
-    
+
     The AI agent landscape has evolved dramatically in 2025. Major companies like Anthropic, OpenAI, and Google have released sophisticated multi-agent systems. These systems can now handle complex research tasks that previously required teams of human analysts.
-    
+
     ## Market Growth
-    
+
     The global AI agents market reached $15.2 billion in 2025, representing a 150% increase from 2024. Enterprise adoption has been the primary driver, with 73% of Fortune 500 companies now using some form of AI agents in their operations.
-    
+
     ## Technical Advances
-    
+
     Claude 3.5 introduced revolutionary multi-agent coordination capabilities in March 2025. The system can now orchestrate up to 50 specialized agents working in parallel. OpenAI's GPT-5 agents achieved similar capabilities but with a focus on code generation and software development.
-    
+
     ## Key Players
-    
+
     Anthropic leads in research and analysis applications with a 32% market share. OpenAI dominates the developer tools segment with 41% market share. Google's Gemini agents have captured 28% of the enterprise automation market.
-    
+
     ## Future Outlook
-    
+
     Industry analysts predict the AI agent market will reach $50 billion by 2027. The integration of agents with robotics and IoT devices represents the next frontier. Regulatory frameworks are still evolving to address autonomous agent decision-making.
     """
-    
+
     # Sample sources
     sample_sources = [
         SearchResult(
@@ -2019,7 +2019,7 @@ async def test_citations() -> Dict[str, Any]:
             relevance_score=0.94
         )
     ]
-    
+
     # Sample findings that map facts to sources
     sample_findings = [
         {
@@ -2048,23 +2048,23 @@ async def test_citations() -> Dict[str, Any]:
             "source_title": "GPT-5 Agents: Focused on Developer Productivity"
         }
     ]
-    
+
     # Initialize citation agent
     citation_agent = CitationAgent()
-    
+
     # Add citations
     cited_report, citation_list = await citation_agent.add_citations(
         sample_report,
         sample_sources,
         sample_findings
     )
-    
+
     # Generate bibliography
     bibliography = await citation_agent.generate_bibliography(
         sample_sources,
         citation_list
     )
-    
+
     return {
         "original_report_length": len(sample_report),
         "cited_report_length": len(cited_report),
@@ -2077,7 +2077,7 @@ async def test_citations() -> Dict[str, Any]:
 @app.get("/tools/available")
 async def get_available_tools() -> Dict[str, Any]:
     """Get list of available tools for agents"""
-    
+
     return {
         "tools": [
             {
@@ -2155,20 +2155,20 @@ from app.agents.citation_agent import CitationAgent
 
 async def test_full_research_pipeline():
     """Test the complete multi-agent research pipeline"""
-    
+
     print("=== Testing Multi-Agent Research System ===\n")
-    
+
     # 1. Test Citation Agent independently
     print("1. Testing Citation Agent...")
-    
+
     citation_agent = CitationAgent()
-    
+
     test_report = """
     Recent studies show that AI adoption in healthcare has increased by 45% in 2025.
     Major hospitals are using AI for diagnosis, with accuracy rates reaching 94%.
     The FDA has approved 23 new AI-powered medical devices this year.
     """
-    
+
     test_sources = [
         SearchResult(
             url="https://healthtech.com/ai-adoption-2025",
@@ -2183,52 +2183,52 @@ async def test_full_research_pipeline():
             relevance_score=0.93
         )
     ]
-    
+
     cited_report, citations = await citation_agent.add_citations(test_report, test_sources)
     print(f"✓ Citation Agent added {len(citations)} citations\n")
-    
+
     # 2. Test Search Subagent
     print("2. Testing Search Subagent...")
-    
+
     test_task = SubAgentTask(
         objective="Find information about AI agents in healthcare",
         search_focus="AI medical diagnosis accuracy statistics 2025",
         expected_output_format="List of statistics with sources"
     )
-    
+
     search_agent = SearchSubAgent(test_task.task_id)
     result = await search_agent.execute_task(test_task)
-    
+
     print(f"✓ Search Agent found {len(result.sources)} sources")
     print(f"✓ Extracted {len(result.findings)} findings\n")
-    
+
     # 3. Test Full Pipeline
     print("3. Testing Complete Research Pipeline...")
-    
+
     research_query = ResearchQuery(
         query="What are the latest breakthroughs in AI-powered medical diagnosis in 2025?",
         max_subagents=2,
         max_iterations=2
     )
-    
+
     lead_agent = LeadResearchAgent()
     research_result = await lead_agent.conduct_research(research_query)
-    
+
     print(f"✓ Research completed!")
     print(f"✓ Total tokens used: {research_result.total_tokens_used}")
     print(f"✓ Sources found: {len(research_result.sources_used)}")
     print(f"✓ Report length: {len(research_result.report)} characters")
-    
+
     # Show a sample of the report with citations
     print("\n=== Sample of Final Report ===")
     print(research_result.report[:500] + "...")
-    
+
     # Check that citations were added
     citation_pattern = r'\[\d+\]'
     import re
     citations_found = len(re.findall(citation_pattern, research_result.report))
     print(f"\n✓ Citations in report: {citations_found}")
-    
+
     print("\n=== Test Complete ===")
 
 

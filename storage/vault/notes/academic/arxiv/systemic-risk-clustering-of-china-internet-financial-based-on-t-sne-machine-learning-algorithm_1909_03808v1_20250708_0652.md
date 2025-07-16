@@ -10,18 +10,18 @@ primary_category: q-fin.ST
 arxiv_id: 1909.03808v1
 url: http://arxiv.org/abs/1909.03808v1
 pdf_url: http://arxiv.org/pdf/1909.03808v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 1328a1bc9a02addb
 ---
 
 # Systemic Risk Clustering of China Internet Financial Based on t-SNE Machine Learning Algorithm
 
-**Authors:** Mi Chuanmin, Xu Runjie, Lin Qingtong  
-**Published:** 2019-08-30  
-**Updated:** 2019-08-30  
-**Primary Category:** q-fin.ST  
-**ArXiv ID:** 1909.03808v1  
+**Authors:** Mi Chuanmin, Xu Runjie, Lin Qingtong
+**Published:** 2019-08-30
+**Updated:** 2019-08-30
+**Primary Category:** q-fin.ST
+**ArXiv ID:** 1909.03808v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1909.03808v1)

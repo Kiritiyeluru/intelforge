@@ -10,18 +10,18 @@ primary_category: math.AP
 arxiv_id: 1704.01446v2
 url: http://arxiv.org/abs/1704.01446v2
 pdf_url: http://arxiv.org/pdf/1704.01446v2
-doi: 
+doi:
 journal_ref: ""
 content_hash: 2b0bf5c6dc70bea6
 ---
 
 # Quantitative unique continuation of solutions to higher order elliptic equations with singular coefficients
 
-**Authors:** Jiuyi Zhu  
-**Published:** 2017-04-05  
-**Updated:** 2018-03-25  
-**Primary Category:** math.AP  
-**ArXiv ID:** 1704.01446v2  
+**Authors:** Jiuyi Zhu
+**Published:** 2017-04-05
+**Updated:** 2018-03-25
+**Primary Category:** math.AP
+**ArXiv ID:** 1704.01446v2
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1704.01446v2)

@@ -16,8 +16,8 @@ import argparse
 import os
 from typing import Dict, List
 
-from github import Github
 from dotenv import load_dotenv
+from github import Github
 
 from scripts.scraping_base import BaseScraper
 
@@ -173,12 +173,12 @@ class GitHubScraper(BaseScraper):
                         "stars": repo.stargazers_count,
                         "forks": repo.forks_count,
                         "language": repo.language,
-                        "created_at": repo.created_at.isoformat()
-                        if repo.created_at
-                        else None,
-                        "updated_at": repo.updated_at.isoformat()
-                        if repo.updated_at
-                        else None,
+                        "created_at": (
+                            repo.created_at.isoformat() if repo.created_at else None
+                        ),
+                        "updated_at": (
+                            repo.updated_at.isoformat() if repo.updated_at else None
+                        ),
                         "topics": list(repo.get_topics()),
                         "license": repo.license.name if repo.license else None,
                         "clone_url": repo.clone_url,

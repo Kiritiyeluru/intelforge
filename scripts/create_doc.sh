@@ -48,10 +48,10 @@ estimated_time: ""
 
 # ${DESC//_/ }
 
-**Created:** $(date +%Y-%m-%d)  
-**Category:** ${CATEGORY} ($(get_category_name $CATEGORY))  
-**Priority:** ${PRIORITY} ($(get_priority_name $PRIORITY))  
-**Author:** ${AUTHOR}  
+**Created:** $(date +%Y-%m-%d)
+**Category:** ${CATEGORY} ($(get_category_name $CATEGORY))
+**Priority:** ${PRIORITY} ($(get_priority_name $PRIORITY))
+**Author:** ${AUTHOR}
 
 ## Overview
 

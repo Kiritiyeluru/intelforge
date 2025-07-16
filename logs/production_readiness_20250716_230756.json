@@ -1,0 +1,111 @@
+{
+  "timestamp": "2025-07-16T23:07:56.298356",
+  "overall_score": 89,
+  "overall_status": "Deployment Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "pass",
+      "score": 100,
+      "message": "All critical files present and valid",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Security Baseline",
+      "status": "pass",
+      "score": 100,
+      "message": "Security tests pass",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Test Coverage",
+      "status": "skip",
+      "score": 75,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for detailed coverage analysis"
+      ]
+    },
+    {
+      "name": "Performance Benchmarks",
+      "status": "skip",
+      "score": 70,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for performance analysis"
+      ]
+    },
+    {
+      "name": "CLI Functionality",
+      "status": "pass",
+      "score": 100,
+      "message": "All CLI commands working",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Documentation",
+      "status": "pass",
+      "score": 100,
+      "message": "Missing: 0 docs",
+      "details": null,
+      "recommendations": []
+    },
+    {
+      "name": "Infrastructure Health",
+      "status": "pass",
+      "score": 100,
+      "message": "8/8 checks passed",
+      "details": {
+        "checks": {
+          "Python 3.x": true,
+          "Package: pytest": true,
+          "Package: loguru": true,
+          "Package: rich": true,
+          "Package: typer": true,
+          "Directory: scripts": true,
+          "Directory: tests": true,
+          "Directory: logs": true
+        }
+      },
+      "recommendations": []
+    },
+    {
+      "name": "Budget Tracking",
+      "status": "skip",
+      "score": 70,
+      "message": "Skipped in quick mode",
+      "details": null,
+      "recommendations": [
+        "Run full check for budget analysis"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Run full check for detailed coverage analysis",
+    "Run full check for performance analysis",
+    "Run full check for budget analysis"
+  ],
+  "deployment_ready": true,
+  "summary": {
+    "total_checks": 8,
+    "passed": 5,
+    "warnings": 0,
+    "failed": 0,
+    "duration_seconds": 28.79,
+    "check_details": {
+      "Critical Files": 100,
+      "Security Baseline": 100,
+      "Test Coverage": 75,
+      "Performance Benchmarks": 70,
+      "CLI Functionality": 100,
+      "Documentation": 100,
+      "Infrastructure Health": 100,
+      "Budget Tracking": 70
+    }
+  }
+}

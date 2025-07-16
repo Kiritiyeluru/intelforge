@@ -19,12 +19,12 @@ export let options = {
       executor: 'ramping-vus',
       stages: [
         { duration: '2m', target: 50 },   // Ramp to 50 concurrent crawlers
-        { duration: '10m', target: 100 }, // Scale to 100 concurrent crawlers  
+        { duration: '10m', target: 100 }, // Scale to 100 concurrent crawlers
         { duration: '5m', target: 200 },  // Stress test at 200 concurrent
         { duration: '2m', target: 0 },    // Ramp down
       ],
     },
-    
+
     // Spike test: Sudden load increases
     spike_test: {
       executor: 'ramping-vus',
@@ -35,7 +35,7 @@ export let options = {
         { duration: '30s', target: 0 },   // Drop to zero
       ],
     },
-    
+
     // Constant rate test: Steady throughput validation
     constant_rate: {
       executor: 'constant-arrival-rate',
@@ -46,7 +46,7 @@ export let options = {
       maxVUs: 300,
     },
   },
-  
+
   // Performance thresholds (superior to Python assertions)
   thresholds: {
     http_req_duration: ['p(95)<5000'],      // 95% of requests under 5s
@@ -67,7 +67,7 @@ const crawlerConfig = {
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:122.0) Gecko/20100101 Firefox/122.0'
   ],
-  
+
   // Test endpoints (mix of fast and slow responses for realistic testing)
   testUrls: [
     'https://httpbin.org/get',
@@ -79,7 +79,7 @@ const crawlerConfig = {
     'https://httpbin.org/status/200',
     'https://httpbin.org/headers',
   ],
-  
+
   // Financial content simulation patterns
   financialKeywords: [
     'options', 'trading', 'market', 'analysis', 'investment',
@@ -91,7 +91,7 @@ export default function() {
   // Realistic crawler behavior simulation
   const userAgent = crawlerConfig.userAgents[Math.floor(Math.random() * crawlerConfig.userAgents.length)];
   const testUrl = crawlerConfig.testUrls[Math.floor(Math.random() * crawlerConfig.testUrls.length)];
-  
+
   const headers = {
     'User-Agent': userAgent,
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -105,22 +105,22 @@ export default function() {
     'Sec-Fetch-Site': 'none',
     'Cache-Control': 'max-age=0',
   };
-  
+
   // Simulate crawler request with timing
   const crawlStart = Date.now();
-  let response = http.get(testUrl, { 
-    headers: headers, 
+  let response = http.get(testUrl, {
+    headers: headers,
     timeout: '10s',
-    tags: { 
+    tags: {
       url_type: testUrl.includes('delay') ? 'slow' : 'fast',
       scenario: __ENV.K6_SCENARIO || 'default'
     }
   });
   const crawlTime = Date.now() - crawlStart;
-  
+
   // Record custom metrics
   crawlDuration.add(crawlTime);
-  
+
   // Comprehensive checks (superior to Python assertions)
   let crawlSuccess = check(response, {
     'status is 200': (r) => r.status === 200,
@@ -129,18 +129,18 @@ export default function() {
     'response size > 0': (r) => r.body.length > 0,
     'no server errors': (r) => r.status < 500,
     'no client errors': (r) => r.status < 400 || r.status === 404, // 404 can be expected
-    'content type valid': (r) => r.headers['Content-Type'] && 
-                               (r.headers['Content-Type'].includes('text') || 
+    'content type valid': (r) => r.headers['Content-Type'] &&
+                               (r.headers['Content-Type'].includes('text') ||
                                 r.headers['Content-Type'].includes('json')),
     'has response headers': (r) => Object.keys(r.headers).length > 0,
   }, {
     url: testUrl,
     user_agent: userAgent
   });
-  
+
   // Simulate semantic processing time based on content
   const semanticStart = Date.now();
-  
+
   // Simulate different processing times based on content complexity
   let processingTime;
   if (response.body && response.body.length > 5000) {
@@ -150,25 +150,25 @@ export default function() {
   } else {
     processingTime = Math.random() * 200 + 50;  // 50-250ms for small content
   }
-  
+
   sleep(processingTime / 1000); // Convert to seconds for k6
   const semanticTime = Date.now() - semanticStart;
   semanticProcessingTime.add(semanticTime);
-  
+
   // Track success/failure metrics
   if (crawlSuccess) {
     successfulCrawls.add(1);
   } else {
     failedCrawls.add(1);
   }
-  
+
   // Track errors
   errorRate.add(!crawlSuccess);
-  
+
   // Anti-detection: Random delay between requests (realistic crawler behavior)
   const delay = Math.random() * 2 + 1; // 1-3 seconds
   sleep(delay);
-  
+
   // Simulate occasional longer delays (realistic crawler politeness)
   if (Math.random() < 0.1) { // 10% chance
     sleep(Math.random() * 3 + 2); // Additional 2-5 seconds
@@ -181,14 +181,14 @@ export function setup() {
   console.log('📊 Monitoring: Crawl performance, semantic processing, error rates');
   console.log('🔍 Anti-detection: Realistic user agents and delays');
   console.log('⚡ Superior to Python async testing: Better concurrency and statistics');
-  
+
   // Validate test endpoints are accessible
   const testResponse = http.get('https://httpbin.org/get');
   if (testResponse.status !== 200) {
     console.warn('⚠️  Test endpoint may be unreachable, results may vary');
   }
-  
-  return { 
+
+  return {
     startTime: Date.now(),
     testEndpoints: crawlerConfig.testUrls.length,
     userAgents: crawlerConfig.userAgents.length
@@ -198,7 +198,7 @@ export function setup() {
 // Teardown with comprehensive reporting
 export function teardown(data) {
   const testDuration = (Date.now() - data.startTime) / 1000;
-  
+
   console.log('\n=== IntelForge Stress Test Summary ===');
   console.log(`✅ Test Duration: ${testDuration.toFixed(1)}s`);
   console.log(`🌐 Test Endpoints: ${data.testEndpoints}`);

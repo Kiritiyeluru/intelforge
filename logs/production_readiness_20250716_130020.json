@@ -1,0 +1,153 @@
+{
+  "timestamp": "2025-07-16T13:00:20.425332",
+  "overall_score": 38,
+  "overall_status": "Not Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "warning",
+      "score": 80,
+      "message": "Missing: 1, Invalid: 0",
+      "details": {
+        "missing": [
+          "requirements.txt"
+        ],
+        "invalid": []
+      },
+      "recommendations": [
+        "Create missing files: requirements.txt"
+      ]
+    },
+    {
+      "name": "Security Baseline",
+      "status": "fail",
+      "score": 30,
+      "message": "Security tests failed",
+      "details": {
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: 'python'"
+      },
+      "recommendations": [
+        "Fix security test failures",
+        "Review security scanning results",
+        "Address identified vulnerabilities"
+      ]
+    },
+    {
+      "name": "Test Coverage",
+      "status": "fail",
+      "score": 20,
+      "message": "Coverage analysis failed",
+      "details": null,
+      "recommendations": [
+        "Fix coverage analysis execution"
+      ]
+    },
+    {
+      "name": "Performance Benchmarks",
+      "status": "fail",
+      "score": 30,
+      "message": "Performance tests failed",
+      "details": null,
+      "recommendations": [
+        "Address performance regressions"
+      ]
+    },
+    {
+      "name": "CLI Functionality",
+      "status": "fail",
+      "score": 40,
+      "message": "2 CLI commands failed",
+      "details": {
+        "failed_commands": [
+          "CLI help",
+          "Status command"
+        ]
+      },
+      "recommendations": [
+        "Fix failing CLI commands"
+      ]
+    },
+    {
+      "name": "Documentation",
+      "status": "warning",
+      "score": 60,
+      "message": "Missing: 2 docs",
+      "details": null,
+      "recommendations": [
+        "Create missing documentation: README.md, CURRENT_IMPLEMENTATION_PLAN.md"
+      ]
+    },
+    {
+      "name": "Infrastructure Health",
+      "status": "fail",
+      "score": 37,
+      "message": "3/8 checks passed",
+      "details": {
+        "checks": {
+          "Python 3.x": false,
+          "Package: pytest": false,
+          "Package: loguru": false,
+          "Package: rich": false,
+          "Package: typer": false,
+          "Directory: scripts": true,
+          "Directory: tests": true,
+          "Directory: logs": true
+        }
+      },
+      "recommendations": [
+        "Fix: Python 3.x",
+        "Fix: Package: pytest",
+        "Fix: Package: loguru",
+        "Fix: Package: rich",
+        "Fix: Package: typer"
+      ]
+    },
+    {
+      "name": "Budget Tracking",
+      "status": "fail",
+      "score": 30,
+      "message": "Budget check failed",
+      "details": null,
+      "recommendations": [
+        "Fix budget tracking system"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Create missing files: requirements.txt",
+    "Fix security test failures",
+    "Review security scanning results",
+    "Address identified vulnerabilities",
+    "Fix coverage analysis execution",
+    "Address performance regressions",
+    "Fix failing CLI commands",
+    "Create missing documentation: README.md, CURRENT_IMPLEMENTATION_PLAN.md",
+    "Fix: Python 3.x",
+    "Fix: Package: pytest",
+    "Fix: Package: loguru",
+    "Fix: Package: rich",
+    "Fix: Package: typer",
+    "Fix budget tracking system",
+    "Address 6 failing checks before deployment",
+    "Review 2 warning checks for production optimization"
+  ],
+  "deployment_ready": false,
+  "summary": {
+    "total_checks": 8,
+    "passed": 0,
+    "warnings": 2,
+    "failed": 6,
+    "duration_seconds": 0.0,
+    "check_details": {
+      "Critical Files": 80,
+      "Security Baseline": 30,
+      "Test Coverage": 20,
+      "Performance Benchmarks": 30,
+      "CLI Functionality": 40,
+      "Documentation": 60,
+      "Infrastructure Health": 37,
+      "Budget Tracking": 30
+    }
+  }
+}

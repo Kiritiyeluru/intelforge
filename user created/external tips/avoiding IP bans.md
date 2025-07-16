@@ -245,4 +245,3 @@ You only need to:
 * Maybe write 30 lines to track IP/URL bans
 
 Let me know if you want a `scrapy` or `requests` sample configuration with all of this enabled.
-

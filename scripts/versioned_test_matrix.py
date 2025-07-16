@@ -6,13 +6,13 @@ experiment tracking via Sacred for advanced analytics.
 """
 
 import csv
+import importlib.util
 import logging
+import platform
+import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-import subprocess
-import platform
-import importlib.util
+from typing import Any, Dict, List, Optional
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -367,9 +367,9 @@ class VersionedTestMatrix:
         second_ttr = self._calculate_avg_metric(second_half, "Avg_TTR")
 
         return {
-            "stealth_trend": "improving"
-            if second_stealth > first_stealth
-            else "declining",
+            "stealth_trend": (
+                "improving" if second_stealth > first_stealth else "declining"
+            ),
             "stealth_change": round(second_stealth - first_stealth, 1),
             "ttr_trend": "improving" if second_ttr < first_ttr else "declining",
             "ttr_change": round(second_ttr - first_ttr, 1),

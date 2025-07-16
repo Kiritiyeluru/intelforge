@@ -72,7 +72,7 @@ Deep Research with Claude Sonnet 4 in Claude Code
   # Financial markets
   WebSearch: "quantitative finance papers 2024" + allowed_domains: ["arxiv.org", "ssrn.com"]
 
-  # Technology trends  
+  # Technology trends
   WebSearch: "AI framework benchmarks" + blocked_domains: ["pinterest.com", "instagram.com"]
 
   Time-Sensitive Research:

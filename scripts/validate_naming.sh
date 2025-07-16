@@ -24,7 +24,7 @@ for file in "$dir"/*.md "$dir"/*/*.md; do
     if [ -f "$file" ]; then
         base=$(basename "$file")
         total=$((total + 1))
-        
+
         if [[ $base =~ $regex ]]; then
             echo "✅ Valid: $base"
             valid=$((valid + 1))

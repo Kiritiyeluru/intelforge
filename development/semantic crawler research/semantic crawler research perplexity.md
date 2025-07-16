@@ -231,7 +231,7 @@ A recent open-source project demonstrates a modular pipeline with:
 - Storage and semantic search using a vector DB.
 - Modular, extensible codebase suitable for both entry-level and advanced use.
 
-**Reference:**  
+**Reference:**
 A detailed walkthrough and repo are available, showing how to orchestrate Playwright, sentence-transformers, and pgvector in an async pipeline[1].
 
 ### 2. **Async Semantic Search with Qdrant**
@@ -362,4 +362,3 @@ Deploying semantic web crawlers with AI-based relevance filtering at scale prese
 
 By combining these strategies, semantic web crawlers can achieve high efficiency, relevance, and scalability—enabling large-scale, AI-powered content discovery and retrieval for modern applications[8][2][1][3][5][4][6][7].
 ------------------------------------
-

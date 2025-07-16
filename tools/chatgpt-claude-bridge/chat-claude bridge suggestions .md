@@ -234,4 +234,3 @@ These are **immediate value**, **low effort**, and **zero risk**.
 
 Want me to generate updated scripts with all these enhancements included? Just say:
 **"Give me enhanced Claude Bridge bundle"**.
-

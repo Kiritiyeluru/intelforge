@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:57.240072
 
 # Investing News
 
-**URL:** https://www.cnbc.com/investing/  
-**Final URL:** https://www.cnbc.com/investing/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 4,328 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:57.240072  
+**URL:** https://www.cnbc.com/investing/
+**Final URL:** https://www.cnbc.com/investing/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 4,328 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:57.240072
 
 ## Main Content
 

@@ -278,7 +278,7 @@ keywords = [
 tags = ["tag","another tag"]
 
     # ⚠️ In v8.21.0 `[rules.allowlist]` was replaced with `[[rules.allowlists]]`.
-    # This change was backwards-compatible: instances of `[rules.allowlist]` still  work.  
+    # This change was backwards-compatible: instances of `[rules.allowlist]` still  work.
     #
     # You can define multiple allowlists for a rule to reduce false positives.
     # A finding will be ignored if _ANY_ `[[rules.allowlists]]` matches.

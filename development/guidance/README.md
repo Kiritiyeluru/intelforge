@@ -8,117 +8,117 @@ This directory contains all crucial guidance documents reorganized from `/docs/`
 
 ## 🏛️ **Core Essentials** - Daily Development Reference
 
-**Location:** `guidance/core_essentials/`  
+**Location:** `guidance/core_essentials/`
 **Usage:** Consult these before/during development for immediate guidance
 
 ### 🔧 [find_vs_build.md](core_essentials/find_vs_build.md)
-**Purpose:** Decision framework for build vs. reuse choices  
-**When to use:** Before implementing any new functionality  
+**Purpose:** Decision framework for build vs. reuse choices
+**When to use:** Before implementing any new functionality
 **Key sections:** Reuse checklist, build criteria, decision matrix
 
 ### 🚨 [troubleshooting_guide.md](core_essentials/troubleshooting_guide.md)
-**Purpose:** Quick problem resolution reference  
-**When to use:** When encountering issues or errors  
+**Purpose:** Quick problem resolution reference
+**When to use:** When encountering issues or errors
 **Key sections:** Common problems, MCP issues, git workflow, quick fixes
 
 ### ⚡ [scraping_tools_recommendations.md](core_essentials/scraping_tools_recommendations.md)
-**Purpose:** Comprehensive technical implementation guide  
-**When to use:** For tool selection, performance optimization, architecture decisions  
+**Purpose:** Comprehensive technical implementation guide
+**When to use:** For tool selection, performance optimization, architecture decisions
 **Key sections:** Performance benchmarks, Phase 2 roadmap, tool comparisons
 
 ---
 
 ## 📊 **Project Intelligence** - Knowledge Capture & Analysis
 
-**Location:** `guidance/project_intelligence/`  
+**Location:** `guidance/project_intelligence/`
 **Usage:** Document insights, track decisions, monitor technical status
 
 ### 🎯 [decision_log.md](project_intelligence/decision_log.md)
-**Purpose:** Architectural decisions with detailed rationale  
-**When to update:** After making any significant technical or architectural choice  
+**Purpose:** Architectural decisions with detailed rationale
+**When to update:** After making any significant technical or architectural choice
 **Key sections:** Tool selections, architecture patterns, trade-off analysis
 
 ### 🧠 [learning_log.md](project_intelligence/learning_log.md)
-**Purpose:** Capture insights, discoveries, and lessons learned  
-**When to update:** After significant discoveries or completing development sessions  
+**Purpose:** Capture insights, discoveries, and lessons learned
+**When to update:** After significant discoveries or completing development sessions
 **Key sections:** Technical insights, process improvements, gotchas and solutions
 
 ### 📈 [dependency_report.md](project_intelligence/dependency_report.md)
-**Purpose:** Auto-generated dependency analysis and warnings  
-**When to review:** After adding new dependencies or during health checks  
+**Purpose:** Auto-generated dependency analysis and warnings
+**When to review:** After adding new dependencies or during health checks
 **Key sections:** Package analysis, import warnings, security considerations
 
 ---
 
 ## ⚙️ **Operations** - Configuration & Automation Management
 
-**Location:** `guidance/operations/`  
+**Location:** `guidance/operations/`
 **Usage:** Configuration management and long-term automation strategy
 
 ### 📝 [config_changelog.md](operations/config_changelog.md)
-**Purpose:** Track configuration changes to prevent breaking changes  
-**When to update:** Every time configuration files are modified  
+**Purpose:** Track configuration changes to prevent breaking changes
+**When to update:** Every time configuration files are modified
 **Key sections:** Change log template, impact analysis, rollback procedures
 
 ### 🤖 [claude_code_hooks_maintenance_plan.md](operations/claude_code_hooks_maintenance_plan.md)
-**Purpose:** Comprehensive automation strategy with 9 intelligent hooks  
-**When to reference:** Planning automation improvements or implementing new hooks  
+**Purpose:** Comprehensive automation strategy with 9 intelligent hooks
+**When to reference:** Planning automation improvements or implementing new hooks
 **Key sections:** Hook implementation phases, dependency intelligence, code pattern enforcement
 
 ---
 
 ## 🚀 **Strategic Vision** - Future Planning & Roadmaps
 
-**Location:** `guidance/strategic_vision/`  
+**Location:** `guidance/strategic_vision/`
 **Usage:** Long-term planning and architectural evolution
 
 ### 🔮 [Automated Knowledge Miner (AKM).md](strategic_vision/Automated%20Knowledge%20Miner%20(AKM).md)
-**Purpose:** Comprehensive future development roadmap for intelligent knowledge extraction  
-**When to reference:** Planning major features or architectural evolution  
+**Purpose:** Comprehensive future development roadmap for intelligent knowledge extraction
+**When to reference:** Planning major features or architectural evolution
 **Key sections:** AKM system design, intelligence capabilities, integration roadmap
 
 ---
 
 ## 🛠️ **Development** - Methodology & Best Practices
 
-**Location:** `guidance/development/`  
+**Location:** `guidance/development/`
 **Usage:** Core development processes and methodologies for consistent AI-assisted development
 
 ### 📋 [Reusable_Development_Checklist_for_Each_Module.md](development/Reusable_Development_Checklist_for_Each_Module.md)
-**Purpose:** 10-point checklist for every module development  
-**When to use:** Before implementing any new functionality  
+**Purpose:** 10-point checklist for every module development
+**When to use:** Before implementing any new functionality
 **Key sections:** Reuse over rebuild, AI-friendliness, modularity, testability
 
 ### 🏗️ [SOFTWARE_DEVELOPMENT_PROCESS.md](development/SOFTWARE_DEVELOPMENT_PROCESS.md)
-**Purpose:** Professional software development process for solo developers with AI assistance  
-**When to use:** Planning development phases and maintaining quality standards  
+**Purpose:** Professional software development process for solo developers with AI assistance
+**When to use:** Planning development phases and maintaining quality standards
 **Key sections:** Project initialization, development workflow, testing strategy
 
 ### ⚠️ [crucial_issues_to_address_proactively.md](development/crucial_issues_to_address_proactively.md)
-**Purpose:** Proactive issue identification and prevention  
-**When to use:** Regular review sessions and before major changes  
+**Purpose:** Proactive issue identification and prevention
+**When to use:** Regular review sessions and before major changes
 **Key sections:** Common pitfalls, prevention strategies, quality gates
 
 ### 📚 [general_Professional Software_Development_Process_Checklist.md](development/general_Professional%20Software_Development_Process_Checklist.md)
-**Purpose:** Comprehensive development checklist  
-**When to use:** Project reviews and process improvement  
+**Purpose:** Comprehensive development checklist
+**When to use:** Project reviews and process improvement
 **Key sections:** Planning, implementation, testing, deployment phases
 
 ---
 
 ## 🤖 **Automation** - GitHub Projects & Workflow Enhancement
 
-**Location:** `guidance/automation/`  
+**Location:** `guidance/automation/`
 **Usage:** Automation strategies and GitHub integration for enhanced development workflow
 
 ### 🐙 [github-projects/README.md](automation/github-projects/README.md)
-**Purpose:** GitHub Projects automation setup and usage  
-**When to reference:** Setting up project management automation  
+**Purpose:** GitHub Projects automation setup and usage
+**When to reference:** Setting up project management automation
 **Key sections:** Project board configuration, automation rules, workflow integration
 
 ### 📋 [github-projects/plan.md](automation/github-projects/plan.md)
-**Purpose:** Detailed automation implementation plan  
-**When to reference:** Planning GitHub integration features  
+**Purpose:** Detailed automation implementation plan
+**When to reference:** Planning GitHub integration features
 **Key sections:** Phase-based automation, issue templates, project management
 
 ---

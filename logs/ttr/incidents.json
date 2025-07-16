@@ -25,6 +25,156 @@
         "database",
         "connectivity"
       ]
+    },
+    {
+      "incident_id": "INC-1752653206-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:36:46.203773",
+      "resolution_time": "2025-07-16 13:36:47.204950",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:36:46] Checked database service status",
+        "[2025-07-16 13:36:46] Restarted database service",
+        "[2025-07-16 13:36:46] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
+    },
+    {
+      "incident_id": "INC-1752653276-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:37:56.237803",
+      "resolution_time": "2025-07-16 13:37:57.246417",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:37:56] Checked database service status",
+        "[2025-07-16 13:37:56] Restarted database service",
+        "[2025-07-16 13:37:56] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
+    },
+    {
+      "incident_id": "INC-1752653315-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:38:35.888637",
+      "resolution_time": "2025-07-16 13:38:36.897384",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:38:35] Checked database service status",
+        "[2025-07-16 13:38:35] Restarted database service",
+        "[2025-07-16 13:38:35] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
+    },
+    {
+      "incident_id": "INC-1752653390-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:39:50.211762",
+      "resolution_time": "2025-07-16 13:39:51.221225",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:39:50] Checked database service status",
+        "[2025-07-16 13:39:50] Restarted database service",
+        "[2025-07-16 13:39:50] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
+    },
+    {
+      "incident_id": "INC-1752653761-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:46:01.731412",
+      "resolution_time": "2025-07-16 13:46:02.740953",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:46:01] Checked database service status",
+        "[2025-07-16 13:46:01] Restarted database service",
+        "[2025-07-16 13:46:01] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
+    },
+    {
+      "incident_id": "INC-1752653838-DAT",
+      "title": "Database connection failure",
+      "description": "Unable to connect to primary database",
+      "severity": "high",
+      "component": "database",
+      "detection_time": "2025-07-16 13:47:18.966661",
+      "resolution_time": "2025-07-16 13:47:19.976562",
+      "status": "resolved",
+      "recovery_actions": [
+        "[2025-07-16 13:47:18] Checked database service status",
+        "[2025-07-16 13:47:18] Restarted database service",
+        "[2025-07-16 13:47:18] Verified connectivity restored"
+      ],
+      "root_cause": "Database service crashed due to memory exhaustion",
+      "prevention_measures": [
+        "Implement database monitoring",
+        "Set up memory alerts",
+        "Configure automatic restart"
+      ],
+      "tags": [
+        "database",
+        "connectivity"
+      ]
     }
   ]
 }

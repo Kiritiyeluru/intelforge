@@ -15,10 +15,10 @@ estimated_time: ""
 
 # IntelForge Documentation Naming Convention Guide
 
-**Created:** 2025-07-14  
-**Category:** REF (Reference)  
-**Priority:** A (Critical/Urgent)  
-**Author:** CL  
+**Created:** 2025-07-14
+**Category:** REF (Reference)
+**Priority:** A (Critical/Urgent)
+**Author:** CL
 
 ## Overview
 

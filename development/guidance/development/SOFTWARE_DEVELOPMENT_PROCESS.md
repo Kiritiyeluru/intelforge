@@ -185,4 +185,3 @@ This isn't about corporate bureaucracy (like waterfall or pure Agile). It’s ab
 * Think in **minimum functional systems**, not “perfect systems.”
 
 ---
-

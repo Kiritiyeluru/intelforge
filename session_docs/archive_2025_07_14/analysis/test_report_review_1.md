@@ -332,7 +332,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
-    
+
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4

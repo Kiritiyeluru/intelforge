@@ -8,7 +8,7 @@
       "content_type": "research_paper"
     },
     {
-      "url": "https://arxiv.org/abs/1706.03762", 
+      "url": "https://arxiv.org/abs/1706.03762",
       "title": "Attention Is All You Need",
       "domain": "deep_learning",
       "expected_keywords": ["transformer", "attention mechanism", "self-attention", "neural networks"],

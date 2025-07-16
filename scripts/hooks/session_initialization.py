@@ -16,39 +16,41 @@ def enforce_philosophy_compliance():
 
 ZERO TOLERANCE FOR CUSTOM CODE WHEN ALTERNATIVES EXIST:
 - REUSE OVER REBUILD: NEVER write custom code when existing libraries/tools exist
-- CHECK FIRST, BUILD NEVER: Always search for existing solutions before coding  
+- CHECK FIRST, BUILD NEVER: Always search for existing solutions before coding
 - FRAMEWORK OVER CUSTOM: Use established frameworks rather than custom implementations
 - TOOL RESEARCH MANDATORY: Use find_tools_template.md before any development
 - PROVEN OVER NOVEL: Prefer battle-tested tools over custom logic
 - WRAP, DON'T WRITE: Integrate existing tools rather than reimplementing
 
-🏆 EVIDENCE OF SUCCESS: Phase 2C - Replaced 400+ line custom academic scraper 
+🏆 EVIDENCE OF SUCCESS: Phase 2C - Replaced 400+ line custom academic scraper
 with <200 lines using production frameworks. This philosophy WORKS and MUST be followed.
 
-⚡ VIOLATION CONSEQUENCE: Any suggestion to build custom code will be rejected. 
+⚡ VIOLATION CONSEQUENCE: Any suggestion to build custom code will be rejected.
 Research existing tools FIRST, ALWAYS.
 
-📋 APPROVED FRAMEWORKS: scrapy, trafilatura, scrapy-playwright, nodriver, 
-camoufox, scrapling, paperscraper, autoscraper, stealth-requests, news-please, 
+📋 APPROVED FRAMEWORKS: scrapy, trafilatura, scrapy-playwright, nodriver,
+camoufox, scrapling, paperscraper, autoscraper, stealth-requests, news-please,
 playwright-python, arxiv.py, feedparser, botasaurus, selectolax, httpx, polars
 
 🎯 ENFORCEMENT: Philosophy enforcer hook will validate ALL code attempts.
 """
     print(philosophy_reminder)
-    
+
     # Log philosophy enforcement
     project_root = Path("/home/kiriti/alpha_projects/intelforge")
     philosophy_log = project_root / ".claude" / "philosophy_enforcement.log"
-    
+
     with open(philosophy_log, "a") as f:
-        f.write(f"{datetime.now().isoformat()} - PHILOSOPHY ENFORCED AT SESSION START\n")
+        f.write(
+            f"{datetime.now().isoformat()} - PHILOSOPHY ENFORCED AT SESSION START\n"
+        )
 
 
 def log_session_start():
     """Log session initialization and project plan status."""
     # FIRST: Enforce philosophy compliance
     enforce_philosophy_compliance()
-    
+
     project_root = Path("/home/kiriti/alpha_projects/intelforge")
 
     # Paths

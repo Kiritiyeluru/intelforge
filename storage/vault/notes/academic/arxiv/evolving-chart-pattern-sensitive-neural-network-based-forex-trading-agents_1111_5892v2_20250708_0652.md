@@ -10,18 +10,18 @@ primary_category: cs.NE
 arxiv_id: 1111.5892v2
 url: http://arxiv.org/abs/1111.5892v2
 pdf_url: http://arxiv.org/pdf/1111.5892v2
-doi: 
+doi:
 journal_ref: ""
 content_hash: 0c618b055ceccbe6
 ---
 
 # Evolving Chart Pattern Sensitive Neural Network Based Forex Trading Agents
 
-**Authors:** Gene I. Sher  
-**Published:** 2011-11-25  
-**Updated:** 2012-01-30  
-**Primary Category:** cs.NE  
-**ArXiv ID:** 1111.5892v2  
+**Authors:** Gene I. Sher
+**Published:** 2011-11-25
+**Updated:** 2012-01-30
+**Primary Category:** cs.NE
+**ArXiv ID:** 1111.5892v2
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1111.5892v2)

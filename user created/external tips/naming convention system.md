@@ -68,7 +68,7 @@ version: $VERSION
 author: $AUTHOR
 tags: []
 status: active
-estimated_time: 
+estimated_time:
 ---
 
 # ${DESC//_/ }

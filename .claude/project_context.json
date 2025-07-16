@@ -8,7 +8,7 @@
     "development_model": "Solo developer with AI assistance (Claude Code)",
     "design_patterns": [
       "One file per phase, flat structure",
-      "Functions over classes when possible", 
+      "Functions over classes when possible",
       "Configuration-driven behavior",
       "AI-regenerable modules"
     ]
@@ -20,7 +20,7 @@
     "active_components": [
       "Unified scraping framework (scripts/scraping_base.py)",
       "Reddit scraper (scrapers/reddit_scraper.py)",
-      "GitHub scraper (scrapers/github_scraper.py)", 
+      "GitHub scraper (scrapers/github_scraper.py)",
       "Web scraper (scrapers/web_scraper.py)",
       "Knowledge management system (47 articles organized)",
       "AI semantic search (1,683 chunks, FAISS vector DB)"
@@ -29,7 +29,7 @@
   "project_structure": {
     "session_management": "session_docs/",
     "scrapers": "scrapers/",
-    "utilities": "scripts/", 
+    "utilities": "scripts/",
     "configuration": "config/",
     "output": "vault/notes/",
     "logs": "vault/logs/",

@@ -4,8 +4,8 @@ IntelForge Rust Performance Testing
 Tests the performance improvements from Rust tools integration
 """
 
-import time
 import subprocess
+import time
 
 
 def test_selectolax_vs_beautifulsoup():

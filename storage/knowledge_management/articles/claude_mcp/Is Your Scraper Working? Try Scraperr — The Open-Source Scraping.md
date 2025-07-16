@@ -62,13 +62,13 @@ def scrape(url):
         response = requests.get(url, timeout=10)
         response.raise_for_status()  # If request fails, raise an exception
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Here is your specific parsing logic, like extracting the title
         title = soup.find('title').string if soup.find('title') else 'No title found'
-        
+
         # Let's say we also want to extract all H1 tags
         h1_tags = [h1.get_text(strip=True) for h1 in soup.find_all('h1')]
-        
+
         return {"url": url, "title": title, "h1_tags": h1_tags, "status": "success"}
     except Exception as e:
         return {"url": url, "error": str(e), "status": "error"}
@@ -105,7 +105,7 @@ type ScrapeResult struct {
 }
 func main() {
     router := gin.Default()
-    
+
     // API endpoint to trigger a scrape
     router.POST("/scrape", func(c *gin.Context) {
         var req ScrapeRequest
@@ -113,7 +113,7 @@ func main() {
             c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
             return
         }
-        
+
         // Path should be the actual path to your Python interpreter and script
         // In Scraperr, this would be more complex, involving task management, queues, etc.
         cmd := exec.Command("python3", "path/to/your/my_scraper.py", req.URL)
@@ -128,7 +128,7 @@ func main() {
             })
             return
         }
-        
+
         var result ScrapeResult
         if err := json.Unmarshal(output, &result); err != nil {
             // If the Python script's output is not valid JSON
@@ -139,12 +139,12 @@ func main() {
             })
             return
         }
-        
+
         // In a real application, this would save the result to a database
         // dbmodule.SaveResult(result)
         c.JSON(http.StatusOK, result)
     })
-    
+
     router.Run(":8080")  // Start HTTP server, listen on port 8080
 }
 Key Points:

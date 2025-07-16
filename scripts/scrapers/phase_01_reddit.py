@@ -268,9 +268,9 @@ class IntelForgeRedditScraper:
                 if hasattr(comment, "body") and comment.score >= min_comment_score:
                     comments.append(
                         {
-                            "author": str(comment.author)
-                            if comment.author
-                            else "[deleted]",
+                            "author": (
+                                str(comment.author) if comment.author else "[deleted]"
+                            ),
                             "body": comment.body,
                             "score": comment.score,
                             "created_utc": datetime.fromtimestamp(

@@ -10,18 +10,18 @@ primary_category: q-fin.CP
 arxiv_id: 2107.09051v1
 url: http://arxiv.org/abs/2107.09051v1
 pdf_url: http://arxiv.org/pdf/2107.09051v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: f990736b5dcd5f29
 ---
 
 # AI in Finance: Challenges, Techniques and Opportunities
 
-**Authors:** Longbing Cao  
-**Published:** 2021-07-20  
-**Updated:** 2021-07-20  
-**Primary Category:** q-fin.CP  
-**ArXiv ID:** 2107.09051v1  
+**Authors:** Longbing Cao
+**Published:** 2021-07-20
+**Updated:** 2021-07-20
+**Primary Category:** q-fin.CP
+**ArXiv ID:** 2107.09051v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2107.09051v1)

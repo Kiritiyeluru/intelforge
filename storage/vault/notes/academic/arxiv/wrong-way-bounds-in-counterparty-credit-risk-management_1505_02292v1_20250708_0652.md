@@ -10,18 +10,18 @@ primary_category: q-fin.RM
 arxiv_id: 1505.02292v1
 url: http://arxiv.org/abs/1505.02292v1
 pdf_url: http://arxiv.org/pdf/1505.02292v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: 8ff264fffb229de6
 ---
 
 # Wrong-Way Bounds in Counterparty Credit Risk Management
 
-**Authors:** Amir Memartoluie, David Saunders, Tony Wirjanto  
-**Published:** 2015-05-09  
-**Updated:** 2015-05-09  
-**Primary Category:** q-fin.RM  
-**ArXiv ID:** 1505.02292v1  
+**Authors:** Amir Memartoluie, David Saunders, Tony Wirjanto
+**Published:** 2015-05-09
+**Updated:** 2015-05-09
+**Primary Category:** q-fin.RM
+**ArXiv ID:** 1505.02292v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1505.02292v1)

@@ -306,7 +306,7 @@ It is also the most lightweight and is closer to an agent pattern library than a
 
 You can install it by using uv (recommended) or pip.
 
-uv add "mcp-agent" 
+uv add "mcp-agent"
 
 # OR
 pip install mcp-agent
@@ -401,7 +401,7 @@ async def main():
             instructions="You help the user manage their emails using the connected Gmail tool.",
             mcp_servers=[gmail_server]
         )
-        
+
         task = "send an email to hi@anmolbaranwal.com with subject 'Hello from MCP Agent' and body 'This is a test email sent via the Gmail MCP server.'"
         result = await Runner.run(agent, task)
         print(result.final_output)

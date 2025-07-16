@@ -260,4 +260,3 @@ I can generate:
 * `richified_cli.py` — upgrade to colored, readable outputs
 
 Say the word and I’ll scaffold them.
-

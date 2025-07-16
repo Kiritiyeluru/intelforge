@@ -20,7 +20,7 @@ To use hooks, you need to define them in your Claude Code settings file. This is
 
 [[hooks]]
 # The event that triggers the hook.
-event = "PostToolUse" 
+event = "PostToolUse"
 
 # (Optional) Conditions for the hook to run.
 [hooks.matcher]
@@ -31,7 +31,7 @@ file_paths = ["*.py", "api/**/*.py"]
 command = "ruff check --fix $CLAUDE_FILE_PATHS && black $CLAUDE_FILE_PATHS"
 
 # (Optional) Whether to run the command in the background.
-run_in_background = false 
+run_in_background = false
 Let's break down each part in detail.
 
 The event Field in Claude Code Hooks (Required)

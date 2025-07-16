@@ -80,8 +80,8 @@ extraction_method: trafilatura
 
 # {title}
 
-**Source:** [{site}]({url})  
-**Author:** {author}  
+**Source:** [{site}]({url})
+**Author:** {author}
 **Scraped:** {scraped_at[:10]}
 
 ---
@@ -90,7 +90,7 @@ extraction_method: trafilatura
 
 ---
 
-**Keywords:** {", ".join(keywords)}  
+**Keywords:** {", ".join(keywords)}
 **URL:** {url}
 """
 

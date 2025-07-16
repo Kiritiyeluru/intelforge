@@ -3,7 +3,7 @@
     "basic_config": {
       "storage_type": "chromadb",
       "collection_name": "intelforge_default",
-      "embedding_model": "all-MiniLM-L6-v2", 
+      "embedding_model": "all-MiniLM-L6-v2",
       "chunk_size": 512,
       "chunk_overlap": 50,
       "max_concurrent_requests": 3
@@ -37,7 +37,7 @@
     {
       "name": "chromadb_to_qdrant",
       "source": "chromadb",
-      "target": "qdrant", 
+      "target": "qdrant",
       "collection_mapping": {
         "intelforge_default": "intelforge_migrated",
         "academic_research": "research_qdrant"
@@ -51,7 +51,7 @@
       "target_version": "2.0",
       "changes": [
         "add_security_options",
-        "update_embedding_model", 
+        "update_embedding_model",
         "migrate_chunk_settings",
         "add_performance_monitoring"
       ],
@@ -61,7 +61,7 @@
   "workflow_templates": {
     "developer_onboarding": [
       "intelforge status --detailed",
-      "intelforge validate --quick", 
+      "intelforge validate --quick",
       "intelforge docs --generate-config",
       "intelforge crawl --url https://example.com --test-mode",
       "intelforge status --json"
@@ -76,7 +76,7 @@
     "development_cycle": [
       "intelforge validate --fail-fast",
       "intelforge crawl --batch-urls tests/fixtures/academic_urls/sample_urls.txt",
-      "intelforge status --performance", 
+      "intelforge status --performance",
       "intelforge docs --snapshot-create",
       "intelforge validate --semantic-drift"
     ]
@@ -102,7 +102,7 @@
       "template": "intelforge migrate --source {source} --target {target} --collection-map {mapping}",
       "parameters": {
         "source": "chromadb",
-        "target": "qdrant", 
+        "target": "qdrant",
         "mapping": "intelforge_default:migrated_collection"
       }
     }

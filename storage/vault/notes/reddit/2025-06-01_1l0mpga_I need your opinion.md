@@ -32,7 +32,7 @@ No
 
 **Author:** u/DenisWestVS
 
-Listen to Dr. Ernest Chan  
+Listen to Dr. Ernest Chan
 He is a well-deserved specialist in machine learning and algotrader at the same time. His opinion is not, at present, AI is not able to predict moving of the price.
 
 ### Comment 3 (Score: 21)
@@ -42,7 +42,7 @@ He is a well-deserved specialist in machine learning and algotrader at the same 
 ML will not find patterns by itself from candlesticks (too much noise, can’t generalize well).
 
 
-A much better approach for using ml is to have an underlying strategy that has an existing edge, and train a model on the results of that strategy. This means the labels you train on could be either the win / loss outcomes of each trade (binary classification, usually the easiest), the pnl distribution, or any metric you want, but some are definitely better. The goal is for the model to AMPLIFY that existing edge. 
+A much better approach for using ml is to have an underlying strategy that has an existing edge, and train a model on the results of that strategy. This means the labels you train on could be either the win / loss outcomes of each trade (binary classification, usually the easiest), the pnl distribution, or any metric you want, but some are definitely better. The goal is for the model to AMPLIFY that existing edge.
 
 
 Finding an edge -> ml bad
@@ -50,10 +50,10 @@ Finding an edge -> ml bad
 Improving an existing edge -> ml good
 
 
-You need to use a robust cross validation method and be 100% sure your pipeline has zero data leakage, since you will be training and testing on your historical results. 
+You need to use a robust cross validation method and be 100% sure your pipeline has zero data leakage, since you will be training and testing on your historical results.
 
 
-This method can improve your win rate (if that’s what you’re optimizing for) by a few %, which can be huge. And from my experience the risk adjusted returns get the biggest boost - it basically is attempting to filter out more bad trades than good trades which really helps reduce your drawdowns. 
+This method can improve your win rate (if that’s what you’re optimizing for) by a few %, which can be huge. And from my experience the risk adjusted returns get the biggest boost - it basically is attempting to filter out more bad trades than good trades which really helps reduce your drawdowns.
 
 
 It’s called meta labeling, the book Advances in Financial Machine Learning goes into more detail about all of this if you’re interested, I couldn’t possibly cover it all here but this is the idea.

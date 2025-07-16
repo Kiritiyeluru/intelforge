@@ -66,7 +66,7 @@ Transform IntelForge from a simple Reddit scraper into a **comprehensive automat
   ```json
   {
     "title": "Strategy Name",
-    "url": "source_url", 
+    "url": "source_url",
     "summary": "AI-generated summary",
     "tags": ["bollinger-band", "python"],
     "source": "GitHub|Reddit|arXiv",
@@ -125,13 +125,13 @@ Transform IntelForge from a simple Reddit scraper into a **comprehensive automat
 def fetch_repos(query: str) -> List[Dict]:
     """
     Fetch repositories from GitHub based on search query.
-    
+
     Args:
         query (str): Search string (e.g., "bollinger band language:python")
-        
+
     Returns:
         List[Dict]: Parsed repositories with metadata
-        
+
     AI_HINT: This function is part of the Extractor module. Keep reusable and source-agnostic.
     """
 ```
@@ -161,7 +161,7 @@ github:
 - **Purpose**: Validate all APIs before pipeline runs
 - **Features**: Test connectivity, log status to `vault/logs/health_check.md`
 
-#### Sample Data Generator  
+#### Sample Data Generator
 - **Purpose**: Mock data for offline testing
 - **Features**: Generate realistic fake data matching real API schemas
 
@@ -175,7 +175,7 @@ github:
 ```
 Create a script that:
 - [Task]: Fetch GitHub repos matching 'bollinger band'
-- [Output]: Save to vault/notes/github-YYYY-MM-DD.md  
+- [Output]: Save to vault/notes/github-YYYY-MM-DD.md
 - [Logging]: Log to vault/logs/pipeline.log
 - [Error Handling]: Retry with exponential backoff
 - [Features]: Include docstrings, comments, --dry-run flag

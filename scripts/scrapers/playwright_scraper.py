@@ -18,8 +18,8 @@ import os
 from typing import Dict, List, Optional
 from urllib.parse import urlparse
 
-from playwright.async_api import async_playwright, Page
 from dotenv import load_dotenv
+from playwright.async_api import Page, async_playwright
 
 from scripts.scraping_base import BaseScraper
 
@@ -116,22 +116,24 @@ class PlaywrightScraper(BaseScraper):
         page = await self.context.new_page()
 
         # Add basic anti-detection
-        await page.add_init_script("""
+        await page.add_init_script(
+            """
             // Override webdriver property
             Object.defineProperty(navigator, 'webdriver', {
                 get: () => undefined,
             });
-            
+
             // Mock plugins
             Object.defineProperty(navigator, 'plugins', {
                 get: () => [1, 2, 3, 4, 5],
             });
-            
+
             // Mock languages
             Object.defineProperty(navigator, 'languages', {
                 get: () => ['en-US', 'en'],
             });
-        """)
+        """
+        )
 
         return page
 

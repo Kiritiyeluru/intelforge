@@ -8,15 +8,16 @@ Simple wrapper for comprehensive academic research
 import argparse
 import os
 import sys
-import yaml
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
+
+import yaml
 
 # Direct paperscraper usage (multi-database research tool)
 try:
-    from paperscraper import QUERY_FN_DICT
     import paperscraper.get_dumps as get_dumps
+    from paperscraper import QUERY_FN_DICT
 except ImportError:
     print("Error: paperscraper not installed. Run: pip install paperscraper")
     sys.exit(1)
@@ -206,10 +207,10 @@ content_hash: {generate_content_hash(paper.get("abstract", ""))}
 
 # {paper.get("title", "Untitled")}
 
-**Authors:** {authors_str}  
-**Published:** {paper.get("published", "Unknown")}  
-**Database:** {paper.get("database", "").upper()}  
-**Paper ID:** {paper.get("id", "")}  
+**Authors:** {authors_str}
+**Published:** {paper.get("published", "Unknown")}
+**Database:** {paper.get("database", "").upper()}
+**Paper ID:** {paper.get("id", "")}
 
 **Links:**
 - [Abstract]({paper.get("url", "")})

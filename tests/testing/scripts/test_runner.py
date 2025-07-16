@@ -4,12 +4,12 @@ IntelForge Test Runner
 Comprehensive testing framework for all IntelForge modules
 """
 
-import sys
-import json
+import argparse
 import datetime
+import json
+import sys
 from pathlib import Path
 from typing import Dict, Optional
-import argparse
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent

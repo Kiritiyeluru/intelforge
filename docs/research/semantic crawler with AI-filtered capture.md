@@ -475,9 +475,9 @@ def is_relevant_with_gpt(content: str, url: str) -> bool:
     if not content or len(content) < 300:
         return False
     prompt = f"""
-You are an AI assistant trained in quantitative finance. 
+You are an AI assistant trained in quantitative finance.
 
-Given the following article content from {url}, answer only YES or NO: 
+Given the following article content from {url}, answer only YES or NO:
 "Is this article discussing a concrete trading strategy, backtest result, or detailed analysis related to momentum-based strategies?"
 
 Content:

@@ -7,19 +7,19 @@ reddit:
   client_id: ""  # Add your Reddit app client ID
   client_secret: ""  # Add your Reddit app client secret
   user_agent: "IntelForge/1.0 (Algorithmic Trading Research Bot)"
-  
+
   # Target subreddits for content extraction
   subreddits:
     - "algotrading"
-    - "SecurityAnalysis" 
+    - "SecurityAnalysis"
     - "investing"
     - "quantfinance"
-  
+
   # Rate limiting and extraction settings
   rate_limit_delay: 2  # Seconds between API calls
   max_posts_per_subreddit: 50  # Limit for initial testing
   max_comments_per_post: 10  # Comments to extract per post
-  
+
   # Content filtering
   min_post_score: 5  # Minimum upvotes to consider
   min_comment_score: 2  # Minimum comment upvotes

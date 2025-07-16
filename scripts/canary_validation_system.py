@@ -5,12 +5,13 @@ Lightweight validation system that runs before main pipeline execution
 to ensure stealth capabilities are operational.
 """
 
-import time
 import json
 import logging
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
 from intel_bot_driver import IntelBotDriver
 
 # Configure logging

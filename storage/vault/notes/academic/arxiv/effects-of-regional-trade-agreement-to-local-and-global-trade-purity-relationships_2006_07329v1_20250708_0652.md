@@ -10,18 +10,18 @@ primary_category: q-fin.GN
 arxiv_id: 2006.07329v1
 url: http://arxiv.org/abs/2006.07329v1
 pdf_url: http://arxiv.org/pdf/2006.07329v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: d706a7fea6c1fac8
 ---
 
 # Effects of Regional Trade Agreement to Local and Global Trade Purity Relationships
 
-**Authors:** Siyu Huang, Wensha Gou, Hongbo Cai, Xiaomeng Li, Qinghua Chen  
-**Published:** 2020-05-29  
-**Updated:** 2020-05-29  
-**Primary Category:** q-fin.GN  
-**ArXiv ID:** 2006.07329v1  
+**Authors:** Siyu Huang, Wensha Gou, Hongbo Cai, Xiaomeng Li, Qinghua Chen
+**Published:** 2020-05-29
+**Updated:** 2020-05-29
+**Primary Category:** q-fin.GN
+**ArXiv ID:** 2006.07329v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/2006.07329v1)

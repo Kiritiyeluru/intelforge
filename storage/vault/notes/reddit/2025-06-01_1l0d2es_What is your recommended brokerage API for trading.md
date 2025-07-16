@@ -34,9 +34,9 @@ I am also interested in trading stocks, forex and crypto.
 2. Free
 3. Fast
 
-You can only pick two. 
+You can only pick two.
 
-Check out Architect maybe? Not sure on their cost structure, but they offer futures trading. 
+Check out Architect maybe? Not sure on their cost structure, but they offer futures trading.
 
 Lightspeed is another to look at.
 

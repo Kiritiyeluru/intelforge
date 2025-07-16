@@ -18,7 +18,7 @@ content_types:
       - "breaking"
       - "latest"
       - "today"
-  
+
   research:
     ttl_hours: 168       # Research papers - weekly refresh
     priority: medium
@@ -27,7 +27,7 @@ content_types:
       - "study"
       - "research"
       - "journal"
-  
+
   documentation:
     ttl_hours: 720       # Documentation - monthly refresh
     priority: low
@@ -36,7 +36,7 @@ content_types:
       - "documentation"
       - "manual"
       - "guide"
-  
+
   reference:
     ttl_hours: 2160      # Reference materials - quarterly refresh
     priority: low
@@ -50,15 +50,15 @@ domains:
   arxiv.org:
     ttl_hours: 24       # Academic preprints change frequently
     priority: high
-  
+
   sec.gov:
     ttl_hours: 72       # SEC filings - 3 day refresh
     priority: high
-  
+
   wikipedia.org:
     ttl_hours: 168      # Wikipedia - weekly refresh
     priority: medium
-  
+
   github.com:
     ttl_hours: 24       # Code repositories change frequently
     priority: medium

@@ -23,8 +23,8 @@ import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
-from urllib.robotparser import RobotFileParser
 from urllib.parse import urlparse
+from urllib.robotparser import RobotFileParser
 
 import httpx
 import yaml
@@ -107,9 +107,11 @@ class BaseScraper:
         )
 
         logging.basicConfig(
-            level=logging.DEBUG
-            if self.config["options"]["verbose_logging"]
-            else logging.INFO,
+            level=(
+                logging.DEBUG
+                if self.config["options"]["verbose_logging"]
+                else logging.INFO
+            ),
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
             handlers=[logging.FileHandler(log_file), logging.StreamHandler()],
         )
@@ -127,7 +129,8 @@ class BaseScraper:
     def _init_database(self):
         """Initialize SQLite database with basic schema."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
+            conn.execute(
+                """
                 CREATE TABLE IF NOT EXISTS scraped_content (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     url TEXT UNIQUE,
@@ -138,7 +141,8 @@ class BaseScraper:
                     scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     metadata TEXT
                 )
-            """)
+            """
+            )
             conn.commit()
 
     def _get_random_user_agent(self) -> str:
@@ -238,7 +242,7 @@ class BaseScraper:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
-                INSERT OR REPLACE INTO scraped_content 
+                INSERT OR REPLACE INTO scraped_content
                 (url, title, content, source, content_hash, metadata)
                 VALUES (?, ?, ?, ?, ?, ?)
             """,

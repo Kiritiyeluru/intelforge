@@ -17,7 +17,7 @@ As investors, we make countless decisions simple ones like “buy or don’t buy
 
 If you’ve been investing for a long time, you’ve probably had your share of both great and terrible calls.
 
-What’s the best investment decision you’ve ever made? What about the worst? 
+What’s the best investment decision you’ve ever made? What about the worst?
 
 And how did those decisions turn out for you in the long run?
 
@@ -43,7 +43,7 @@ Ignore everything. Don’t time the market. Just keep buying.
 
 **Author:** u/orbit_fire
 
-Best:  switching to index funds  
+Best:  switching to index funds
 Worst:  trading penny stocks early in my career
 
 ### Comment 4 (Score: 53)
@@ -69,9 +69,9 @@ Keep buying down, up and sideways keep buying.
 **Author:** u/Opening_Swordfish_14
 
 Start young. Buy regularly,
-In good times and in bad. Invest in low cost index funds. I’m personally a big S&P 500 guy. 
+In good times and in bad. Invest in low cost index funds. I’m personally a big S&P 500 guy.
 
-I lived through the Dot-Com crash, the housing/financial crisis of 2008, and Covid. Came out smelling like a rose by only doing the above. Nothing fancy. 
+I lived through the Dot-Com crash, the housing/financial crisis of 2008, and Covid. Came out smelling like a rose by only doing the above. Nothing fancy.
 I am the world’s laziest investor and this advice set me for early retirement.
 
 ### Comment 8 (Score: 12)

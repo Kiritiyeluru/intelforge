@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-07-16T13:47:26.049037",
+  "health_status": {
+    "status": "healthy",
+    "message": "System healthy: 88.6% (healthy)",
+    "health_percentage": 88.57142857142857,
+    "overall_status": "healthy",
+    "critical_failures": 0
+  },
+  "health_data": {
+    "timestamp": "2025-07-16T13:47:13.604344",
+    "intelforge_version": "v0.9.8",
+    "overall_status": "healthy",
+    "checks": {
+      "system_health": {
+        "status": "degraded",
+        "details": {
+          "total_checks": 35,
+          "results": {
+            "pass": 31,
+            "fail": 2,
+            "warn": 2,
+            "skip": 0
+          },
+          "critical_failures": 0
+        }
+      },
+      "drift_status": {
+        "status": "healthy",
+        "details": {
+          "drift_percentage": 0.5,
+          "threshold": 2.0
+        }
+      },
+      "freshness_status": {
+        "status": "healthy",
+        "details": {
+          "avg_age_hours": 0,
+          "threshold_hours": 24,
+          "total_urls": 0,
+          "fresh_count": 0,
+          "stale_count": 0,
+          "expired_count": 0
+        }
+      },
+      "crawl_success_rate": {
+        "status": "healthy",
+        "details": {
+          "success_rate": 95.5,
+          "threshold": 90.0
+        }
+      },
+      "pii_status": {
+        "status": "healthy",
+        "details": {
+          "pii_detected": false,
+          "risk_score": 0.0,
+          "total_entities": 0,
+          "detector_type": "presidio",
+          "last_scan": "2025-07-16T13:47:16.768480"
+        }
+      },
+      "storage_health": {
+        "status": "healthy",
+        "details": {
+          "qdrant": true,
+          "chromadb": true,
+          "data": true,
+          "logs": true
+        }
+      }
+    },
+    "failed_checks": [],
+    "warnings": []
+  },
+  "monitoring_cycle": "completed"
+}

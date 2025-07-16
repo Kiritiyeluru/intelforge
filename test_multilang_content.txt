@@ -1,0 +1,5 @@
+https://example.com/english-content
+https://example.com/spanish-content
+https://example.com/french-content
+https://example.com/german-content
+https://example.com/chinese-content

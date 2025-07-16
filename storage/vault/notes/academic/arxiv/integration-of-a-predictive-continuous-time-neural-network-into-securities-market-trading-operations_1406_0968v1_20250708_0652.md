@@ -10,18 +10,18 @@ primary_category: q-fin.CP
 arxiv_id: 1406.0968v1
 url: http://arxiv.org/abs/1406.0968v1
 pdf_url: http://arxiv.org/pdf/1406.0968v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: e084ddef0ef3bd7d
 ---
 
 # Integration of a Predictive, Continuous Time Neural Network into Securities Market Trading Operations
 
-**Authors:** Christopher S Kirk  
-**Published:** 2014-06-04  
-**Updated:** 2014-06-04  
-**Primary Category:** q-fin.CP  
-**ArXiv ID:** 1406.0968v1  
+**Authors:** Christopher S Kirk
+**Published:** 2014-06-04
+**Updated:** 2014-06-04
+**Primary Category:** q-fin.CP
+**ArXiv ID:** 1406.0968v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1406.0968v1)

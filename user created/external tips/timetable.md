@@ -1,261 +1,171 @@
-update
-/home/kiriti/alpha_projects/intelforge/user created/external tips/building_aware_optimizer.py
-the **plain text / monospace version** of timetables — cleanly aligned for copy-paste into VS Code or terminal.
+# College Timetable Optimization Guide
 
+## 📋 Time Slot Configuration
 
-let us number the slots
-8:30 am to 10 am slot 1
-10 am to 11:30 am slot 2
-11:30 am to 1 pm slot 3
-1 pm to 2 pm lunch
-2pm to 3:30 pm slot 4
-3:30 pm to 5 pm slot 5
-5:30 pm to 7 pm slot 6
+### Standard Time Slots (1.5 hours each)
+- **Slot 1**: 8:30 AM - 10:00 AM
+- **Slot 2**: 10:00 AM - 11:30 AM
+- **Slot 3**: 11:30 AM - 1:00 PM
+- **Lunch**: 1:00 PM - 2:00 PM
+- **Slot 4**: 2:00 PM - 3:30 PM
+- **Slot 5**: 3:30 PM - 5:00 PM
+- **Slot 6**: 5:30 PM - 7:00 PM
 
-for 9th class, block slot 1 every day
+### Special Slots for 9th Class
+- **8:30 AM - 10:00 AM**: IOQM Exam (blocked)
+- **10:00 AM - 1:00 PM**: Combined Slots 1 & 2 (3 hours)
+- **2:00 PM - 5:00 PM**: Combined Slots 3 & 4 (3 hours)
+- **5:30 PM - 7:00 PM**: Slot 5 (1.5 hours - counts as 2 slots for faculty)
 
+## 🏢 Building Layout & Distance Constraints
 
-we must and should keep both 1hr 30 min classes in 9th class together as the building is far away from  other two and we need to ensure faculty dont have 
-  to travel twice.\
-  For 9th class, grouping is not an option.\
-  for other classes, it is somewhat manageable, still prefer to have the adjacent slots without break between them in same building
-  
-  
-constraints:
-1. we cannot change faculty between batches.
-2.  For 9th class, the time slots are 8:30 am to 10 am- Busy with IOQM
-                                      10 am - 1pm- slot 1 &2
-                                      1pm to 2pm lunch
-                                      2pm to 5pm slot 3&4
-                                      5 30 pm to 7pm slot 5&6
-                                      each slot 1 hr 30 min
-                                      Only for 9th class, treat 
-                                      5 30 pm to 7pm as 2 slots 5&6
-That is, a faculty taking 5:30 pm to 7pm need not be given another slot in 9 tha class that day
+### Building 1 (Close Distance)
+- **AK_E_JR_1**
+- **AK_E_JR_2**
 
-this is the time table of batches in our college;
-The faculty cannot be changed between batches.
-their timings can be changed anywhere between 830 am to 7 pm.
-but the issue is no matter how we arrange, we are unable to scheduel so that none of them have any break.
-the classes are supposed to start at 8 30 am and end at 7 pm/
-but due to not being able to arrange properly.. all faculty classes are extending upto 830 pm/
-with an  1hr 30 min break for each of them which is waste.--
+### Building 2 (0.55 km from Building 1)
+- **AK-SR-2**
+- **AK-JR-2**
+- **AK-JR-3**
 
-AK-JR_1: 1.30-3.30 CHEM Mr. PRK 3.30-5.30 CHEM Mr. PRK cannot be changed as 
-that batch has different timings and 1:30pm - 5:30 pm is the only common slot between both timings
+### Building 3 (Far Distance - Traffic Issues)
+- **9th Class**
+- **Requires lunch break (1-2 PM) or evening break (5-5:30 PM) for travel**
 
-Since AK-JR-1: CHEM - PRK fixed at 2:00-3:30 and 3:30-5:00 and that batch remaining faculty
-sagardas and srikanth dont have any other batches common with other faculty..
-so AK-JR-1: need not be disturbed at all.
-also remove AK-JR-1  entirely from the provided time table from now on
+## 📐 Key Constraints
 
+### Faculty Assignment Rules
+1. **Faculty cannot be changed between batches**
+2. **Classes must run from 8:30 AM to 7:00 PM maximum**
+3. **Minimize faculty travel between buildings**
 
-AK_E_JR_1 AK_E_JR_2
-These bathces are in one building 1
+### 9th Class Special Requirements
+- **Both 1.5-hour classes must be scheduled together** (avoid double travel)
+- **No grouping options available**
+- **Faculty taking 5:30-7:00 PM slot counts as having 2 slots that day**
 
-AK-SR-2
-AK-JR-1
-AK JR 2
-AK-JR-3
-These batches are in building 2
+### Building Preferences
+- **Strongly prefer**: Adjacent slots in same building without breaks
+- **Acceptable**: Some breaks if unavoidable for optimization
 
+## ⚠️ Current Issues
 
-9th_CLASS
-These batches are in building 3
+### Schedule Overrun Problems
+- **Target**: All classes end by 7:00 PM
+- **Current**: Classes extending to 8:30 PM and 10:30 PM
+- **Cause**: Poor arrangement creating 1.5-hour gaps for faculty
 
-building 1 and 2 are 0.55 km away
+### Fixed Batch (Do Not Modify)
+**AK-JR-1**:
+- **CHEM - PRK**: Fixed at 1:30-3:30 PM and 3:30-5:00 PM
+- **Reason**: Different timing constraints, only common slot available
+- **Faculty**: Sagar Das and Srikanth (no overlap with other batches)
+- **Action**: Remove entirely from optimization process
+## 📅 Current Timetables (July 16, 2025)
 
-but building 3 is faraway in traffic and would need lunch break 1pm to 2pm or evening 5pm to 5 30 snacks break to reach to and fro
+### Building 1: AK-EXTEN-JR Classes
 
-
-can we keep both 1hr 30 min classes in 9th class together as the building is far away from  other two and we need to ensure faculty dont have to travel twice?
-
-can we keep both 1hr 30 min classes in one building together or adjacent?, This is not mandatory, just have a preference.
-we can skip it if it is avoidable
-### 🏫 AK-EXTEN-JR TIME TABLE – WED-16-07-25
-
-#### AK\_E JR\_1
-
+#### AK_E_JR_1
 ```
-TIME        | 6.30-8.00   | 8.30-10.00       | 10.00-11.30      | 11.40-1.00       | 1.00-2.00     | 2.00-3.30     | 3.30-5.00     | 5.30-7.00         | 7.00-8.30         | 9.00-10.30    
--------------------------------------------------------------------------------------------------------------------------
-AK_E JR_1   | PHYSICS-WORK| MATHS - RAM REDDY| MATHS - RAM REDDY| CHEM - WORKING   | LUNCH BREAK   | CHEM - KK     | CHEM - KK     | PHYSICS - KIRITI  | PHYSICS - KIRITI  | MATHS - WORKING
+TIME        | 6:30-8:00   | 8:30-10:00    | 10:00-11:30   | 11:40-1:00   | 1:00-2:00   | 2:00-3:30 | 3:30-5:00 | 5:30-7:00    | 7:00-8:30    | 9:00-10:30
+--------------------------------------------------------------------------------------------------------------------------------------
+AK_E_JR_1   | PHYSICS-WORK| MATHS-RAMREDDY| MATHS-RAMREDDY| CHEM-WORKING | LUNCH BREAK | CHEM-KK   | CHEM-KK   | PHYSICS-KIRITI| PHYSICS-KIRITI| MATHS-WORKING
 ```
 
-#### AK\_E JR\_2
-
+#### AK_E_JR_2
 ```
-TIME        | 6.30-8.00   | 8.30-10.00       | 10.00-11.30      | 11.40-1.00       | 1.00-2.00     | 2.00-3.30     | 3.30-5.00     | 5.30-7.00         | 7.00-8.30         | 9.00-10.30    
--------------------------------------------------------------------------------------------------------------------------
-AK_E JR_2   | PHYSICS-WORK| PHYSICS - KIRITI| PHYSICS - KIRITI | MATHS - RAM REDDY| LUNCH BREAK   | MATHS - RAM   | CHEM - WORKING| CHEM - KK         | CHEM - KK         | MATHS - WORKING
-```
-
----
-
-### 🏫 9th CLASS TIME TABLE – WED-16-07-25
-
-```
-TIME        | 8.00-11.00  | 11.10-1.00       | 1.00-2.00     | 2.00-5.00            | 5.00-8.00       
----------------------------------------------------------------------------------------------
-9th CLASS   | IOQM EXAM   | CHEM - KK        | LUNCH BREAK   | PHYSICS - ANIL KUMAR | MATHS - RAJESH
+TIME        | 6:30-8:00   | 8:30-10:00    | 10:00-11:30   | 11:40-1:00   | 1:00-2:00   | 2:00-3:30 | 3:30-5:00 | 5:30-7:00    | 7:00-8:30    | 9:00-10:30
+--------------------------------------------------------------------------------------------------------------------------------------
+AK_E_JR_2   | PHYSICS-WORK| PHYSICS-KIRITI| PHYSICS-KIRITI| MATHS-RAMREDDY| LUNCH BREAK | MATHS-RAM | CHEM-WORKING| CHEM-KK     | CHEM-KK     | MATHS-WORKING
 ```
 
----
-
-### 🏫 AK-SR & JR TIME TABLE – WED-16-07-25
+### Building 2: AK-SR & JR Classes
 
 #### AK-SR-1
-
 ```
-TIME        | 6.30-8.00     | 8.30-10.30        | 10.40-12.30        | 12.30-1.30     | 1.30-3.30        | 3.30-5.30        | 6.00-8.00          | 8.30-10.30       
-------------------------------------------------------------------------------------------------------------------------
-AK-SR-1     | M.P.C WORKING | PHYSICS - SAGAR   | PHYSICS - SAGAR    | LUNCH BREAK    | MATHS - SRIKANTH | MATHS - SRIKANTH | CHEM - SAIDI REDDY | CHEM - SAIDI REDDY
+TIME        | 6:30-8:00   | 8:30-10:30    | 10:40-12:30   | 12:30-1:30 | 1:30-3:30    | 3:30-5:30    | 6:00-8:00     | 8:30-10:30
+--------------------------------------------------------------------------------------------------------------------------
+AK-SR-1     | MPC-WORKING | PHYSICS-SAGAR | PHYSICS-SAGAR | LUNCH BREAK| MATHS-SRIKANTH| MATHS-SRIKANTH| CHEM-SAIDIREDDY| CHEM-SAIDIREDDY
 ```
 
 #### AK-SR-2
-
 ```
-TIME        | 6.30-8.00   | 8.30-10.00         | 10.00-11.30       | 11.40-1.00       | 1.00-2.00     | 2.00-3.30       | 3.30-5.00       | 5.30-7.00         | 7.00-8.30         | 9.00-10.30     
--------------------------------------------------------------------------------------------------------------------------------------------
-AK-SR-2     | CHEM - WORK | PHYSICS - ANIL KUMAR| MATHS - RAJESH    | MATHS - RAJESH   | LUNCH BREAK   | CHEM - SAIDI    | CHEM - SAIDI    | PHYSICS - ANIL K  | PHYSICS - WORKING | MATHS - WORKING
+TIME        | 6:30-8:00  | 8:30-10:00     | 10:00-11:30  | 11:40-1:00  | 1:00-2:00   | 2:00-3:30   | 3:30-5:00   | 5:30-7:00    | 7:00-8:30    | 9:00-10:30
+----------------------------------------------------------------------------------------------------------------------------------------
+AK-SR-2     | CHEM-WORK  | PHYSICS-ANILK  | MATHS-RAJESH | MATHS-RAJESH| LUNCH BREAK | CHEM-SAIDI  | CHEM-SAIDI  | PHYSICS-ANILK| PHYSICS-WORKING| MATHS-WORKING
 ```
 
----
-
-#### AK-JR-1
-
+#### AK-JR-1 (Fixed - Do Not Modify)
 ```
-TIME        | 6.30-8.00     | 8.30-10.30        | 10.40-12.30        | 12.30-1.30     | 1.30-3.30      | 3.30-5.30      | 6.00-8.00           | 8.30-10.30       
+TIME        | 6:30-8:00   | 8:30-10:30    | 10:40-12:30   | 12:30-1:30 | 1:30-3:30  | 3:30-5:30  | 6:00-8:00      | 8:30-10:30
 -----------------------------------------------------------------------------------------------------------------------
-AK-JR-1     | M.P.C WORKING | MATHS - SRIKANTH  | MATHS - SRIKANTH   | LUNCH BREAK    | CHEM - PRK     | CHEM - PRK     | PHYSICS - SAGAR DAS | PHYSICS - SAGAR DAS
+AK-JR-1     | MPC-WORKING | MATHS-SRIKANTH| MATHS-SRIKANTH| LUNCH BREAK| CHEM-PRK   | CHEM-PRK   | PHYSICS-SAGARDAS| PHYSICS-SAGARDAS
 ```
 
 #### AK-JR-2
-
 ```
-TIME        | 6.30-8.00     | 8.30-10.00     | 10.00-11.30    | 11.40-1.00     | 1.00-2.00     | 2.00-3.30      | 3.30-5.00      | 5.30-7.00         | 7.00-8.30           | 9.00-10.30         
------------------------------------------------------------------------------------------------------------------------------------------------------
-AK-JR-2     | MATHS - WORK  | CHEM - PRK     | CHEM - PRK     | CHEM - WORK    | LUNCH BREAK   | MATHS - RAJESH | MATHS - RAJESH | PHYSICS - WORKING | PHYSICS - ANIL KUMAR | PHYSICS - ANIL KUMAR
+TIME        | 6:30-8:00  | 8:30-10:00 | 10:00-11:30| 11:40-1:00| 1:00-2:00   | 2:00-3:30    | 3:30-5:00    | 5:30-7:00    | 7:00-8:30      | 9:00-10:30
+----------------------------------------------------------------------------------------------------------------------------------------
+AK-JR-2     | MATHS-WORK | CHEM-PRK   | CHEM-PRK   | CHEM-WORK  | LUNCH BREAK | MATHS-RAJESH | MATHS-RAJESH | PHYSICS-WORKING| PHYSICS-ANILK | PHYSICS-ANILK
 ```
 
 #### AK-JR-3
-
 ```
-TIME        | 6.30-8.00     | 8.30-10.00     | 10.00-11.30    | 11.40-1.00     | 1.00-2.00     | 2.00-3.30      | 3.30-5.00      | 5.30-7.00         | 7.00-8.30         | 9.00-10.30         
---------------------------------------------------------------------------------------------------------------------------------------------------
-AK-JR-3     | PHYSICS - WORK| CHEM - WORK    | CHEM - PRK     | CHEM - PRK     | LUNCH BREAK   | PHYSICS - KIRITI| PHYSICS - KIRITI| MATHS - RAM REDDY | MATHS - RAM REDDY | MATHS - WORKING
+TIME        | 6:30-8:00    | 8:30-10:00 | 10:00-11:30| 11:40-1:00| 1:00-2:00   | 2:00-3:30     | 3:30-5:00     | 5:30-7:00     | 7:00-8:30     | 9:00-10:30
+----------------------------------------------------------------------------------------------------------------------------------------
+AK-JR-3     | PHYSICS-WORK | CHEM-WORK  | CHEM-PRK   | CHEM-PRK   | LUNCH BREAK | PHYSICS-KIRITI| PHYSICS-KIRITI| MATHS-RAMREDDY| MATHS-RAMREDDY| MATHS-WORKING
 ```
-AK_E JR_1: goes until 10:30 PM (7:00-8:30, 9:00-10:30)
-here the issue is only from 7 to 830
-9pm to 10 30 pm is not an issue as it is 
-  working hour..faculty wont be sitting there
 
+### Building 3: 9th Class
+```
+TIME        | 8:00-11:00 | 11:10-1:00     | 1:00-2:00   | 2:00-5:00       | 5:00-8:00
+-------------------------------------------------------------------------------------
+9th CLASS   | IOQM EXAM  | CHEM-KK        | LUNCH BREAK | PHYSICS-ANILKUMAR| MATHS-RAJESH
+```
 
-    AK_E JR_2: goes until 10:30 PM (7:00-8:30, 9:00-10:30)\
-  here the issue is only from 7 to 830
-  9pm to 10 30 pm is not an issue as it is 
-  working hour..faculty wont be sitting there
+### 🚨 Current Schedule Issues
 
+**Classes Running Over 7:00 PM Deadline:**
+- **AK_E_JR_1**: Extends to 8:30 PM (issue: 7:00-8:30 PM slot)
+- **AK_E_JR_2**: Extends to 8:30 PM (issue: 7:00-8:30 PM slot)
+- **AK-JR-2**: Extends to 10:00 PM (MAJOR issue: 7:00-10:30 PM)
+- **AK-JR-3**: Extends to 8:30 PM (issue: 7:00-8:30 PM slot)
+- **AK-SR-2**: No issue - classes end by 7:00 PM ✅
 
-  AK-SR-2: goes until 10:30 PM (7:00-8:30, 9:00-10:30)\
-  here classes completed at 7pm...it is working upto 10 30 pm so no 
-  issue at all
-- AK-JR-2: goes until 10:30 PM (7:00-8:30, 9:00-10:30)\
-  here there is really issue. classes are spilling over 
-  7pm, not just upto 830pm..but 10 pm
-  
-    - AK-JR-3: goes until 10:30 PM (7:00-8:30, 9:00-10:30)\
-  again here the issue is only from 7 to 830..No problem from 9pm to 
-  1030 pm
----
-
-Want this piped to `.txt` file or prettified automatically via script? I can generate a quick `Python` or `Bash` formatter too.
-
-
-Here's a **detailed, step-by-step guide** to help you use **Google OR-Tools** for timetable optimization in **Ubuntu**, inside **VS Code**, without any GUI dependencies.
+**Notes:**
+- 9:00-10:30 PM slots are "working hours" (self-study) - faculty not required
+- Real issue is 7:00-8:30 PM extension for most batches
 
 ---
 
-## ✅ Overview
+# OR-Tools Timetable Optimization Guide
 
-We’ll walk through:
+## 📋 Quick Setup
 
-1. Installing OR-Tools in Ubuntu
-2. Setting up VS Code
-3. Defining the timetable problem
-4. Writing Python code using CP-SAT solver
-5. Running the solver from terminal
-6. Exporting the optimized timetable
-
----
-
-## 1. 🔧 Install OR-Tools on Ubuntu
-
-### Step 1.1: Create a Python virtual environment (optional but recommended)
-
+### 1. Install OR-Tools
 ```bash
 sudo apt update
 sudo apt install python3-venv -y
 python3 -m venv venv
 source venv/bin/activate
-```
-
-### Step 1.2: Install OR-Tools
-
-```bash
 pip install ortools
 ```
 
----
-
-## 2. 💻 Set Up VS Code for Python
-
-### Step 2.1: Open VS Code
-
+### 2. VS Code Setup
 ```bash
 code .
+# Install Python extension: Ctrl+Shift+X → Search "Python"
+# Select interpreter: Ctrl+Shift+P → "Python: Select Interpreter" → Choose ./venv/bin/python
 ```
 
-### Step 2.2: Install Python extension (if not already installed)
-
-* Go to Extensions (`Ctrl+Shift+X`)
-* Search for `Python` by Microsoft and install
-
-### Step 2.3: Select your virtual environment
-
-* Press `Ctrl+Shift+P` → “Python: Select Interpreter” → Choose `./venv/bin/python`
-
----
-
-## 3. 🧠 Define Your Timetabling Problem
-
-For example, you have:
-
-* **3 subjects** (Math, Physics, Chem)
-* **3 teachers** (R1, R2, R3)
-* **3 batches** (A, B, C)
-* **5 time slots per day**
-* **Constraints**:
-
-  * Each teacher can only teach one subject at a time
-  * Each batch gets one subject per slot
-  * No idle slots for teachers between classes
-
----
-
-## 4. 🧪 Write Python Code using CP-SAT Solver
-
-### Step 4.1: Create `timetable_solver.py`
-
-Here’s a **minimal functional OR-Tools example**:
-
+### 3. Basic Solver Template
 ```python
 from ortools.sat.python import cp_model
 
-batches = ["A", "B", "C"]
+# Define your problem variables
+batches = ["AK_E_JR_1", "AK_E_JR_2", "AK-SR-2"]
 subjects = ["Math", "Physics", "Chem"]
-teachers = {"Math": "R1", "Physics": "R2", "Chem": "R3"}
-slots_per_day = 5
+time_slots = 6
 
 model = cp_model.CpModel()
 
@@ -264,118 +174,53 @@ timetable = {}
 for batch in batches:
     timetable[batch] = [
         model.NewIntVar(0, len(subjects) - 1, f"{batch}_slot_{s}")
-        for s in range(slots_per_day)
+        for s in range(time_slots)
     ]
 
-# Constraint: no repeated subject in same batch
+# Add constraints
 for batch in batches:
-    model.AddAllDifferent(timetable[batch])
-
-# Constraint: no teacher conflict across batches at the same time
-for slot in range(slots_per_day):
-    for s_idx, teacher in enumerate(subjects):
-        involved = []
-        for batch in batches:
-            var = timetable[batch][slot]
-            involved.append(model.NewBoolVar(f"{teacher}_used_{batch}_{slot}"))
-            model.Add(var == s_idx).OnlyEnforceIf(involved[-1])
-            model.Add(var != s_idx).OnlyEnforceIf(involved[-1].Not())
-        model.Add(sum(involved) <= 1)  # teacher can teach one batch per slot
+    model.AddAllDifferent(timetable[batch])  # No repeated subjects
 
 # Solve
 solver = cp_model.CpSolver()
 status = solver.Solve(model)
 
-if status == cp_model.FEASIBLE or status == cp_model.OPTIMAL:
+if status == cp_model.OPTIMAL:
     for batch in batches:
-        print(f"\nBatch {batch}:")
-        for slot in range(slots_per_day):
+        print(f"Batch {batch}:")
+        for slot in range(time_slots):
             subject = subjects[solver.Value(timetable[batch][slot])]
             print(f"  Slot {slot+1}: {subject}")
-else:
-    print("No solution found.")
 ```
 
----
-
-## 5. 🏃‍♂️ Run the Solver in Terminal
-
-From your project folder:
-
-```bash
-python timetable_solver.py
-```
-
-You should see output like:
-
-```
-Batch A:
-  Slot 1: Math
-  Slot 2: Physics
-  ...
-
-Batch B:
-  Slot 1: Chem
-  Slot 2: Math
-  ...
-```
-
----
-
-## 6. 📤 (Optional) Export to CSV
-
-Add this at the bottom of your script:
-
+### 4. Export Results
 ```python
 import csv
-
-with open("schedule.csv", "w", newline="") as f:
+with open("optimized_schedule.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Batch", "Slot", "Subject"])
     for batch in batches:
-        for slot in range(slots_per_day):
+        for slot in range(time_slots):
             subject = subjects[solver.Value(timetable[batch][slot])]
             writer.writerow([batch, slot + 1, subject])
 ```
 
-Run it again and you’ll get `schedule.csv` with clean structured output.
-
 ---
 
-## 🧠 Next Steps
-
-* Add lunch breaks or off periods as special time slots
-* Add teacher availability windows
-* Minimize idle slots using solver.Objective()
-* Structure your input data as JSON or YAML
-* Add CLI args using `argparse`
-
----
-
-Want me to generate a version of this script with **your actual batch/faculty/timing constraints** from the `.docx`? I can auto-convert and generate a working timetable optimizer tailored to your setup.
-
----
-
-## 🎯 IMPLEMENTED SOLUTION - FIXED FACULTY TIMETABLE OPTIMIZER
+## 🎯 Implemented Solution
 
 ### ✅ Problem Solved: July 15, 2025
 
-**Issue:** Classes were spilling over 7:00 PM deadline, extending until 8:30 PM and 10:30 PM for various batches.
+**Issue:** Classes extending beyond 7:00 PM deadline to 8:30 PM and 10:30 PM for various batches.
 
-**Solution:** Created OR-Tools based optimizer that preserves faculty assignments while rearranging timings within 8:30 AM - 7:00 PM window.
+**Solution:** OR-Tools based optimizer preserving faculty assignments while rearranging timings within 8:30 AM - 7:00 PM window.
 
-### 📁 Files Created
+### 📁 Solution Files
 
-1. **`/home/kiriti/alpha_projects/intelforge/user created/external tips/timetable_optimizer.py`**
-   - Initial optimizer (allows faculty changes) 
-   - ❌ Not used - violated faculty assignment constraints
+1. **`timetable_optimizer.py`** - Initial optimizer (allows faculty changes) ❌ Not used
+2. **`fixed_faculty_optimizer.py`** - ✅ **FINAL SOLUTION** - Preserves faculty assignments
 
-2. **`/home/kiriti/alpha_projects/intelforge/user created/external tips/fixed_faculty_optimizer.py`**
-   - ✅ **FINAL SOLUTION** - Preserves original faculty assignments
-   - Generates plain text tables for easy copy-paste
-   - Ensures no teacher conflicts across batches
-
-### 🔧 How to Run the Optimizer
+### 🔧 Usage Instructions
 
 ```bash
 # Navigate to project directory
@@ -391,48 +236,24 @@ cd "user created/external tips"
 python3 fixed_faculty_optimizer.py
 ```
 
-### 📊 Results Achieved
+### 📊 Optimization Results
 
-**Before Optimization:**
+**Before:**
 - **AK-JR-2**: Classes until 10:00 PM ❌
-- **AK-JR-3**: Classes until 8:30 PM ❌  
-- **AK_E JR_1**: Classes until 8:30 PM ❌
-- **AK_E JR_2**: Classes until 8:30 PM ❌
+- **AK-JR-3**: Classes until 8:30 PM ❌
+- **AK_E_JR_1**: Classes until 8:30 PM ❌
+- **AK_E_JR_2**: Classes until 8:30 PM ❌
 
-**After Optimization:**
+**After:**
 - **ALL BATCHES**: Classes end by 7:00 PM ✅
-- **Faculty assignments**: Preserved exactly as original ✅
+- **Faculty assignments**: Preserved exactly ✅
 - **Teacher conflicts**: Zero conflicts ✅
 - **Lunch break**: Maintained at 1:00-2:00 PM ✅
-
-### 🔄 To Repeat This Process
-
-1. **Install OR-Tools** (if not already installed):
-   ```bash
-   pip install ortools
-   ```
-
-2. **Update Faculty Assignments** in `fixed_faculty_optimizer.py`:
-   - Modify `BATCH_FACULTY` dictionary with current faculty-batch assignments
-   - Ensure each subject has exactly 2 sessions per batch
-
-3. **Adjust Time Constraints** if needed:
-   - Modify `TIME_SLOTS` array for different time windows
-   - Update `WORKING_SLOTS` to exclude lunch/break periods
-
-4. **Run Optimizer**:
-   ```bash
-   python3 fixed_faculty_optimizer.py
-   ```
-
-5. **Copy Generated Tables**:
-   - Plain text tables are displayed in terminal
-   - Ready for copy-paste into VS Code or scheduling systems
 
 ### 🛠️ Technical Details
 
 - **Solver**: Google OR-Tools CP-SAT (Constraint Programming)
-- **Constraints**: 
+- **Constraints**:
   - Fixed faculty assignments per batch
   - 8:30 AM - 7:00 PM time window
   - No teacher conflicts across batches
@@ -444,25 +265,18 @@ python3 fixed_faculty_optimizer.py
 ### 📝 Key Learnings
 
 1. **Faculty assignments are non-negotiable** - must be preserved
-2. **OR-Tools CP-SAT** is excellent for complex scheduling problems
-3. **Plain text table output** is most practical for educational scheduling
-4. **Teacher conflict resolution** is critical for feasible solutions
-5. **Constraint modeling** requires careful balance between flexibility and requirements
+2. **OR-Tools CP-SAT** excellent for complex scheduling problems
+3. **Plain text table output** most practical for educational scheduling
+4. **Teacher conflict resolution** critical for feasible solutions
+5. **Constraint modeling** requires balance between flexibility and requirements
 
----
-
-### 🔍 Debugging Tips for Future Use
+### 🔍 Troubleshooting Tips
 
 **If optimizer fails:**
-1. Check teacher conflicts in `BATCH_FACULTY` assignments
+1. Check teacher conflicts in faculty assignments
 2. Verify time slot configuration matches available hours
 3. Ensure lunch break timing doesn't conflict with class requirements
 4. Consider adjusting session distribution if needed
-
-**If output format needs changes:**
-1. Modify table generation section in `solve_and_display_fixed_faculty()`
-2. Adjust column widths for better alignment
-3. Change time slot labels if needed
 
 **For new batches/faculty:**
 1. Add new entries to `BATCH_FACULTY` dictionary

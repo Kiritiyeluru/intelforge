@@ -7,10 +7,10 @@ Below is a focused review of scripts/versioned_test_matrix.py, covering what it 
 
 At a high level, this script provides:
 
-    1. CSV‑based test‑matrix logging of anti‑detection (“stealth”) runs (with Chrome & Botasaurus versions, stealth‑pass %, TTR, etc.)scripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py  
-    2. Optional Sacred integration to record each run as an experiment with scalar metrics for richer analyticsscripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py  
-    3. Regression‑analysis helpers that read the CSV, compute averages, detect version changes, and infer simple trends (first‑half vs. second‑half performance)scripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py  
-    4. Markdown report export summarizing results, version stability, and trend assessmentscripts/versioned_test_matrix.py  
+    1. CSV‑based test‑matrix logging of anti‑detection (“stealth”) runs (with Chrome & Botasaurus versions, stealth‑pass %, TTR, etc.)scripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py
+    2. Optional Sacred integration to record each run as an experiment with scalar metrics for richer analyticsscripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py
+    3. Regression‑analysis helpers that read the CSV, compute averages, detect version changes, and infer simple trends (first‑half vs. second‑half performance)scripts/versioned_test_matrix.pyscripts/versioned_test_matrix.py
+    4. Markdown report export summarizing results, version stability, and trend assessmentscripts/versioned_test_matrix.py
     5. A CLI (--log to append a row, --analyze to show/emit analysis, --report to dump markdown) via argparsescripts/versioned_test_matrix.py
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ scripts/versioned_test_matrix.py
 
 ### 3.2. Unify CLI naming & required arguments
 
-The CLI flag is --stealth-score but the internal parameter is called stealth_pass_percent.  Likewise the code checks for args.stealth_score vs. --stealth-score.  Consider renaming the CLI flag to --stealth-pass-percent (or vice‑versa) for 1:1 clarity.  Also, rather than a manual if not args.target or 
+The CLI flag is --stealth-score but the internal parameter is called stealth_pass_percent.  Likewise the code checks for args.stealth_score vs. --stealth-score.  Consider renaming the CLI flag to --stealth-pass-percent (or vice‑versa) for 1:1 clarity.  Also, rather than a manual if not args.target or
 args.stealth_score is None … check, you could use argparse sub‑parsers or required flags to fail early:
 
     - parser.add_argument('--stealth-score', type=float, help='Stealth pass percentage')

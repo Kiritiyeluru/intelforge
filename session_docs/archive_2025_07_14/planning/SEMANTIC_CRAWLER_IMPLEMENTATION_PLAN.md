@@ -1,8 +1,8 @@
 # Comprehensive Semantic Crawler Enhancement & Testing Implementation Plan
 
-**Date**: July 10, 2025  
-**Project**: IntelForge Semantic Crawler  
-**Master Folder**: `/home/kiriti/alpha_projects/intelforge/semantic_crawler/`  
+**Date**: July 10, 2025
+**Project**: IntelForge Semantic Crawler
+**Master Folder**: `/home/kiriti/alpha_projects/intelforge/semantic_crawler/`
 **Status**: ✅ **APPROVED** - Ready for Implementation
 
 ## 🎯 **Strategic Overview**
@@ -36,7 +36,7 @@ This implementation plan consolidates recommendations from four key documents:
 **Priority**: Essential observability tools for both production and testing
 
 ### **1.1 Crawl Failures Logger** (30 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/crawl_failure_logger.py`
 
 **Implementation**:
@@ -58,7 +58,7 @@ This implementation plan consolidates recommendations from four key documents:
 - `output_processor.py` - Processing failures
 
 ### **1.2 Smart Crawl Metadata Indexer** (60 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/crawl_metadata_indexer.py`
 
 **Implementation**:
@@ -67,7 +67,7 @@ This implementation plan consolidates recommendations from four key documents:
 {
   "url": "https://example.com/article",
   "score": 0.92,
-  "category": "research", 
+  "category": "research",
   "tags": ["momentum", "alpha"],
   "length": 2123,
   "embedding_id": "article_3958",
@@ -82,7 +82,7 @@ This implementation plan consolidates recommendations from four key documents:
 - Analytics and reporting functions
 
 ### **1.3 "Why Did This Get Filtered?" CLI Command** (45 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/enhanced_semantic_cli.py`
 
 **Implementation**:
@@ -105,7 +105,7 @@ semantic_cli.py explain-url https://example.com
 - Clear explainability for debugging
 
 ### **1.4 Output Fingerprinting** (30 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/output_fingerprinter.py`
 
 **Implementation**:
@@ -126,7 +126,7 @@ semantic_cli.py explain-url https://example.com
 - Regression detection for model updates
 
 ### **1.5 Personal System Health Monitor** (60 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/system_health_monitor.py`
 
 **Implementation**:
@@ -136,14 +136,14 @@ semantic_cli.py system-report --weekly
 
 **Generated Report**: `weekly_report.md`
 - URLs crawled daily
-- Pass rate trends  
+- Pass rate trends
 - Threshold drift analysis
 - Top failed domains
 - ChromaDB growth metrics
 - Performance benchmarks
 
 ### **1.6 Model Version Logger Integration** (30 minutes)
-**Source**: model_version_logger.py.md  
+**Source**: model_version_logger.py.md
 **Location**: Already implemented, integrate into `adaptive_thresholding.py`
 
 **Implementation**:
@@ -162,7 +162,7 @@ log_threshold_run(
 **Complete audit trail** for threshold decisions with model versions.
 
 ### **1.7 False Positive/Negative Tracker** (90 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/false_positive_tracker.py`
 
 **Implementation**:
@@ -195,7 +195,7 @@ semantic_cli.py mark-false-negative --url https://bar.com --reason "missed finan
 **ROI**: Builds supervised tuning dataset over time, enables fine-tuning from real feedback
 
 ### **1.8 Failed Embedding Tracker + Retry Queue** (45 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/embedding_failure_tracker.py`
 
 **Implementation**:
@@ -240,7 +240,7 @@ semantic_cli.py retry-failed-embeddings --batch-size 10
 cargo install cargo-fuzz
 cd semantic_crawler/rust_tests/
 cargo add proptest --dev
-cargo add criterion --dev  
+cargo add criterion --dev
 cargo add insta --dev
 cargo add tokio --features ["macros", "rt-multi-thread", "test-util"] --dev
 ```
@@ -249,7 +249,7 @@ cargo add tokio --features ["macros", "rt-multi-thread", "test-util"] --dev
 ```
 semantic_crawler/rust_tests/
 ├── Cargo.toml                 # Testing dependencies
-├── src/lib.rs                 # Core testable logic  
+├── src/lib.rs                 # Core testable logic
 ├── tests/
 │   ├── basic.rs              # Unit tests
 │   ├── property.rs           # Property-based testing
@@ -274,7 +274,7 @@ semantic_crawler/rust_tests/
 ```python
 tests/
 ├── test_research_detector.py          # BERTopic + KeyBERT
-├── test_adaptive_thresholding.py      # Ensemble methods  
+├── test_adaptive_thresholding.py      # Ensemble methods
 ├── test_knowledge_graph.py            # txtai integration
 ├── test_output_processor.py           # YAML + markdown
 ├── test_semantic_spider.py            # Scrapy integration
@@ -289,7 +289,7 @@ tests/
 **Leverage Phase 1 Tools for Enhanced Testing**:
 - **Crawl failures logger** → Track test failure patterns
 - **Metadata indexer** → Test run analysis and validation
-- **System health monitor** → Establish testing baselines  
+- **System health monitor** → Establish testing baselines
 - **"Why filtered?" explainer** → Validate test result expectations
 - **Output fingerprinting** → Detect test-induced regressions
 
@@ -298,7 +298,7 @@ tests/
 **Priority**: Scientific analysis and optimization tools
 
 ### **3.1 A/B Testing Harness** (90 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/ab_testing_harness.py`
 
 **Implementation**:
@@ -308,7 +308,7 @@ semantic_cli.py compare-methods --url-file test_urls.txt --methods statistical,e
 
 **Output**: Side-by-side comparison of filtering decisions with rationale.
 
-### **3.2 Event Loop Monitor (CLI Runtime Introspector)** (45 minutes)  
+### **3.2 Event Loop Monitor (CLI Runtime Introspector)** (45 minutes)
 **Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/runtime_monitor.py`
 
@@ -324,7 +324,7 @@ semantic_cli.py smart-crawl --monitor-frequency 10s
 ```
 
 ### **3.3 Structured Enhancement Tracker** (30 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/enhancement_tracker.py`
 
 **Implementation**:
@@ -339,7 +339,7 @@ semantic_cli.py smart-crawl --monitor-frequency 10s
 ```
 
 ### **3.4 Soft Label Drift Detector** (60 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/label_drift_detector.py`
 
 **Implementation**:
@@ -356,7 +356,7 @@ semantic_cli.py label-drift-report --category research --tag momentum
   "tag": "momentum",
   "category_distribution": {
     "research": 18,
-    "trading": 120, 
+    "trading": 120,
     "news": 4,
     "general": 1
   },
@@ -374,7 +374,7 @@ semantic_cli.py label-drift-report --category research --tag momentum
 **ROI**: Early warning for model retraining needs, catches semantic drift before quality degrades
 
 ### **3.5 Release Blueprint System** (30 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/release_blueprint.py`
 
 **Implementation**:
@@ -388,7 +388,7 @@ semantic_cli.py validate-release-blueprint --blueprint-id release_2025_07_10
 ```yaml
 change: switch to hdbscan-based novelty detection
 reason: current method fails with < 5 docs
-impact_risks: 
+impact_risks:
   - topic fragmentation
   - missed false negatives
 rollback_plan: revert to last model version
@@ -408,7 +408,7 @@ success_criteria:
 **ROI**: Solo developer discipline, prevents reckless tweaks, ensures reproducibility
 
 ### **3.6 Tag-to-Category Confusion Matrix** (60 minutes)
-**Source**: high-ROI, low-complexity tools.md  
+**Source**: high-ROI, low-complexity tools.md
 **Location**: `scripts/confusion_matrix_generator.py`
 
 **Implementation**:
@@ -435,7 +435,7 @@ futures  |     3    |   61    |  9   |   6
 **ROI**: Detects category/tag mismatch over time, helps tune classification rules
 
 ### **3.7 1-Page Semantic Profile Generator** (90 minutes)
-**Source**: high-ROI, low-complexity tools 2.md  
+**Source**: high-ROI, low-complexity tools 2.md
 **Location**: `scripts/semantic_profiler.py`
 
 **Implementation**:
@@ -450,7 +450,7 @@ semantic_cli.py profile-author --author "Ray Dalio" --include-related-entities
 # Semantic Profile: www.ritholtz.com
 
 - Most common tags: momentum, macro, ETF
-- Confidence range: 0.78 – 0.94  
+- Confidence range: 0.78 – 0.94
 - Semantic novelty: HIGH (compared to vault)
 - Related entities: alpha architect, Meb Faber, Ray Dalio
 - Primary category: research
@@ -582,9 +582,9 @@ strategy:
 **Weekly Commitment**: ~7 hours per week
 **Daily Commitment**: ~1.5 hours per day
 
-### **Week 1: Critical Infrastructure** 
+### **Week 1: Critical Infrastructure**
 - **Monday**: Crawl Failures Logger + Metadata Indexer (90 min)
-- **Tuesday**: "Why Filtered?" Explainer + Output Fingerprinting (75 min)  
+- **Tuesday**: "Why Filtered?" Explainer + Output Fingerprinting (75 min)
 - **Wednesday**: System Health Monitor + Model Version Logger Integration (90 min)
 - **Thursday**: False Positive/Negative Tracker (90 min)
 - **Friday**: Failed Embedding Tracker + Retry Queue (45 min)
@@ -595,7 +595,7 @@ strategy:
 - **Thursday**: Testing infrastructure integration (2 hours)
 - **Friday**: Phase 2 validation and testing (60 min)
 
-### **Week 3: Advanced Observability**  
+### **Week 3: Advanced Observability**
 - **Monday**: A/B Testing Harness (90 min)
 - **Tuesday**: Runtime Monitor + Enhancement Tracker (75 min)
 - **Wednesday**: Soft Label Drift Detector (60 min)
@@ -605,7 +605,7 @@ strategy:
 ### **Week 4: Comprehensive Testing**
 - **Monday**: Load & stress testing (2 hours)
 - **Tuesday**: Edge case & fault injection (2 hours)
-- **Wednesday**: CI/CD setup (2 hours)  
+- **Wednesday**: CI/CD setup (2 hours)
 - **Thursday**: Production readiness validation (2 hours)
 - **Friday**: Final integration and documentation
 
@@ -623,6 +623,6 @@ This implementation plan represents a **strategic investment** in the IntelForge
 
 ---
 
-**Status**: ✅ **READY FOR IMPLEMENTATION**  
-**Next Action**: Begin Phase 1 - Critical Infrastructure  
+**Status**: ✅ **READY FOR IMPLEMENTATION**
+**Next Action**: Begin Phase 1 - Critical Infrastructure
 **First Task**: Implement Crawl Failures Logger (30 minutes)

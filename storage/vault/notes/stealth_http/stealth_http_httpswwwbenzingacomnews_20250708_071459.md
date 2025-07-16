@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:59.821442
 
 # News - Benzinga
 
-**URL:** https://www.benzinga.com/news/  
-**Final URL:** https://www.benzinga.com/news  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 129,393 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:59.821442  
+**URL:** https://www.benzinga.com/news/
+**Final URL:** https://www.benzinga.com/news
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 129,393 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:59.821442
 
 ## Main Content
 

@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:51.355754
 
 # AAPL: Apple Inc Stock Price Quote - NASDAQ GS - Bloomberg
 
-**URL:** https://www.bloomberg.com/quote/AAPL:US  
-**Final URL:** https://www.bloomberg.com/quote/AAPL:US  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 1,041 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:51.355754  
+**URL:** https://www.bloomberg.com/quote/AAPL:US
+**Final URL:** https://www.bloomberg.com/quote/AAPL:US
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 1,041 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:51.355754
 
 ## Main Content
 

@@ -4,14 +4,14 @@ IntelForge Production Readiness Assessment
 Comprehensive evaluation of system readiness for production deployment
 """
 
-import sys
-import json
+import argparse
 import datetime
+import json
+import sqlite3
 import subprocess
+import sys
 from pathlib import Path
 from typing import Dict
-import argparse
-import sqlite3
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
@@ -84,7 +84,8 @@ class ProductionReadinessAssessor:
         conn = sqlite3.connect(self.assessment_db_path)
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS assessment_results (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -96,9 +97,11 @@ class ProductionReadinessAssessor:
                 details TEXT,
                 recommendations TEXT
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS readiness_metrics (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -108,9 +111,11 @@ class ProductionReadinessAssessor:
                 meets_threshold BOOLEAN NOT NULL,
                 category TEXT NOT NULL
             )
-        """)
+        """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS blocking_issues (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL,
@@ -120,7 +125,8 @@ class ProductionReadinessAssessor:
                 resolution_required TEXT,
                 category TEXT NOT NULL
             )
-        """)
+        """
+        )
 
         conn.commit()
         conn.close()
@@ -141,7 +147,7 @@ class ProductionReadinessAssessor:
 
         cursor.execute(
             """
-            INSERT INTO assessment_results 
+            INSERT INTO assessment_results
             (timestamp, category, test_name, score, max_score, status, details, recommendations)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
@@ -174,7 +180,7 @@ class ProductionReadinessAssessor:
 
         cursor.execute(
             """
-            INSERT INTO blocking_issues 
+            INSERT INTO blocking_issues
             (timestamp, issue_type, severity, description, resolution_required, category)
             VALUES (?, ?, ?, ?, ?, ?)
         """,
@@ -453,11 +459,11 @@ class ProductionReadinessAssessor:
         return {
             "score": infrastructure_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if infrastructure_percentage >= 90
-            else "good"
-            if infrastructure_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if infrastructure_percentage >= 90
+                else "good" if infrastructure_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "directory_score": directory_score,
                 "config_score": config_score,
@@ -766,11 +772,11 @@ class ProductionReadinessAssessor:
         return {
             "score": security_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if security_percentage >= 90
-            else "good"
-            if security_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if security_percentage >= 90
+                else "good" if security_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "security_tools_score": security_tools_score,
                 "tools_installed": tools_installed,
@@ -945,9 +951,7 @@ class ProductionReadinessAssessor:
                         status = (
                             "excellent"
                             if success_rate >= 95
-                            else "good"
-                            if success_rate >= 85
-                            else "needs_attention"
+                            else "good" if success_rate >= 85 else "needs_attention"
                         )
                         self.record_assessment_result(
                             "performance",
@@ -1060,11 +1064,11 @@ class ProductionReadinessAssessor:
         return {
             "score": performance_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if performance_percentage >= 90
-            else "good"
-            if performance_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if performance_percentage >= 90
+                else "good" if performance_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "baseline_score": baseline_score,
                 "recent_performance_score": recent_performance_score,
@@ -1115,9 +1119,9 @@ class ProductionReadinessAssessor:
                         status = (
                             "excellent"
                             if error_density >= 0.02
-                            else "good"
-                            if error_density >= 0.01
-                            else "needs_improvement"
+                            else (
+                                "good" if error_density >= 0.01 else "needs_improvement"
+                            )
                         )
                         self.record_assessment_result(
                             "reliability",
@@ -1181,11 +1185,11 @@ class ProductionReadinessAssessor:
             "logging_implementation",
             logging_score,
             max_logging_score,
-            "good"
-            if logging_modules >= 3
-            else "partial"
-            if logging_modules > 0
-            else "missing",
+            (
+                "good"
+                if logging_modules >= 3
+                else "partial" if logging_modules > 0 else "missing"
+            ),
             f"Modules with logging: {logging_modules}",
         )
 
@@ -1230,11 +1234,11 @@ class ProductionReadinessAssessor:
             "fault_tolerance",
             fault_tolerance_score,
             max_fault_tolerance_score,
-            "excellent"
-            if fault_tolerance_found >= 5
-            else "good"
-            if fault_tolerance_found >= 3
-            else "needs_improvement",
+            (
+                "excellent"
+                if fault_tolerance_found >= 5
+                else "good" if fault_tolerance_found >= 3 else "needs_improvement"
+            ),
             f"Fault tolerance patterns found: {fault_tolerance_found}",
         )
 
@@ -1246,11 +1250,11 @@ class ProductionReadinessAssessor:
         return {
             "score": reliability_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if reliability_percentage >= 90
-            else "good"
-            if reliability_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if reliability_percentage >= 90
+                else "good" if reliability_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "error_handling_score": error_handling_score,
                 "logging_score": logging_score,
@@ -1318,11 +1322,11 @@ class ProductionReadinessAssessor:
                 "reporting_infrastructure",
                 reports_score,
                 40,
-                "excellent"
-                if len(report_types) >= 4
-                else "good"
-                if len(report_types) >= 2
-                else "basic",
+                (
+                    "excellent"
+                    if len(report_types) >= 4
+                    else "good" if len(report_types) >= 2 else "basic"
+                ),
                 f"Report categories available: {len(report_types)}",
             )
         else:
@@ -1377,11 +1381,11 @@ class ProductionReadinessAssessor:
         return {
             "score": monitoring_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if monitoring_percentage >= 90
-            else "good"
-            if monitoring_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if monitoring_percentage >= 90
+                else "good" if monitoring_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "log_infrastructure_score": log_infrastructure_score,
                 "reports_score": reports_score,
@@ -1475,11 +1479,11 @@ class ProductionReadinessAssessor:
                 "session_documentation",
                 session_score,
                 max_session_score,
-                "excellent"
-                if len(session_files) >= 6
-                else "good"
-                if len(session_files) >= 3
-                else "basic",
+                (
+                    "excellent"
+                    if len(session_files) >= 6
+                    else "good" if len(session_files) >= 3 else "basic"
+                ),
                 f"Session documentation files: {len(session_files)}",
             )
         else:
@@ -1516,11 +1520,11 @@ class ProductionReadinessAssessor:
             "technical_documentation",
             technical_docs_score,
             max_technical_score,
-            "excellent"
-            if tech_doc_count >= 15
-            else "good"
-            if tech_doc_count >= 8
-            else "basic",
+            (
+                "excellent"
+                if tech_doc_count >= 15
+                else "good" if tech_doc_count >= 8 else "basic"
+            ),
             f"Technical documentation files: {tech_doc_count}",
         )
 
@@ -1532,11 +1536,11 @@ class ProductionReadinessAssessor:
         return {
             "score": documentation_percentage,
             "max_score": 100,
-            "status": "excellent"
-            if documentation_percentage >= 90
-            else "good"
-            if documentation_percentage >= 75
-            else "needs_attention",
+            "status": (
+                "excellent"
+                if documentation_percentage >= 90
+                else "good" if documentation_percentage >= 75 else "needs_attention"
+            ),
             "details": {
                 "essential_docs_score": essential_docs_score,
                 "session_docs_score": session_docs_score,
@@ -1633,15 +1637,15 @@ class ProductionReadinessAssessor:
 
         content = f"""# IntelForge Production Readiness Assessment
 
-**Assessment ID**: {overall["session_id"]}  
-**Assessment Date**: {overall["start_time"]}  
-**Report Type**: Comprehensive Production Readiness Evaluation  
+**Assessment ID**: {overall["session_id"]}
+**Assessment Date**: {overall["start_time"]}
+**Report Type**: Comprehensive Production Readiness Evaluation
 
 ## 📊 Executive Summary
 
-**Overall Readiness**: {readiness_display.get(overall["readiness_level"], overall["readiness_level"])}  
-**Readiness Score**: {overall["overall_score"]:.1f}/100  
-**Blocking Issues**: {len(overall["blocking_issues"])}  
+**Overall Readiness**: {readiness_display.get(overall["readiness_level"], overall["readiness_level"])}
+**Readiness Score**: {overall["overall_score"]:.1f}/100
+**Blocking Issues**: {len(overall["blocking_issues"])}
 **Recommendations**: {len(overall["recommendations"])}
 
 ## 🎯 Readiness Assessment Overview
@@ -1657,9 +1661,7 @@ class ProductionReadinessAssessor:
             status_emoji = (
                 "✅"
                 if results["score"] >= 90
-                else "⚠️"
-                if results["score"] >= 75
-                else "❌"
+                else "⚠️" if results["score"] >= 75 else "❌"
             )
 
             content += f"| **{category.replace('_', ' ').title()}** | {results['score']:.1f} | {weight:.0%} | {weighted_score:.1f} | {status_emoji} {results['status']} |\n"
@@ -1668,7 +1670,7 @@ class ProductionReadinessAssessor:
 
 ### Readiness Breakdown
 - **Infrastructure**: System dependencies and core modules
-- **Security**: Vulnerability assessment and secret management  
+- **Security**: Vulnerability assessment and secret management
 - **Performance**: Benchmarks and scalability validation
 - **Reliability**: Error handling and fault tolerance
 - **Monitoring**: Observability and reporting capabilities
@@ -1708,9 +1710,7 @@ class ProductionReadinessAssessor:
                 severity_emoji = (
                     "🔴"
                     if issue["severity"] == "critical"
-                    else "🟡"
-                    if issue["severity"] == "high"
-                    else "🟠"
+                    else "🟡" if issue["severity"] == "high" else "🟠"
                 )
                 content += f"### {severity_emoji} {issue['type'].replace('_', ' ').title()}\n\n"
                 content += f"**Severity**: {issue['severity'].title()}  \n"
@@ -1779,16 +1779,16 @@ class ProductionReadinessAssessor:
 
 ## 🔗 Technical Details
 
-**Assessment Database**: `{self.assessment_db_path}`  
-**Report Location**: `{path}`  
+**Assessment Database**: `{self.assessment_db_path}`
+**Report Location**: `{path}`
 **Assessment Framework**: Comprehensive production readiness evaluation
 
-**Categories Assessed**: {len(overall["categories"])}  
-**Total Metrics Evaluated**: {sum(len(r.get("details", {})) for r in overall["categories"].values())}  
+**Categories Assessed**: {len(overall["categories"])}
+**Total Metrics Evaluated**: {sum(len(r.get("details", {})) for r in overall["categories"].values())}
 **Assessment Duration**: {(datetime.datetime.fromisoformat(overall["end_time"]) - datetime.datetime.fromisoformat(overall["start_time"])).total_seconds():.1f} seconds
 
 ---
-*Generated by IntelForge Production Readiness Assessor*  
+*Generated by IntelForge Production Readiness Assessor*
 *Framework: Multi-category production readiness evaluation with weighted scoring*
 """
 
@@ -1833,29 +1833,29 @@ def main():
         print(f"\n{'=' * 80}")
 
         if category == "infrastructure":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_infrastructure_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_infrastructure_readiness()
         elif category == "security":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_security_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_security_readiness()
         elif category == "performance":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_performance_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_performance_readiness()
         elif category == "reliability":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_reliability_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_reliability_readiness()
         elif category == "monitoring":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_monitoring_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_monitoring_readiness()
         elif category == "documentation":
-            assessor.assessment_results["categories"][category] = (
-                assessor.assess_documentation_readiness()
-            )
+            assessor.assessment_results["categories"][
+                category
+            ] = assessor.assess_documentation_readiness()
 
     # Calculate overall readiness
     print(f"\n{'=' * 80}")

@@ -29,7 +29,7 @@ export const options = {
 // Test data - academic URLs for bulk processing
 const academicUrls = [
   'https://arxiv.org/abs/2301.00001',
-  'https://arxiv.org/abs/2301.00002', 
+  'https://arxiv.org/abs/2301.00002',
   'https://arxiv.org/abs/2301.00003',
   'https://arxiv.org/abs/2301.00004',
   'https://arxiv.org/abs/2301.00005',
@@ -38,7 +38,7 @@ const academicUrls = [
 export default function () {
   // Simulate researcher persona bulk academic URL processing
   const startTime = Date.now();
-  
+
   // Test CLI status command under load
   const statusResponse = http.get('http://localhost:8000/api/status', {
     headers: {
@@ -47,16 +47,16 @@ export default function () {
     },
     timeout: '10s',
   });
-  
+
   const statusCheck = check(statusResponse, {
     'status command responds': (r) => r.status === 200 || r.status === 404, // 404 OK if API not running
     'response time < 2s': (r) => r.timings.duration < 2000,
   });
-  
+
   if (!statusCheck) {
     errorRate.add(1);
   }
-  
+
   // Simulate bulk URL processing load
   academicUrls.forEach((url, index) => {
     const processingResponse = http.post('http://localhost:8000/api/crawl', JSON.stringify({
@@ -71,24 +71,24 @@ export default function () {
       },
       timeout: '30s',
     });
-    
+
     const processingCheck = check(processingResponse, {
       'crawl request accepted': (r) => r.status === 200 || r.status === 404, // 404 OK if API not running
       'processing time reasonable': (r) => r.timings.duration < 30000, // 30s max
     });
-    
+
     if (!processingCheck) {
       errorRate.add(1);
     }
-    
+
     // Simulate realistic processing delay between URLs
     sleep(Math.random() * 2 + 1); // 1-3 seconds between requests
   });
-  
+
   // Measure total scenario time
   const totalTime = Date.now() - startTime;
   console.log(`Researcher scenario completed in ${totalTime}ms`);
-  
+
   // Realistic pause between test iterations
   sleep(Math.random() * 3 + 2); // 2-5 seconds
 }
@@ -103,7 +103,7 @@ export function handleSummary(data) {
 function textSummary(data, options = {}) {
   const indent = options.indent || '';
   const colors = options.enableColors !== false;
-  
+
   let summary = `${indent}Researcher Load Test Summary\n`;
   summary += `${indent}============================\n`;
   summary += `${indent}Virtual Users: ${data.metrics.vus?.values?.max || 'N/A'}\n`;
@@ -112,6 +112,6 @@ function textSummary(data, options = {}) {
   summary += `${indent}Error Rate: ${(data.metrics.http_req_failed?.values?.rate || 0) * 100}%\n`;
   summary += `${indent}Avg Duration: ${data.metrics.http_req_duration?.values?.avg || 'N/A'}ms\n`;
   summary += `${indent}95th Percentile: ${data.metrics.http_req_duration?.values?.['p(95)'] || 'N/A'}ms\n`;
-  
+
   return summary;
 }

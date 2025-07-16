@@ -4,18 +4,19 @@ Enterprise Monitoring Dashboard
 Comprehensive logging, performance tracking, and alerting system for IntelForge
 """
 
+import argparse
 import json
+import sqlite3
+import statistics
 import sys
 import time
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-import sqlite3
-import argparse
-from dataclasses import dataclass
-import statistics
-import yfinance as yf
+from typing import Any, Dict, List, Optional
+
 import plotly.graph_objects as go
+import yfinance as yf
 from plotly.subplots import make_subplots
 
 # Optional import for quantstats (requires IPython in some environments)
@@ -59,7 +60,8 @@ class ScrapingLogger:
     def init_database(self):
         """Initialize SQLite database for logging."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
+            conn.execute(
+                """
                 CREATE TABLE IF NOT EXISTS scraping_events (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT NOT NULL,
@@ -74,7 +76,8 @@ class ScrapingLogger:
                     retry_count INTEGER,
                     metadata TEXT
                 )
-            """)
+            """
+            )
 
             # Create indexes for performance
             conn.execute(
@@ -95,9 +98,9 @@ class ScrapingLogger:
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
-                INSERT INTO scraping_events 
-                (timestamp, event_type, scraper_type, url, status_code, 
-                 content_length, execution_time, error_message, bot_detected, 
+                INSERT INTO scraping_events
+                (timestamp, event_type, scraper_type, url, status_code,
+                 content_length, execution_time, error_message, bot_detected,
                  retry_count, metadata)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
@@ -124,8 +127,8 @@ class ScrapingLogger:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 """
-                SELECT * FROM scraping_events 
-                WHERE timestamp > ? 
+                SELECT * FROM scraping_events
+                WHERE timestamp > ?
                 ORDER BY timestamp DESC
             """,
                 (cutoff_time,),
@@ -141,10 +144,10 @@ class ScrapingLogger:
             success_rates = {}
             cursor = conn.execute(
                 """
-                SELECT scraper_type, 
+                SELECT scraper_type,
                        COUNT(*) as total,
                        SUM(CASE WHEN event_type = 'success' THEN 1 ELSE 0 END) as successes
-                FROM scraping_events 
+                FROM scraping_events
                 WHERE timestamp > ? AND event_type IN ('success', 'failure')
                 GROUP BY scraper_type
             """,
@@ -164,7 +167,7 @@ class ScrapingLogger:
                 """
                 SELECT COUNT(*) as bot_detections,
                        AVG(execution_time) as avg_time_with_detection
-                FROM scraping_events 
+                FROM scraping_events
                 WHERE timestamp > ? AND bot_detected = 1
             """,
                 (cutoff_time,),
@@ -175,11 +178,11 @@ class ScrapingLogger:
             # Average execution times
             cursor = conn.execute(
                 """
-                SELECT scraper_type, 
+                SELECT scraper_type,
                        AVG(execution_time) as avg_time,
                        MIN(execution_time) as min_time,
                        MAX(execution_time) as max_time
-                FROM scraping_events 
+                FROM scraping_events
                 WHERE timestamp > ? AND execution_time IS NOT NULL
                 GROUP BY scraper_type
             """,
@@ -199,7 +202,7 @@ class ScrapingLogger:
             cursor = conn.execute(
                 """
                 SELECT error_message, COUNT(*) as frequency
-                FROM scraping_events 
+                FROM scraping_events
                 WHERE timestamp > ? AND event_type = 'failure' AND error_message IS NOT NULL
                 GROUP BY error_message
                 ORDER BY frequency DESC
@@ -246,9 +249,9 @@ class PerformanceMonitor:
                 alerts.append(
                     {
                         "type": "low_success_rate",
-                        "severity": "warning"
-                        if stats["success_rate"] > 50
-                        else "critical",
+                        "severity": (
+                            "warning" if stats["success_rate"] > 50 else "critical"
+                        ),
                         "scraper_type": scraper_type,
                         "current_value": stats["success_rate"],
                         "threshold": self.thresholds["min_success_rate"],
@@ -381,8 +384,8 @@ class FinancialAnalytics:
                            SUM(CASE WHEN event_type = 'success' THEN 1 ELSE 0 END) as successes,
                            AVG(execution_time) as avg_time,
                            SUM(CASE WHEN bot_detected = 1 THEN 1 ELSE 0 END) as bot_detections
-                    FROM scraping_events 
-                    WHERE timestamp > ? AND url LIKE ? 
+                    FROM scraping_events
+                    WHERE timestamp > ? AND url LIKE ?
                     AND event_type IN ('success', 'failure')
                 """,
                     (cutoff_time, f"%{site}%"),
@@ -395,9 +398,9 @@ class FinancialAnalytics:
                         "total_requests": total,
                         "success_rate": (successes / total * 100) if total > 0 else 0,
                         "avg_execution_time": avg_time or 0,
-                        "bot_detection_rate": (bot_detections / total * 100)
-                        if total > 0
-                        else 0,
+                        "bot_detection_rate": (
+                            (bot_detections / total * 100) if total > 0 else 0
+                        ),
                     }
 
             # Financial content analysis
@@ -405,9 +408,9 @@ class FinancialAnalytics:
                 """
                 SELECT COUNT(*) as financial_articles,
                        AVG(content_length) as avg_content_length
-                FROM scraping_events 
-                WHERE timestamp > ? 
-                AND event_type = 'success' 
+                FROM scraping_events
+                WHERE timestamp > ?
+                AND event_type = 'success'
                 AND (url LIKE '%finance%' OR url LIKE '%trading%' OR url LIKE '%market%')
                 AND content_length IS NOT NULL
             """,
@@ -419,9 +422,9 @@ class FinancialAnalytics:
             return {
                 "financial_sites_performance": financial_performance,
                 "content_analysis": {
-                    "financial_articles_scraped": content_stats[0]
-                    if content_stats[0]
-                    else 0,
+                    "financial_articles_scraped": (
+                        content_stats[0] if content_stats[0] else 0
+                    ),
                     "avg_content_length": content_stats[1] if content_stats[1] else 0,
                 },
                 "analysis_period_hours": hours,
@@ -526,12 +529,12 @@ class FinancialAnalytics:
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
             <style>
                 body {{ font-family: Arial, sans-serif; margin: 20px; }}
-                .metric-card {{ 
-                    display: inline-block; margin: 10px; padding: 15px; 
+                .metric-card {{
+                    display: inline-block; margin: 10px; padding: 15px;
                     border: 1px solid #ddd; border-radius: 5px; min-width: 200px;
                 }}
                 .metric-value {{ font-size: 24px; font-weight: bold; }}
-                .market-sentiment {{ 
+                .market-sentiment {{
                     padding: 10px; margin: 10px 0; border-radius: 5px; text-align: center;
                     font-weight: bold; font-size: 18px;
                 }}
@@ -544,23 +547,23 @@ class FinancialAnalytics:
         <body>
             <h1>🏦 IntelForge Financial Intelligence Dashboard</h1>
             <p>Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
-            
+
             <div class="market-sentiment {market_context.get("market_sentiment", "neutral").lower()}">
                 Market Sentiment: {market_context.get("market_sentiment", "UNKNOWN")}
             </div>
-            
+
             <div class="metric-card">
                 <div>Financial Articles Scraped</div>
                 <div class="metric-value">{financial_metrics["content_analysis"]["financial_articles_scraped"]}</div>
             </div>
-            
+
             <div class="metric-card">
                 <div>Avg Content Length</div>
                 <div class="metric-value">{financial_metrics["content_analysis"]["avg_content_length"]:.0f}</div>
             </div>
-            
+
             <div id="dashboard-chart"></div>
-            
+
             <script>
                 {fig.to_json()}
                 Plotly.newPlot('dashboard-chart', {fig.to_json()});
@@ -601,16 +604,14 @@ Time Period: Last {hours} hours
         if "market_data" in market_context:
             report += f"""
    Market Sentiment: {market_context.get("market_sentiment", "UNKNOWN")}
-   
+
    📈 Key Market Indicators:
 """
             for symbol, data in market_context["market_data"].items():
                 change_icon = (
                     "📈"
                     if data["change_pct"] > 0
-                    else "📉"
-                    if data["change_pct"] < 0
-                    else "➡️"
+                    else "📉" if data["change_pct"] < 0 else "➡️"
                 )
                 report += f"   {change_icon} {symbol}: ${data['current_price']:.2f} ({data['change_pct']:+.2f}%)\n"
 
@@ -643,9 +644,7 @@ Time Period: Last {hours} hours
                 status_icon = (
                     "✅"
                     if stats["success_rate"] >= 80
-                    else "⚠️"
-                    if stats["success_rate"] >= 60
-                    else "❌"
+                    else "⚠️" if stats["success_rate"] >= 60 else "❌"
                 )
                 report += f"   {status_icon} {scraper_type}: {stats['success_rate']:.1f}% ({stats['successes']}/{stats['total']})\n"
 
@@ -656,9 +655,7 @@ Time Period: Last {hours} hours
                 status_icon = (
                     "✅"
                     if stats["success_rate"] >= 80
-                    else "⚠️"
-                    if stats["success_rate"] >= 60
-                    else "❌"
+                    else "⚠️" if stats["success_rate"] >= 60 else "❌"
                 )
                 bot_icon = "🛡️" if stats["bot_detection_rate"] > 0 else ""
                 report += f"   {status_icon} {site}: {stats['success_rate']:.1f}% success, {stats['avg_execution_time']:.2f}s avg {bot_icon}\n"
@@ -825,9 +822,7 @@ def main():
                 change_icon = (
                     "📈"
                     if data["change_pct"] > 0
-                    else "📉"
-                    if data["change_pct"] < 0
-                    else "➡️"
+                    else "📉" if data["change_pct"] < 0 else "➡️"
                 )
                 print(
                     f"   {change_icon} {symbol}: ${data['current_price']:.2f} ({data['change_pct']:+.2f}%)"

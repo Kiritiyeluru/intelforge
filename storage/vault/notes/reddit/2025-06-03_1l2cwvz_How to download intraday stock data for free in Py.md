@@ -16,7 +16,7 @@ I've been using Yahoo Finance for most of my historical data. The API is quite g
 
 Those who are just getting started with algo trading might be struggling to find a free data source, so I've made a tutorial video showing how to code this "data downloader", how to configure the various options, and how to download bulk data for multiple stocks at once.
 
-**Video:** [Click here](https://youtu.be/5cZJPvEYRbA)  
+**Video:** [Click here](https://youtu.be/5cZJPvEYRbA)
 **Code:** [GitHub link](https://github.com/russs123/algo_tutorials/blob/main/fetch_data_yf_tutorial.ipynb)
 
 Let me know what you think.

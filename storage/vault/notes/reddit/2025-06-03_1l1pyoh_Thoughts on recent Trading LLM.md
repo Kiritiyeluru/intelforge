@@ -12,13 +12,13 @@ post_id: 1l1pyoh
 
 # Thoughts on recent Trading LLM?
 
-An LLM has been created and taunted as a winning strategy. 
+An LLM has been created and taunted as a winning strategy.
 
-Original paper: 
+Original paper:
 
 https://arxiv.org/abs/2411.00782
 
-Any quants / traders using this? Curious on what you think 🤔 
+Any quants / traders using this? Curious on what you think 🤔
 
 
 ## Comments
@@ -33,13 +33,13 @@ Probably bullshit. None of these results are easily verifiable since no code and
 
 **Author:** u/Yocurt
 
-This approach does seem to have some potential, at least compared to the other methods people typically try to use LLM’s for. 
+This approach does seem to have some potential, at least compared to the other methods people typically try to use LLM’s for.
 
-Their method is no different than giving an expert all of the available information about macro economic data, company fundamentals, news articles, and market data, and that human expert making an educated guess. (Except it’s spitting out what it THINKS an expert would say, *just to cover my butt for the replies*). 
+Their method is no different than giving an expert all of the available information about macro economic data, company fundamentals, news articles, and market data, and that human expert making an educated guess. (Except it’s spitting out what it THINKS an expert would say, *just to cover my butt for the replies*).
 
-However, this would only work (I think, I only read the abstract) for more long term investing strategies. It’s more like investing in “good” businesses at good times in a macro sense. 
+However, this would only work (I think, I only read the abstract) for more long term investing strategies. It’s more like investing in “good” businesses at good times in a macro sense.
 
-I would definitely take the paper with a grain of salt, since 99% of papers like this are complete BS, I’m just saying the general idea makes sense. 
+I would definitely take the paper with a grain of salt, since 99% of papers like this are complete BS, I’m just saying the general idea makes sense.
 
 Getting an LLM to discover an edge for a scalping/short term swings/daytrading strategy from pure market data, price action, is a whole different application, which absolutely no LLM can do yet (for now).
 
@@ -47,7 +47,7 @@ Getting an LLM to discover an edge for a scalping/short term swings/daytrading s
 
 **Author:** u/kokanee-fish
 
-There's not enough detail here to know if their stated results are compelling. It's surprisingly difficult to create a backtesting process that doesn't introduce overfitting, lookahead bias, or optimistic executions. Usually, great test results are caused by an oversight in the testing process. But not always. 
+There's not enough detail here to know if their stated results are compelling. It's surprisingly difficult to create a backtesting process that doesn't introduce overfitting, lookahead bias, or optimistic executions. Usually, great test results are caused by an oversight in the testing process. But not always.
 
 At a high level, though, the idea of assigning an LLM to each trading signal, and using another LLM to synthesize the signals into a decision, seems reasonable. I'm sure we'll see a lot of progress in this area.
 
@@ -122,7 +122,7 @@ Disclaimer: There is a lot more going on apart from just prompting, this alone w
 ⠀⠀⠀⠀⠀⠀⠀⠀- Today's low: 24677.6
 ⠀⠀⠀⠀⠀⠀⠀⠀- Previous close: 24757.15
 ⠀⠀⠀⠀⠀⠀⠀⠀- VWAP: 24777.03
-⠀⠀⠀⠀⠀⠀⠀⠀- Day summary: 
+⠀⠀⠀⠀⠀⠀⠀⠀- Day summary:
 
 ⠀⠀⠀⠀⠀⠀⠀⠀Analyze all this data (1m, 15m, 2h, volume, regression values, VWAP, pivots, option chain, OI, VIX, structure, volume profile) and return ONLY ONE trade idea in this JSON:
 ⠀⠀⠀⠀⠀⠀⠀⠀[{"dir":"LONG|SHORT|WAIT", "entry":float, "sl":float, "tg":float, "why":string, "instrument":"NIFTY", "strike":int, "right":"CE|PE", "option_entry":float, "option_sl":float, "option_tg":float}]

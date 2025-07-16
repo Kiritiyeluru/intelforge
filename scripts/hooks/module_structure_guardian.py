@@ -4,12 +4,12 @@ Module Structure Guardian Hook for IntelForge
 Ensures all new Python modules follow IntelForge patterns and conventions
 """
 
-import json
-import sys
 import ast
-from pathlib import Path
-from datetime import datetime
+import json
 import re
+import sys
+from datetime import datetime
+from pathlib import Path
 
 # Configure paths
 HOOKS_DIR = Path(__file__).parent
@@ -320,12 +320,12 @@ def main():
             "compliance": compliance,
             "file_info": {
                 "line_count": content_info.get("line_count", 0) if content_info else 0,
-                "has_functions": content_info.get("has_functions", False)
-                if content_info
-                else False,
-                "has_classes": content_info.get("has_classes", False)
-                if content_info
-                else False,
+                "has_functions": (
+                    content_info.get("has_functions", False) if content_info else False
+                ),
+                "has_classes": (
+                    content_info.get("has_classes", False) if content_info else False
+                ),
             },
         }
 

@@ -7,11 +7,11 @@ Here’s a high‑level code review of scripts/canary_validation_system_v2.py, c
 ### What’s good
 
     * Modular design: clear separation between EnhancedCanaryValidator (validation logic) and EnhancedPipelineGatekeeper (pipeline‑gating logic).
-    * Assertion‑style checks in _validate_page_content, collecting (name, bool) tuples for pass/fail, then summarizing resultsscripts/canary_validation_system_v2.py.  
-    * Plugin architecture for site‑specific checks via self.validators mapping and domain extractionscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.  
-    * Caching layer so repeated runs within a time window reuse results, reducing browser hitsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.  
-    * Enhanced summary metrics (overall_status, ready_for_pipeline, validation_success_rate, etc.) for richer health signalsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.  
-    * Detailed logging with ✅/❌ symbols and warnings for failed checks; and recommendations in the gatekeeper based on failure patternsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.  
+    * Assertion‑style checks in _validate_page_content, collecting (name, bool) tuples for pass/fail, then summarizing resultsscripts/canary_validation_system_v2.py.
+    * Plugin architecture for site‑specific checks via self.validators mapping and domain extractionscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.
+    * Caching layer so repeated runs within a time window reuse results, reducing browser hitsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.
+    * Enhanced summary metrics (overall_status, ready_for_pipeline, validation_success_rate, etc.) for richer health signalsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.
+    * Detailed logging with ✅/❌ symbols and warnings for failed checks; and recommendations in the gatekeeper based on failure patternsscripts/canary_validation_system_v2.pyscripts/canary_validation_system_v2.py.
     * Built‑in “smoke test” under test_enhanced_canary_system() and a main() entrypoint for manual runsscripts/canary_validation_system_v2.py.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -38,8 +38,8 @@ Example in Action:
 # Find files effortlessly
 Command: "Show me all Python files in my folder"
 Terminal MCP Tool: Search
-Output: 
-- app.py 
+Output:
+- app.py
 - helper.py
 
 # Seamlessly execute code
@@ -125,4 +125,3 @@ Example in Action:
 Command: "Find related articles on 'climate change'"
 Vector Search Output: "[List of related articles displayed]"
 Learn about Vector Search MCP.
-

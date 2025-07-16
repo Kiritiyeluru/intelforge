@@ -103,7 +103,7 @@ I have been dollar cost averaging for over 20 years, every month.  It works for 
 
 **Author:** u/stockpreacher
 
-You do realize we haven't pushed past the Feb. 21st price, right? 
+You do realize we haven't pushed past the Feb. 21st price, right?
 
 That was when macroeconomic data showed that consumer sentiment went off a cliff and the Services PMI showed contraction.
 
@@ -115,7 +115,7 @@ Until that price is breached - and it's going to have to take positive macroecon
 
 Earnings won't do it. NVDA's earnings BLEW THE DOORS OFF. It went up but then stalled out and fell.
 
-Market breadth is at historically insane lows. The housing market is going to shit. VIX hasn't even kissed 15 in months. 
+Market breadth is at historically insane lows. The housing market is going to shit. VIX hasn't even kissed 15 in months.
 
 If you want to make a case that people who sold off in April were dumb, fair enough.
 

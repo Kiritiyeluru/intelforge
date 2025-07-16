@@ -7,15 +7,15 @@ environment:
   rust_version: "1.88.0"
   package_manager: "uv (40x faster than pip)"
   rust_toolchain: "stable"
-  
+
   # Superior Testing Packages (from testing_tools_stack.json)
   rust_packages:
     - criterion: "0.5.1"     # Statistical benchmarking
-    - proptest: "1.7.0"      # Property-based testing  
+    - proptest: "1.7.0"      # Property-based testing
     - insta: "1.43.1"        # Snapshot testing
     - tokio: "1.46.1"        # Async testing
     - libfuzzer-sys: "0.4.10" # Fuzzing support
-  
+
   python_packages:
     - pytest: "8.4.1"                    # Core testing framework
     - pytest-cov: "6.2.1"               # Coverage reporting
@@ -26,18 +26,18 @@ environment:
     - pytest-approvaltests: "0.2.4"     # Snapshot testing
     - snapshottest: "0.6.0"             # Jest-style snapshots
     - typer: "0.16.0"                    # Modern CLI framework
-  
+
   test_data_dir: "test_data"
   report_dir: "reports"
   log_level: "INFO"
-  
+
   # Tool Locations
   rust_tools:
     cargo_nextest: "/home/kiriti/.cargo/bin/cargo-nextest"  # 50% faster test runner
     cargo_insta: "/home/kiriti/.cargo/bin/cargo-insta"      # Snapshot management
     cargo_fuzz: "/home/kiriti/.cargo/bin/cargo-fuzz"        # LLVM fuzzing
     hyperfine: "/home/kiriti/.cargo/bin/hyperfine"          # CLI benchmarking
-  
+
   system_tools:
     k6: "~/.local/bin/k6"                                   # Load testing
 
@@ -50,7 +50,7 @@ hybrid_testing:
     - "Core algorithm validation"
     - "Load testing infrastructure"
     - "Snapshot/configuration testing"
-  
+
   python_for:
     - "ML model testing (sentence-transformers, BERTopic)"
     - "API integration testing (Reddit, GitHub, ChromaDB)"
@@ -64,26 +64,26 @@ rust_tests:
   runner: "cargo nextest run"  # 50% faster than cargo test
   timeout: 30
   parallel: true
-  
+
   benchmarking:
     tool: "criterion"
     precision: "sub-microsecond"
     statistical_analysis: true
     html_reports: true
     baseline_comparison: true
-  
+
   property_testing:
     tool: "proptest"
     test_cases: 1000
     shrinking: true
     strategies: "custom_domain_strategies"
-  
+
   snapshot_testing:
     tool: "insta"
     auto_review: false
     interactive_approval: true
     baseline_management: true
-  
+
   fuzzing:
     tool: "cargo-fuzz"
     targets: ["parser", "domain_validator", "content_processor"]
@@ -96,11 +96,11 @@ unit_tests:
   coverage_threshold: 80  # minimum coverage percentage
   parallel_execution: true
   runner: "pytest-xdist"  # Parallel execution
-  
+
   test_patterns:
     - "test_*.py"
     - "*_test.py"
-  
+
   modules_to_test:
     - reddit_scraper
     - github_scraper
@@ -109,14 +109,14 @@ unit_tests:
     - data_organizer
     - article_organizer
     - ai_processor
-  
+
   # Property-based testing with Hypothesis
   property_testing:
     tool: "hypothesis"
     max_examples: 1000
     deadline: 10000  # ms
     shrink_timeout: 60  # seconds
-  
+
   # Snapshot testing
   snapshot_testing:
     tools: ["pytest-approvaltests", "snapshottest"]
@@ -128,7 +128,7 @@ integration_tests:
   timeout: 300  # seconds (5 minutes)
   retry_attempts: 3
   delay_between_retries: 5  # seconds
-  
+
   endpoints_to_test:
     reddit:
       - "https://www.reddit.com/r/algotrading.json"
@@ -140,7 +140,7 @@ integration_tests:
 # Performance Testing Configuration (Enhanced)
 performance_tests:
   timeout: 600  # seconds (10 minutes)
-  
+
   # Rust Criterion Benchmarks (100x faster than Python)
   rust_benchmarks:
     tool: "criterion"
@@ -148,33 +148,33 @@ performance_tests:
     statistical_analysis: true
     baseline_comparison: true
     html_reports: true
-    
+
     targets:
       semantic_scoring: "93.6 ns average"
-      domain_validation: "222.6 ns average" 
+      domain_validation: "222.6 ns average"
       content_validation: "2.3 ns average"
-  
+
   # Python pytest-benchmark
   python_benchmarks:
     tool: "pytest-benchmark"
     precision: "microsecond"
     statistical_analysis: true
     regression_detection: true
-    
+
     targets:
       scraping_speed:
         target: 100  # pages per minute
         tolerance: 20  # percentage deviation
         current_baseline: "9.95 μs average"
-      
+
       memory_usage:
         max_mb: 200
         tolerance: 50  # MB
-      
+
       response_time:
         max_seconds: 5
         tolerance: 2  # seconds
-  
+
   # CLI Performance Testing with hyperfine
   cli_benchmarks:
     tool: "hyperfine"
@@ -188,15 +188,15 @@ scraping_tests:
   rate_limiting:
     requests_per_minute: 10
     respect_robots_txt: true
-  
+
   user_agents:
     - "Mozilla/5.0 (compatible; IntelForge-Test/1.0)"
-  
+
   test_targets:
     safe_endpoints:
       - "https://httpbin.org/html"
       - "https://example.com"
-    
+
     mock_responses: true
     real_scraping: false  # Set to true for live testing
 
@@ -205,7 +205,7 @@ security_tests:
   api_key_validation: true
   rate_limit_testing: true
   input_sanitization: true
-  
+
   sensitive_data_patterns:
     - "api_key"
     - "password"
@@ -218,11 +218,11 @@ reporting:
     - "markdown"
     - "json"
     - "html"
-  
+
   include_logs: true
   include_screenshots: false
   archive_after_days: 30
-  
+
   notifications:
     on_failure: true
     on_success: false
@@ -234,7 +234,7 @@ test_data:
     reddit_post: "test_data/mock_reddit_response.json"
     github_repo: "test_data/mock_github_response.json"
     web_page: "test_data/mock_web_response.html"
-  
+
   sample_content:
     articles_dir: "test_data/sample_articles"
     max_file_size_mb: 10
@@ -246,6 +246,6 @@ ci:
   required_tests:
     - unit_tests
     - integration_tests
-  
+
   performance_regression_check: true
   coverage_report: true

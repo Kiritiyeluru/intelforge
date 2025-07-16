@@ -383,7 +383,7 @@ from scrapy_playwright.page import PageMethod
 
 class FinancialContentSpider(scrapy.Spider):
     name = 'financial_semantic'
-    
+
     custom_settings = {
         'PLAYWRIGHT_BROWSER_TYPE': 'chromium',
         'PLAYWRIGHT_LAUNCH_OPTIONS': {'headless': True},
@@ -411,20 +411,20 @@ def langchain_pipeline(urls):
     # Load documents
     loader = WebBaseLoader(urls)
     documents = loader.load()
-    
+
     # Split text
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
         chunk_overlap=200
     )
     docs = text_splitter.split_documents(documents)
-    
+
     # Create embeddings
     embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
-    
+
     # Store in vector database
     vectorstore = Chroma.from_documents(docs, embeddings, persist_directory="./chroma_db")
-    
+
     return vectorstore
 
 # Benchmark vs. custom approach
@@ -470,7 +470,7 @@ kw_model = KeyBERT(model='all-MiniLM-L6-v2')
 # Create comprehensive training embeddings
 training_content = [
     "momentum trading strategy using moving averages and RSI indicators",
-    "algorithmic backtesting with vectorbt and pandas quantitative analysis", 
+    "algorithmic backtesting with vectorbt and pandas quantitative analysis",
     "quantitative finance research with statistical arbitrage models",
     "mean reversion strategies with Bollinger Bands implementation",
     "portfolio optimization using modern portfolio theory",
@@ -484,7 +484,7 @@ reference_embeddings = model.encode(training_content)
 
 # Auto-tag function
 def auto_tag_content(content):
-    tags = kw_model.extract_keywords(content, keyphrase_ngram_range=(1, 2), 
+    tags = kw_model.extract_keywords(content, keyphrase_ngram_range=(1, 2),
                                    stop_words='english', top_k=5)
     return [tag[0] for tag in tags if tag[1] > 0.3]  # Confidence threshold
 ```
@@ -500,12 +500,12 @@ import httpx
 async def is_relevant_url(url):
     """Fast relevance check via URL patterns and HEAD request"""
     domain = urlparse(url).netloc
-    
+
     # Check URL patterns
     relevant_patterns = ['trading', 'finance', 'quant', 'strategy', 'backtest']
     if any(pattern in url.lower() for pattern in relevant_patterns):
         return True
-    
+
     # Check HEAD request for content type
     try:
         async with httpx.AsyncClient() as client:
@@ -520,12 +520,12 @@ class AdaptiveThresholder:
     def __init__(self, initial_threshold=0.75):
         self.threshold = initial_threshold
         self.scores = []
-    
+
     def update_threshold(self, scores):
         self.scores.extend(scores)
         if len(self.scores) > 50:  # Adjust after sufficient data
             self.threshold = np.percentile(self.scores, 80)
-    
+
     def get_threshold(self):
         return self.threshold
 
@@ -550,7 +550,7 @@ import click
 def smart_crawl(url_file, framework, threshold, dry_run, verbose):
     """🧠 AI-powered semantic crawling with production frameworks"""
     thresholder = AdaptiveThresholder(threshold) if threshold else AdaptiveThresholder()
-    
+
     if framework == 'scrapy':
         return run_scrapy_pipeline(url_file, thresholder, dry_run, verbose)
     elif framework == 'langchain':
@@ -1006,14 +1006,14 @@ class SemanticCrawlerTester:
             "langchain": {"accuracy": 0.0, "speed": 0.0, "throughput": 0.0},
             "hybrid": {"accuracy": 0.0, "speed": 0.0, "throughput": 0.0}
         }
-    
+
     def run_framework_comparison(self):
         """Compare all available frameworks"""
         for framework in ["scrapy", "langchain", "hybrid"]:
             self.test_framework_performance(framework)
             self.test_framework_accuracy(framework)
             self.test_framework_throughput(framework)
-    
+
     def generate_comparison_report(self):
         """Generate comprehensive framework comparison"""
         # Implementation for detailed reporting
@@ -1065,7 +1065,7 @@ This implementation plan has been enhanced with production-grade frameworks spec
 
 #### **✅ Performance Optimizations**
 - **Pre-fetch relevance estimation** - 40-60% reduction in unnecessary crawling
-- **Smart extraction pipeline** - 5-20x faster with production frameworks  
+- **Smart extraction pipeline** - 5-20x faster with production frameworks
 - **Adaptive thresholding** - Maintains 90%+ accuracy automatically
 - **Smart caching system** - 30-50% time savings through duplicate prevention
 
@@ -1102,20 +1102,20 @@ This implementation plan has been enhanced with production-grade frameworks spec
 
 ### **Implementation Benefits**
 
-**Development Time**: Reduced by 60% through framework reuse  
-**Maintenance Overhead**: Reduced by 70% through community support  
-**Performance**: 10-50x improvement through production optimizations  
-**Cost**: $0 ongoing costs for all operations  
-**Reliability**: Production-grade stability and error handling  
-**Community Support**: Access to extensive documentation and plugins  
+**Development Time**: Reduced by 60% through framework reuse
+**Maintenance Overhead**: Reduced by 70% through community support
+**Performance**: 10-50x improvement through production optimizations
+**Cost**: $0 ongoing costs for all operations
+**Reliability**: Production-grade stability and error handling
+**Community Support**: Access to extensive documentation and plugins
 
 ### **Strategic Advantages**
 
-**Framework Leverage**: Built on battle-tested, community-maintained components  
-**Performance Optimization**: Production-grade features without custom development  
-**Maintenance Reduction**: Community handles framework updates and bug fixes  
-**Scalability Path**: Clear upgrade path when moving beyond solo development  
-**Risk Mitigation**: Proven components reduce implementation risk  
+**Framework Leverage**: Built on battle-tested, community-maintained components
+**Performance Optimization**: Production-grade features without custom development
+**Maintenance Reduction**: Community handles framework updates and bug fixes
+**Scalability Path**: Clear upgrade path when moving beyond solo development
+**Risk Mitigation**: Proven components reduce implementation risk
 
 **Result**: A production-ready semantic crawler that leverages the best available frameworks while maintaining all solo developer optimizations. The solution provides enterprise-grade capabilities with minimal maintenance overhead.
 
@@ -1186,14 +1186,14 @@ This implementation plan has been enhanced with production-grade frameworks spec
 
 ### **Strategic Implementation Approach (Framework-Enhanced)**
 
-**Immediate Focus**: Phase 1 implementation with Scrapy ecosystem and LangChain evaluation  
-**Success Criteria**: 90%+ accuracy, <1s processing time, framework comparison complete  
-**Timeline**: Single session (4 hours) for production foundation with benchmarking  
-**Risk Level**: Very Low (production frameworks, community support)  
+**Immediate Focus**: Phase 1 implementation with Scrapy ecosystem and LangChain evaluation
+**Success Criteria**: 90%+ accuracy, <1s processing time, framework comparison complete
+**Timeline**: Single session (4 hours) for production foundation with benchmarking
+**Risk Level**: Very Low (production frameworks, community support)
 
-**Framework Strategy**: Leverage battle-tested components, compare empirically, choose optimally  
-**Community Leverage**: Access extensive documentation, plugins, and ongoing support  
-**Maintenance Strategy**: Community handles framework updates, focus on domain optimization  
+**Framework Strategy**: Leverage battle-tested components, compare empirically, choose optimally
+**Community Leverage**: Access extensive documentation, plugins, and ongoing support
+**Maintenance Strategy**: Community handles framework updates, focus on domain optimization
 
 **Next Steps**: Begin Phase 1 implementation immediately with comprehensive framework evaluation and performance benchmarking to ensure optimal production deployment.
 
@@ -1245,7 +1245,7 @@ sqlite index.db → title, url, score, tags, filepath
 
 **Implementation**:
 - Detect encoding issues
-- Validate dates / timestamps  
+- Validate dates / timestamps
 - Validate score range / tag length
 - Prevents YAML corruption in Obsidian
 
@@ -1283,7 +1283,7 @@ sqlite index.db → title, url, score, tags, filepath
 
 Perfectly aligns with our complexity avoidance checklist:
 - ✅ Skip LLM agent systems
-- ✅ Avoid expensive API scoring  
+- ✅ Avoid expensive API scoring
 - ✅ No API gateway complexity
 - ✅ Local ChromaDB over cloud Pinecone
 - ✅ Defer browser plugins

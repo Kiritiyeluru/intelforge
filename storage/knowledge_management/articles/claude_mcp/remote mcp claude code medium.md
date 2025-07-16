@@ -80,7 +80,7 @@ node server.js --port 3001
 # New way: Remote MCP server
 claude mcp add sse --name "linear" --url "https://mcp.linear.app/sse"
 /mcp auth linear
-# Done. 
+# Done.
 The bandwidth usage is also surprisingly efficient.
 
 Since these servers use Server-Sent Events, they only push updates when something changes.
@@ -113,7 +113,7 @@ claude mcp add sse --name "linear" --url "https://mcp.linear.app/sse" --scope pr
 Once connected, you can ask Claude things like “Show me open issues in the current sprint” or “Create a bug report for login timeout issues.”
 
 Sentry Integration (Error Monitoring)
-# Add Sentry server  
+# Add Sentry server
 claude mcp add sse --name "sentry" --url "https://mcp.sentry.io/sse" --scope project
 
 # Auth and you're done
@@ -137,7 +137,7 @@ For team projects, create a .mcp.json file in your project root:
       "type": "sse",
       "url": "https://mcp.sentry.io/sse",
       "oauth": {
-        "client_id": "your_sentry_client_id", 
+        "client_id": "your_sentry_client_id",
         "scopes": ["project:read", "event:read"]
       }
     }

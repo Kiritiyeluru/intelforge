@@ -1,6 +1,6 @@
 # Proxy Pool Configuration for IntelForge
 # Format: protocol://ip:port or protocol://username:password@ip:port
-# 
+#
 # Example entries (commented out - add your own proxy providers):
 # http://proxy1.example.com:8080
 # http://user:pass@proxy2.example.com:3128
@@ -8,7 +8,7 @@
 #
 # For production use, consider services like:
 # - Bright Data (formerly Luminati)
-# - ProxyMesh  
+# - ProxyMesh
 # - Smartproxy
 # - Oxylabs
 #

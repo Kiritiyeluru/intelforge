@@ -9,7 +9,7 @@ This directory provides organized project documentation across development phase
 ### 📋 `/active/` - Current Development
 Current project status, tasks, and immediate priorities:
 - **`PROJECT_STATUS.md`** - **AUTHORITATIVE PROJECT STATUS** - READ FIRST
-- `CURRENT_TASK.md` - Active development tasks  
+- `CURRENT_TASK.md` - Active development tasks
 - `NEXT_STEPS.md` - Immediate action items
 - `ROADMAP.md` - Project roadmap
 - `priority_*_*.md` - Current priorities
@@ -40,7 +40,7 @@ Comprehensive structured documentation:
 ## Quick Reference
 
 ### ✅ For Project Status and Current Work
-**READ:** `active/PROJECT_STATUS.md` 
+**READ:** `active/PROJECT_STATUS.md`
 
 ### ✅ For Session-Specific Technical Details
 **CHECK:** `history/SESSION_HANDOVER*.md`

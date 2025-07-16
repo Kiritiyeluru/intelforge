@@ -10,18 +10,18 @@ primary_category: q-fin.RM
 arxiv_id: 1311.3764v1
 url: http://arxiv.org/abs/1311.3764v1
 pdf_url: http://arxiv.org/pdf/1311.3764v1
-doi: 
+doi:
 journal_ref: ""
 content_hash: f5a042be51ccd982
 ---
 
 # Modeling systemic risks in financial markets
 
-**Authors:** Abhijnan Rej  
-**Published:** 2013-11-15  
-**Updated:** 2013-11-15  
-**Primary Category:** q-fin.RM  
-**ArXiv ID:** 1311.3764v1  
+**Authors:** Abhijnan Rej
+**Published:** 2013-11-15
+**Updated:** 2013-11-15
+**Primary Category:** q-fin.RM
+**ArXiv ID:** 1311.3764v1
 
 **Links:**
 - [ArXiv Abstract](http://arxiv.org/abs/1311.3764v1)

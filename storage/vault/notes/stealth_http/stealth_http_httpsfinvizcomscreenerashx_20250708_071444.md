@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:14:44.343781
 
 # Free Stock Screener
 
-**URL:** https://finviz.com/screener.ashx  
-**Final URL:** https://finviz.com/screener.ashx  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 19,423 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:14:44.343781  
+**URL:** https://finviz.com/screener.ashx
+**Final URL:** https://finviz.com/screener.ashx
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 19,423 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:14:44.343781
 
 ## Main Content
 

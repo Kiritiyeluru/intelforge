@@ -17,13 +17,13 @@ timestamp: 2025-07-08T07:15:01.398317
 
 # Live stock, index, futures, Forex and Bitcoin charts on TradingView
 
-**URL:** https://www.tradingview.com/chart/  
-**Final URL:** https://www.tradingview.com/chart/  
-**Status:** detection_warning (HTTP 200)  
-**Bot Detection:** ⚠️ WARNING  
-**Content Length:** 719 characters  
-**Stealth Method:** stealth-requests  
-**Scraped:** 2025-07-08T07:15:01.398317  
+**URL:** https://www.tradingview.com/chart/
+**Final URL:** https://www.tradingview.com/chart/
+**Status:** detection_warning (HTTP 200)
+**Bot Detection:** ⚠️ WARNING
+**Content Length:** 719 characters
+**Stealth Method:** stealth-requests
+**Scraped:** 2025-07-08T07:15:01.398317
 
 ## Main Content
 

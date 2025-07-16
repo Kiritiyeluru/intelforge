@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelForge Mobile Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { background: #2e7d32; color: white; padding: 20px; border-radius: 8px; }
+        .status { margin: 20px 0; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .healthy { border-left: 4px solid #4caf50; }
+        .degraded { border-left: 4px solid #ff9800; }
+        .unhealthy { border-left: 4px solid #f44336; }
+        .metric { display: flex; justify-content: space-between; margin: 10px 0; }
+        .refresh-btn { background: #2e7d32; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .timestamp { color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 IntelForge v1.0.0</h1>
+            <p>Production-Battle-Hardened System Status</p>
+        </div>
+        
+        <div class="status healthy">
+            <h2>✅ Overall Status: HEALTHY</h2>
+            <div class="metric">
+                <span>System Health:</span>
+                <span>31/35 checks passing</span>
+            </div>
+            <div class="metric">
+                <span>Drift Status:</span>
+                <span>0.5% (threshold: 2.0%)</span>
+            </div>
+            <div class="metric">
+                <span>Crawl Success Rate:</span>
+                <span>95.5% (threshold: 90.0%)</span>
+            </div>
+            <div class="metric">
+                <span>PII Status:</span>
+                <span>No PII detected</span>
+            </div>
+            <div class="metric">
+                <span>Storage Health:</span>
+                <span>ChromaDB ✅ Qdrant ✅</span>
+            </div>
+        </div>
+        
+        <div class="status healthy">
+            <h2>🔧 System Components</h2>
+            <div class="metric">
+                <span>Scrapy Integration:</span>
+                <span>✅ Available</span>
+            </div>
+            <div class="metric">
+                <span>ChromaDB Integration:</span>
+                <span>✅ Available</span>
+            </div>
+            <div class="metric">
+                <span>GPU Acceleration:</span>
+                <span>✅ RTX 3060 (cuda:0)</span>
+            </div>
+            <div class="metric">
+                <span>AI Model:</span>
+                <span>✅ all-MiniLM-L6-v2</span>
+            </div>
+            <div class="metric">
+                <span>PII Detection:</span>
+                <span>✅ Presidio</span>
+            </div>
+        </div>
+        
+        <div class="status degraded">
+            <h2>⚠️ System Warnings</h2>
+            <div class="metric">
+                <span>Enhanced modules:</span>
+                <span>Using basic semantic analysis (NumPy 2.3 compatibility)</span>
+            </div>
+            <div class="metric">
+                <span>Freshness tracker:</span>
+                <span>Minor error in overall metrics</span>
+            </div>
+        </div>
+        
+        <div class="status healthy">
+            <h2>📊 Network Access</h2>
+            <div class="metric">
+                <span>Tailscale Status:</span>
+                <span>✅ Active (100.81.114.94)</span>
+            </div>
+            <div class="metric">
+                <span>Mobile Access:</span>
+                <span>✅ Dashboard accessible</span>
+            </div>
+            <div class="metric">
+                <span>Connected Devices:</span>
+                <span>kiritib4 (active), others offline</span>
+            </div>
+        </div>
+        
+        <button class="refresh-btn" onclick="window.location.reload()">🔄 Refresh Status</button>
+        
+        <div class="timestamp">
+            Last updated: 2025-07-16 13:26:23 UTC
+        </div>
+    </div>
+</body>
+</html>

@@ -80,7 +80,7 @@ Still learning 🙂 I hope I get something important from it 👌🏼
 
 **Author:** u/GrandSeperatedTheory
 
-Are all of the backtests just time series analysis-based. With regards to TCA how do you handle commission, slipage, borrow rate, bid ask etc. With regards to risk management and port opt how do handle rebal, optimizers, vol targets. 
+Are all of the backtests just time series analysis-based. With regards to TCA how do you handle commission, slipage, borrow rate, bid ask etc. With regards to risk management and port opt how do handle rebal, optimizers, vol targets.
 
 Does the backtester put more emphasis on the TSA played backed returns or the port stats, like orthogonalization of returns & risk factor loadings.
 

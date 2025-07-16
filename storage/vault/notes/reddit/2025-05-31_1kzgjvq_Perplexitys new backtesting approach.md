@@ -12,7 +12,7 @@ post_id: 1kzgjvq
 
 # Perplexitys new backtesting approach
 
-Perplexity is getting into backtesting. Curious would anyone use this? Feels like tad overfitting but functionality seems good for beginners 
+Perplexity is getting into backtesting. Curious would anyone use this? Feels like tad overfitting but functionality seems good for beginners
 
 [https://www.perplexity.ai/search/recommend-a-momentum-trading-s-SaiYAR5LSKeuUp8ZqlbJKw](https://www.perplexity.ai/search/recommend-a-momentum-trading-s-SaiYAR5LSKeuUp8ZqlbJKw)
 

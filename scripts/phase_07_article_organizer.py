@@ -5,9 +5,10 @@ Automatically categorizes and moves articles from intake folder to organized str
 """
 
 import shutil
-import yaml
 from datetime import datetime
 from pathlib import Path
+
+import yaml
 
 # Configuration
 PROJECT_ROOT = Path(__file__).parent

@@ -1,7 +1,7 @@
 # Architecture Decision Record - Knowledge Management
 
 ## Decision 1: Local-First Vector Database
-**Date:** 2025-07-02  
+**Date:** 2025-07-02
 **Status:** Accepted
 
 ### Context
@@ -22,7 +22,7 @@ Use FAISS for local vector storage with Ollama embeddings.
 - Custom search (rejected: reinventing wheel)
 
 ## Decision 2: Hierarchical + AI Hybrid Approach
-**Date:** 2025-07-02  
+**Date:** 2025-07-02
 **Status:** Accepted
 
 ### Context
@@ -38,7 +38,7 @@ Implement folder-based organization first, then add AI search layer.
 - Fallback if AI system has issues
 
 ## Decision 3: Integration with Existing Phases
-**Date:** 2025-07-02  
+**Date:** 2025-07-02
 **Status:** Accepted
 
 ### Context
