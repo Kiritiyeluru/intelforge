@@ -1,0 +1,71 @@
+{
+  "session_id": "2025-07-12_19-11-56",
+  "test_type": "performance_regression",
+  "start_time": "2025-07-12T19:11:56.640354",
+  "benchmarks": {
+    "scraping_base": {
+      "status": "\u274c ERROR",
+      "error": "Traceback (most recent call last):\n  File \"/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/temp/scraping_base_benchmark_2025-07-12_19-11-56.py\", line 7, in <module>\n    from scripts.scraping_base import ScrapingBase\n  File \"/home/kiriti/alpha_projects/intelforge/scripts/scraping_base.py\", line 31, in <module>\n    from retrying import retry\nModuleNotFoundError: No module named 'retrying'\n",
+      "benchmarks": {}
+    },
+    "reddit_scraper": {
+      "status": "\u274c ERROR",
+      "error": "No module named 'praw'",
+      "benchmarks": {}
+    },
+    "ai_processing": {
+      "status": "\u2705 PASS",
+      "workflow_time": 0.42125558853149414,
+      "benchmarks": {
+        "total_time": {
+          "value": 0.32832765579223633,
+          "baseline": null,
+          "regression_percent": null,
+          "status": "pass"
+        },
+        "document_throughput": {
+          "value": 60.91475892197115,
+          "baseline": null,
+          "regression_percent": null,
+          "status": "pass"
+        },
+        "embedding_throughput": {
+          "value": 97.44654652073203,
+          "baseline": null,
+          "regression_percent": null,
+          "status": "pass"
+        },
+        "search_throughput": {
+          "value": 443.8839677852917,
+          "baseline": null,
+          "regression_percent": null,
+          "status": "pass"
+        },
+        "memory_usage_mb": {
+          "value": 0.125,
+          "baseline": null,
+          "regression_percent": null,
+          "status": "pass"
+        }
+      },
+      "raw_data": {
+        "total_time": 0.32832765579223633,
+        "extraction_time": 0.00017189979553222656,
+        "embedding_time": 0.20524072647094727,
+        "database_time": 0.10013794898986816,
+        "search_time": 0.022528409957885742,
+        "memory_usage_mb": 0.125,
+        "documents_processed": 20,
+        "embeddings_generated": 20,
+        "searches_performed": 10,
+        "document_throughput": 60.91475892197115,
+        "embedding_throughput": 97.44654652073203,
+        "search_throughput": 443.8839677852917
+      }
+    }
+  },
+  "regressions": [],
+  "improvements": [],
+  "status": "completed",
+  "end_time": "2025-07-12T19:11:57.300986"
+}

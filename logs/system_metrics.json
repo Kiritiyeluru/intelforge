@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-07-17T20:17:35.818318",
+    "cpu_usage": 6.2,
+    "memory_usage": 35.4,
+    "disk_usage": 68.36441976906946,
+    "active_crawls": 0,
+    "queue_size": 0
+  }
+]

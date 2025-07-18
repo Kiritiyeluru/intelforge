@@ -1,0 +1,93 @@
+repos:
+  - repo: local
+    hooks:
+      # Security scanning with gitleaks
+      - id: gitleaks
+        name: gitleaks
+        entry: gitleaks
+        args: ['detect', '--source', '.']
+        language: system
+        pass_filenames: false
+
+      # Fast secret pattern scanning with ripgrep
+      - id: ripgrep-secrets
+        name: ripgrep-secrets
+        entry: rg
+        args: ['--quiet', 'secret|password|token|api_key|private_key', '.']
+        language: system
+        pass_filenames: false
+
+      # Code formatting with black
+      - id: black
+        name: black
+        entry: black
+        language: system
+        types: [python]
+
+      # Import sorting with isort
+      - id: isort
+        name: isort
+        entry: isort
+        language: system
+        types: [python]
+
+      # Security analysis with semgrep
+      - id: semgrep
+        name: semgrep
+        entry: semgrep
+        args: ['--config', 'p/security-audit', '--error', '--quiet']
+        language: system
+        types: [python]
+
+      # Fast linting with ruff
+      - id: ruff
+        name: ruff
+        entry: ruff
+        args: ['check', '--fix']
+        language: system
+        types: [python]
+
+      # Type checking with mypy
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      # Fast Python tests on changed files
+      - id: pytest-fast
+        name: pytest-fast
+        entry: pytest
+        args: ['-x', '--tb=short', '-q']
+        language: system
+        types: [python]
+        pass_filenames: false
+
+  # External hooks for additional checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+
+  # Rust formatting and linting
+  - repo: local
+    hooks:
+      - id: rustfmt
+        name: rustfmt
+        entry: rustfmt
+        language: system
+        files: \.rs$
+
+      - id: clippy
+        name: clippy
+        entry: cargo
+        args: ['clippy', '--', '-D', 'warnings']
+        language: system
+        files: \.rs$
+        pass_filenames: false

@@ -1,0 +1,28 @@
+[
+  {
+    "operation_id": "91edbe99",
+    "operation_type": "page_load",
+    "target_url": "https://httpbin.org/user-agent",
+    "start_time": 1752382438.2280777,
+    "start_timestamp": "2025-07-13T10:23:58.228078",
+    "status": "completed",
+    "end_time": 1752382475.4437542,
+    "end_timestamp": "2025-07-13T10:24:35.443756",
+    "ttr_seconds": 37.2156765460968,
+    "success": false,
+    "error": "Page validation failed: Failed checks: title_present, content_size, httpbin_elements"
+  },
+  {
+    "operation_id": "92c4ce28",
+    "operation_type": "page_load",
+    "target_url": "https://example.com",
+    "start_time": 1752382475.4439218,
+    "start_timestamp": "2025-07-13T10:24:35.443922",
+    "status": "completed",
+    "end_time": 1752382478.6141417,
+    "end_timestamp": "2025-07-13T10:24:38.614144",
+    "ttr_seconds": 3.170219898223877,
+    "success": true,
+    "error": null
+  }
+]

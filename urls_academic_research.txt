@@ -1,0 +1,5 @@
+https://arxiv.org/rss/q-fin
+https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm?txtCriteria=algorithmic+trading
+https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm?txtCriteria=quantitative+finance
+https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm?txtCriteria=backtesting
+https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm?txtCriteria=machine+learning+trading

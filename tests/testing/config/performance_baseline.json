@@ -1,0 +1,16 @@
+{
+  "ai_processing": {
+    "total_time": 0.32832765579223633,
+    "extraction_time": 0.00017189979553222656,
+    "embedding_time": 0.20524072647094727,
+    "database_time": 0.10013794898986816,
+    "search_time": 0.022528409957885742,
+    "memory_usage_mb": 0.125,
+    "documents_processed": 20,
+    "embeddings_generated": 20,
+    "searches_performed": 10,
+    "document_throughput": 60.91475892197115,
+    "embedding_throughput": 97.44654652073203,
+    "search_throughput": 443.8839677852917
+  }
+}

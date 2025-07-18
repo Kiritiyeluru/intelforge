@@ -1,0 +1,60 @@
+{
+  "timestamp": "2025-07-13T08:50:02.051239",
+  "duration_seconds": 4.124915,
+  "overall_success_rate": 80.0,
+  "overall_status": "\u2705 READY",
+  "categories_tested": 5,
+  "categories_successful": 4,
+  "detailed_results": {
+    "enhanced_core_libraries": {
+      "available": [
+        "tenacity",
+        "deepdiff",
+        "datacompy",
+        "invoke"
+      ],
+      "failed": [],
+      "total": 4,
+      "success_rate": 100.0
+    },
+    "docker_services": {
+      "available": [
+        "browserless",
+        "flaresolverr"
+      ],
+      "failed": [],
+      "total": 2,
+      "success_rate": 100.0
+    },
+    "anti-detection_stack": {
+      "available": [
+        "botasaurus_driver",
+        "selenium_stealth"
+      ],
+      "failed": [
+        {
+          "name": "scrapy_rotating_proxies",
+          "error": "No module named 'scrapy.downloadermiddlewares.rotating_proxies'"
+        }
+      ],
+      "total": 3,
+      "success_rate": 66.66666666666666
+    },
+    "observability_stack": {
+      "available": [
+        "rich",
+        "loguru",
+        "structlog",
+        "prometheus"
+      ],
+      "failed": [],
+      "total": 4,
+      "success_rate": 100.0
+    },
+    "enhanced_validation": {
+      "status": "success",
+      "message": "Advanced comparison tools working"
+    }
+  },
+  "prometheus_metrics": "# HELP infrastructure_tests_total Total infrastructure tests\n# TYPE infrastructure_tests_total counter\ninfrastructure_tests_total 4.0\n# HELP infrastructure_tests_created Total infrastructure tests\n# TYPE infrastructure_tests_created gauge\ninfrastructure_tests_created 1.752376797926365e+09\n# HELP infrastructure_test_duration_seconds Test duration\n# TYPE infrastructure_test_duration_seconds histogram\ninfrastructure_test_duration_seconds_bucket{le=\"0.005\"} 1.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.01\"} 3.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.025\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.05\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.075\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.1\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.25\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.5\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"0.75\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"1.0\"} 4.0\ninfrastructure_test_duration_seconds_bucket{le=\"2.5\"} 5.0\ninfrastructure_test_duration_seconds_bucket{le=\"5.0\"} 5.0\ninfrastructure_test_duration_seconds_bucket{le=\"7.5\"} 5.0\ninfrastructure_test_duration_seconds_bucket{le=\"10.0\"} 5.0\ninfrastructure_test_duration_seconds_bucket{le=\"+Inf\"} 5.0\ninfrastructure_test_duration_seconds_count 5.0\ninfrastructure_test_duration_seconds_sum 1.5582675210007437\n# HELP infrastructure_test_duration_seconds_created Test duration\n# TYPE infrastructure_test_duration_seconds_created gauge\ninfrastructure_test_duration_seconds_created 1.752376797926403e+09\n"
+}

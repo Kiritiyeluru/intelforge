@@ -1,0 +1,62 @@
+# IntelForge Crawler Schedule - Automated Crawling Cron Jobs
+# Phase 5.2: Cron Integration and Automation
+#
+# This file contains cron job definitions for automated semantic crawling
+# based on source priorities defined in the source registry.
+#
+# To install these cron jobs, run:
+#   crontab /home/kiriti/alpha_projects/intelforge/cron/crawler_schedule.cron
+#
+# Or use the justfile command:
+#   just setup-crawling-schedule
+
+# Set environment variables for cron jobs
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+MAILTO=""
+
+# Set the project directory
+PROJECT_DIR=/home/kiriti/alpha_projects/intelforge
+
+# Activate virtual environment and run crawler scheduler
+# Format: minute hour day month day_of_week command
+
+# Daily crawling - High priority sources (RSS feeds)
+# Run every day at 6:00 AM
+0 6 * * * cd $PROJECT_DIR && source venv/bin/activate && python scripts/crawler_scheduler.py --priority daily --max-sources 5 >> logs/crawler_daily.log 2>&1
+
+# Weekly crawling - Medium priority sources (Technical blogs, GitHub)
+# Run every Monday at 7:00 AM
+0 7 * * 1 cd $PROJECT_DIR && source venv/bin/activate && python scripts/crawler_scheduler.py --priority weekly --max-sources 8 >> logs/crawler_weekly.log 2>&1
+
+# Monthly crawling - Low priority sources (Academic papers)
+# Run on the 1st of each month at 8:00 AM
+0 8 1 * * cd $PROJECT_DIR && source venv/bin/activate && python scripts/crawler_scheduler.py --priority monthly --max-sources 10 >> logs/crawler_monthly.log 2>&1
+
+# Health check - Run every 4 hours to ensure system is operational
+# Check system health and log status
+0 */4 * * * cd $PROJECT_DIR && source venv/bin/activate && python scripts/semantic_crawler.py --health-check >> logs/health_check.log 2>&1
+
+# Cleanup old logs - Run weekly on Sunday at 2:00 AM
+# Keep only last 30 days of logs
+0 2 * * 0 find $PROJECT_DIR/logs -name "*.log" -mtime +30 -delete
+
+# Backup metadata - Run daily at 11:00 PM
+# Backup crawl metadata and schedule data
+0 23 * * * cd $PROJECT_DIR && tar -czf backups/metadata_backup_$(date +\%Y\%m\%d).tar.gz metadata/ >> logs/backup.log 2>&1
+
+# Monitor disk usage - Run daily at 5:00 AM
+# Alert if disk usage exceeds 80%
+0 5 * * * df -h $PROJECT_DIR | awk 'NR==2 {if(int($5) > 80) print "Warning: Disk usage is " $5 " at " $6}' >> logs/disk_usage.log 2>&1
+
+# Example cron job comments for different schedules:
+#
+# Every 15 minutes: */15 * * * *
+# Every hour: 0 * * * *
+# Every 6 hours: 0 */6 * * *
+# Every day at midnight: 0 0 * * *
+# Every Sunday at 2 AM: 0 2 * * 0
+# Every 1st of month: 0 0 1 * *
+# Every weekday at 9 AM: 0 9 * * 1-5
+#
+# Cron format: minute(0-59) hour(0-23) day(1-31) month(1-12) day_of_week(0-7)

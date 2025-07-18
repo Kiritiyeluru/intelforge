@@ -1,0 +1,128 @@
+{
+  "cli_configurations": {
+    "basic_config": {
+      "storage_type": "chromadb",
+      "collection_name": "intelforge_default",
+      "embedding_model": "all-MiniLM-L6-v2",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "max_concurrent_requests": 3
+    },
+    "advanced_config": {
+      "storage_type": "qdrant",
+      "collection_name": "intelforge_advanced",
+      "embedding_model": "all-mpnet-base-v2",
+      "chunk_size": 1024,
+      "chunk_overlap": 100,
+      "max_concurrent_requests": 5,
+      "security": {
+        "enable_output_sanitization": true,
+        "graceful_shutdown": true,
+        "performance_monitoring": true
+      }
+    },
+    "research_config": {
+      "storage_type": "chromadb",
+      "collection_name": "academic_research",
+      "embedding_model": "all-MiniLM-L6-v2",
+      "chunk_size": 768,
+      "chunk_overlap": 75,
+      "filters": {
+        "domains": ["arxiv.org", "scholar.google.com", "pubmed.ncbi.nlm.nih.gov"],
+        "content_types": ["research_paper", "academic_article", "conference_paper"]
+      }
+    }
+  },
+  "migration_scenarios": [
+    {
+      "name": "chromadb_to_qdrant",
+      "source": "chromadb",
+      "target": "qdrant",
+      "collection_mapping": {
+        "intelforge_default": "intelforge_migrated",
+        "academic_research": "research_qdrant"
+      },
+      "expected_document_count": 150,
+      "validation_checks": ["embedding_consistency", "metadata_preservation", "query_compatibility"]
+    },
+    {
+      "name": "config_upgrade_v1_to_v2",
+      "config_version": "1.0",
+      "target_version": "2.0",
+      "changes": [
+        "add_security_options",
+        "update_embedding_model",
+        "migrate_chunk_settings",
+        "add_performance_monitoring"
+      ],
+      "backward_compatibility": true
+    }
+  ],
+  "workflow_templates": {
+    "developer_onboarding": [
+      "intelforge status --detailed",
+      "intelforge validate --quick",
+      "intelforge docs --generate-config",
+      "intelforge crawl --url https://example.com --test-mode",
+      "intelforge status --json"
+    ],
+    "config_management": [
+      "intelforge docs --backup-config",
+      "intelforge migrate --source chromadb --target qdrant --dry-run",
+      "intelforge validate --config-check",
+      "intelforge migrate --source chromadb --target qdrant --execute",
+      "intelforge status --drift"
+    ],
+    "development_cycle": [
+      "intelforge validate --fail-fast",
+      "intelforge crawl --batch-urls tests/fixtures/academic_urls/sample_urls.txt",
+      "intelforge status --performance",
+      "intelforge docs --snapshot-create",
+      "intelforge validate --semantic-drift"
+    ]
+  },
+  "cli_generation_templates": {
+    "research_command": {
+      "template": "intelforge crawl --batch-file {batch_file} --collection {collection} --filter-domain {domain}",
+      "parameters": {
+        "batch_file": "tests/fixtures/academic_urls/research_batch.txt",
+        "collection": "academic_research",
+        "domain": "arxiv.org"
+      }
+    },
+    "finance_command": {
+      "template": "intelforge crawl --url {url} --anti-detection --user-agent {user_agent} --delay {delay}",
+      "parameters": {
+        "url": "https://finviz.com/quote.ashx?t=AAPL",
+        "user_agent": "random",
+        "delay": "2-5"
+      }
+    },
+    "migration_command": {
+      "template": "intelforge migrate --source {source} --target {target} --collection-map {mapping}",
+      "parameters": {
+        "source": "chromadb",
+        "target": "qdrant",
+        "mapping": "intelforge_default:migrated_collection"
+      }
+    }
+  },
+  "snapshot_reload_workflows": {
+    "create_snapshot": {
+      "commands": [
+        "intelforge docs --snapshot-create --name dev_checkpoint_1",
+        "intelforge status --json > snapshot_status.json",
+        "intelforge validate --config-export > snapshot_config.json"
+      ],
+      "expected_artifacts": ["snapshot_dev_checkpoint_1.json", "snapshot_status.json", "snapshot_config.json"]
+    },
+    "reload_snapshot": {
+      "commands": [
+        "intelforge docs --snapshot-load --name dev_checkpoint_1",
+        "intelforge validate --config-import snapshot_config.json",
+        "intelforge status --compare-snapshot"
+      ],
+      "validation_checks": ["config_consistency", "collection_integrity", "performance_baseline"]
+    }
+  }
+}

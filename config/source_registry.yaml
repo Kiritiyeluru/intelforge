@@ -1,0 +1,229 @@
+# IntelForge Source Registry Configuration
+# YAML-based configuration system for scalable source management
+
+# RSS Feeds - High-quality algorithmic trading sources
+rss_feeds:
+  - name: "QuantStart"
+    url: "https://www.quantstart.com/articles/"
+    priority: "daily"
+    threshold: 0.8
+    complexity: "medium"
+    quality: "premium"
+    description: "Comprehensive algorithmic trading strategies and backtesting tutorials"
+    content_requirements:
+      must_have:
+        - "entry/exit rule logic"
+        - "explicit parameter values"
+        - "backtest results"
+      optional:
+        - "strategy name"
+        - "risk management description"
+        - "performance metrics"
+    tags: ["backtesting", "python", "strategies", "quantitative"]
+
+  - name: "RobotWealth"
+    url: "https://robotwealth.com/articles/"
+    priority: "daily"
+    threshold: 0.75
+    complexity: "medium"
+    quality: "premium"
+    description: "Professional trading strategies and market analysis"
+    content_requirements:
+      must_have:
+        - "strategy logic"
+        - "implementation details"
+      optional:
+        - "backtesting results"
+        - "risk metrics"
+    tags: ["strategies", "systematic", "portfolio", "risk"]
+
+  - name: "QuantInsti Blog"
+    url: "https://blog.quantinsti.com/feed/"
+    priority: "daily"
+    threshold: 0.7
+    complexity: "low"
+    quality: "good"
+    description: "Educational content on algorithmic trading and quantitative finance"
+    content_requirements:
+      must_have:
+        - "trading concepts"
+        - "practical examples"
+      optional:
+        - "code snippets"
+        - "strategy implementation"
+    tags: ["education", "algorithms", "finance", "tutorials"]
+
+# Technical Blogs - High-quality trading and quant content
+technical_blogs:
+  - name: "Quantpedia Strategies"
+    url: "https://quantpedia.com/strategies/"
+    priority: "weekly"
+    threshold: 0.8
+    complexity: "high"
+    quality: "premium"
+    description: "Academic-backed trading strategies with research references"
+    content_requirements:
+      must_have:
+        - "strategy description"
+        - "academic references"
+        - "implementation logic"
+      optional:
+        - "backtesting results"
+        - "risk analysis"
+    tags: ["academic", "research", "strategies", "quantitative"]
+
+  - name: "PyQuantNews"
+    url: "https://www.pyquantnews.com/"
+    priority: "weekly"
+    threshold: 0.7
+    complexity: "medium"
+    quality: "good"
+    description: "Python-focused quantitative finance news and tutorials"
+    content_requirements:
+      must_have:
+        - "python code"
+        - "financial concepts"
+      optional:
+        - "data analysis"
+        - "visualization"
+    tags: ["python", "news", "tutorials", "data"]
+
+# GitHub Repositories - Code-heavy sources
+github_sources:
+  - name: "Backtrader Examples"
+    url: "https://github.com/mementum/backtrader/tree/master/samples"
+    priority: "weekly"
+    threshold: 0.8
+    complexity: "high"
+    quality: "premium"
+    description: "Comprehensive backtesting framework examples and strategies"
+    content_requirements:
+      must_have:
+        - "complete strategy code"
+        - "backtesting setup"
+        - "parameter definitions"
+      optional:
+        - "documentation"
+        - "performance metrics"
+    tags: ["backtrader", "python", "examples", "strategies"]
+
+  - name: "Freqtrade Strategies"
+    url: "https://github.com/freqtrade/freqtrade-strategies"
+    priority: "weekly"
+    threshold: 0.75
+    complexity: "high"
+    quality: "premium"
+    description: "Community-contributed trading strategies for Freqtrade"
+    content_requirements:
+      must_have:
+        - "strategy class implementation"
+        - "indicator usage"
+        - "buy/sell logic"
+      optional:
+        - "backtesting results"
+        - "optimization parameters"
+    tags: ["freqtrade", "crypto", "strategies", "community"]
+
+  - name: "Backtesting.py Examples"
+    url: "https://github.com/kernc/backtesting.py/tree/master/examples"
+    priority: "monthly"
+    threshold: 0.7
+    complexity: "medium"
+    quality: "good"
+    description: "Simple backtesting framework examples and demonstrations"
+    content_requirements:
+      must_have:
+        - "strategy implementation"
+        - "backtesting code"
+      optional:
+        - "performance analysis"
+        - "optimization examples"
+    tags: ["backtesting", "python", "examples", "simple"]
+
+# Academic Sources - Research papers and academic content
+academic_sources:
+  - name: "arXiv Quantitative Finance"
+    url: "https://arxiv.org/rss/q-fin"
+    priority: "monthly"
+    threshold: 0.85
+    complexity: "high"
+    quality: "premium"
+    description: "Academic research papers on quantitative finance and algorithmic trading"
+    content_requirements:
+      must_have:
+        - "mathematical models"
+        - "empirical results"
+        - "methodology description"
+      optional:
+        - "implementation details"
+        - "code availability"
+    tags: ["academic", "research", "papers", "mathematical"]
+
+  - name: "SSRN Algorithmic Trading"
+    url: "https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm?txtCriteria=algorithmic+trading"
+    priority: "monthly"
+    threshold: 0.8
+    complexity: "high"
+    quality: "premium"
+    description: "Social Science Research Network papers on algorithmic trading"
+    content_requirements:
+      must_have:
+        - "research methodology"
+        - "empirical analysis"
+        - "conclusions"
+      optional:
+        - "data sources"
+        - "implementation notes"
+    tags: ["academic", "research", "ssrn", "empirical"]
+
+# Content Type Definitions
+content_types:
+  article:
+    description: "Blog posts, articles, and written content"
+    min_word_count: 200
+    max_word_count: 10000
+
+  codeblock:
+    description: "Code repositories, examples, and implementations"
+    min_word_count: 50
+    max_word_count: 5000
+
+  tutorial:
+    description: "Step-by-step guides and educational content"
+    min_word_count: 300
+    max_word_count: 8000
+
+  research:
+    description: "Academic papers and research documents"
+    min_word_count: 500
+    max_word_count: 20000
+
+# Global Configuration
+global_settings:
+  default_threshold: 0.75
+  default_rate_limit: 3
+  default_timeout: 10
+  default_max_retries: 2
+  default_backoff_factor: 2
+
+  # Quality scoring weights
+  quality_weights:
+    has_entry_rules: 0.15
+    has_exit_rules: 0.15
+    has_parameters: 0.10
+    parameters_valid: 0.15
+    contains_backtest: 0.20
+    has_specific_indicators: 0.10
+    has_risk_management: 0.15
+
+  # Content filtering defaults
+  content_filtering:
+    enable_keyword_filtering: true
+    enable_word_count_filtering: true
+    enable_content_type_filtering: true
+    enable_similarity_threshold: true
+
+  # Default keywords for inclusion/exclusion
+  default_keywords:
+    include: ["backtest", "strategy", "signal", "RSI", "EMA", "MACD", "trading", "algorithm"]
+    exclude: ["opinion", "news", "breaking", "market update", "daily brief"]

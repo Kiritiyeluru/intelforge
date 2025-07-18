@@ -1,0 +1,90 @@
+{
+  "embedding_stability_report": {
+    "timestamp": "2025-07-15T08:38:12.186114",
+    "model_name": "all-MiniLM-L6-v2",
+    "model_available": true,
+    "expected_dimension": 384,
+    "summary": {
+      "total_tests": 4,
+      "passed_tests": 4,
+      "success_rate": 1.0
+    },
+    "test_results": [
+      {
+        "test_name": "dimensional_consistency",
+        "input_text": "7 test texts",
+        "embedding_hash": "multiple",
+        "dimension": 384,
+        "magnitude": 0.0,
+        "consistency_score": 1.0,
+        "passed": true,
+        "details": {
+          "test_texts_count": 7,
+          "dimensions_found": [
+            384
+          ],
+          "expected_dimension": 384
+        }
+      },
+      {
+        "test_name": "reproducibility",
+        "input_text": "This is a test for embedding reproducibility and deterministic behavior.",
+        "embedding_hash": "89a57f09aab2c09a",
+        "dimension": 384,
+        "magnitude": 1.0,
+        "consistency_score": 1.0,
+        "passed": true,
+        "details": {
+          "num_runs": 5,
+          "unique_hashes": 1,
+          "min_similarity": 1.0,
+          "all_similarities": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "test_name": "magnitude_stability",
+        "input_text": "2 groups tested",
+        "embedding_hash": "multiple",
+        "dimension": 384,
+        "magnitude": 1.0,
+        "consistency_score": 1.0,
+        "passed": true,
+        "details": {
+          "max_magnitude_ratio": 1.0,
+          "mean_magnitude_ratio": 1.0,
+          "all_ratios": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "groups_tested": 2
+        }
+      },
+      {
+        "test_name": "semantic_stability",
+        "input_text": "4 similar + 4 different pairs",
+        "embedding_hash": "multiple",
+        "dimension": 384,
+        "magnitude": 0.7941225171089172,
+        "consistency_score": 17.09313201904297,
+        "passed": true,
+        "details": {
+          "min_similar_similarity": 0.6758990287780762,
+          "max_different_similarity": 0.03954214230179787,
+          "mean_similar_similarity": 0.7946852445602417,
+          "mean_different_similarity": 0.0005627241916954517,
+          "semantic_separation": true,
+          "reasonable_similarity": true
+        }
+      }
+    ]
+  }
+}

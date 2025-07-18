@@ -1,0 +1,31 @@
+[
+  {
+    "url": "https://www.quantstart.com/articles/",
+    "title": "Articles | QuantStart",
+    "score": 0.614,
+    "extracted": true,
+    "parameters": [],
+    "backtest_result": true,
+    "word_count": 2232,
+    "content_type": "codeblock",
+    "crawl_timestamp": "2025-07-17T19:22:00Z",
+    "language": "en",
+    "language_confidence": 0.9999962294586657,
+    "filter_results": {
+      "keyword_filter": true,
+      "word_count_filter": true,
+      "content_type_filter": true,
+      "similarity_threshold": true
+    },
+    "validation_status": {
+      "has_entry_rules": true,
+      "has_exit_rules": false,
+      "has_parameters": true,
+      "parameters_valid": false,
+      "contains_backtest": true,
+      "has_specific_indicators": true,
+      "has_risk_management": true,
+      "quality_score": 0.71
+    }
+  }
+]

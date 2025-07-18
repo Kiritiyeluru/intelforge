@@ -1,0 +1,2 @@
+Date,Time,Chrome_Version,Botasaurus_Version,Target,Stealth_Pass_Percent,Avg_TTR,Budget_Exceeded_Count,Success_Rate,Detection_Rate,Notes
+2025-07-13,13:39:39,137.0.7151.119,unknown,finviz,85.5%,12.3,0,95.0%,0.0%,Test run after session completion

@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-07-06T11:22:23.422781",
+  "html_parsing": {
+    "selectolax": {
+      "time": 0.01715714799865964,
+      "success": true,
+      "result": {
+        "title": "Performance Test Page",
+        "paragraphs": 1500,
+        "links": 1500,
+        "table_rows": 2000
+      },
+      "error": null
+    },
+    "bs4": {
+      "time": 0,
+      "success": false,
+      "result": null,
+      "error": "BeautifulSoup not available"
+    }
+  },
+  "http_requests": {
+    "httpx": {
+      "time": 1.20220479800264,
+      "success": true,
+      "result": [
+        {
+          "url": "https://httpbin.org/json",
+          "status": 200,
+          "size": 429
+        },
+        {
+          "url": "https://httpbin.org/html",
+          "status": 200,
+          "size": 3741
+        }
+      ],
+      "error": null
+    },
+    "requests": {
+      "time": 2.0873126389997196,
+      "success": true,
+      "result": [
+        {
+          "url": "https://httpbin.org/json",
+          "status": 200,
+          "size": 429
+        },
+        {
+          "url": "https://httpbin.org/html",
+          "status": 200,
+          "size": 3741
+        }
+      ],
+      "error": null
+    }
+  }
+}

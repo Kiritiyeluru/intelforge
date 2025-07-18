@@ -1,0 +1,33 @@
+# Article Categorization Config
+
+categories:
+  claude_mcp:
+    keywords: ["claude", "mcp", "model context protocol", "anthropic", "claude code"]
+    description: "Claude development, MCP servers, Claude Code workflows"
+
+  web_scraping:
+    keywords: ["scraping", "crawling", "scraperr", "pydoll", "beautiful soup", "selenium"]
+    description: "Web scraping tools, techniques, and libraries"
+
+  ai_workflows:
+    keywords: ["ai agent", "langraph", "workflow", "prompt", "llm", "gpt"]
+    description: "AI development workflows, agents, and prompt engineering"
+
+  productivity:
+    keywords: ["productivity", "tools", "ubuntu", "cli", "development", "tips"]
+    description: "Development tools, productivity tips, and system optimization"
+
+  archived:
+    keywords: []
+    description: "Older or less relevant articles"
+
+# Auto-categorization rules
+rules:
+  - if_title_contains: ["MCP", "Claude"]
+    assign_to: "claude_mcp"
+  - if_content_contains: ["scraping", "crawling"]
+    assign_to: "web_scraping"
+  - if_title_contains: ["AI", "Agent", "LLM"]
+    assign_to: "ai_workflows"
+  - if_title_contains: ["Tips", "Tools", "Productivity"]
+    assign_to: "productivity"

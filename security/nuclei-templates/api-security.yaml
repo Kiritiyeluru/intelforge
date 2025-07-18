@@ -1,0 +1,111 @@
+id: api-security-scan
+
+info:
+  name: API Security Scan
+  author: IntelForge
+  severity: medium
+  description: API endpoint security testing for IntelForge services
+  classification:
+    cwe-id: CWE-287
+  metadata:
+    verified: true
+    max-request: 5
+  tags: security,api,intelforge
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api"
+      - "{{BaseURL}}/api/v1"
+      - "{{BaseURL}}/api/v2"
+      - "{{BaseURL}}/graphql"
+      - "{{BaseURL}}/webhook"
+      - "{{BaseURL}}/callback"
+
+    headers:
+      User-Agent: "IntelForge-API-Scanner/1.0"
+      Accept: "application/json"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 400
+          - 401
+          - 403
+          - 404
+          - 405
+          - 500
+
+      - type: word
+        words:
+          - "api"
+          - "graphql"
+          - "json"
+          - "xml"
+          - "rest"
+          - "endpoint"
+          - "unauthorized"
+          - "forbidden"
+          - "authentication"
+          - "authorization"
+        condition: or
+        part: body
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/auth"
+      - "{{BaseURL}}/api/login"
+      - "{{BaseURL}}/api/register"
+      - "{{BaseURL}}/api/reset"
+      - "{{BaseURL}}/api/refresh"
+
+    headers:
+      User-Agent: "IntelForge-API-Scanner/1.0"
+      Content-Type: "application/json"
+
+    body: |
+      {
+        "username": "admin",
+        "password": "admin",
+        "email": "test@example.com"
+      }
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 400
+          - 401
+          - 422
+          - 500
+
+      - type: word
+        words:
+          - "token"
+          - "jwt"
+          - "auth"
+          - "session"
+          - "cookie"
+          - "error"
+          - "invalid"
+          - "expired"
+        condition: or
+        part: body
+
+    extractors:
+      - type: regex
+        name: auth_tokens
+        regex:
+          - '(?i)(token|jwt|bearer)[\s]*[:=][\s]*["\']?([a-zA-Z0-9_.-]+)["\']?'
+          - '(?i)(session|sid)[\s]*[:=][\s]*["\']?([a-zA-Z0-9_.-]+)["\']?'
+        part: body
+
+      - type: regex
+        name: error_messages
+        regex:
+          - '(?i)(error|exception)[\s]*[:=][\s]*["\']?([^"\']+)["\']?'
+          - '(?i)(message|msg)[\s]*[:=][\s]*["\']?([^"\']+)["\']?'
+        part: body

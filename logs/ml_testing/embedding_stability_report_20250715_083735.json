@@ -1,0 +1,36 @@
+{
+  "embedding_stability_report": {
+    "timestamp": "2025-07-15T08:37:35.558493",
+    "model_name": "all-MiniLM-L6-v2",
+    "model_available": true,
+    "expected_dimension": 384,
+    "summary": {
+      "total_tests": 4,
+      "passed_tests": 4,
+      "success_rate": 1.0
+    },
+    "test_results": [
+      {
+        "test_name": "dimensional_consistency",
+        "input_text": "7 test texts",
+        "embedding_hash": "multiple",
+        "dimension": 384,
+        "magnitude": 0.0,
+        "consistency_score": 1.0,
+        "passed": true,
+        "details": {
+          "test_texts_count": 7,
+          "dimensions_found": [
+            384
+          ],
+          "expected_dimension": 384
+        }
+      },
+      {
+        "test_name": "reproducibility",
+        "input_text": "This is a test for embedding reproducibility and deterministic behavior.",
+        "embedding_hash": "89a57f09aab2c09a",
+        "dimension": 384,
+        "magnitude": 1.0,
+        "consistency_score": 1.0,
+        "passed":

@@ -1,0 +1,101 @@
+# 📦 config.yaml
+# Centralized configuration file for IntelForge
+
+# Reddit scraping configuration (Phase 1)
+reddit:
+  # Reddit API credentials - get from https://www.reddit.com/prefs/apps
+  client_id: ""  # Add your Reddit app client ID
+  client_secret: ""  # Add your Reddit app client secret
+  user_agent: "IntelForge/1.0 (Algorithmic Trading Research Bot)"
+
+  # Target subreddits for content extraction
+  subreddits:
+    - "algotrading"
+    - "SecurityAnalysis"
+    - "investing"
+    - "quantfinance"
+
+  # Rate limiting and extraction settings
+  rate_limit_delay: 2  # Seconds between API calls
+  max_posts_per_subreddit: 50  # Limit for initial testing
+  max_comments_per_post: 10  # Comments to extract per post
+
+  # Content filtering
+  min_post_score: 5  # Minimum upvotes to consider
+  min_comment_score: 2  # Minimum comment upvotes
+  keywords:  # Posts containing these keywords get priority
+    - "strategy"
+    - "backtest"
+    - "algorithm"
+    - "bot"
+    - "trading"
+    - "indicator"
+
+# GitHub repository mining (Phase 2)
+github:
+  query: "bollinger band strategy language:python"
+  max_results: 10
+  use_readme_summary: true
+  save_markdown: true
+  access_token: ""  # GitHub Personal Access Token
+  rate_limit_delay: 1
+  search_queries:
+    - "algorithmic trading"
+    - "quantitative finance"
+    - "trading bot"
+    - "backtesting"
+
+# Web scraping configuration (Phase 3)
+web:
+  target_sites:
+    - "medium.com"
+    - "dev.to"
+    - "towardsdatascience.com"
+    - "quantstart.com"
+  rate_limit_delay: 3  # Seconds between requests
+  max_pages_per_site: 20
+  keywords:
+    - "algorithmic trading"
+    - "quantitative finance"
+    - "trading strategy"
+    - "backtesting"
+    - "technical analysis"
+    - "machine learning trading"
+
+# AI summarization services (Phase 5)
+ai:
+  openai:
+    api_key: ""
+    model: "gpt-4"
+    max_tokens: 2000
+  claude:
+    api_key: ""
+    model: "claude-3-sonnet"
+
+# Paths configuration
+paths:
+  output_dir: "vault/notes/"
+  reddit_notes: "vault/notes/reddit/"
+  github_notes: "vault/notes/github/"
+  web_notes: "vault/notes/web/"
+  log_file: "vault/logs/"
+
+# Global options
+options:
+  dry_run: false      # If true, fetch but don't write files
+  log_errors: true    # Save failed queries or exceptions to log
+  include_metadata: true  # Add stars, description, etc. to markdown
+  verbose_logging: true
+  max_file_size_mb: 10
+
+# API keys (populated from .env file)
+api_keys:
+  github_token: "${GITHUB_TOKEN}"
+  reddit_client_id: ""
+  reddit_client_secret: ""
+
+# Project metadata
+metadata:
+  project: "IntelForge"
+  version: "1.0"
+  current_phase: "Phase 1 - Reddit Scraping"

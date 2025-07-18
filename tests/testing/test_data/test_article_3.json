@@ -1,0 +1,11 @@
+{
+  "title": "Market Microstructure and High-Frequency Trading",
+  "content": "An in-depth examination of market microstructure effects on high-frequency trading strategies. The analysis covers order book dynamics, latency arbitrage, and market making algorithms. Results indicate that co-location strategies provide significant advantages, with latency reductions of 10 microseconds improving profitability by 15% in equity markets.",
+  "source": "https://example.com/hft-analysis",
+  "tags": [
+    "hft",
+    "microstructure",
+    "equity"
+  ],
+  "date": "2025-07-08"
+}

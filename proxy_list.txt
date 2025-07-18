@@ -1,0 +1,14 @@
+# Proxy List for IntelForge Scrapy Integration
+# Format: protocol://username:password@host:port
+# Example: http://user:pass@proxy.example.com:8080
+#
+# Free proxy services (add your own):
+# http://free-proxy-service.com:8080
+# https://another-proxy.com:3128
+#
+# Commercial proxy services (configure as needed):
+# For ScraperAPI: http://scraperapi:YOUR_API_KEY@proxy-server.scraperapi.com:8001
+# For Zyte: http://username:password@proxy.zyte.com:8011
+# For SmartProxy: http://user:pass@gate.smartproxy.com:10000
+#
+# Add your proxy servers below (one per line):

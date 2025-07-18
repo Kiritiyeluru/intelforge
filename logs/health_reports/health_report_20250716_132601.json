@@ -1,0 +1,85 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-07-16T13:26:01.209088",
+    "period_hours": 24,
+    "period_start": "2025-07-15T13:26:01.209099",
+    "period_end": "2025-07-16T13:26:01.209106",
+    "report_type": "system_health",
+    "generation_time_seconds": 0.0
+  },
+  "crawling_metrics": {
+    "total_urls_crawled": 0,
+    "total_urls_passed": 0,
+    "overall_pass_rate": 0.0,
+    "average_semantic_score": 0.0,
+    "average_processing_time": 0.0,
+    "urls_per_hour": 0.0,
+    "score_distribution": {
+      "0.0-0.2": 0,
+      "0.2-0.4": 0,
+      "0.4-0.6": 0,
+      "0.6-0.8": 0,
+      "0.8-1.0": 0
+    },
+    "extraction_methods": {},
+    "content_categories": {}
+  },
+  "performance_analysis": {
+    "error": "No performance data available"
+  },
+  "domain_analysis": {
+    "error": "No domain data available"
+  },
+  "threshold_analysis": {
+    "current_pass_rate": 0.0,
+    "score_distribution": {
+      "0.0-0.2": 0,
+      "0.2-0.4": 0,
+      "0.4-0.6": 0,
+      "0.6-0.8": 0,
+      "0.8-1.0": 0
+    },
+    "threshold_effectiveness": {
+      "status": "too_strict"
+    },
+    "recommended_adjustments": [
+      "Consider lowering threshold - very low pass rate"
+    ]
+  },
+  "content_quality": {
+    "tag_diversity": 0,
+    "category_distribution": {},
+    "top_tags": [],
+    "content_quality_indicators": [
+      "Low tag diversity - limited content variety"
+    ]
+  },
+  "trend_analysis": {
+    "crawling_volume_trend": "stable",
+    "pass_rate_trend": "stable",
+    "performance_trend": "stable",
+    "trend_indicators": []
+  },
+  "failure_analysis": {
+    "total_failures": 0,
+    "failure_rate": 0,
+    "failures_by_stage": {},
+    "failures_by_domain": {},
+    "failures_by_error_type": {},
+    "critical_issues": []
+  },
+  "consistency_analysis": {
+    "drift_score": 0,
+    "drift_indicators": [],
+    "content_diversity": 0,
+    "embedding_diversity": 0,
+    "tags_diversity": 0,
+    "total_fingerprints": 0,
+    "consistency_status": "good"
+  },
+  "recommendations": [
+    "🎯 Pass rate is low - consider adjusting threshold or improving source quality",
+    "🌐 Limited domain diversity - consider expanding source coverage",
+    "🏷️ Low tag diversity - review content categorization"
+  ]
+}

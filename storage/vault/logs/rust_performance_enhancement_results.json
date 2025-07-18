@@ -1,0 +1,18 @@
+{
+  "tokenizers": {
+    "transformers_time": 2.3475096225738525,
+    "rust_tokenizers_time": 0.4658396244049072,
+    "speedup": 5.039308593751999
+  },
+  "polars": {
+    "pandas_time": 0.014968395233154297,
+    "polars_time": 0.013621091842651367,
+    "speedup": 1.098913024452574
+  },
+  "qdrant": {
+    "setup_successful": true,
+    "setup_time": 0.03005361557006836,
+    "vectors_inserted": 100,
+    "search_results": 10
+  }
+}

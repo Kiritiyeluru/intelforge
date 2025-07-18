@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-07-16T21:21:57.184409",
+  "overall_score": 90,
+  "overall_status": "Production Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "warning",
+      "score": 80,
+      "message": "Missing: 1 files"
+    },
+    {
+      "name": "Infrastructure",
+      "status": "pass",
+      "score": 100,
+      "message": "4/4 checks passed"
+    }
+  ],
+  "deployment_ready": true,
+  "duration_seconds": 0.0
+}

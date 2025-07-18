@@ -1,0 +1,18 @@
+[extend]
+useDefault = true
+
+[allowlist]
+regexTarget = "match"
+regexes = [
+  '''test_key_12345''',
+  '''dummy_secret_.*''',
+  '''example_api_key''',
+  '''fake_token_.*'''
+]
+
+# Custom rules
+[[rules]]
+description = "IntelForge API Keys"
+id = "intelforge-api-key"
+regex = '''(?i)(intelforge|forge)[_-]?api[_-]?key[_=:]\s*['"]?([a-zA-Z0-9_-]{20,})['"]?'''
+keywords = ["intelforge", "forge", "api"]

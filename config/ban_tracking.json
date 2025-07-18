@@ -1,0 +1,30 @@
+{
+  "ban_tracking": {
+    "last_updated": "2025-07-15T00:00:00Z",
+    "version": "1.0.0",
+    "domains": {},
+    "ip_addresses": {},
+    "user_agents": {},
+    "settings": {
+      "ban_detection_enabled": true,
+      "ban_threshold_429": 3,
+      "ban_threshold_403": 2,
+      "ban_threshold_503": 5,
+      "cooldown_period_seconds": 1800,
+      "max_ban_duration_seconds": 86400,
+      "circuit_breaker_enabled": true,
+      "circuit_breaker_failure_threshold": 5,
+      "circuit_breaker_timeout_seconds": 300,
+      "auto_cleanup_enabled": true,
+      "cleanup_interval_hours": 24,
+      "max_history_days": 7
+    },
+    "global_stats": {
+      "total_bans": 0,
+      "total_recoveries": 0,
+      "active_bans": 0,
+      "last_ban_timestamp": null,
+      "last_recovery_timestamp": null
+    }
+  }
+}

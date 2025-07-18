@@ -1,0 +1,59 @@
+[
+  {
+    "url": "https://robotwealth.com/feed/",
+    "title": "Robot Wealth",
+    "score": 0.318,
+    "extracted": false,
+    "parameters": [],
+    "backtest_result": false,
+    "word_count": 7910,
+    "content_type": "codeblock",
+    "crawl_timestamp": "2025-07-18T06:00:32Z",
+    "language": "en",
+    "language_confidence": 0.9999975435165003,
+    "filter_results": {
+      "keyword_filter": true,
+      "word_count_filter": true,
+      "content_type_filter": true,
+      "similarity_threshold": false
+    }
+  },
+  {
+    "url": "https://quantpedia.com/feed/",
+    "title": "QuantPedia",
+    "score": 0.282,
+    "extracted": false,
+    "parameters": [],
+    "backtest_result": false,
+    "word_count": 1250,
+    "content_type": "research",
+    "crawl_timestamp": "2025-07-18T06:00:32Z",
+    "language": "en",
+    "language_confidence": 0.9999963981295626,
+    "filter_results": {
+      "keyword_filter": true,
+      "word_count_filter": true,
+      "content_type_filter": true,
+      "similarity_threshold": false
+    }
+  },
+  {
+    "url": "https://www.quantstart.com/articles/",
+    "title": "Articles | QuantStart",
+    "score": 0.614,
+    "extracted": false,
+    "parameters": [],
+    "backtest_result": false,
+    "word_count": 2232,
+    "content_type": "codeblock",
+    "crawl_timestamp": "2025-07-18T06:00:32Z",
+    "language": "en",
+    "language_confidence": 0.9999971975616662,
+    "filter_results": {
+      "keyword_filter": true,
+      "word_count_filter": true,
+      "content_type_filter": true,
+      "similarity_threshold": false
+    }
+  }
+]

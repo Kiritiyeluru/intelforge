@@ -1,0 +1,122 @@
+{
+  "session_id": "2025-07-12_19-15-00",
+  "test_type": "end_to_end_workflow",
+  "start_time": "2025-07-12T19:15:00.786233",
+  "workflows": {
+    "data_ingestion": {
+      "status": "\u2705 PASS",
+      "workflow_duration": 0.01616668701171875,
+      "input_articles": 5,
+      "validated_articles": 5,
+      "transformed_articles": 5,
+      "validation_errors": [],
+      "integrity_score": 1.0,
+      "output_file": "/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/test_output/2025-07-12_19-15-00/processed_articles.json"
+    },
+    "content_processing": {
+      "status": "\u2705 PASS",
+      "workflow_duration": 0.015516996383666992,
+      "input_articles": 5,
+      "analyzed_articles": 5,
+      "high_quality_articles": 0,
+      "average_quality_score": 0.5222666666666667,
+      "processing_accuracy": 0.0,
+      "output_file": "/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/test_output/2025-07-12_19-15-00/analyzed_articles.json"
+    },
+    "ai_pipeline": {
+      "status": "\u2705 PASS",
+      "workflow_duration": 0.019295930862426758,
+      "input_articles": 5,
+      "total_chunks": 5,
+      "embedding_dimension": 384,
+      "search_queries": 4,
+      "average_search_similarity": 0.021256529594075965,
+      "ai_performance": "needs_improvement",
+      "output_file": "/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/test_output/2025-07-12_19-15-00/ai_pipeline_results.json"
+    },
+    "output_generation": {
+      "status": "\u2705 PASS",
+      "workflow_duration": 0.018619060516357422,
+      "summary_report": {
+        "executive_summary": {
+          "total_documents_processed": 5,
+          "total_content_chunks": 5,
+          "embedding_model": "mock-sentence-transformer",
+          "search_performance": 0.021256529594075965,
+          "processing_timestamp": "2025-07-12T19:15:00.874757"
+        },
+        "content_analysis": {
+          "categories_identified": [
+            "market_analysis",
+            "sustainable_finance",
+            "algorithmic_trading",
+            "risk_management"
+          ],
+          "average_chunk_length": 364.0,
+          "content_distribution": {
+            "market_analysis": 2,
+            "risk_management": 1,
+            "algorithmic_trading": 1,
+            "sustainable_finance": 1
+          }
+        },
+        "search_analytics": {
+          "queries_processed": 4,
+          "average_results_per_query": 5.0,
+          "search_quality_score": 0.021256529594075965
+        }
+      },
+      "markdown_file": "/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/test_output/2025-07-12_19-15-00/analysis_report.md",
+      "json_file": "/home/kiriti/alpha_projects/intelforge/session_docs/reorganized_docs/testing/test_output/2025-07-12_19-15-00/export_data.json",
+      "markdown_size": 1354,
+      "json_size": 61177,
+      "output_quality": "excellent"
+    }
+  },
+  "data_flow": {},
+  "integrity_checks": {
+    "status": "\u2705 PASS",
+    "integrity_results": {
+      "file_integrity": {
+        "processed_articles.json": {
+          "exists": true,
+          "size": 3730,
+          "readable": true
+        },
+        "analyzed_articles.json": {
+          "exists": true,
+          "size": 7577,
+          "readable": true
+        },
+        "ai_pipeline_results.json": {
+          "exists": true,
+          "size": 56142,
+          "readable": true
+        },
+        "analysis_report.md": {
+          "exists": true,
+          "size": 1354,
+          "readable": true
+        },
+        "export_data.json": {
+          "exists": true,
+          "size": 61177,
+          "readable": true
+        }
+      },
+      "consistency_checks": {
+        "processed_articles_count": 5,
+        "analyzed_articles_count": 5,
+        "total_chunks": 5
+      },
+      "scores": {
+        "file_integrity_score": 1.0,
+        "data_consistency_score": 1.0,
+        "overall_integrity_score": 1.0
+      }
+    },
+    "overall_score": 1.0
+  },
+  "status": "completed",
+  "end_time": "2025-07-12T19:15:00.898567"
+}

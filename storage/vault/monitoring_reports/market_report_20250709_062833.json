@@ -1,0 +1,28 @@
+{
+  "report_type": "market_data",
+  "timestamp": "2025-07-09T06:28:33.735948",
+  "market_data": {
+    "SPY": {
+      "price": 500.25,
+      "change": 1.25,
+      "change_pct": 0.25
+    },
+    "QQQ": {
+      "price": 375.8,
+      "change": 2.15,
+      "change_pct": 0.58
+    },
+    "IWM": {
+      "price": 220.45,
+      "change": -0.85,
+      "change_pct": -0.38
+    },
+    "VIX": {
+      "price": 14.25,
+      "change": -0.35,
+      "change_pct": -2.4
+    }
+  },
+  "sentiment": "BULLISH",
+  "summary": "SPY: 500.25 (up 0.25%); QQQ: 375.8 (up 0.58%); IWM: 220.45 (down 0.38%); VIX: 14.25 (down 2.40%)"
+}

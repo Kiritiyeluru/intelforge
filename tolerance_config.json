@@ -1,0 +1,77 @@
+{
+  "semantic_drift_thresholds": {
+    "semantic_drift_threshold": 0.02,
+    "high_priority_threshold": 0.01,
+    "critical_threshold": 0.005
+  },
+  "drift_detection_settings": {
+    "enabled": true,
+    "model_name": "all-MiniLM-L6-v2",
+    "similarity_metric": "cosine",
+    "embedding_dimensions": 384,
+    "batch_size": 32
+  },
+  "tolerance_levels": {
+    "content_extraction": {
+      "acceptable_variance": 0.02,
+      "warning_threshold": 0.015,
+      "critical_threshold": 0.005
+    },
+    "semantic_analysis": {
+      "acceptable_variance": 0.03,
+      "warning_threshold": 0.02,
+      "critical_threshold": 0.01
+    },
+    "ai_pipeline_outputs": {
+      "acceptable_variance": 0.025,
+      "warning_threshold": 0.018,
+      "critical_threshold": 0.008
+    }
+  },
+  "snapshot_validation": {
+    "enabled": true,
+    "snapshot_retention_days": 30,
+    "comparison_window_hours": 24,
+    "minimum_samples_for_analysis": 5
+  },
+  "reporting_settings": {
+    "generate_detailed_reports": true,
+    "include_inline_annotations": true,
+    "export_formats": ["json", "markdown"],
+    "notification_thresholds": {
+      "warning": 0.015,
+      "critical": 0.005,
+      "immediate_alert": 0.002
+    }
+  },
+  "modules": {
+    "EnhancedResearchGapDetector": {
+      "drift_threshold": 0.02,
+      "acceptable_variance": 0.025,
+      "critical_threshold": 0.008
+    },
+    "SemanticCrawler": {
+      "drift_threshold": 0.015,
+      "acceptable_variance": 0.02,
+      "critical_threshold": 0.005
+    },
+    "ContentAnalyzer": {
+      "drift_threshold": 0.02,
+      "acceptable_variance": 0.03,
+      "critical_threshold": 0.01
+    },
+    "AIResponseGenerator": {
+      "drift_threshold": 0.018,
+      "acceptable_variance": 0.025,
+      "critical_threshold": 0.007
+    }
+  },
+  "metadata": {
+    "config_version": "1.0",
+    "created_date": "2025-07-15",
+    "last_modified": "2025-07-15",
+    "description": "Tolerance configuration for semantic drift detection and validation in IntelForge AI pipeline",
+    "author": "Claude",
+    "validation_schema_version": "2.1"
+  }
+}

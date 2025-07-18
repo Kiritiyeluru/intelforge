@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2025-07-17T20:19:05.686920",
+    "source_name": "Test Source",
+    "url": "https://example.com",
+    "success": true,
+    "execution_time": 45.5,
+    "content_extracted": 10,
+    "error_message": null,
+    "threshold_used": 0.8,
+    "rate_limit": 3.0
+  }
+]

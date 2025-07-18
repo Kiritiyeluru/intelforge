@@ -1,0 +1,84 @@
+id: web-app-security-scan
+
+info:
+  name: Web Application Security Scan
+  author: IntelForge
+  severity: info
+  description: Comprehensive web application security scan for IntelForge components
+  classification:
+    cwe-id: CWE-200
+  metadata:
+    verified: true
+    max-request: 3
+  tags: security,web,intelforge
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+      - "{{BaseURL}}/health"
+      - "{{BaseURL}}/status"
+      - "{{BaseURL}}/metrics"
+      - "{{BaseURL}}/admin"
+      - "{{BaseURL}}/config"
+      - "{{BaseURL}}/debug"
+      - "{{BaseURL}}/api/v1"
+      - "{{BaseURL}}/docs"
+      - "{{BaseURL}}/swagger"
+      - "{{BaseURL}}/openapi"
+
+    headers:
+      User-Agent: "IntelForge-Security-Scanner/1.0"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+          - 201
+          - 202
+          - 301
+          - 302
+          - 400
+          - 401
+          - 403
+          - 404
+          - 500
+
+      - type: word
+        words:
+          - "error"
+          - "debug"
+          - "admin"
+          - "config"
+          - "password"
+          - "token"
+          - "secret"
+          - "api_key"
+          - "private_key"
+          - "database"
+          - "sql"
+          - "mongodb"
+          - "redis"
+          - "elasticsearch"
+          - "exception"
+          - "traceback"
+          - "stacktrace"
+        condition: or
+        part: body
+
+    extractors:
+      - type: regex
+        name: sensitive_info
+        regex:
+          - '(?i)(password|token|secret|api_key|private_key)[\s]*[:=][\s]*["\']?([a-zA-Z0-9_-]+)["\']?'
+          - '(?i)(database|db)[\s]*[:=][\s]*["\']?([a-zA-Z0-9_.-]+)["\']?'
+          - '(?i)(email|mail)[\s]*[:=][\s]*["\']?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})["\']?'
+        part: body
+
+      - type: regex
+        name: version_info
+        regex:
+          - '(?i)(version|v)[\s]*[:=][\s]*["\']?([0-9]+\.[0-9]+\.[0-9]+)["\']?'
+          - '(?i)(build|commit|sha)[\s]*[:=][\s]*["\']?([a-f0-9]{7,40})["\']?'
+        part: body

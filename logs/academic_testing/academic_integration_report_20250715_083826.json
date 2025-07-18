@@ -1,0 +1,55 @@
+{
+  "academic_integration_report": {
+    "timestamp": "2025-07-15T08:38:26.237894",
+    "component_availability": {
+      "semantic_crawler": false,
+      "research_gap_detector": false,
+      "sentence_transformers": true,
+      "chromadb": true,
+      "timestamp": "2025-07-15T08:38:26.237883"
+    },
+    "test_queries": [
+      {
+        "query": "machine learning applications in healthcare",
+        "expected_domains": [
+          "healthcare",
+          "machine learning",
+          "AI"
+        ],
+        "min_results": 3
+      },
+      {
+        "query": "climate change impact on agriculture",
+        "expected_domains": [
+          "climate",
+          "agriculture",
+          "environment"
+        ],
+        "min_results": 2
+      },
+      {
+        "query": "quantum computing cryptography research",
+        "expected_domains": [
+          "quantum",
+          "cryptography",
+          "security"
+        ],
+        "min_results": 2
+      }
+    ],
+    "mock_urls": [
+      "https://arxiv.org/abs/2301.00001",
+      "https://pubmed.ncbi.nlm.nih.gov/12345678",
+      "https://ieeexplore.ieee.org/document/9876543",
+      "https://www.nature.com/articles/s41586-023-12345-6",
+      "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=test"
+    ],
+    "test_results": [],
+    "summary": {
+      "components_available": 2,
+      "total_components": 4,
+      "tests_run": 0,
+      "tests_passed": 0
+    }
+  }
+}

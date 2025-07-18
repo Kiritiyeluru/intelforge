@@ -1,0 +1,100 @@
+# Coverage configuration for IntelForge
+# Part of Part 3B System Hardening implementation
+
+[run]
+# Source code directories to analyze
+source = scripts, scrapers
+
+# Files and directories to omit from coverage
+omit =
+    */tests/*
+    */test_*
+    */__pycache__/*
+    */venv/*
+    */env/*
+    */build/*
+    */dist/*
+    */.*
+    setup.py
+    conftest.py
+    # Exclude vendor/third-party code
+    */site-packages/*
+    */lib/*
+    # Exclude specific test utilities that shouldn't count towards coverage
+    tests/utils/*
+    tests/fixtures/*
+    tests/load/*
+
+# Enable branch coverage (more comprehensive than line coverage)
+branch = True
+
+# Data file location
+data_file = .coverage
+
+# Concurrency support for parallel test execution
+concurrency = thread, multiprocessing
+
+[report]
+# Reporting options
+show_missing = True
+skip_covered = False
+skip_empty = True
+
+# Coverage thresholds - fail if below these percentages
+fail_under = 70
+
+# Lines to exclude from coverage reports
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run
+    if 0:
+    if __name__ == .__main__.:
+    if __name__ == "__main__":
+
+    # Don't complain about abstract methods
+    @(abc\.)?abstractmethod
+
+    # Don't complain about protocol classes
+    class .*\bProtocol\):
+
+    # Don't complain about type checking imports
+    if TYPE_CHECKING:
+
+    # Don't complain about platform-specific code
+    if sys\.platform
+
+    # Don't complain about error handling
+    except ImportError:
+    except.*Error:
+
+    # Don't complain about logging and debug statements
+    logger\.debug
+    log\.debug
+    print\(.*debug.*\)
+
+# Precision for coverage percentages
+precision = 1
+
+[html]
+# HTML report configuration
+directory = reports/coverage_html
+title = IntelForge Coverage Report
+
+[xml]
+# XML report for CI integration
+output = reports/coverage.xml
+
+[json]
+# JSON report for programmatic analysis
+output = reports/coverage.json
+show_contexts = True

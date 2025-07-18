@@ -1,0 +1,49 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "interval_seconds": 300,
+    "retention_days": 30,
+    "max_metrics_in_memory": 1000
+  },
+  "alerts": {
+    "enabled": true,
+    "email_enabled": false,
+    "email_smtp_server": "smtp.gmail.com",
+    "email_port": 587,
+    "email_username": "",
+    "email_password": "",
+    "email_recipients": []
+  },
+  "thresholds": {
+    "failure_rate_threshold": 0.2,
+    "response_time_threshold": 300,
+    "cpu_threshold": 80.0,
+    "memory_threshold": 85.0,
+    "disk_threshold": 90.0,
+    "queue_size_threshold": 50
+  },
+  "notifications": {
+    "slack_enabled": false,
+    "slack_webhook_url": "",
+    "discord_enabled": false,
+    "discord_webhook_url": "",
+    "log_level": "INFO"
+  },
+  "performance": {
+    "collect_detailed_metrics": true,
+    "track_response_times": true,
+    "track_content_quality": true,
+    "benchmark_intervals": [
+      "1h",
+      "6h",
+      "24h",
+      "7d"
+    ]
+  },
+  "recovery": {
+    "auto_restart_failed_crawls": true,
+    "max_retry_attempts": 3,
+    "retry_delay_seconds": 300,
+    "escalation_threshold": 5
+  }
+}

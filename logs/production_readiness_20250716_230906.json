@@ -1,0 +1,106 @@
+{
+  "timestamp": "2025-07-16T23:09:06.414988",
+  "overall_score": 84,
+  "overall_status": "Not Ready",
+  "checks": [
+    {
+      "name": "Critical Files",
+      "status": "pass",
+      "score": 100,
+      "message": "All critical files present and valid",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Security Baseline",
+      "status": "pass",
+      "score": 100,
+      "message": "Security tests pass",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Test Coverage",
+      "status": "fail",
+      "score": 20,
+      "message": "Coverage analysis failed",
+      "details": null,
+      "recommendations": [
+        "Fix coverage analysis execution"
+      ]
+    },
+    {
+      "name": "Performance Benchmarks",
+      "status": "pass",
+      "score": 100,
+      "message": "Performance tests pass",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "CLI Functionality",
+      "status": "pass",
+      "score": 100,
+      "message": "All CLI commands working",
+      "details": null,
+      "recommendations": null
+    },
+    {
+      "name": "Documentation",
+      "status": "pass",
+      "score": 100,
+      "message": "Missing: 0 docs",
+      "details": null,
+      "recommendations": []
+    },
+    {
+      "name": "Infrastructure Health",
+      "status": "pass",
+      "score": 100,
+      "message": "8/8 checks passed",
+      "details": {
+        "checks": {
+          "Python 3.x": true,
+          "Package: pytest": true,
+          "Package: loguru": true,
+          "Package: rich": true,
+          "Package: typer": true,
+          "Directory: scripts": true,
+          "Directory: tests": true,
+          "Directory: logs": true
+        }
+      },
+      "recommendations": []
+    },
+    {
+      "name": "Budget Tracking",
+      "status": "pass",
+      "score": 100,
+      "message": "Budget within limits",
+      "details": null,
+      "recommendations": null
+    }
+  ],
+  "recommendations": [
+    "Fix coverage analysis execution",
+    "Address 1 failing checks before deployment"
+  ],
+  "deployment_ready": false,
+  "summary": {
+    "total_checks": 8,
+    "passed": 7,
+    "warnings": 0,
+    "failed": 1,
+    "duration_seconds": 66.01,
+    "check_details": {
+      "Critical Files": 100,
+      "Security Baseline": 100,
+      "Test Coverage": 20,
+      "Performance Benchmarks": 100,
+      "CLI Functionality": 100,
+      "Documentation": 100,
+      "Infrastructure Health": 100,
+      "Budget Tracking": 100
+    }
+  }
+}

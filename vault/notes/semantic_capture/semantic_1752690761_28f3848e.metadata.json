@@ -1,0 +1,18 @@
+{
+  "title": "Untitled",
+  "url": "https://httpbin.org/html",
+  "score": -0.038,
+  "filter_method": "cosine_similarity",
+  "tags": [
+    "technical_analysis"
+  ],
+  "captured_at": "2025-07-17 00:02:41",
+  "content_hash": "336b128e83163516",
+  "content_length": 3566,
+  "source": "semantic_crawler",
+  "qdrant_embedded": false,
+  "vector_embedded": true,
+  "vector_id": 9593214704516091861,
+  "vector_storage": "Qdrant",
+  "enhanced_processing": false
+}

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelForge Analytics Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .metric-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-healthy { color: #28a745; }
+        .status-warning { color: #ffc107; }
+        .status-critical { color: #dc3545; }
+        .status-degraded { color: #fd7e14; }
+
+        .chart-container {
+            height: 400px;
+            margin: 20px 0;
+        }
+        .alert-item {
+            border-left: 4px solid;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+        .alert-critical { border-left-color: #dc3545; background-color: #f8d7da; }
+        .alert-high { border-left-color: #fd7e14; background-color: #fff3cd; }
+        .alert-medium { border-left-color: #ffc107; background-color: #fff3cd; }
+        .alert-low { border-left-color: #17a2b8; background-color: #d1ecf1; }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chart-line me-2"></i>
+                IntelForge Analytics Dashboard
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text">
+                    <i class="fas fa-clock me-1"></i>
+                    <span id="last-update">Loading...</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Overview Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <i class="fas fa-heartbeat fa-2x text-primary mb-2"></i>
+                    <div class="metric-value" id="system-status">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="metric-label">System Status</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <i class="fas fa-spider fa-2x text-success mb-2"></i>
+                    <div class="metric-value text-success" id="total-crawls">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="metric-label">Total Crawls (24h)</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <i class="fas fa-check-circle fa-2x text-info mb-2"></i>
+                    <div class="metric-value text-info" id="success-rate">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="metric-label">Success Rate</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <i class="fas fa-exclamation-triangle fa-2x text-warning mb-2"></i>
+                    <div class="metric-value text-warning" id="total-alerts">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="metric-label">Alerts (24h)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Trends -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Performance Trends
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="success-rate-chart" class="chart-container"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="execution-time-chart" class="chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Health and Source Performance -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-server me-2"></i>
+                            System Health
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 text-center">
+                                <div class="metric-value" id="cpu-usage">
+                                    <div class="spinner"></div>
+                                </div>
+                                <div class="metric-label">CPU Usage</div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar" id="cpu-progress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <div class="metric-value" id="memory-usage">
+                                    <div class="spinner"></div>
+                                </div>
+                                <div class="metric-label">Memory Usage</div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar" id="memory-progress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <div class="metric-value" id="disk-usage">
+                                    <div class="spinner"></div>
+                                </div>
+                                <div class="metric-label">Disk Usage</div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar" id="disk-progress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-list me-2"></i>
+                            Source Performance
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="source-performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>Success Rate</th>
+                                        <th>Avg Time</th>
+                                        <th>Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            <div class="spinner"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Quality and Recent Alerts -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>
+                            Content Quality Trends
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="content-quality-chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-bell me-2"></i>
+                            Recent Alerts
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="alerts-container">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <p>Loading alerts...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Reports & Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-primary me-2" onclick="generateReport()">
+                                    <i class="fas fa-file-download me-1"></i>
+                                    Generate Report
+                                </button>
+                                <button class="btn btn-success me-2" onclick="downloadReport()">
+                                    <i class="fas fa-download me-1"></i>
+                                    Download JSON
+                                </button>
+                                <button class="btn btn-info" onclick="refreshDashboard()">
+                                    <i class="fas fa-sync me-1"></i>
+                                    Refresh Data
+                                </button>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Dashboard auto-refreshes every 5 minutes
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refresh Button -->
+    <button class="btn btn-primary btn-lg refresh-btn" onclick="refreshDashboard()" title="Refresh Dashboard">
+        <i class="fas fa-sync"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dashboard JavaScript
+        let refreshInterval;
+
+        $(document).ready(function() {
+            refreshDashboard();
+
+            // Auto-refresh every 5 minutes
+            refreshInterval = setInterval(refreshDashboard, 300000);
+        });
+
+        function refreshDashboard() {
+            loadOverview();
+            loadPerformanceTrends();
+            loadSystemHealth();
+            loadSourcePerformance();
+            loadContentQuality();
+            loadAlerts();
+            updateLastRefresh();
+        }
+
+        function updateLastRefresh() {
+            const now = new Date();
+            document.getElementById('last-update').textContent = now.toLocaleTimeString();
+        }
+
+        function loadOverview() {
+            $.get('/api/overview', function(data) {
+                const statusElement = document.getElementById('system-status');
+                const statusClass = `status-${data.system_status}`;
+                statusElement.innerHTML = `<span class="${statusClass}">${data.system_status.toUpperCase()}</span>`;
+
+                document.getElementById('total-crawls').textContent = data.total_crawls_24h;
+                document.getElementById('success-rate').textContent = (data.success_rate * 100).toFixed(1) + '%';
+                document.getElementById('total-alerts').textContent = data.total_alerts_24h;
+            }).fail(function() {
+                console.error('Failed to load overview data');
+            });
+        }
+
+        function loadPerformanceTrends() {
+            $.get('/api/performance-trends?days=7', function(data) {
+                if (data.error) {
+                    console.error('Error loading performance trends:', data.error);
+                    return;
+                }
+
+                // Success Rate Chart
+                const successTrace = {
+                    x: data.timestamps,
+                    y: data.success_rates,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: 'Success Rate (%)',
+                    line: { color: '#28a745' }
+                };
+
+                Plotly.newPlot('success-rate-chart', [successTrace], {
+                    title: 'Success Rate Over Time',
+                    xaxis: { title: 'Time' },
+                    yaxis: { title: 'Success Rate (%)' },
+                    margin: { t: 30 }
+                });
+
+                // Execution Time Chart
+                const timeTrace = {
+                    x: data.timestamps,
+                    y: data.avg_execution_times,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: 'Avg Execution Time (s)',
+                    line: { color: '#007bff' }
+                };
+
+                Plotly.newPlot('execution-time-chart', [timeTrace], {
+                    title: 'Average Execution Time',
+                    xaxis: { title: 'Time' },
+                    yaxis: { title: 'Execution Time (s)' },
+                    margin: { t: 30 }
+                });
+            }).fail(function() {
+                console.error('Failed to load performance trends');
+            });
+        }
+
+        function loadSystemHealth() {
+            $.get('/api/system-health', function(data) {
+                if (data.error) {
+                    console.error('Error loading system health:', data.error);
+                    return;
+                }
+
+                const current = data.current;
+
+                // Update CPU
+                document.getElementById('cpu-usage').textContent = current.cpu_usage.toFixed(1) + '%';
+                document.getElementById('cpu-progress').style.width = current.cpu_usage + '%';
+                document.getElementById('cpu-progress').className = getProgressClass(current.cpu_usage);
+
+                // Update Memory
+                document.getElementById('memory-usage').textContent = current.memory_usage.toFixed(1) + '%';
+                document.getElementById('memory-progress').style.width = current.memory_usage + '%';
+                document.getElementById('memory-progress').className = getProgressClass(current.memory_usage);
+
+                // Update Disk
+                document.getElementById('disk-usage').textContent = current.disk_usage.toFixed(1) + '%';
+                document.getElementById('disk-progress').style.width = current.disk_usage + '%';
+                document.getElementById('disk-progress').className = getProgressClass(current.disk_usage);
+            }).fail(function() {
+                console.error('Failed to load system health');
+            });
+        }
+
+        function getProgressClass(value) {
+            if (value > 90) return 'progress-bar bg-danger';
+            if (value > 80) return 'progress-bar bg-warning';
+            if (value > 70) return 'progress-bar bg-info';
+            return 'progress-bar bg-success';
+        }
+
+        function loadSourcePerformance() {
+            $.get('/api/source-performance', function(data) {
+                const tbody = document.querySelector('#source-performance-table tbody');
+                tbody.innerHTML = '';
+
+                Object.entries(data).forEach(([source, stats]) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><small>${source}</small></td>
+                        <td><small>${(stats.success_rate * 100).toFixed(1)}%</small></td>
+                        <td><small>${stats.avg_execution_time.toFixed(1)}s</small></td>
+                        <td><small>${stats.total_content}</small></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }).fail(function() {
+                console.error('Failed to load source performance');
+            });
+        }
+
+        function loadContentQuality() {
+            $.get('/api/content-quality', function(data) {
+                if (data.error) {
+                    console.error('Error loading content quality:', data.error);
+                    return;
+                }
+
+                const trace1 = {
+                    x: data.dates,
+                    y: data.content_per_crawl,
+                    name: 'Content per Crawl',
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    line: { color: '#17a2b8' }
+                };
+
+                const trace2 = {
+                    x: data.dates,
+                    y: data.quality_scores,
+                    name: 'Quality Score',
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    yaxis: 'y2',
+                    line: { color: '#ffc107' }
+                };
+
+                Plotly.newPlot('content-quality-chart', [trace1, trace2], {
+                    title: 'Content Quality Over Time',
+                    xaxis: { title: 'Date' },
+                    yaxis: { title: 'Content per Crawl' },
+                    yaxis2: {
+                        title: 'Quality Score',
+                        overlaying: 'y',
+                        side: 'right'
+                    },
+                    margin: { t: 30 }
+                });
+            }).fail(function() {
+                console.error('Failed to load content quality');
+            });
+        }
+
+        function loadAlerts() {
+            $.get('/api/alerts', function(data) {
+                const container = document.getElementById('alerts-container');
+                container.innerHTML = '';
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p class="text-muted text-center">No recent alerts</p>';
+                    return;
+                }
+
+                data.slice(-5).forEach(alert => {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = `alert-item alert-${alert.severity}`;
+                    alertDiv.innerHTML = `
+                        <strong>${alert.alert_name}</strong><br>
+                        <small>${new Date(alert.timestamp).toLocaleString()}</small>
+                    `;
+                    container.appendChild(alertDiv);
+                });
+            }).fail(function() {
+                console.error('Failed to load alerts');
+            });
+        }
+
+        function generateReport() {
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Generating...';
+            button.disabled = true;
+
+            $.get('/api/report/generate', function(data) {
+                // Display report in modal or new window
+                const reportWindow = window.open('', '_blank');
+                reportWindow.document.write(`
+                    <html>
+                        <head><title>Crawler Report</title></head>
+                        <body>
+                            <h1>IntelForge Crawler Report</h1>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </body>
+                    </html>
+                `);
+            }).fail(function() {
+                alert('Failed to generate report');
+            }).always(function() {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+        }
+
+        function downloadReport() {
+            window.location.href = '/api/report/download';
+        }
+    </script>
+</body>
+</html>
