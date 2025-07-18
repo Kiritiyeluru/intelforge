@@ -11,34 +11,38 @@ Constraints:
 
 from ortools.sat.python import cp_model
 
-# Define time slots (8:30 AM - 7:00 PM) - NUMBERED SYSTEM
+# Define time slots (6:30 AM - 7:00 PM) - NUMBERED SYSTEM
 TIME_SLOTS = [
+    "6:30-8:00",  # Slot 0 - EARLY SLOT (only for KIRITI)
     "8:30-10:00",  # Slot 1
     "10:00-11:30",  # Slot 2
     "11:30-1:00",  # Slot 3
-    "1:00-2:00",  # LUNCH BREAK
-    "2:00-3:30",  # Slot 4
-    "3:30-5:00",  # Slot 5
-    "5:30-7:00",  # Slot 6
+    "1:00-2:00",  # LUNCH BREAK (Slot 4)
+    "2:00-3:30",  # Slot 5
+    "3:30-5:00",  # Slot 6
+    "5:30-7:00",  # Slot 7
 ]
 
 # Fixed time slot assignments (cannot be changed)
 FIXED_ASSIGNMENTS = {
     "AK-JR-1": {
-        4: ("CHEM", "PRK", 0),  # Slot 4: 2:00-3:30 CHEM - PRK (session 0)
-        5: ("CHEM", "PRK", 1),  # Slot 5: 3:30-5:00 CHEM - PRK (session 1)
+        5: ("CHEM", "PRK", 0),  # Slot 5: 2:00-3:30 CHEM - PRK (session 0)
+        6: ("CHEM", "PRK", 1),  # Slot 6: 3:30-5:00 CHEM - PRK (session 1)
     },
     "9th_CLASS": {
-        0: ("BLOCKED", "IOQM", 0),  # Slot 1: 8:30-10:00 BLOCKED for IOQM
+        1: ("BLOCKED", "IOQM", 0),  # Slot 1: 8:30-10:00 BLOCKED for IOQM
     },
 }
 
 # Working time slots (excluding lunch)
-WORKING_SLOTS = [0, 1, 2, 4, 5, 6]  # Slots 1,2,3,4,5,6 (skip lunch)
-LUNCH_SLOT = 3
+WORKING_SLOTS = [0, 1, 2, 3, 5, 6, 7]  # Slots 0,1,2,3,5,6,7 (skip lunch slot 4)
+LUNCH_SLOT = 4
+
+# Early slot (6:30-8:00 AM) - only for KIRITI in Building 1
+EARLY_SLOT = 0
 
 # Working slots for 9th_CLASS (excluding blocked slot 1 and lunch)
-NINTH_CLASS_WORKING_SLOTS = [1, 2, 4, 5, 6]  # Slots 2,3,4,5,6 (skip slot 1 and lunch)
+NINTH_CLASS_WORKING_SLOTS = [2, 3, 5, 6, 7]  # Slots 2,3,5,6,7 (skip slot 1 and lunch)
 
 # Building assignments
 BUILDING_ASSIGNMENTS = {
@@ -146,6 +150,52 @@ def create_building_aware_model():
                         subject_idx = SUBJECTS.index(subject)
                         model.Add(batch_schedule[batch][slot]["subject"] == subject_idx)
                         model.Add(batch_schedule[batch][slot]["session"] == session)
+
+    # SPECIAL CONSTRAINT: Force AK-JR-2 and AK-JR-3 to have CHEM-PRK at slot 2 (10:00-11:30 AM)
+    chem_idx = SUBJECTS.index("CHEM")
+    slot_2 = 2  # 10:00-11:30 AM
+
+    # Force AK-JR-2 to have CHEM at slot 2
+    if "AK-JR-2" in batch_schedule and slot_2 in batch_schedule["AK-JR-2"]:
+        model.Add(batch_schedule["AK-JR-2"][slot_2]["subject"] == chem_idx)
+        model.Add(batch_schedule["AK-JR-2"][slot_2]["session"] == 0)  # First session
+
+    # Force AK-JR-3 to have CHEM at slot 2
+    if "AK-JR-3" in batch_schedule and slot_2 in batch_schedule["AK-JR-3"]:
+        model.Add(batch_schedule["AK-JR-3"][slot_2]["subject"] == chem_idx)
+        model.Add(batch_schedule["AK-JR-3"][slot_2]["session"] == 0)  # First session
+
+    # SPECIAL CONSTRAINT: Early slot (6:30-8:00 AM) only for KIRITI in Building 1
+    physics_idx = SUBJECTS.index("PHYSICS")
+    early_slot = 0  # 6:30-8:00 AM
+
+    # Only AK_E_JR_1 and AK_E_JR_2 can use the early slot, and only for KIRITI (PHYSICS)
+    for batch in BATCHES:
+        if batch in ["AK_E_JR_1", "AK_E_JR_2"] and early_slot in batch_schedule[batch]:
+            # If early slot is used, it must be PHYSICS (KIRITI)
+            early_slot_used = model.NewBoolVar(f"{batch}_early_slot_used")
+
+            # Create variables for all subjects in early slot
+            for subj_idx in range(len(SUBJECTS)):
+                for sess_idx in [0, 1]:
+                    is_this_subject = model.NewBoolVar(f"{batch}_early_{subj_idx}_{sess_idx}")
+                    model.Add(batch_schedule[batch][early_slot]["subject"] == subj_idx).OnlyEnforceIf(is_this_subject)
+                    model.Add(batch_schedule[batch][early_slot]["session"] == sess_idx).OnlyEnforceIf(is_this_subject)
+
+                    if subj_idx == physics_idx:
+                        # If PHYSICS is in early slot, mark as used
+                        model.Add(early_slot_used == 1).OnlyEnforceIf(is_this_subject)
+                    else:
+                        # If non-PHYSICS is in early slot, not allowed
+                        model.Add(is_this_subject == 0)
+        elif early_slot in batch_schedule.get(batch, {}):
+            # Other batches cannot use early slot at all
+            for subj_idx in range(len(SUBJECTS)):
+                for sess_idx in [0, 1]:
+                    is_this_subject = model.NewBoolVar(f"{batch}_early_{subj_idx}_{sess_idx}_forbidden")
+                    model.Add(batch_schedule[batch][early_slot]["subject"] == subj_idx).OnlyEnforceIf(is_this_subject)
+                    model.Add(batch_schedule[batch][early_slot]["session"] == sess_idx).OnlyEnforceIf(is_this_subject)
+                    model.Add(is_this_subject == 0)  # Forbid all subjects for other batches
 
     # Constraint 1: Each batch must have exactly 2 sessions of each subject
     for batch in BATCHES:
@@ -273,6 +323,7 @@ def create_building_aware_model():
                 model.Add(sum(session_uses) == 1)
 
     # Constraint 3: Building-aware teacher conflicts with travel time
+    # SPECIAL EXCEPTION: PRK can teach AK-JR-2 and AK-JR-3 CHEM at slot 1 (10:00-11:30 AM)
     all_possible_slots = set(WORKING_SLOTS + NINTH_CLASS_WORKING_SLOTS)
     for slot in all_possible_slots:
         teacher_usage = {}
@@ -330,8 +381,14 @@ def create_building_aware_model():
 
                     teacher_usage[teacher][batch_building].append(teaching_here)
 
-        # Apply building-specific constraints
+        # Apply building-specific constraints with SPECIAL EXCEPTION
         for teacher, buildings in teacher_usage.items():
+            # SPECIAL EXCEPTION: PRK can teach both AK-JR-2 and AK-JR-3 CHEM at slot 2 (10:00-11:30 AM)
+            if teacher == "PRK" and slot == 2:  # Slot 2 is 10:00-11:30 AM
+                # Allow PRK to teach both AK-JR-2 and AK-JR-3 CHEM at the same time slot
+                # Skip the usual constraint for PRK at slot 2
+                continue
+
             # Teacher can teach at most one batch per slot within same building
             for building, usages in buildings.items():
                 model.Add(sum(usages) <= 1)
@@ -351,11 +408,9 @@ def create_building_aware_model():
                                 <= 1
                             )
 
-    # Very Strong Soft Constraint: Highly prefer adjacent sessions (almost hard)
-    # Create objective variables for session grouping
+    # ADJACENCY PREFERENCE: Try to keep sessions of same subject together (if possible)
     grouping_bonus = []
 
-    # For each batch, strongly prefer adjacent sessions of same subject/teacher
     for batch in BATCHES:
         # Skip AK-JR-1 as it's fixed and undisturbed
         if batch == "AK-JR-1":
@@ -370,25 +425,25 @@ def create_building_aware_model():
             # For 9th_CLASS: MANDATORY grouping - faculty must make only 1 trip
             # Each subject must appear in adjacent slots (except slot 6 which counts as 2)
             for subject_idx, subject in enumerate(SUBJECTS):
-                # Check all valid adjacent pairs for 9th_CLASS
+                # Check all valid adjacent pairs for 9th_CLASS (updated slot numbers)
                 ninth_class_adjacent_pairs = [
-                    (1, 2),  # Slots 2,3: 10:00-1:00 PM
-                    (2, 4),  # Slots 3,4: 11:30-1:00 PM then 2:00-3:30 PM (across lunch)
-                    (4, 5),  # Slots 4,5: 2:00-5:00 PM
-                    # Slot 6 is special - counts as 2 sessions by itself
+                    (2, 3),  # Slots 2,3: 10:00-11:30 AM + 11:30-1:00 PM
+                    (3, 5),  # Slots 3,5: 11:30-1:00 PM then 2:00-3:30 PM (across lunch)
+                    (5, 6),  # Slots 5,6: 2:00-3:30 PM + 3:30-5:00 PM
+                    # Slot 7 is special - counts as 2 sessions by itself
                 ]
 
-                # Check if subject is in slot 6 (counts as 2 sessions)
-                is_in_slot6 = model.NewBoolVar(f"{batch}_{subject}_in_slot6")
+                # Check if subject is in slot 7 (counts as 2 sessions)
+                is_in_slot7 = model.NewBoolVar(f"{batch}_{subject}_in_slot7")
                 model.Add(
-                    batch_schedule[batch][6]["subject"] == subject_idx
-                ).OnlyEnforceIf(is_in_slot6)
+                    batch_schedule[batch][7]["subject"] == subject_idx
+                ).OnlyEnforceIf(is_in_slot7)
                 model.Add(
-                    batch_schedule[batch][6]["subject"] != subject_idx
-                ).OnlyEnforceIf(is_in_slot6.Not())
+                    batch_schedule[batch][7]["subject"] != subject_idx
+                ).OnlyEnforceIf(is_in_slot7.Not())
 
-                # If in slot 6, subject is done (2 sessions)
-                # If not in slot 6, must be in exactly one adjacent pair
+                # If in slot 7, subject is done (2 sessions)
+                # If not in slot 7, must be in exactly one adjacent pair
                 pair_assignments = []
                 for slot1, slot2 in ninth_class_adjacent_pairs:
                     if (
@@ -426,70 +481,149 @@ def create_building_aware_model():
 
                         pair_assignments.append(pair_assigned)
 
-                # MANDATORY: Either in slot 6 OR in exactly one adjacent pair
+                # MANDATORY: Either in slot 7 OR in exactly one adjacent pair
                 if pair_assignments:
                     model.Add(sum(pair_assignments) == 1).OnlyEnforceIf(
-                        is_in_slot6.Not()
+                        is_in_slot7.Not()
                     )
-                    model.Add(sum(pair_assignments) == 0).OnlyEnforceIf(is_in_slot6)
+                    model.Add(sum(pair_assignments) == 0).OnlyEnforceIf(is_in_slot7)
             continue
 
-        # For regular batches: heavily reward adjacency
+        # For regular batches: Different rules based on batch
         for subject_idx, subject in enumerate(SUBJECTS):
-            # Check all valid adjacent pairs
-            valid_adjacent_pairs = [
-                (0, 1),  # Slots 1,2: 8:30-11:30 AM
-                (1, 2),  # Slots 2,3: 10:00-1:00 PM
-                (2, 4),  # Slots 3,4: 11:30-1:00 PM then 2:00-3:30 PM (across lunch)
-                (4, 5),  # Slots 4,5: 2:00-5:00 PM
-                (5, 6),  # Slots 5,6: 3:30-7:00 PM
-            ]
+            # SPECIAL CASE: For CHEM-PRK in AK-JR-2 and AK-JR-3, we already fixed slot 2
+            # So we need to handle their second CHEM session differently
+            if ((batch == "AK-JR-2" or batch == "AK-JR-3") and
+                subject_idx == SUBJECTS.index("CHEM")):
+                # For AK-JR-2 and AK-JR-3 CHEM, slot 2 is fixed, so slot 3 must also be CHEM
+                # This satisfies the adjacency requirement (slots 2,3)
+                if 3 in batch_schedule[batch]:  # Slot 3 is 11:30-1:00 PM
+                    model.Add(batch_schedule[batch][3]["subject"] == subject_idx)
+                    model.Add(batch_schedule[batch][3]["session"] == 1)  # Second session
+                continue
 
-            for slot1, slot2 in valid_adjacent_pairs:
-                if slot1 in batch_schedule[batch] and slot2 in batch_schedule[batch]:
-                    # Check if both slots have the same subject
-                    same_subject_adjacent = model.NewBoolVar(
-                        f"{batch}_{subject}_adjacent_{slot1}_{slot2}"
-                    )
+            # SPECIAL CONSTRAINT: KIRITI classes must end by 5 PM if starting at 6:30 AM
+            if ((batch == "AK_E_JR_1" or batch == "AK_E_JR_2") and
+                subject_idx == SUBJECTS.index("PHYSICS")):  # KIRITI teaches PHYSICS
+                # If KIRITI has a class at 6:30 AM (slot 0), all KIRITI classes must be by 5 PM (slot 6)
 
-                    # Both slots must be the same subject
-                    model.Add(
-                        batch_schedule[batch][slot1]["subject"] == subject_idx
-                    ).OnlyEnforceIf(same_subject_adjacent)
-                    model.Add(
-                        batch_schedule[batch][slot2]["subject"] == subject_idx
-                    ).OnlyEnforceIf(same_subject_adjacent)
+                # Check if slot 0 is used for PHYSICS
+                physics_in_slot0 = model.NewBoolVar(f"{batch}_physics_slot0")
+                model.Add(batch_schedule[batch][0]["subject"] == subject_idx).OnlyEnforceIf(physics_in_slot0)
+                model.Add(batch_schedule[batch][0]["subject"] != subject_idx).OnlyEnforceIf(physics_in_slot0.Not())
 
-                    # If not same subject, set to false
-                    not_same_1 = model.NewBoolVar(
-                        f"not_same_{batch}_{subject}_{slot1}_{slot2}_1"
-                    )
-                    not_same_2 = model.NewBoolVar(
-                        f"not_same_{batch}_{subject}_{slot1}_{slot2}_2"
-                    )
+                # If PHYSICS is in slot 0, then PHYSICS cannot be in slot 7 (5:30-7:00 PM)
+                for other_slot in [7]:  # Slot 7 is after 5 PM
+                    if other_slot in batch_schedule[batch]:
+                        physics_not_in_late_slot = model.NewBoolVar(f"{batch}_physics_not_slot{other_slot}")
+                        model.Add(batch_schedule[batch][other_slot]["subject"] != subject_idx).OnlyEnforceIf(physics_in_slot0)
+                        model.Add(physics_not_in_late_slot == 1).OnlyEnforceIf(physics_in_slot0)
 
-                    model.Add(
-                        batch_schedule[batch][slot1]["subject"] != subject_idx
-                    ).OnlyEnforceIf(not_same_1)
-                    model.Add(
-                        batch_schedule[batch][slot2]["subject"] != subject_idx
-                    ).OnlyEnforceIf(not_same_2)
+                # Continue to adjacency preferences
 
-                    model.AddBoolOr([same_subject_adjacent, not_same_1, not_same_2])
-                    model.Add(same_subject_adjacent == 0).OnlyEnforceIf(not_same_1)
-                    model.Add(same_subject_adjacent == 0).OnlyEnforceIf(not_same_2)
+            # Relaxed adjacency for AK_E_JR_1 and AK_E_JR_2 - just preference, not requirement
+            if batch in ["AK_E_JR_1", "AK_E_JR_2"]:
+                # Check all valid adjacent pairs (updated for new slot numbering)
+                valid_adjacent_pairs = [
+                    (0, 1),  # Slots 0,1: 6:30-8:00 AM + 8:30-10:00 AM
+                    (1, 2),  # Slots 1,2: 8:30-10:00 AM + 10:00-11:30 AM
+                    (2, 3),  # Slots 2,3: 10:00-11:30 AM + 11:30-1:00 PM
+                    (3, 5),  # Slots 3,5: 11:30-1:00 PM then 2:00-3:30 PM (across lunch)
+                    (5, 6),  # Slots 5,6: 2:00-3:30 PM + 3:30-5:00 PM
+                    (6, 7),  # Slots 6,7: 3:30-5:00 PM + 5:30-7:00 PM
+                ]
 
-                    # Add very high bonus for adjacency (almost hard constraint)
-                    if BATCH_BUILDING[batch] == "Building_3":
-                        grouping_bonus.append(
-                            same_subject_adjacent * 100
-                        )  # Very high weight for far building
-                    else:
-                        grouping_bonus.append(
-                            same_subject_adjacent * 50
-                        )  # High weight for close buildings
+                # Light preference for adjacent pairs
+                pair_assignments = []
+                for slot1, slot2 in valid_adjacent_pairs:
+                    if slot1 in batch_schedule[batch] and slot2 in batch_schedule[batch]:
+                        # Check if both slots have the same subject
+                        pair_assigned = model.NewBoolVar(
+                            f"{batch}_{subject}_{slot1}_{slot2}_pair"
+                        )
 
-    # Set optimization objective to strongly favor grouping
+                        # Both slots must be the same subject
+                        model.Add(
+                            batch_schedule[batch][slot1]["subject"] == subject_idx
+                        ).OnlyEnforceIf(pair_assigned)
+                        model.Add(
+                            batch_schedule[batch][slot2]["subject"] == subject_idx
+                        ).OnlyEnforceIf(pair_assigned)
+
+                        # If not assigned to this pair, at least one slot is different subject
+                        different_1 = model.NewBoolVar(
+                            f"diff1_{batch}_{subject}_{slot1}_{slot2}"
+                        )
+                        different_2 = model.NewBoolVar(
+                            f"diff2_{batch}_{subject}_{slot1}_{slot2}"
+                        )
+
+                        model.Add(
+                            batch_schedule[batch][slot1]["subject"] != subject_idx
+                        ).OnlyEnforceIf(different_1)
+                        model.Add(
+                            batch_schedule[batch][slot2]["subject"] != subject_idx
+                        ).OnlyEnforceIf(different_2)
+
+                        model.AddBoolOr([pair_assigned, different_1, different_2])
+
+                        pair_assignments.append(pair_assigned)
+
+                # Add light bonus for adjacent pairs (very soft preference)
+                if pair_assignments:
+                    for pair_var in pair_assignments:
+                        grouping_bonus.append(pair_var * 2)  # Very light bonus for AK_E batches
+            else:
+                # For other batches, keep stronger adjacency preference
+                valid_adjacent_pairs = [
+                    (1, 2),  # Slots 1,2: 8:30-10:00 AM + 10:00-11:30 AM
+                    (2, 3),  # Slots 2,3: 10:00-11:30 AM + 11:30-1:00 PM
+                    (3, 5),  # Slots 3,5: 11:30-1:00 PM then 2:00-3:30 PM (across lunch)
+                    (5, 6),  # Slots 5,6: 2:00-3:30 PM + 3:30-5:00 PM
+                    (6, 7),  # Slots 6,7: 3:30-5:00 PM + 5:30-7:00 PM
+                ]
+
+                pair_assignments = []
+                for slot1, slot2 in valid_adjacent_pairs:
+                    if slot1 in batch_schedule[batch] and slot2 in batch_schedule[batch]:
+                        # Check if both slots have the same subject
+                        pair_assigned = model.NewBoolVar(
+                            f"{batch}_{subject}_{slot1}_{slot2}_pair"
+                        )
+
+                        # Both slots must be the same subject
+                        model.Add(
+                            batch_schedule[batch][slot1]["subject"] == subject_idx
+                        ).OnlyEnforceIf(pair_assigned)
+                        model.Add(
+                            batch_schedule[batch][slot2]["subject"] == subject_idx
+                        ).OnlyEnforceIf(pair_assigned)
+
+                        # If not assigned to this pair, at least one slot is different subject
+                        different_1 = model.NewBoolVar(
+                            f"diff1_{batch}_{subject}_{slot1}_{slot2}"
+                        )
+                        different_2 = model.NewBoolVar(
+                            f"diff2_{batch}_{subject}_{slot1}_{slot2}"
+                        )
+
+                        model.Add(
+                            batch_schedule[batch][slot1]["subject"] != subject_idx
+                        ).OnlyEnforceIf(different_1)
+                        model.Add(
+                            batch_schedule[batch][slot2]["subject"] != subject_idx
+                        ).OnlyEnforceIf(different_2)
+
+                        model.AddBoolOr([pair_assigned, different_1, different_2])
+
+                        pair_assignments.append(pair_assigned)
+
+                # Add moderate bonus for adjacent pairs
+                if pair_assignments:
+                    for pair_var in pair_assignments:
+                        grouping_bonus.append(pair_var * 10)  # Moderate bonus for other batches
+
+    # Set objective to prefer adjacency when possible
     if grouping_bonus:
         model.Maximize(sum(grouping_bonus))
 
@@ -530,11 +664,6 @@ def solve_and_display_building_aware():
                         # Special handling for 9th_CLASS with slot numbering
                         header = "TIME        |"
                         for slot_idx in range(len(TIME_SLOTS)):
-                            slot_name = (
-                                f"Slot {slot_idx + 1}"
-                                if slot_idx != LUNCH_SLOT
-                                else "Lunch"
-                            )
                             header += f" {TIME_SLOTS[slot_idx]:<12} |"
 
                         print(header)
@@ -544,7 +673,7 @@ def solve_and_display_building_aware():
                         row = f"{batch:<12}|"
 
                         for slot_idx in range(len(TIME_SLOTS)):
-                            if slot_idx == 0:  # Slot 1 - blocked for IOQM
+                            if slot_idx == 1:  # Slot 1 - blocked for IOQM
                                 row += f" {'IOQM EXAM':<12} |"
                             elif slot_idx == LUNCH_SLOT:  # Lunch break
                                 row += f" {'LUNCH BREAK':<12} |"
@@ -562,8 +691,8 @@ def solve_and_display_building_aware():
                                 subject = SUBJECTS[subject_idx]
                                 teacher = BATCH_FACULTY[batch][subject][session_idx]
 
-                                # For slot 6 (5:30-7:00 PM), indicate it's a double session
-                                if slot_idx == 6:  # Slot 6 is 5:30-7:00 PM
+                                # For slot 7 (5:30-7:00 PM), indicate it's a double session
+                                if slot_idx == 7:  # Slot 7 is 5:30-7:00 PM
                                     cell_content = f"{subject} - {teacher} (2x)"
                                 else:
                                     cell_content = f"{subject} - {teacher}"

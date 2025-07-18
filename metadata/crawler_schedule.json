@@ -1,0 +1,62 @@
+{
+  "QuantStart": {
+    "last_crawled": "2025-07-18T06:00:34.835250",
+    "next_crawl": "2025-07-19T06:00:34.835254",
+    "crawl_count": 1,
+    "success_rate": 1.0
+  },
+  "RobotWealth": {
+    "last_crawled": "2025-07-18T06:01:08.458613",
+    "next_crawl": "2025-07-19T06:01:08.458617",
+    "crawl_count": 1,
+    "success_rate": 1.0
+  },
+  "QuantInsti Blog": {
+    "last_crawled": null,
+    "next_crawl": "2025-07-18T22:16:51.403562",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "Quantpedia Strategies": {
+    "last_crawled": null,
+    "next_crawl": "2025-07-24T22:16:51.403565",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "PyQuantNews": {
+    "last_crawled": null,
+    "next_crawl": "2025-07-24T22:16:51.403570",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "Backtrader Examples": {
+    "last_crawled": null,
+    "next_crawl": "2025-07-24T22:16:51.403573",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "Freqtrade Strategies": {
+    "last_crawled": null,
+    "next_crawl": "2025-07-24T22:16:51.403576",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "Backtesting.py Examples": {
+    "last_crawled": null,
+    "next_crawl": "2025-08-16T22:16:51.403579",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "arXiv Quantitative Finance": {
+    "last_crawled": null,
+    "next_crawl": "2025-08-16T22:16:51.403583",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  },
+  "SSRN Algorithmic Trading": {
+    "last_crawled": null,
+    "next_crawl": "2025-08-16T22:16:51.403585",
+    "crawl_count": 0,
+    "success_rate": 1.0
+  }
+}

@@ -3,6 +3,7 @@
 ## 📋 Time Slot Configuration
 
 ### Standard Time Slots (1.5 hours each)
+- **Slot 0**: 6:30 AM - 8:00 AM (EARLY SLOT - KIRITI only)
 - **Slot 1**: 8:30 AM - 10:00 AM
 - **Slot 2**: 10:00 AM - 11:30 AM
 - **Slot 3**: 11:30 AM - 1:00 PM
@@ -36,17 +37,27 @@
 
 ### Faculty Assignment Rules
 1. **Faculty cannot be changed between batches**
-2. **Classes must run from 8:30 AM to 7:00 PM maximum**
+2. **Classes must run from 6:30 AM to 7:00 PM maximum** (with early slot)
 3. **Minimize faculty travel between buildings**
+
+### KIRITI Special Requirements (NEW)
+- **Early slot (6:30-8:00 AM) only for KIRITI** in Building 1 (AK_E_JR_1, AK_E_JR_2)
+- **If KIRITI starts at 6:30 AM, all KIRITI classes must end by 5:00 PM**
+- **No other faculty can use the 6:30-8:00 AM slot**
+
+### PRK Overlap (ALLOWED)
+- **PRK can teach both AK-JR-2 and AK-JR-3 CHEM at 10:00-11:30 AM** (only allowed overlap)
+- **This is the only teacher overlap permitted**
 
 ### 9th Class Special Requirements
 - **Both 1.5-hour classes must be scheduled together** (avoid double travel)
 - **No grouping options available**
 - **Faculty taking 5:30-7:00 PM slot counts as having 2 slots that day**
 
-### Building Preferences
-- **Strongly prefer**: Adjacent slots in same building without breaks
-- **Acceptable**: Some breaks if unavoidable for optimization
+### Building Preferences (RELAXED)
+- **AK_E_JR_1 and AK_E_JR_2**: Adjacency preference relaxed (flexible scheduling)
+- **Other batches**: Prefer adjacent slots but allow flexibility
+- **Acceptable**: Non-adjacent sessions if needed for feasible solution
 
 ## ⚠️ Current Issues
 
@@ -218,7 +229,8 @@ with open("optimized_schedule.csv", "w", newline="") as f:
 ### 📁 Solution Files
 
 1. **`timetable_optimizer.py`** - Initial optimizer (allows faculty changes) ❌ Not used
-2. **`fixed_faculty_optimizer.py`** - ✅ **FINAL SOLUTION** - Preserves faculty assignments
+2. **`fixed_faculty_optimizer.py`** - Previous solution ❌ Deprecated
+3. **`building_aware_optimizer.py`** - ✅ **CURRENT SOLUTION** - With early slot & relaxed constraints
 
 ### 🔧 Usage Instructions
 
@@ -232,8 +244,8 @@ source venv/bin/activate
 # Navigate to optimizer directory
 cd "user created/external tips"
 
-# Run the fixed faculty optimizer
-python3 fixed_faculty_optimizer.py
+# Run the building-aware optimizer with new constraints
+python3 building_aware_optimizer.py
 ```
 
 ### 📊 Optimization Results
@@ -244,23 +256,29 @@ python3 fixed_faculty_optimizer.py
 - **AK_E_JR_1**: Classes until 8:30 PM ❌
 - **AK_E_JR_2**: Classes until 8:30 PM ❌
 
-**After:**
+**Current Target (Updated Constraints):**
 - **ALL BATCHES**: Classes end by 7:00 PM ✅
+- **EARLY SLOT**: 6:30-8:00 AM available for KIRITI only ✅
+- **KIRITI CONSTRAINT**: If starting at 6:30 AM, end by 5:00 PM ✅
+- **PRK OVERLAP**: Allowed at 10:00-11:30 AM for AK-JR-2 & AK-JR-3 ✅
+- **RELAXED ADJACENCY**: Flexible scheduling for AK_E batches ✅
 - **Faculty assignments**: Preserved exactly ✅
-- **Teacher conflicts**: Zero conflicts ✅
 - **Lunch break**: Maintained at 1:00-2:00 PM ✅
 
 ### 🛠️ Technical Details
 
 - **Solver**: Google OR-Tools CP-SAT (Constraint Programming)
-- **Constraints**:
+- **Updated Constraints**:
   - Fixed faculty assignments per batch
-  - 8:30 AM - 7:00 PM time window
-  - No teacher conflicts across batches
+  - 6:30 AM - 7:00 PM time window (with early slot)
+  - KIRITI early slot exclusivity (6:30-8:00 AM)
+  - KIRITI 5 PM deadline if using early slot
+  - PRK overlap allowed at 10:00-11:30 AM only
+  - Relaxed adjacency for AK_E_JR_1 & AK_E_JR_2
   - 2 sessions per subject per batch
   - Lunch break at 1:00-2:00 PM
-- **Optimization Time**: ~0.05 seconds
-- **Status**: OPTIMAL solution found
+- **Optimization Time**: TBD (in progress)
+- **Status**: Under development with new constraints
 
 ### 📝 Key Learnings
 

@@ -1,0 +1,207 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "IntelForge: Health Check",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py health",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Check IntelForge system health and status"
+        },
+        {
+            "label": "IntelForge: Health Check (JSON)",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py health --json --strict",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Machine-readable health check for CI/CD integration"
+        },
+        {
+            "label": "IntelForge: System Status",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py status --detailed",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Detailed system information and resource monitoring"
+        },
+        {
+            "label": "IntelForge: Semantic Crawl (Dry Run)",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py crawl ${input:urlFile} --dry-run --threshold ${input:threshold}",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Test semantic crawling without saving - preview what would be captured"
+        },
+        {
+            "label": "IntelForge: Production Crawl",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py crawl ${input:urlFile} --threshold ${input:threshold}",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Live semantic crawling with content storage"
+        },
+        {
+            "label": "IntelForge: Advanced Crawl (Stealth)",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py crawl ${input:urlFile} --threshold ${input:threshold} --proxy-rotate --save-raw --max-retries 5",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Stealth crawling with proxy rotation and raw content saving"
+        },
+        {
+            "label": "IntelForge: Full Sync Workflow",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py sync --input ${input:urlFile} --threshold ${input:threshold}",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Complete workflow: crawl → embeddings → snapshot → archive"
+        },
+        {
+            "label": "IntelForge: Create Vector Snapshot",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py snapshot create",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Create backup snapshot of vector database"
+        },
+        {
+            "label": "IntelForge: List Snapshots",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py snapshot list",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Show available vector database snapshots"
+        },
+        {
+            "label": "IntelForge: Freshness Report",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py freshness report",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Generate content freshness and analytics report"
+        },
+        {
+            "label": "IntelForge: PII Scan",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py pii-scan --file ${input:scanFile}",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Scan file for personally identifiable information (PII)"
+        },
+        {
+            "label": "IntelForge: Budget Check",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py budget-check --report",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Check development budget and time tracking"
+        },
+        {
+            "label": "IntelForge: Version Info",
+            "type": "shell",
+            "command": "source venv/bin/activate && python scripts/cli.py version",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Show detailed version and component information"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "urlFile",
+            "description": "Path to URL file",
+            "default": "urls.txt",
+            "type": "promptString"
+        },
+        {
+            "id": "threshold",
+            "description": "Semantic similarity threshold (0.6-0.9)",
+            "default": "0.75",
+            "type": "promptString"
+        },
+        {
+            "id": "scanFile",
+            "description": "File to scan for PII",
+            "default": "content.txt",
+            "type": "promptString"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+  "email": {
+    "enabled": true,
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "username": "",
+    "password": "",
+    "from_name": "IntelForge Analytics"
+  },
+  "reports": {
+    "daily": {
+      "enabled": true,
+      "time": "09:00",
+      "recipients": [
+        "admin@example.com"
+      ],
+      "include_charts": true,
+      "include_alerts": true
+    },
+    "weekly": {
+      "enabled": true,
+      "day": "monday",
+      "time": "09:00",
+      "recipients": [
+        "admin@example.com",
+        "manager@example.com"
+      ],
+      "include_detailed_analysis": true,
+      "include_performance_trends": true
+    },
+    "monthly": {
+      "enabled": true,
+      "day": 1,
+      "time": "09:00",
+      "recipients": [
+        "admin@example.com",
+        "manager@example.com",
+        "executive@example.com"
+      ],
+      "include_executive_summary": true,
+      "include_recommendations": true
+    }
+  },
+  "formatting": {
+    "company_name": "IntelForge",
+    "logo_url": "",
+    "theme_color": "#667eea",
+    "include_raw_data": false
+  },
+  "notifications": {
+    "slack_webhook": "",
+    "teams_webhook": "",
+    "discord_webhook": ""
+  }
+}

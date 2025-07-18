@@ -1,0 +1,9 @@
+https://www.quantstart.com/rss.xml
+https://robotwealth.com/feed/
+https://blog.quantinsti.com/feed/
+https://quantocracy.com/feed/
+https://quantpedia.com/feed/
+https://www.quantstart.com/articles/
+https://robotwealth.com/articles/
+https://blog.quantinsti.com/tag/trading-strategy/
+https://quantpedia.com/strategies/

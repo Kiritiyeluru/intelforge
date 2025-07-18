@@ -1,0 +1,65 @@
+[
+  {
+    "name": "high_failure_rate",
+    "condition": "failure_rate > threshold",
+    "threshold": 0.2,
+    "severity": "high",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "slow_response",
+    "condition": "avg_response_time > threshold",
+    "threshold": 300,
+    "severity": "medium",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "high_cpu",
+    "condition": "cpu_usage > threshold",
+    "threshold": 80.0,
+    "severity": "medium",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "high_memory",
+    "condition": "memory_usage > threshold",
+    "threshold": 85.0,
+    "severity": "medium",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "high_disk",
+    "condition": "disk_usage > threshold",
+    "threshold": 90.0,
+    "severity": "high",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "large_queue",
+    "condition": "queue_size > threshold",
+    "threshold": 50,
+    "severity": "medium",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  },
+  {
+    "name": "crawler_down",
+    "condition": "no_recent_activity",
+    "threshold": 3600,
+    "severity": "critical",
+    "enabled": true,
+    "cooldown_minutes": 30,
+    "last_triggered": null
+  }
+]

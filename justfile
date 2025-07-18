@@ -482,6 +482,69 @@ db-backup:
     cp -r chroma_storage chroma_storage_backup_$timestamp
     echo "✅ Backup created: chroma_storage_backup_$timestamp"
 
+# Phase 5.2: Cron Integration Tasks
+
+# Setup crawler scheduling cron jobs
+setup-crawling-schedule:
+    #!/usr/bin/env bash
+    source {{venv_path}}/bin/activate
+    echo "📅 Setting up IntelForge crawler scheduling..."
+
+    # Create log directories
+    mkdir -p logs/crawler backups
+
+    # Check if cron jobs already exist
+    if crontab -l 2>/dev/null | grep -q "IntelForge Crawler Schedule"; then
+        echo "WARNING: IntelForge crawler cron jobs already exist"
+        echo "Use 'crontab -e' to manually manage existing entries"
+        echo "Or run 'just remove-crawling-schedule' to remove existing jobs"
+    else
+        echo "Adding crawler cron jobs..."
+        (crontab -l 2>/dev/null; cat cron/crawler_schedule.cron) | crontab -
+        echo "✅ Crawler cron jobs added successfully!"
+    fi
+
+    # Test the scheduler
+    echo "🧪 Testing scheduler functionality..."
+    python scripts/crawler_scheduler.py --show-schedule
+
+    echo "✅ Crawler scheduling setup complete!"
+
+# Remove crawler scheduling cron jobs
+remove-crawling-schedule:
+    #!/usr/bin/env bash
+    echo "🗑️ Removing IntelForge crawler cron jobs..."
+
+    # Remove lines containing IntelForge crawler references
+    crontab -l 2>/dev/null | grep -v "IntelForge Crawler Schedule" | grep -v "crawler_scheduler.py" | grep -v "semantic_crawler.py --health-check" | crontab -
+
+    echo "✅ Crawler cron jobs removed"
+
+# Run scheduled crawls manually
+run-scheduled-crawls PRIORITY="" MAX_SOURCES="10":
+    #!/usr/bin/env bash
+    source {{venv_path}}/bin/activate
+    echo "🚀 Running scheduled crawls..."
+
+    if [ -n "{{PRIORITY}}" ]; then
+        python scripts/crawler_scheduler.py --priority {{PRIORITY}} --max-sources {{MAX_SOURCES}}
+    else
+        python scripts/crawler_scheduler.py --max-sources {{MAX_SOURCES}}
+    fi
+
+# Show crawler schedule status
+show-crawler-schedule:
+    #!/usr/bin/env bash
+    source {{venv_path}}/bin/activate
+    python scripts/crawler_scheduler.py --show-schedule
+
+# Test crawler scheduler with dry run
+test-crawler-scheduler PRIORITY="daily":
+    #!/usr/bin/env bash
+    source {{venv_path}}/bin/activate
+    echo "🧪 Testing crawler scheduler (dry run)..."
+    python scripts/crawler_scheduler.py --priority {{PRIORITY}} --max-sources 3 --dry-run
+
 # Show help for all commands
 help:
     @echo "IntelForge Task Runner - Available Commands:"
@@ -500,3 +563,9 @@ help:
     @echo "  just setup-monitoring - Configure cron jobs"
     @echo "  just monitor          - Run continuous monitoring"
     @echo "  just health-check     - Check system health"
+    @echo ""
+    @echo "Phase 5 - Crawler Scheduling:"
+    @echo "  just setup-crawling-schedule    - Setup automated crawling"
+    @echo "  just show-crawler-schedule      - Show current schedule"
+    @echo "  just run-scheduled-crawls       - Run scheduled crawls manually"
+    @echo "  just test-crawler-scheduler     - Test scheduler with dry run"
