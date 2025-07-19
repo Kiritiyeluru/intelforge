@@ -21,6 +21,7 @@ def run_scrapy_crawler(
     proxy_rotate: bool = False,
     max_retries: int = 3,
     ignore_robots: bool = False,
+    output_dir: str = None,
 ) -> List[Dict[str, Any]]:
     """
     Run scrapy spider with trafilatura integration
@@ -61,49 +62,53 @@ def run_scrapy_crawler(
         # Configure proxy rotation if enabled
         if proxy_rotate:
             settings.set("ROTATING_PROXY_LIST_PATH", "config/proxy_pools.txt")
-            settings.set(
-                "DOWNLOADER_MIDDLEWARES",
-                {
-                    "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
-                    "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
-                },
+            # Get existing middlewares and add proxy middlewares
+            existing_middlewares = settings.get("DOWNLOADER_MIDDLEWARES")
+            proxy_middlewares = {
+                "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,
+                "rotating_proxies.middlewares.BanDetectionMiddleware": 370,
+            }
+            # Merge middlewares
+            combined_middlewares = {**existing_middlewares, **proxy_middlewares}
+            settings.set("DOWNLOADER_MIDDLEWARES", combined_middlewares)
+
+        # Configure output directory and file
+        if output_dir:
+            output_path = Path(output_dir)
+            output_path.mkdir(parents=True, exist_ok=True)
+            output_file_path = output_path / "scraped_data.jsonl"
+        else:
+            # Fallback to temporary file
+            output_file = tempfile.NamedTemporaryFile(
+                mode="w", suffix=".jsonl", delete=False
             )
+            output_file.close()
+            output_file_path = output_file.name
 
-        # Create output file
-        output_file = tempfile.NamedTemporaryFile(
-            mode="w", suffix=".json", delete=False
-        )
-        output_file.close()
-
-        # Configure feeds for output
-        settings.set("FEEDS", {output_file.name: {"format": "json", "overwrite": True}})
+        # Configure feeds for output (use JSONL for better streaming)
+        settings.set("FEEDS", {str(output_file_path): {"format": "jsonlines", "overwrite": True}})
 
         # Create and run crawler
         process = CrawlerProcess(settings)
         process.crawl(SemanticSpider, urls_file=urls_file, save_raw=save_raw)
         process.start()
 
-        # Read results
+        # Read results from JSONL file
         results = []
         try:
-            with open(output_file.name, "r") as f:
-                content = f.read().strip()
-                if content:
-                    # Handle both single objects and arrays
-                    if content.startswith("["):
-                        results = json.loads(content)
-                    else:
-                        # Line-delimited JSON
-                        results = []
-                        for line in content.split("\n"):
-                            if line.strip():
-                                results.append(json.loads(line))
-        except (json.JSONDecodeError, FileNotFoundError):
+            with open(output_file_path, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        results.append(json.loads(line))
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"Warning: Could not read results from {output_file_path}: {e}")
             results = []
 
-        # Cleanup
+        # Cleanup temporary files (keep output if output_dir specified)
         Path(urls_file).unlink(missing_ok=True)
-        Path(output_file.name).unlink(missing_ok=True)
+        if not output_dir:
+            Path(output_file_path).unlink(missing_ok=True)
 
         return results
 

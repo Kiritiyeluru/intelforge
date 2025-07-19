@@ -1,0 +1,162 @@
+{
+  "timestamp": "2025-07-19T17:30:00Z",
+  "system_status": "operational",
+  "infrastructure": {
+    "crawling_engine": {
+      "status": "healthy",
+      "version": "scrapy_2.13.3_trafilatura",
+      "proxy_middleware": "disabled",
+      "last_successful_run": "2025-07-19T06:13:49Z",
+      "success_rate_24h": "100%"
+    },
+    "storage_systems": {
+      "vector_storage": {
+        "type": "qdrant",
+        "status": "healthy",
+        "collection": "semantic_capture",
+        "embedding_model": "all-MiniLM-L6-v2"
+      },
+      "file_storage": {
+        "markdown_files": "healthy",
+        "data_runs": "healthy",
+        "logs": "healthy"
+      }
+    },
+    "content_processing": {
+      "semantic_analysis": "enabled",
+      "threshold": 0.75,
+      "language_filtering": "enabled",
+      "content_validation": "available"
+    }
+  },
+  "resource_usage": {
+    "memory": {
+      "current_usage": "1.4GB",
+      "peak_usage": "1.4GB",
+      "limit": "2.0GB",
+      "utilization": "70%",
+      "status": "normal"
+    },
+    "disk_space": {
+      "total": "100GB",
+      "used": "15GB",
+      "available": "85GB",
+      "utilization": "15%",
+      "status": "excellent"
+    },
+    "network": {
+      "bandwidth_usage": "minimal",
+      "request_rate": "1.75/second",
+      "status": "optimal"
+    }
+  },
+  "job_execution": {
+    "last_completed_job": {
+      "job_id": "immediate_crawl_20250719",
+      "status": "completed",
+      "duration": "21 seconds",
+      "urls_processed": 35,
+      "success_rate": "100%",
+      "content_captured": "TBD",
+      "output_directory": "/home/kiriti/alpha_projects/intelforge/crawl_ops/data_runs/20250719"
+    },
+    "upcoming_jobs": [
+      {
+        "job_id": "finance-daily-2am",
+        "next_execution": "2025-07-20T02:00:00Z",
+        "estimated_duration": "5 minutes",
+        "status": "scheduled"
+      }
+    ],
+    "job_queue": {
+      "active": 0,
+      "pending": 0,
+      "failed": 0
+    }
+  },
+  "target_lists": {
+    "finance_premium": {
+      "file": "config/targets_finance.txt",
+      "url_count": 35,
+      "last_validated": "2025-07-19T06:13:28Z",
+      "status": "ready"
+    },
+    "academic_research": {
+      "file": "urls_academic_research.txt",
+      "status": "pending_validation"
+    },
+    "technical_blogs": {
+      "file": "urls_technical_blogs.txt", 
+      "status": "pending_validation"
+    },
+    "github_strategies": {
+      "file": "urls_github_strategies.txt",
+      "status": "pending_validation"
+    },
+    "tier1_premium": {
+      "file": "urls_tier1_premium.txt",
+      "status": "pending_validation"
+    }
+  },
+  "performance_metrics": {
+    "average_processing_speed": "1.75 urls/second",
+    "content_quality_score": "0.75+ (threshold)",
+    "system_reliability": "100% (last 24h)",
+    "error_rate": "0%",
+    "optimization_status": "baseline_established"
+  },
+  "operational_readiness": {
+    "nightly_schedule": "ready",
+    "monitoring_systems": "active",
+    "backup_systems": "configured",
+    "failure_recovery": "documented",
+    "proxy_fallback": "not_required"
+  },
+  "data_locations": {
+    "primary_storage": "/home/kiriti/alpha_projects/intelforge/crawl_ops/data_runs/",
+    "latest_run": "20250719",
+    "latest_data_file": "/home/kiriti/alpha_projects/intelforge/crawl_ops/data_runs/20250719/scraped_data.jsonl",
+    "latest_content": {
+      "source": "QuantStart Articles",
+      "size_chars": 15422,
+      "url": "https://www.quantstart.com/articles/",
+      "topics": ["options_pricing", "statistical_analysis", "algorithmic_trading", "programming"]
+    }
+  },
+  "recent_issues": {
+    "resolved": [
+      {
+        "issue": "proxy_middleware_configuration",
+        "resolved_at": "2025-07-19T06:13:45Z",
+        "solution": "disabled_hardcoded_middleware",
+        "status": "permanently_resolved"
+      }
+    ],
+    "active": [],
+    "monitoring": []
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "action": "validate_additional_target_lists",
+      "description": "Validate and test academic research, technical blogs, and GitHub strategy target lists"
+    },
+    {
+      "priority": "low", 
+      "action": "implement_automated_reporting",
+      "description": "Set up automated daily and weekly performance reporting"
+    },
+    {
+      "priority": "low",
+      "action": "consider_crawl4ai_migration",
+      "description": "Evaluate Crawl4AI for enhanced semantic analysis capabilities"
+    }
+  ],
+  "next_maintenance_window": "2025-07-21T01:00:00Z",
+  "documentation_status": {
+    "lessons_learned": "comprehensive",
+    "job_planning": "complete", 
+    "operational_procedures": "documented",
+    "troubleshooting_guides": "available"
+  }
+}

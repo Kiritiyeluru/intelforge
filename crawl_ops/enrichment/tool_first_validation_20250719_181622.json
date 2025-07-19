@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-07-19T18:16:22.935007",
+  "pipeline_results": [
+    {
+      "article": 1,
+      "tags_found": 16,
+      "tags": [
+        "backtest",
+        "beginner",
+        "macd",
+        "mean",
+        "mean_reversion"
+      ],
+      "quality_score": 57.0,
+      "processing_time": "0.017s",
+      "storage_status": "\u26a0\ufe0f Storage simulated (Qdrant unavailable): [Errno 111] Connection refused..."
+    },
+    {
+      "article": 2,
+      "tags_found": 5,
+      "tags": [
+        "advanced",
+        "optimization",
+        "options",
+        "portfolio",
+        "strategy"
+      ],
+      "quality_score": 28.25,
+      "processing_time": "0.012s",
+      "storage_status": "\u26a0\ufe0f Storage simulated (Qdrant unavailable): [Errno 111] Connection refused..."
+    }
+  ],
+  "reduction_analysis": {
+    "total_original_loc": 2385,
+    "total_tool_first_loc": 150,
+    "reduction_percentage": 93.71069182389937,
+    "components": [
+      {
+        "component": "Content Scoring",
+        "original_loc": 375,
+        "tool_first_loc": 40,
+        "reduction": "89%",
+        "tools": "textstat + YAKE"
+      },
+      {
+        "component": "Auto-Tagging",
+        "original_loc": 490,
+        "tool_first_loc": 50,
+        "reduction": "90%",
+        "tools": "spaCy + rapidfuzz"
+      },
+      {
+        "component": "Strategy Extraction",
+        "original_loc": 460,
+        "tool_first_loc": 60,
+        "reduction": "87%",
+        "tools": "FlashText"
+      },
+      {
+        "component": "Storage Wrapper",
+        "original_loc": 380,
+        "tool_first_loc": 0,
+        "reduction": "100%",
+        "tools": "Native Qdrant API"
+      },
+      {
+        "component": "Analytics Engine",
+        "original_loc": 680,
+        "tool_first_loc": 0,
+        "reduction": "100%",
+        "tools": "Jupyter + pandas/plotly"
+      }
+    ]
+  },
+  "status": "SUCCESS",
+  "philosophy": "REUSE OVER REBUILD"
+}

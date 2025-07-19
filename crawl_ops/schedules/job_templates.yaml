@@ -1,0 +1,266 @@
+# IntelForge Crawl Job Templates
+# Configuration templates for different crawling scenarios
+
+templates:
+  
+  # ============================================================================
+  # PRODUCTION TEMPLATES
+  # ============================================================================
+  
+  finance_daily:
+    name: "Finance Daily Crawl"
+    description: "Standard daily finance content collection"
+    schedule: "0 2 * * *"
+    target_file: "config/targets_finance.txt"
+    profile: "standard"
+    estimated_duration: "5 minutes"
+    output_pattern: "crawl_ops/data_runs/{date}/"
+    settings:
+      threshold: 0.75
+      concurrency: 2
+      download_delay: 5
+      timeout: 30
+      retries: 3
+      proxy_enabled: false
+      memory_limit: "2048MB"
+    monitoring:
+      alert_on_failure: true
+      performance_tracking: true
+      quality_validation: true
+    
+  research_weekly:
+    name: "Research Weekly Crawl"
+    description: "Academic and research content collection"
+    schedule: "10 2 * * 1"
+    target_file: "urls_academic_research.txt"
+    profile: "thorough"
+    estimated_duration: "15 minutes"
+    output_pattern: "crawl_ops/data_runs/research_{date}/"
+    settings:
+      threshold: 0.80
+      concurrency: 1
+      download_delay: 8
+      timeout: 45
+      retries: 5
+      proxy_enabled: false
+      memory_limit: "3072MB"
+      enhanced_validation: true
+    monitoring:
+      alert_on_failure: true
+      performance_tracking: true
+      quality_validation: true
+      
+  comprehensive_weekly:
+    name: "Weekly Comprehensive Crawl"
+    description: "Multi-source comprehensive content collection"
+    schedule: "0 20 * * 0"
+    target_file: "multiple"
+    profile: "balanced"
+    estimated_duration: "45 minutes"
+    output_pattern: "crawl_ops/data_runs/weekly_{date}/"
+    target_rotation:
+      - "urls_technical_blogs.txt"
+      - "urls_github_strategies.txt"
+      - "urls_tier1_premium.txt"
+    settings:
+      threshold: 0.75
+      concurrency: 2
+      download_delay: 5
+      timeout: 30
+      retries: 3
+      proxy_enabled: false
+      memory_limit: "2048MB"
+    monitoring:
+      alert_on_failure: true
+      performance_tracking: true
+      quality_validation: true
+
+  # ============================================================================
+  # TESTING TEMPLATES
+  # ============================================================================
+      
+  fast_test:
+    name: "Fast Test Crawl"
+    description: "Quick testing with reduced targets"
+    schedule: "manual"
+    target_file: "any"
+    profile: "fast"
+    estimated_duration: "2 minutes"
+    output_pattern: "crawl_ops/data_runs/test_{timestamp}/"
+    settings:
+      threshold: 0.70
+      concurrency: 4
+      download_delay: 2
+      timeout: 15
+      retries: 2
+      proxy_enabled: false
+      memory_limit: "1024MB"
+      dry_run: true
+    monitoring:
+      alert_on_failure: false
+      performance_tracking: true
+      quality_validation: false
+      
+  development_test:
+    name: "Development Testing"
+    description: "Development environment testing"
+    schedule: "0 10 * * 6"
+    target_file: "data/test_urls.txt"
+    profile: "fast"
+    estimated_duration: "5 minutes"
+    output_pattern: "crawl_ops/data_runs/dev_test_{date}/"
+    settings:
+      threshold: 0.65
+      concurrency: 2
+      download_delay: 3
+      timeout: 20
+      retries: 2
+      proxy_enabled: false
+      memory_limit: "1024MB"
+      dry_run: true
+    monitoring:
+      alert_on_failure: false
+      performance_tracking: true
+      quality_validation: false
+
+  # ============================================================================
+  # SPECIAL PURPOSE TEMPLATES
+  # ============================================================================
+  
+  emergency_recovery:
+    name: "Emergency Recovery Crawl"
+    description: "Minimal settings for system recovery"
+    schedule: "manual"
+    target_file: "config/targets_finance.txt"
+    profile: "minimal"
+    estimated_duration: "10 minutes"
+    output_pattern: "crawl_ops/data_runs/emergency_{timestamp}/"
+    settings:
+      threshold: 0.60
+      concurrency: 1
+      download_delay: 10
+      timeout: 60
+      retries: 1
+      proxy_enabled: false
+      memory_limit: "512MB"
+      max_urls: 10
+    monitoring:
+      alert_on_failure: false
+      performance_tracking: true
+      quality_validation: false
+      
+  high_quality_research:
+    name: "High Quality Research Crawl"
+    description: "Maximum quality filtering for research content"
+    schedule: "manual"
+    target_file: "any"
+    profile: "thorough"
+    estimated_duration: "variable"
+    output_pattern: "crawl_ops/data_runs/research_hq_{timestamp}/"
+    settings:
+      threshold: 0.85
+      concurrency: 1
+      download_delay: 10
+      timeout: 60
+      retries: 5
+      proxy_enabled: false
+      memory_limit: "4096MB"
+      enhanced_validation: true
+      content_requirements: "strict"
+    monitoring:
+      alert_on_failure: true
+      performance_tracking: true
+      quality_validation: true
+
+# ============================================================================
+# PROFILE DEFINITIONS
+# ============================================================================
+
+profiles:
+  minimal:
+    description: "Minimal resource usage for emergency situations"
+    concurrency: 1
+    download_delay: 10
+    timeout: 60
+    retries: 1
+    memory_limit: "512MB"
+    
+  fast:
+    description: "Fast execution for testing and development"
+    concurrency: 4
+    download_delay: 2
+    timeout: 15
+    retries: 2
+    memory_limit: "1024MB"
+    
+  standard:
+    description: "Standard production settings - balanced performance"
+    concurrency: 2
+    download_delay: 5
+    timeout: 30
+    retries: 3
+    memory_limit: "2048MB"
+    
+  balanced:
+    description: "Balanced settings for mixed content types"
+    concurrency: 2
+    download_delay: 5
+    timeout: 30
+    retries: 3
+    memory_limit: "2048MB"
+    
+  thorough:
+    description: "Thorough analysis with enhanced validation"
+    concurrency: 1
+    download_delay: 8
+    timeout: 45
+    retries: 5
+    memory_limit: "3072MB"
+    enhanced_validation: true
+
+# ============================================================================
+# SCHEDULE PATTERNS
+# ============================================================================
+
+schedule_patterns:
+  daily_2am: "0 2 * * *"
+  daily_6am: "0 6 * * *"
+  weekday_morning: "0 8 * * 1-5"
+  weekend_morning: "0 10 * * 6,0"
+  weekly_monday: "0 2 * * 1"
+  weekly_sunday: "0 20 * * 0"
+  monthly_first: "0 1 1 * *"
+  hourly_business: "0 9-17 * * 1-5"
+  every_4_hours: "0 */4 * * *"
+
+# ============================================================================
+# COMMAND TEMPLATES
+# ============================================================================
+
+commands:
+  nightly_crawl: "/home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh"
+  cli_sync: "cd {project_dir} && source venv/bin/activate && python scripts/cli.py sync --input {target_file} --threshold {threshold}"
+  health_check: "cd {project_dir} && source venv/bin/activate && python scripts/cli.py health --json"
+  dry_run: "cd {project_dir} && source venv/bin/activate && python scripts/cli.py sync --input {target_file} --dry-run"
+
+# ============================================================================
+# MONITORING CONFIGURATIONS
+# ============================================================================
+
+monitoring:
+  default_alerts:
+    failure_rate_threshold: 20
+    memory_usage_threshold: 80
+    disk_usage_threshold: 90
+    execution_time_threshold: 120  # percent of estimated duration
+    
+  notification_channels:
+    log_files: "crawl_ops/logs/"
+    status_files: "crawl_ops/status/"
+    reports: "crawl_ops/reports/"
+    
+  health_checks:
+    system_resources: true
+    crawler_availability: true
+    storage_accessibility: true
+    target_file_validity: true

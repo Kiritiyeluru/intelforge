@@ -1,0 +1,12 @@
+IntelForge Nightly Crawl Summary
+================================
+Date: 2025-07-19 06:13:49
+Target File: /home/kiriti/alpha_projects/intelforge/config/targets_finance.txt
+Output Directory: /home/kiriti/alpha_projects/intelforge/data_runs/20250719
+
+Results:
+- Files Crawled: 0
+- Disk Usage: 4.0K
+- Target URLs: 35
+
+Status: SUCCESS

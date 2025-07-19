@@ -11,6 +11,66 @@ python_path := venv_path + "/bin/python"
 default:
     @just --list
 
+# ============================================================================
+# NIGHTLY CRAWLER TASKS
+# ============================================================================
+
+# Run nightly crawler manually (same as cron job)
+sync-nightly:
+    #!/usr/bin/env bash
+    echo "🌙 Running IntelForge nightly crawler manually..."
+    {{project_root}}/cron/nightly_crawl.sh
+
+# Install nightly crawler cron job
+install-cron:
+    #!/usr/bin/env bash
+    echo "⚙️  Installing nightly crawler cron job..."
+    {{project_root}}/cron/install_cron.sh
+
+# Test nightly crawler (dry run)
+test-nightly:
+    #!/usr/bin/env bash
+    echo "🧪 Testing nightly crawler configuration..."
+    source {{venv_path}}/bin/activate
+    TODAY=$(date +%Y%m%d)
+    TEST_DIR="{{project_root}}/data_runs/test_$TODAY"
+    echo "📂 Test output directory: $TEST_DIR"
+    mkdir -p "$TEST_DIR"
+    {{python_path}} {{project_root}}/scripts/cli.py sync \
+        --input {{project_root}}/urls_tier1_premium.txt \
+        --threshold 0.75 \
+        --skip-embeddings \
+        --skip-snapshot \
+        --skip-archive \
+        --dry-run
+    echo "✅ Nightly crawler test completed"
+
+# View nightly crawler logs
+logs-nightly:
+    #!/usr/bin/env bash
+    LOG_FILE="{{project_root}}/logs/intelforge_nightly.log"
+    if [[ -f "$LOG_FILE" ]]; then
+        echo "📋 Showing last 50 lines of nightly crawler logs:"
+        tail -n 50 "$LOG_FILE"
+    else
+        echo "📋 No nightly crawler logs found at $LOG_FILE"
+    fi
+
+# Check cron job status
+status-cron:
+    #!/usr/bin/env bash
+    echo "📅 Checking cron job status..."
+    if crontab -l | grep -q "nightly_crawl.sh"; then
+        echo "✅ Nightly crawler cron job is installed"
+        echo "📊 Current crontab entries:"
+        crontab -l | grep -A1 -B1 "nightly_crawl.sh"
+        echo
+        echo "📅 Next run: $(date -d 'tomorrow 2:00' '+%Y-%m-%d %H:%M:%S')"
+    else
+        echo "❌ Nightly crawler cron job is not installed"
+        echo "💡 Run 'just install-cron' to install it"
+    fi
+
 # Fast test execution with parallel processing
 test-fast:
     #!/usr/bin/env bash

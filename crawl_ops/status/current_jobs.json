@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-07-19T17:00:00Z",
+  "active_jobs": [],
+  "queued_jobs": [
+    {
+      "job_id": "immediate_crawl_20250719",
+      "type": "manual_trigger",
+      "status": "queued",
+      "target_file": "config/targets_finance.txt",
+      "requested_by": "user",
+      "priority": "high",
+      "estimated_duration": "15-30 minutes"
+    }
+  ],
+  "system_status": "ready"
+}

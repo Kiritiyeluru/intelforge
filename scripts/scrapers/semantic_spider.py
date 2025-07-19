@@ -6,6 +6,8 @@ Replaces custom httpx/asyncio implementation with scrapy+trafilatura
 from pathlib import Path
 
 import scrapy
+import trafilatura
+from scrapy.http import HtmlResponse
 
 
 class SemanticSpider(scrapy.Spider):
@@ -39,7 +41,7 @@ class SemanticSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        """Parse response - trafilatura middleware handles extraction"""
+        """Parse response - extract content directly using trafilatura"""
 
         # Save raw HTML if enabled
         if self.save_raw:
@@ -51,14 +53,53 @@ class SemanticSpider(scrapy.Spider):
                 f.write(response.text)
             self.logger.info(f"Saved raw HTML to {raw_file}")
 
-        # Trafilatura middleware has already processed the content
-        trafilatura_item = response.meta.get("trafilatura_item")
+        # Only process HTML responses
+        if not isinstance(response, HtmlResponse):
+            self.logger.warning(f"Non-HTML response from {response.url}")
+            return
 
-        if trafilatura_item:
-            # Content was successfully extracted
-            yield trafilatura_item
+        # Extract content directly using trafilatura
+        self.logger.debug(f"Extracting content from {response.url}")
+        
+        # Get settings for trafilatura
+        settings = self.crawler.settings
+        content = trafilatura.extract(
+            response.text,
+            include_comments=settings.getbool("TRAFILATURA_INCLUDE_COMMENTS", False),
+            include_tables=settings.getbool("TRAFILATURA_INCLUDE_TABLES", True),
+            include_formatting=settings.getbool("TRAFILATURA_INCLUDE_FORMATTING", True),
+            url=response.url,
+        )
+
+        self.logger.debug(f"Extracted content length: {len(content) if content else 0}")
+
+        # Extract metadata if enabled
+        metadata = None
+        if settings.getbool("TRAFILATURA_EXTRACT_METADATA", True):
+            metadata = trafilatura.extract_metadata(response.text)
+            self.logger.debug(f"Extracted metadata: {metadata.title if metadata and metadata.title else 'No title'}")
+
+        # Check content length requirement
+        min_content_length = settings.getint("TRAFILATURA_MIN_CONTENT_LENGTH", 100)
+        
+        if content and len(content.strip()) >= min_content_length:
+            # Create and yield the item
+            item = {
+                "url": response.url,
+                "title": metadata.title if metadata and metadata.title else "Untitled",
+                "content": content,
+                "author": metadata.author if metadata and metadata.author else "Unknown",
+                "date": metadata.date if metadata and metadata.date else None,
+                "content_length": len(content),
+                "extraction_method": "trafilatura",
+                "site": response.url.split("/")[2],
+            }
+            
+            self.logger.info(f"Yielding item from {response.url}: {item['title'][:50]}... ({len(content)} chars)")
+            yield item
         else:
-            self.logger.debug(f"No content extracted from {response.url}")
+            content_length = len(content) if content else 0
+            self.logger.warning(f"Content too short or empty from {response.url}: {content_length} chars (min: {min_content_length})")
 
 
 # Scrapy settings for semantic spider
@@ -69,15 +110,14 @@ SCRAPY_SETTINGS = {
     "DOWNLOADER_MIDDLEWARES": {
         # Anti-detection middleware (ordered by priority)
         "scrapy_fake_useragent.middleware.RandomUserAgentMiddleware": 350,
-        "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,
-        "rotating_proxies.middlewares.BanDetectionMiddleware": 370,
-        "scripts.scrapers.trafilatura_middleware.TrafilaturaMiddleware": 585,
+        # Proxy middleware will be added conditionally in scrapy_integration.py
+        # TrafilaturaMiddleware removed - extraction now done in spider parse() method
     },
     "TRAFILATURA_INCLUDE_COMMENTS": False,
     "TRAFILATURA_INCLUDE_TABLES": True,
     "TRAFILATURA_INCLUDE_FORMATTING": True,
     "TRAFILATURA_EXTRACT_METADATA": True,
-    "TRAFILATURA_MIN_CONTENT_LENGTH": 300,
+    "TRAFILATURA_MIN_CONTENT_LENGTH": 100,
     "ROBOTSTXT_OBEY": True,
     "CONCURRENT_REQUESTS": 2,  # Reduced for respectful crawling
     "DOWNLOAD_DELAY": 5,  # Increased for politeness
@@ -129,5 +169,5 @@ SCRAPY_SETTINGS = {
     "MEMUSAGE_LIMIT_MB": 2048,
     "MEMUSAGE_WARNING_MB": 1024,
     "LOG_LEVEL": "INFO",
-    "LOG_FILE": "logs/semantic_spider.log",
+    "LOG_FILE": "crawl_ops/logs/semantic_spider.log",
 }

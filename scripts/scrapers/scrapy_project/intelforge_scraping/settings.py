@@ -59,11 +59,12 @@ AUTOTHROTTLE_DEBUG = False
 DOWNLOADER_MIDDLEWARES = {
     # Anti-detection middleware (ordered by priority)
     "scrapy_fake_useragent.middleware.RandomUserAgentMiddleware": 350,
-    "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,
-    "rotating_proxies.middlewares.BanDetectionMiddleware": 370,
+    # "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,  # DISABLED - No proxy config
+    # "rotating_proxies.middlewares.BanDetectionMiddleware": 370,   # DISABLED - No proxy config
     "intelforge_scraping.middlewares.StealthDownloaderMiddleware": 400,
     "intelforge_scraping.middlewares.NoDriverMiddleware": 401,
     "intelforge_scraping.middlewares.RateLimitingMiddleware": 420,  # Phase 4 rate limiting
+    "crawl_ops.middleware.dedup_middleware.URLTrackingMiddleware": 100,  # URL deduplication
     "intelforge_scraping.middlewares.IntelforgeScrapingDownloaderMiddleware": 543,
 }
 
@@ -76,6 +77,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    "crawl_ops.middleware.tracking_pipeline.URLRecordingPipeline": 200,  # URL tracking
+    "crawl_ops.middleware.tracking_pipeline.ContentValidationPipeline": 250,  # Content validation
     "intelforge_scraping.pipelines.ObsidianMarkdownPipeline": 300,
 }
 
@@ -181,3 +184,59 @@ MEMUSAGE_WARNING_MB = 1024
 # Logging configuration
 LOG_LEVEL = "INFO"
 LOG_FILE = "logs/scrapy.log"
+
+# URL Tracking Configuration
+URL_TRACKING = {
+    "enabled": True,
+    "database_path": "crawl_ops/tracking/url_tracker.db",
+    "default_refresh_days": 30,
+    
+    # Site-specific refresh policies (days)
+    "site_policies": {
+        "quantstart.com": 90,
+        "investopedia.com": 30,
+        "blog.quantinsti.com": 7,
+        "quantinsti.com": 14,
+        "reddit.com": 1,
+        "news.ycombinator.com": 1,
+        "stackoverflow.com": 30,
+        "github.com": 7,
+        "arxiv.org": 180,
+        "wikipedia.org": 30,
+        "medium.com": 14,
+        "towards-data-science": 14,
+    },
+    
+    # Content change detection settings
+    "content_change_detection": True,
+    "check_http_headers": False,  # Enable for sites with reliable headers
+    "quality_scoring": True,
+    
+    # Content validation settings
+    "validation": {
+        "min_content_length": 100,
+        "min_quality_score": 20,
+        "drop_duplicates": True,
+        "validate_encoding": True,
+    },
+    
+    # URL filtering settings
+    "filtering": {
+        "min_quality_score": 0,
+        "max_failed_attempts": 3,
+        "blacklist_patterns": [
+            r"/wp-admin/",
+            r"/login",
+            r"/register",
+            r"\.pdf$",
+            r"\.zip$",
+            r"/api/",
+        ],
+    },
+    
+    # Analytics and reporting
+    "analytics": {
+        "enabled": True,
+        "report_frequency": "weekly",
+    },
+}

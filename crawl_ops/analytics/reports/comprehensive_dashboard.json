@@ -1,0 +1,411 @@
+{
+  "summary": {
+    "total_entries": 1,
+    "analysis_timestamp": "2025-07-19T10:10:20.641202",
+    "quality_overview": {
+      "avg_quality": 73.5,
+      "actionable_count": 1
+    }
+  },
+  "quality_analysis": {
+    "distribution": {
+      "excellent": 0,
+      "good": 0,
+      "moderate": 1,
+      "basic": 0,
+      "poor": 0
+    },
+    "statistics": {
+      "mean": 73.5,
+      "median": 73.5,
+      "std_dev": 0,
+      "min": 73.5,
+      "max": 73.5,
+      "total_entries": 1
+    },
+    "source_analysis": {
+      "www.quantstart.com": {
+        "count": 1,
+        "avg_quality": 73.5,
+        "max_quality": 73.5,
+        "min_quality": 73.5
+      }
+    },
+    "analysis_timestamp": "2025-07-19T10:10:20.641287"
+  },
+  "topic_coverage": {
+    "coverage_analysis": {
+      "content_types": {
+        "distribution": {
+          "tutorial": 1,
+          "strategy": 1,
+          "theory": 1,
+          "implementation": 1,
+          "news": 1
+        },
+        "coverage": {
+          "tutorial": 100.0,
+          "strategy": 100.0,
+          "theory": 100.0,
+          "implementation": 100.0,
+          "news": 100.0
+        },
+        "most_common": [
+          [
+            "tutorial",
+            1
+          ],
+          [
+            "strategy",
+            1
+          ],
+          [
+            "theory",
+            1
+          ],
+          [
+            "implementation",
+            1
+          ],
+          [
+            "news",
+            1
+          ]
+        ]
+      },
+      "topic_areas": {
+        "distribution": {
+          "options": 1,
+          "futures": 1,
+          "equities": 1,
+          "forex": 1
+        },
+        "coverage": {
+          "options": 100.0,
+          "futures": 100.0,
+          "equities": 100.0,
+          "forex": 100.0
+        },
+        "most_common": [
+          [
+            "options",
+            1
+          ],
+          [
+            "futures",
+            1
+          ],
+          [
+            "equities",
+            1
+          ],
+          [
+            "forex",
+            1
+          ]
+        ]
+      },
+      "tools_languages": {
+        "distribution": {
+          "python": 1,
+          "cpp": 1,
+          "r": 1,
+          "matlab": 1,
+          "api": 1
+        },
+        "coverage": {
+          "python": 100.0,
+          "cpp": 100.0,
+          "r": 100.0,
+          "matlab": 100.0,
+          "api": 100.0
+        },
+        "most_common": [
+          [
+            "python",
+            1
+          ],
+          [
+            "cpp",
+            1
+          ],
+          [
+            "r",
+            1
+          ],
+          [
+            "matlab",
+            1
+          ],
+          [
+            "api",
+            1
+          ]
+        ]
+      },
+      "strategy_types": {
+        "distribution": {
+          "momentum": 1,
+          "mean_reversion": 1,
+          "arbitrage": 1,
+          "ml": 1,
+          "hft": 1
+        },
+        "coverage": {
+          "momentum": 100.0,
+          "mean_reversion": 100.0,
+          "arbitrage": 100.0,
+          "ml": 100.0,
+          "hft": 100.0
+        },
+        "most_common": [
+          [
+            "momentum",
+            1
+          ],
+          [
+            "mean_reversion",
+            1
+          ],
+          [
+            "arbitrage",
+            1
+          ],
+          [
+            "ml",
+            1
+          ],
+          [
+            "hft",
+            1
+          ]
+        ]
+      },
+      "technical_levels": {
+        "distribution": {
+          "intermediate": 1
+        },
+        "coverage": {
+          "intermediate": 100.0
+        }
+      }
+    },
+    "gaps_analysis": {
+      "missing_content_types": [],
+      "underrepresented_topics": [],
+      "missing_tools": [],
+      "strategy_gaps": [],
+      "recommendations": []
+    },
+    "total_entries": 1,
+    "analysis_timestamp": "2025-07-19T10:10:20.641336"
+  },
+  "strategy_mining": {
+    "strategy_density": {
+      "distribution": {
+        "very_high": 0,
+        "high": 0,
+        "moderate": 1,
+        "low": 0,
+        "very_low": 0
+      },
+      "statistics": {
+        "mean": 1.657706093189964,
+        "median": 1.657706093189964,
+        "max": 1.657706093189964
+      }
+    },
+    "technical_indicators": {
+      "most_common": [
+        [
+          "RSI",
+          1
+        ],
+        [
+          "Moving_Average",
+          1
+        ],
+        [
+          "Stochastic",
+          1
+        ]
+      ],
+      "total_unique": 3,
+      "distribution": {
+        "RSI": 1,
+        "Moving_Average": 1,
+        "Stochastic": 1
+      }
+    },
+    "key_concepts": {
+      "most_common": [
+        [
+          "pairs trading",
+          1
+        ],
+        [
+          "moving average",
+          1
+        ],
+        [
+          "alpha",
+          1
+        ],
+        [
+          "martingale",
+          1
+        ],
+        [
+          "sharpe ratio",
+          1
+        ],
+        [
+          "rsi",
+          1
+        ],
+        [
+          "mean reversion",
+          1
+        ],
+        [
+          "corr",
+          1
+        ],
+        [
+          "stochastic",
+          1
+        ]
+      ],
+      "total_unique": 9,
+      "distribution": {
+        "pairs trading": 1,
+        "moving average": 1,
+        "alpha": 1,
+        "martingale": 1,
+        "sharpe ratio": 1,
+        "rsi": 1,
+        "mean reversion": 1,
+        "corr": 1,
+        "stochastic": 1
+      }
+    },
+    "strategy_patterns": {
+      "common_indicators": [
+        [
+          "moving average",
+          1
+        ],
+        [
+          "stochastic",
+          1
+        ],
+        [
+          "ma",
+          1
+        ],
+        [
+          "rsi",
+          1
+        ],
+        [
+          "atr",
+          1
+        ],
+        [
+          "ema",
+          1
+        ]
+      ],
+      "common_signals": [
+        [
+          "crossover",
+          1
+        ]
+      ],
+      "common_metrics": [
+        [
+          "sharpe ratio",
+          1
+        ],
+        [
+          "corr",
+          1
+        ],
+        [
+          "alpha",
+          1
+        ],
+        [
+          "correlation",
+          1
+        ],
+        [
+          "volatility",
+          1
+        ]
+      ],
+      "pattern_diversity": {
+        "indicator_types": 6,
+        "signal_types": 1,
+        "metric_types": 5
+      }
+    },
+    "implementation_analysis": {
+      "code_coverage": 0.0,
+      "most_common_languages": [],
+      "code_type_distribution": {},
+      "average_snippets_per_entry": 0
+    },
+    "analysis_timestamp": "2025-07-19T10:10:20.641384"
+  },
+  "source_performance": {
+    "source_performance": {
+      "www.quantstart.com": {
+        "total_entries": 1,
+        "avg_quality": 73.5,
+        "max_quality": 73.5,
+        "min_quality": 73.5,
+        "avg_strategy_density": 1.657706093189964,
+        "actionable_percentage": 100.0,
+        "code_percentage": 0.0,
+        "quality_consistency": 0
+      }
+    },
+    "ranked_sources": [
+      [
+        "www.quantstart.com",
+        {
+          "total_entries": 1,
+          "avg_quality": 73.5,
+          "max_quality": 73.5,
+          "min_quality": 73.5,
+          "avg_strategy_density": 1.657706093189964,
+          "actionable_percentage": 100.0,
+          "code_percentage": 0.0,
+          "quality_consistency": 0
+        }
+      ]
+    ],
+    "top_performers": [
+      [
+        "www.quantstart.com",
+        {
+          "total_entries": 1,
+          "avg_quality": 73.5,
+          "max_quality": 73.5,
+          "min_quality": 73.5,
+          "avg_strategy_density": 1.657706093189964,
+          "actionable_percentage": 100.0,
+          "code_percentage": 0.0,
+          "quality_consistency": 0
+        }
+      ]
+    ],
+    "performance_summary": {
+      "total_sources": 1,
+      "best_avg_quality": 73.5,
+      "best_actionable_rate": 100.0
+    },
+    "analysis_timestamp": "2025-07-19T10:10:20.641415"
+  }
+}

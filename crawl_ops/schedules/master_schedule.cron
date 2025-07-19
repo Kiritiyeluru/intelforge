@@ -1,0 +1,110 @@
+# IntelForge Production Crawl Schedule
+# Auto-generated: 2025-07-19
+# Based on: crawl_ops/job_planning_and_schedules.md
+
+# Environment Variables
+PROJECT_DIR="/home/kiriti/alpha_projects/intelforge"
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# ============================================================================
+# NIGHTLY OPERATIONS (2:00 AM - Low traffic period)
+# ============================================================================
+
+# Finance Daily Crawl - Primary Revenue Source
+# Every day at 2:00 AM - Finance targets (35 URLs, ~5 min runtime)
+0 2 * * * cd $PROJECT_DIR && /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh >> crawl_ops/logs/cron_execution.log 2>&1
+
+# ============================================================================
+# WEEKLY OPERATIONS (Monday 2:10 AM - After daily completion)
+# ============================================================================
+
+# Research Weekly Crawl - Academic and Research Content
+# Every Monday at 2:10 AM - Research targets (estimated ~15 min runtime)
+10 2 * * 1 cd $PROJECT_DIR && TARGET_FILE="$PROJECT_DIR/urls_academic_research.txt" OUTPUT_DIR="$PROJECT_DIR/crawl_ops/data_runs/research_$(date +%Y%m%d)" /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh >> crawl_ops/logs/research_crawl.log 2>&1
+
+# ============================================================================
+# MORNING OPERATIONS (6:00 AM - Status and health)
+# ============================================================================
+
+# Daily Health Check and Status Report
+# Every day at 6:00 AM - System health validation
+0 6 * * * cd $PROJECT_DIR && source venv/bin/activate && python scripts/cli.py health --json > crawl_ops/status/daily_health_$(date +%Y%m%d).json 2>&1
+
+# Daily Performance Report Generation
+# Every day at 6:05 AM - Generate yesterday's performance summary
+5 6 * * * cd $PROJECT_DIR && scripts/generate_daily_report.sh $(date -d "yesterday" +%Y%m%d) > crawl_ops/reports/daily/performance_$(date +%Y%m%d).md 2>&1
+
+# ============================================================================
+# EVENING OPERATIONS (8:00 PM - Comprehensive weekly jobs)
+# ============================================================================
+
+# Weekly Comprehensive Crawl - All Sources
+# Every Sunday at 8:00 PM - Multi-source comprehensive crawl
+0 20 * * 0 cd $PROJECT_DIR && scripts/weekly_comprehensive_crawl.sh >> crawl_ops/logs/weekly_comprehensive.log 2>&1
+
+# Weekly Performance Analysis
+# Every Sunday at 9:00 PM - Analyze week's performance data
+0 21 * * 0 cd $PROJECT_DIR && scripts/generate_weekly_report.sh >> crawl_ops/reports/weekly/analysis_$(date +%Y%m%d).md 2>&1
+
+# ============================================================================
+# MAINTENANCE OPERATIONS (Monthly and cleanup)
+# ============================================================================
+
+# Monthly Archive and Cleanup
+# First day of each month at 1:00 AM - Archive old data and cleanup
+0 1 1 * * cd $PROJECT_DIR && scripts/monthly_cleanup.sh >> crawl_ops/logs/monthly_maintenance.log 2>&1
+
+# Weekly Log Rotation
+# Every Sunday at 11:30 PM - Rotate and compress logs
+30 23 * * 0 cd $PROJECT_DIR && find crawl_ops/logs -name "*.log" -size +10M -exec gzip {} \; >> crawl_ops/logs/log_rotation.log 2>&1
+
+# ============================================================================
+# HEALTH AND MONITORING (Every 4 hours)
+# ============================================================================
+
+# System Health Check
+# Every 4 hours - Monitor system resources and crawler health
+0 */4 * * * cd $PROJECT_DIR && source venv/bin/activate && python scripts/cli.py health-check --quiet > crawl_ops/status/health_$(date +%H).json 2>&1
+
+# ============================================================================
+# BACKUP OPERATIONS (Daily at 3:00 AM)
+# ============================================================================
+
+# Configuration and Schedule Backup
+# Every day at 3:00 AM - Backup critical configurations
+0 3 * * * cd $PROJECT_DIR && tar -czf "crawl_ops/backups/config_backup_$(date +%Y%m%d_%H%M).tar.gz" config/ crawl_ops/schedules/ crawl_ops/configs/ 2>/dev/null
+
+# ============================================================================
+# DEVELOPMENT AND TESTING (Weekends only)
+# ============================================================================
+
+# Weekend Test Runs - Technical Blogs
+# Every Saturday at 10:00 AM - Test crawling with technical blog targets
+0 10 * * 6 cd $PROJECT_DIR && TARGET_FILE="$PROJECT_DIR/urls_technical_blogs.txt" OUTPUT_DIR="$PROJECT_DIR/crawl_ops/data_runs/test_blogs_$(date +%Y%m%d)" /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh --dry-run >> crawl_ops/logs/weekend_tests.log 2>&1
+
+# Weekend Test Runs - GitHub Strategies  
+# Every Sunday at 10:00 AM - Test crawling with GitHub strategy targets
+0 10 * * 0 cd $PROJECT_DIR && TARGET_FILE="$PROJECT_DIR/urls_github_strategies.txt" OUTPUT_DIR="$PROJECT_DIR/crawl_ops/data_runs/test_github_$(date +%Y%m%d)" /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh --dry-run >> crawl_ops/logs/weekend_tests.log 2>&1
+
+# ============================================================================
+# NOTES AND MAINTENANCE REMINDERS
+# ============================================================================
+
+# This schedule assumes:
+# 1. Proxy middleware disabled (current stable configuration)
+# 2. Standard profile settings (2 concurrency, 5s delay)
+# 3. Finance targets as primary daily source
+# 4. Research/academic sources as weekly supplement
+# 5. 6-month data retention policy
+#
+# Schedule Maintenance:
+# - Review and update monthly based on performance data
+# - Adjust times based on system load and network conditions
+# - Add new target lists as they become available
+# - Monitor resource usage and scale accordingly
+#
+# Emergency Contacts:
+# - Check crawl_ops/logs/ for detailed error information
+# - Review crawl_ops/status/ for real-time system health
+# - Consult crawl_ops/lessons_learned/ for known issues and solutions

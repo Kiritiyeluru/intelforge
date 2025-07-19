@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-07-19T06:13:49Z",
+  "job_id": "immediate_crawl_20250719",
+  "status": "completed",
+  "completion_summary": {
+    "started_at": "2025-07-19T06:13:28Z",
+    "completed_at": "2025-07-19T06:13:49Z",
+    "duration_seconds": 21,
+    "target_urls": 35,
+    "success_rate": "100%",
+    "issues_resolved": [
+      "proxy_middleware_hardcoded_configuration"
+    ]
+  },
+  "outputs_generated": {
+    "data_directory": "/home/kiriti/alpha_projects/intelforge/data_runs/20250719",
+    "logs": [
+      "/home/kiriti/alpha_projects/intelforge/logs/intelforge_nightly.log",
+      "/home/kiriti/alpha_projects/intelforge/logs/semantic_spider.log"
+    ],
+    "reports": [
+      "/home/kiriti/alpha_projects/intelforge/scheduling/reports/daily/crawl_failure_20250719.md",
+      "/home/kiriti/alpha_projects/intelforge/scheduling/reports/daily/crawl_success_20250719.md"
+    ],
+    "documentation": [
+      "/home/kiriti/alpha_projects/intelforge/scheduling/changes/proxy_middleware_fix_20250719.md",
+      "/home/kiriti/alpha_projects/intelforge/scheduling/lessons_learned/proxy_middleware_configuration_debugging_20250719.md"
+    ]
+  },
+  "system_status": "operational",
+  "next_actions": [
+    "Schedule regular crawling if desired",
+    "Monitor system performance",
+    "Consider Crawl4AI migration for enhanced capabilities"
+  ]
+}

@@ -23,7 +23,8 @@ except ImportError:
     print("⚠️ Scrapy integration not available, falling back to httpx")
 import argparse
 import hashlib
-import json
+import orjson as json
+import os
 import time
 import uuid
 from pathlib import Path
@@ -1248,11 +1249,17 @@ def run_semantic_crawler(
     if SCRAPY_AVAILABLE:
         print("🕷️ Using Scrapy + Trafilatura for content extraction")
         try:
+            # Get output directory from environment (set by nightly crawler)
+            output_dir = os.getenv('INTELFORGE_OUTPUT_DIR')
+            if output_dir:
+                print(f"📁 Using output directory: {output_dir}")
+            
             scrapy_results = run_scrapy_crawler(
                 urls,
                 save_raw=save_raw,
                 proxy_rotate=proxy_rotate,
                 max_retries=max_retries,
+                output_dir=output_dir,
             )
             results = convert_scrapy_to_semantic_format(scrapy_results)
 
