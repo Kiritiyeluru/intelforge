@@ -1,8 +1,8 @@
 # IntelForge Crawl Job Planning & Scheduling Strategy
 
-**Created**: 2025-07-19  
-**Status**: Operational Planning  
-**Priority**: High  
+**Created**: 2025-07-19
+**Status**: Operational Planning
+**Priority**: High
 
 ## Executive Summary
 
@@ -28,7 +28,7 @@ Following successful resolution of proxy middleware issues and establishment of 
 ### Available Source Collections
 1. **Finance Premium** (`config/targets_finance.txt`) - 35 URLs
 2. **Academic Research** (`urls_academic_research.txt`) - TBD
-3. **Technical Blogs** (`urls_technical_blogs.txt`) - TBD  
+3. **Technical Blogs** (`urls_technical_blogs.txt`) - TBD
 4. **GitHub Strategies** (`urls_github_strategies.txt`) - TBD
 5. **Tier 1 Premium** (`urls_tier1_premium.txt`) - TBD
 
@@ -51,7 +51,7 @@ Duration: ~5 minutes
 Output: crawl_ops/data_runs/YYYYMMDD/
 ```
 
-**Rationale**: 
+**Rationale**:
 - Minimal server load at 2 AM
 - Fresh daily content capture
 - Established successful baseline
@@ -171,12 +171,12 @@ critical:
   - job_failure_rate > 50%
   - memory_usage > 90%
   - disk_free < 1GB
-  
+
 warning:
   - job_failure_rate > 20%
   - memory_usage > 75%
   - content_quality < 0.65
-  
+
 info:
   - new_high_quality_sources_found
   - performance_improvement_detected

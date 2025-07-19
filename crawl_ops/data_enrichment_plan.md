@@ -1,9 +1,9 @@
 # IntelForge Content Enrichment Pipeline Plan (Tool-First Approach)
 
-**Created**: 2025-07-19  
-**Updated**: 2025-07-19 (Implementation Complete)  
-**Status**: ✅ COMPLETED - Tool-First Implementation Successfully Deployed  
-**Priority**: High  
+**Created**: 2025-07-19
+**Updated**: 2025-07-19 (Implementation Complete)
+**Status**: ✅ COMPLETED - Tool-First Implementation Successfully Deployed
+**Priority**: High
 **Based on**: `/user created/external tips/what to do with crawled jsonl.md`
 
 ## Executive Summary
@@ -38,9 +38,9 @@ Transform raw crawl data into a **cleaned, enriched, searchable knowledge base**
 
 ### 🔧 **Tool-Based Implementation Strategy**
 ```bash
-raw_crawl.jsonl 
+raw_crawl.jsonl
   ↓ dedup (by content_hash) - ALREADY IMPLEMENTED
-  ↓ quality filter (0.75 threshold) - ALREADY ACTIVE  
+  ↓ quality filter (0.75 threshold) - ALREADY ACTIVE
   ↓ orjson processing - ✅ DEPLOYED (2-5x JSON speedup)
   ↓ textstat + YAKE scoring - ✅ DEPLOYED (375→40 LOC)
   ↓ spaCy + rapidfuzz tagging - ✅ DEPLOYED (490→50 LOC)
@@ -72,15 +72,15 @@ import orjson  # 2-5x faster JSON processing
 
 def calculate_content_score(content, title, url):
     """✅ COMPLETED: 40 lines vs 375 lines custom implementation"""
-    
+
     # Use textstat for readability metrics
     readability = flesch_reading_ease(content)
     grade_level = text_standard(content, float_output=True)
-    
+
     # ✅ COMPLETED: Use YAKE for keyword density (5-10x faster than KeyBERT)
     kw_extractor = yake.KeywordExtractor(lan="en", n=3, dedupLim=0.7, top=5)
     trading_keywords = kw_extractor.extract_keywords(content)
-    
+
     # Combine metrics (proven algorithms vs custom heuristics)
     keyword_count = len(trading_keywords)
     score = min(100, (readability/2) + (keyword_count*5) + len(content)/200)
@@ -105,12 +105,12 @@ import openai
 
 def auto_tag_content(content, title, url):
     """✅ VALIDATED: 50 lines vs 490 lines custom rule engine"""
-    
+
     # Use spaCy for entity recognition and pattern matching
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(content)
     matcher = Matcher(nlp.vocab)
-    
+
     # Define trading patterns (leverage spaCy's pattern syntax)
     trading_patterns = [
         [{"LOWER": {"IN": ["strategy", "algorithm", "trading"]}}],
@@ -118,25 +118,25 @@ def auto_tag_content(content, title, url):
         [{"LOWER": {"IN": ["momentum", "mean", "reversion"]}}]
     ]
     matcher.add("TRADING_TERMS", trading_patterns)
-    
+
     # Extract with spaCy
     matches = matcher(doc)
     spacy_tags = [doc[start:end].text for match_id, start, end in matches]
-    
+
     # ✅ NEW: Use rapidfuzz for fuzzy tag matching (10-20x faster than difflib)
-    known_tags = ["tutorial", "strategy", "theory", "implementation", "news", 
-                  "beginner", "intermediate", "advanced", "options", "futures", 
+    known_tags = ["tutorial", "strategy", "theory", "implementation", "news",
+                  "beginner", "intermediate", "advanced", "options", "futures",
                   "equities", "python", "cpp", "momentum", "mean_reversion", "arbitrage"]
-    
+
     # Find fuzzy matches in content
     fuzzy_tags = []
     for tag in known_tags:
         if fuzz.partial_ratio(tag.lower(), content.lower()) > 80:
             fuzzy_tags.append(tag)
-    
+
     # Optional: Use GPT for nuanced classification (fallback if fuzzy matching insufficient)
     # Currently deferred based on review: rule-based approach is optimal
-    
+
     return list(set(spacy_tags + fuzzy_tags))
 ```
 
@@ -149,10 +149,10 @@ from flashtext import KeywordProcessor
 
 def extract_strategy_keywords(content):
     """✅ VALIDATED: 60 lines vs 460 lines custom regex patterns - No LLM needed"""
-    
+
     # Use FlashText for blazing-fast keyword extraction
     keyword_processor = KeywordProcessor()
-    
+
     # Add trading indicators (FlashText handles variations automatically)
     indicators = {
         'RSI': ['rsi', 'relative strength index'],
@@ -163,7 +163,7 @@ def extract_strategy_keywords(content):
         'Volume': ['volume', 'vol', 'volume indicator'],
         'Support Resistance': ['support', 'resistance', 'support level', 'resistance level']
     }
-    
+
     # Add strategy patterns
     strategies = {
         'Mean Reversion': ['mean reversion', 'mean reverting', 'pairs trading'],
@@ -171,15 +171,15 @@ def extract_strategy_keywords(content):
         'Arbitrage': ['arbitrage', 'statistical arbitrage', 'risk arbitrage'],
         'Options Strategy': ['covered call', 'protective put', 'iron condor', 'butterfly']
     }
-    
+
     # Build keyword processor
     for category, variations in {**indicators, **strategies}.items():
         for variation in variations:
             keyword_processor.add_keyword(variation, category)
-    
+
     # Extract with FlashText (much faster than regex)
     found_keywords = keyword_processor.extract_keywords(content.lower())
-    
+
     # Return structured data (no GPT needed for basic extraction)
     return {
         'detected_indicators': [k for k in found_keywords if k in indicators],
@@ -204,13 +204,13 @@ class EnrichedContent(BaseModel):
     content: str
     content_hash: str
     site: str
-    
+
     # Tool-generated enrichment
     quality_score: float  # textstat + keybert
     content_tags: List[str]  # spaCy + GPT
     strategy_data: dict  # FlashText + GPT
     enrichment_timestamp: datetime
-    
+
     @validator('quality_score')
     def score_range(cls, v):
         return max(0, min(100, v))
@@ -218,9 +218,9 @@ class EnrichedContent(BaseModel):
 def store_enriched_content(content: EnrichedContent):
     """Direct Qdrant storage - no custom wrapper needed"""
     from qdrant_client import QdrantClient
-    
+
     client = QdrantClient("localhost", port=6333)
-    
+
     # Use Qdrant's native payload system
     client.upsert(
         collection_name="enriched_content",
@@ -236,9 +236,9 @@ def store_enriched_content(content: EnrichedContent):
 ```python
 def search_content(query: str, filters: dict = None):
     """Use Qdrant's native filtering - no custom search engine"""
-    
+
     client = QdrantClient("localhost", port=6333)
-    
+
     results = client.search(
         collection_name="enriched_content",
         query_vector=generate_embedding(query),
@@ -250,7 +250,7 @@ def search_content(query: str, filters: dict = None):
         },
         limit=10
     )
-    
+
     return [hit.payload for hit in results]
 ```
 
@@ -271,13 +271,13 @@ results = client.scroll(collection_name="enriched_content", limit=1000)
 df = pd.DataFrame([point.payload for point in results[0]])
 
 # Quality distribution (1 line vs 50 LOC custom)
-fig = px.histogram(df, x='quality_score', color='site', 
+fig = px.histogram(df, x='quality_score', color='site',
                    title='Content Quality Distribution by Source')
 fig.show()
 
 # Topic coverage (1 line vs 100 LOC custom)
 tag_counts = df['content_tags'].explode().value_counts()
-px.bar(x=tag_counts.index[:20], y=tag_counts.values[:20], 
+px.bar(x=tag_counts.index[:20], y=tag_counts.values[:20],
        title='Top 20 Content Tags').show()
 
 # Strategy mapping (pandas groupby vs custom aggregation)
@@ -344,7 +344,7 @@ crawl_ops/
 │   └── analytics_dashboard.ipynb # Jupyter notebook (interactive)
 └── libraries/                    # External dependencies
     ├── textstat                  # Content scoring
-    ├── keybert                   # Keyword extraction  
+    ├── keybert                   # Keyword extraction
     ├── spacy                     # NLP processing
     ├── flashtext                 # Fast keyword matching
     ├── openai                    # GPT classification
@@ -373,7 +373,7 @@ python -m spacy download en_core_web_sm
 
 **Benefits vs Custom**:
 - Pre-optimized algorithms (faster)
-- Memory management handled automatically  
+- Memory management handled automatically
 - Battle-tested edge case handling
 - Community maintenance and updates
 
@@ -446,7 +446,7 @@ python -m spacy download en_core_web_sm
 
 **Deployment Components**:
 - ✅ **tool_first_content_scorer.py**: textstat+YAKE scoring (40 LOC)
-- ✅ **tool_first_strategy_extractor.py**: FlashText extraction (60 LOC) 
+- ✅ **tool_first_strategy_extractor.py**: FlashText extraction (60 LOC)
 - ✅ **integrated_tool_first_pipeline.py**: Complete pipeline (150 LOC total)
 - ✅ **All libraries**: textstat, yake, flashtext, spacy, rapidfuzz, orjson deployed
 
@@ -495,14 +495,14 @@ python -m spacy download en_core_web_sm
 
 **Final Assessment**: Tool-first approach successfully demonstrates REUSE OVER REBUILD philosophy with 94% code reduction and complete working pipeline. All components deployed and tested with QuantStart data processing at 1.07 entries/sec.
 
-**Documentation Standard**: IntelForge Content Enrichment Protocol v2.0 (Tool-First) ✅  
-**Storage Location**: `/crawl_ops/data_enrichment_plan.md`  
+**Documentation Standard**: IntelForge Content Enrichment Protocol v2.0 (Tool-First) ✅
+**Storage Location**: `/crawl_ops/data_enrichment_plan.md`
 **Philosophy**: REUSE OVER REBUILD - 94% code reduction achieved through proven NLP tools
 
 ## 🎯 **DEPLOYMENT SUMMARY - 2025-07-19**
 
 **✅ MISSION ACCOMPLISHED**: Complete tool-first pipeline successfully deployed
-- **File Locations**: 
+- **File Locations**:
   - `/crawl_ops/enrichment/tool_first_content_scorer.py` (40 LOC)
   - `/crawl_ops/enrichment/tool_first_strategy_extractor.py` (60 LOC)
   - `/crawl_ops/enrichment/integrated_tool_first_pipeline.py` (150 LOC total)
@@ -510,4 +510,3 @@ python -m spacy download en_core_web_sm
 - **Quality Metrics**: 60/100 scoring, 4 strategies detected, 25 auto-tags generated
 - **Code Reduction**: 94% (2,620 → 150 LOC)
 - **Maintenance Debt**: Zero (all components use proven libraries)
-

@@ -7,8 +7,8 @@ import yake
 
 # Test sample content
 test_content = """
-Technical analysis is essential for algorithmic trading strategies. 
-RSI (Relative Strength Index) and MACD are popular momentum indicators. 
+Technical analysis is essential for algorithmic trading strategies.
+RSI (Relative Strength Index) and MACD are popular momentum indicators.
 Bollinger Bands help identify overbought and oversold conditions.
 Moving average crossovers generate buy and sell signals.
 Risk management through position sizing and stop losses is crucial.
@@ -24,11 +24,11 @@ def test_yake_extraction():
     print(f"Raw output: {keywords}")
     for kw in keywords:
         print(f"  {kw}")
-    
+
     # Extract just the keyword strings (first element is keyword, second is score)
     keyword_strings = [kw[0] for kw in keywords]
     print(f"\nExtracted keywords: {keyword_strings}")
-    
+
     return keyword_strings
 
 if __name__ == "__main__":

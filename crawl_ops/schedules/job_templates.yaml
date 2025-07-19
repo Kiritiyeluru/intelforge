@@ -2,11 +2,11 @@
 # Configuration templates for different crawling scenarios
 
 templates:
-  
+
   # ============================================================================
   # PRODUCTION TEMPLATES
   # ============================================================================
-  
+
   finance_daily:
     name: "Finance Daily Crawl"
     description: "Standard daily finance content collection"
@@ -27,7 +27,7 @@ templates:
       alert_on_failure: true
       performance_tracking: true
       quality_validation: true
-    
+
   research_weekly:
     name: "Research Weekly Crawl"
     description: "Academic and research content collection"
@@ -49,7 +49,7 @@ templates:
       alert_on_failure: true
       performance_tracking: true
       quality_validation: true
-      
+
   comprehensive_weekly:
     name: "Weekly Comprehensive Crawl"
     description: "Multi-source comprehensive content collection"
@@ -78,7 +78,7 @@ templates:
   # ============================================================================
   # TESTING TEMPLATES
   # ============================================================================
-      
+
   fast_test:
     name: "Fast Test Crawl"
     description: "Quick testing with reduced targets"
@@ -100,7 +100,7 @@ templates:
       alert_on_failure: false
       performance_tracking: true
       quality_validation: false
-      
+
   development_test:
     name: "Development Testing"
     description: "Development environment testing"
@@ -126,7 +126,7 @@ templates:
   # ============================================================================
   # SPECIAL PURPOSE TEMPLATES
   # ============================================================================
-  
+
   emergency_recovery:
     name: "Emergency Recovery Crawl"
     description: "Minimal settings for system recovery"
@@ -148,7 +148,7 @@ templates:
       alert_on_failure: false
       performance_tracking: true
       quality_validation: false
-      
+
   high_quality_research:
     name: "High Quality Research Crawl"
     description: "Maximum quality filtering for research content"
@@ -184,7 +184,7 @@ profiles:
     timeout: 60
     retries: 1
     memory_limit: "512MB"
-    
+
   fast:
     description: "Fast execution for testing and development"
     concurrency: 4
@@ -192,7 +192,7 @@ profiles:
     timeout: 15
     retries: 2
     memory_limit: "1024MB"
-    
+
   standard:
     description: "Standard production settings - balanced performance"
     concurrency: 2
@@ -200,7 +200,7 @@ profiles:
     timeout: 30
     retries: 3
     memory_limit: "2048MB"
-    
+
   balanced:
     description: "Balanced settings for mixed content types"
     concurrency: 2
@@ -208,7 +208,7 @@ profiles:
     timeout: 30
     retries: 3
     memory_limit: "2048MB"
-    
+
   thorough:
     description: "Thorough analysis with enhanced validation"
     concurrency: 1
@@ -253,12 +253,12 @@ monitoring:
     memory_usage_threshold: 80
     disk_usage_threshold: 90
     execution_time_threshold: 120  # percent of estimated duration
-    
+
   notification_channels:
     log_files: "crawl_ops/logs/"
     status_files: "crawl_ops/status/"
     reports: "crawl_ops/reports/"
-    
+
   health_checks:
     system_resources: true
     crawler_availability: true

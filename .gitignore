@@ -202,3 +202,25 @@ mcp_servers/docker_data/
 # Test files
 test_urls.txt
 financial_test_urls.txt
+
+# Temporary and debug files
+*.jsonl
+debug_*.txt
+test_*.txt
+*_output.jsonl
+*_debug.txt
+operational_test*
+demo_*.py
+bulk_export_*.json
+
+# Virtual environments
+.venv_*/
+tool_env/
+
+# Analysis and backup directories
+analysis/
+backups/*.tar.gz
+
+# Scheduler scripts (temporary)
+start_discovery_scheduler.sh
+stop_discovery_scheduler.sh

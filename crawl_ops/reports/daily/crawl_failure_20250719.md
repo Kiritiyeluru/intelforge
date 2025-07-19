@@ -1,7 +1,7 @@
 # Crawl Failure Report - 2025-07-19
 
 ## Summary
-- **Start Time**: 2025-07-19 05:52:11 IST  
+- **Start Time**: 2025-07-19 05:52:11 IST
 - **Status**: FAILED - Proxy Configuration Issue
 - **Duration**: ~30 seconds
 - **Items Scraped**: 0
@@ -26,7 +26,7 @@ scrapy.exceptions.CloseSpider: no_proxies_after_reset
 
 ### Proxy Status
 - **Good Proxies**: 0
-- **Dead Proxies**: 0  
+- **Dead Proxies**: 0
 - **Unchecked Proxies**: 0
 - **Error**: No proxies available for rotation
 
@@ -45,7 +45,7 @@ scrapy.exceptions.CloseSpider: no_proxies_after_reset
 - Test connectivity without proxy rotation
 
 ### 2. Alternative Crawling Method
-**Priority**: HIGH  
+**Priority**: HIGH
 - Consider using alternative crawler (Crawl4AI modules available)
 - Test direct HTTP requests without Scrapy proxy middleware
 - Implement fallback crawling without proxy rotation
@@ -59,7 +59,7 @@ scrapy.exceptions.CloseSpider: no_proxies_after_reset
 ## Lessons Learned
 
 1. **Proxy Dependencies**: Current setup requires functioning proxy rotation
-2. **Fallback Needed**: No graceful degradation when proxies unavailable  
+2. **Fallback Needed**: No graceful degradation when proxies unavailable
 3. **Testing Gap**: Pre-flight checks don't validate proxy availability
 
 ## Next Steps

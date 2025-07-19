@@ -1,9 +1,9 @@
 # Proxy Middleware Fix - 2025-07-19
 
 ## Change Summary
-**Type**: Configuration Fix  
-**Priority**: High  
-**Status**: Applied  
+**Type**: Configuration Fix
+**Priority**: High
+**Status**: Applied
 
 ## Problem
 Scrapy crawler failing with `no_proxies_after_reset` error due to rotating proxy middleware requiring proxies but none being configured.
@@ -21,7 +21,7 @@ Disabled proxy middleware in Scrapy settings to allow direct crawling without pr
 "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,
 "rotating_proxies.middlewares.BanDetectionMiddleware": 370,
 
-# AFTER  
+# AFTER
 # "rotating_proxies.middlewares.RotatingProxyMiddleware": 360,  # DISABLED - No proxy config
 # "rotating_proxies.middlewares.BanDetectionMiddleware": 370,   # DISABLED - No proxy config
 ```

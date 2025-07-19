@@ -14,7 +14,7 @@ from .compressed_io import (
 
 __all__ = [
     'write_jsonl_zst',
-    'read_jsonl_zst', 
+    'read_jsonl_zst',
     'append_jsonl_zst',
     'get_compression_stats',
     'compress_existing_jsonl',

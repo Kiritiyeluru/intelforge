@@ -293,7 +293,7 @@ This approach involves retrieving only certain files from the repository, typica
 - **Pros**:
   - **Efficiency**: Faster and uses less storage since you’re only grabbing what you need.
   - **Quick Overview**: Ideal for getting a high-level understanding of the repo without committing to a full clone.
-  
+
 - **Cons**:
   - **Limited Scope**: You might miss critical details in files you don’t download.
   - **Requires Knowledge**: You need to know which files are relevant beforehand.
@@ -377,7 +377,7 @@ You mentioned tools that condense a repository into a single text file. Such too
 - **Pros**:
   - **Convenience**: Easy to feed into a language model or text-based analysis tool.
   - **Speed**: Faster than cloning and processing locally.
-  
+
 - **Cons**:
   - **Loss of Structure**: Concatenating files strips away directory hierarchy and file names, which are critical for understanding code organization.
   - **Incomplete Context**: Summaries might omit details necessary for semantic analysis.

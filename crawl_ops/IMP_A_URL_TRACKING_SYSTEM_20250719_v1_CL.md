@@ -1,9 +1,9 @@
 # IntelForge URL Tracking & Deduplication Implementation Plan (Tool-First Approach)
 
-**Created**: 2025-07-19  
-**Updated**: 2025-07-19  
-**Status**: REFACTORED - Tool-First Implementation ✅  
-**Priority**: High  
+**Created**: 2025-07-19
+**Updated**: 2025-07-19
+**Status**: REFACTORED - Tool-First Implementation ✅
+**Priority**: High
 **Based on**: `/user created/external tips/track already scraped URLs.md`
 
 ## Executive Summary
@@ -43,7 +43,7 @@
 
 #### **Option 1: TinyDB + Scrapy Plugins (RECOMMENDED)**
 - **TinyDB**: JSON-based document store, zero-setup, query-friendly
-- **scrapy-deltafetch**: Built-in duplicate URL filtering  
+- **scrapy-deltafetch**: Built-in duplicate URL filtering
 - **scrapy-httpcache**: HTTP response caching
 - **Pros**: 80% less code, proven reliability, easy maintenance
 - **Best For**: All use cases (1K-100K URLs)
@@ -84,21 +84,21 @@ class URLTracker:
     def __init__(self, db_path="crawl_ops/tracking/urls.json"):
         self.db = TinyDB(db_path)
         self.urls = self.db.table('scraped_urls')
-    
+
     def should_crawl(self, url, refresh_days=30):
         """Check if URL needs crawling - 5 lines vs 50"""
         URL = Query()
         record = self.urls.search(URL.url == url)
-        
+
         if not record:
             return True, "new_url"
-        
+
         last_scraped = datetime.fromisoformat(record[0]['last_scraped'])
         if (datetime.now() - last_scraped).days >= refresh_days:
             return True, "refresh_due"
-        
+
         return False, "recently_scraped"
-    
+
     def record_crawl(self, url, content_hash, **metadata):
         """Record crawl - 3 lines vs 30"""
         URL = Query()
@@ -119,7 +119,7 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 ITEM_PIPELINES = {
-    'scrapy_httpcache.HttpCacheMiddleware': 200,  # Response caching  
+    'scrapy_httpcache.HttpCacheMiddleware': 200,  # Response caching
 }
 
 # Configuration
@@ -137,14 +137,14 @@ HTTPCACHE_DIR = 'crawl_ops/tracking/httpcache'
 url_tracking:
   enabled: true
   storage: "crawl_ops/tracking/urls.json"
-  
+
   # Site-specific refresh policies
   refresh_policies:
     "quantstart.com": 90      # Educational content
-    "investopedia.com": 30    # Financial news  
+    "investopedia.com": 30    # Financial news
     "blog.quantinsti.com": 7  # Blog posts
     default: 30
-    
+
   # Content-type policies
   content_policies:
     tutorial: 90
@@ -174,11 +174,11 @@ schema = {
 def load_config(config_path):
     with open(config_path) as f:
         config = yaml.safe_load(f)
-    
+
     validator = Validator(schema)
     if not validator.validate(config):
         raise ValueError(f"Invalid config: {validator.errors}")
-    
+
     return config
 ```
 
@@ -193,15 +193,15 @@ from crawl_ops.tracking.url_tracker import URLTracker
 def test_tinydb_integration():
     """Test TinyDB storage and retrieval"""
     tracker = URLTracker(db_path="test_urls.json")
-    
+
     # Test new URL
     should_crawl, reason = tracker.should_crawl("https://test.com")
     assert should_crawl == True
     assert reason == "new_url"
-    
+
     # Record crawl
     tracker.record_crawl("https://test.com", "hash123", site="test.com")
-    
+
     # Test recently crawled
     should_crawl, reason = tracker.should_crawl("https://test.com")
     assert should_crawl == False
@@ -230,7 +230,7 @@ def scrapy_settings():
 
 ## 🚀 **Implementation Roadmap - Tool-First**
 
-### **Week 1: Core Replacement** 
+### **Week 1: Core Replacement**
 1. **Install Tools**: `pip install tinydb scrapy-deltafetch cerberus`
 2. **Replace URLTracker**: 150 lines → 20 lines TinyDB implementation
 3. **Configure Scrapy**: Settings-only middleware integration
@@ -254,19 +254,19 @@ def scrapy_settings():
 
 ### ✅ **COMPLETED: Documentation Update**
 - Updated implementation plan with tool-first approach
-- Identified 80% code reduction opportunities  
+- Identified 80% code reduction opportunities
 - Tool selection: TinyDB + scrapy-deltafetch + cerberus
 
 ### 🚨 **PENDING: Implementation Stages**
 
-#### **Stage 1: Replace URLTracker with TinyDB** 
+#### **Stage 1: Replace URLTracker with TinyDB**
 - Remove custom SQLite wrapper (150 lines)
 - Implement 20-line TinyDB solution
 - Maintain same interface for compatibility
 
 #### **Stage 2: Configure Scrapy Plugins**
 - Replace custom middleware with scrapy-deltafetch
-- Configure scrapy-httpcache for response caching  
+- Configure scrapy-httpcache for response caching
 - Remove custom deduplication logic
 
 #### **Stage 3: Externalize Configuration**
@@ -288,7 +288,7 @@ def scrapy_settings():
 
 ### 🛠️ **Tool Stack Selected**
 - **TinyDB**: JSON document storage (replaces SQLite wrapper)
-- **scrapy-deltafetch**: URL deduplication (replaces custom middleware) 
+- **scrapy-deltafetch**: URL deduplication (replaces custom middleware)
 - **scrapy-httpcache**: Response caching (replaces custom cache)
 - **cerberus**: YAML config validation (replaces hardcoded policies)
 - **pytest**: Standard testing (replaces custom test harness)
@@ -310,8 +310,8 @@ def scrapy_settings():
 
 ---
 
-**Documentation Standard**: IntelForge URL Tracking Protocol v2.0 (Tool-First) ✅  
-**Storage Location**: `/crawl_ops/IMP_A_URL_TRACKING_SYSTEM_20250719_v1_CL.md`  
+**Documentation Standard**: IntelForge URL Tracking Protocol v2.0 (Tool-First) ✅
+**Storage Location**: `/crawl_ops/IMP_A_URL_TRACKING_SYSTEM_20250719_v1_CL.md`
 **Philosophy**: REUSE OVER REBUILD - 80% code reduction through proven tools
 
 ## Phase 3: Analytics & Optimization (Week 3)
@@ -321,25 +321,25 @@ def scrapy_settings():
 #### **Efficiency Metrics**
 ```sql
 -- URLs crawled vs skipped ratio
-SELECT 
+SELECT
     site,
     COUNT(*) as total_urls,
     SUM(scrape_count) as total_crawls,
     AVG(scrape_count) as avg_crawls_per_url,
     COUNT(*) * 1.0 / SUM(scrape_count) as efficiency_ratio
-FROM scraped_urls 
+FROM scraped_urls
 GROUP BY site;
 ```
 
 #### **Content Change Patterns**
 ```sql
 -- Identify frequently changing content
-SELECT 
+SELECT
     url,
     site,
     scrape_count,
     (julianday('now') - julianday(first_scraped)) / scrape_count as days_per_change
-FROM scraped_urls 
+FROM scraped_urls
 WHERE scrape_count > 1
 ORDER BY days_per_change ASC;
 ```
@@ -388,16 +388,16 @@ url_tracking:
   enabled: true
   database_path: "crawl_ops/tracking/url_tracker.db"
   default_refresh_days: 30
-  
+
   site_policies:
     "quantstart.com": 90
     "investopedia.com": 30
     "blog.quantinsti.com": 7
-  
+
   content_change_detection:
     method: "hash"  # "hash", "semantic", "http_headers"
     semantic_threshold: 0.1
-    
+
   analytics:
     enabled: true
     report_frequency: "weekly"
@@ -541,7 +541,7 @@ python scripts/cli.py force-refresh --url https://example.com
 **🔧 Active Components**:
 - SQLite database with optimized schema and indexes
 - Intelligent deduplication middleware
-- Content change detection with multiple methods  
+- Content change detection with multiple methods
 - Site-specific and content-type refresh policies
 - Comprehensive CLI management tools
 - Fully integrated with existing Scrapy pipeline
@@ -573,9 +573,9 @@ crawl_ops/
     └── url_manager.py                 # Comprehensive CLI management tool
 ```
 
-**Documentation Standard**: IntelForge URL Tracking Protocol v1.0 ✅ IMPLEMENTED  
-**Storage Location**: `/crawl_ops/url_tracking_implementation_plan.md`  
-**Related Documents**: 
+**Documentation Standard**: IntelForge URL Tracking Protocol v1.0 ✅ IMPLEMENTED
+**Storage Location**: `/crawl_ops/url_tracking_implementation_plan.md`
+**Related Documents**:
 - `/user created/external tips/track already scraped URLs.md`
 - `/crawl_ops/data_enrichment_plan.md`
 - `/crawl_ops/job_planning_and_schedules.md`

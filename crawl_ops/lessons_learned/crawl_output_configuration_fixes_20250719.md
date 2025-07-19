@@ -71,7 +71,7 @@ def run_scrapy_crawler(
 # BEFORE
 settings.set("FEEDS", {output_file_path: {"format": "json", "overwrite": True}})
 
-# AFTER  
+# AFTER
 settings.set("FEEDS", {str(output_file_path): {"format": "jsonlines", "overwrite": True}})
 ```
 

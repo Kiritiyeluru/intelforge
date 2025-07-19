@@ -1,9 +1,9 @@
 # Proxy Middleware Configuration Debugging - Lessons Learned
 
-**Date:** 2025-07-19  
-**Issue:** Proxy middleware continued running despite being commented out in settings.py  
-**Status:** ✅ RESOLVED  
-**Time to Resolution:** ~1 hour  
+**Date:** 2025-07-19
+**Issue:** Proxy middleware continued running despite being commented out in settings.py
+**Status:** ✅ RESOLVED
+**Time to Resolution:** ~1 hour
 
 ## Problem Summary
 
@@ -48,7 +48,7 @@ find . -name "settings.py" -type f
 
 ### Step 2: Tracing Scrapy Integration
 - Examined `scripts/cli.py` to understand the crawl command flow
-- Discovered that CLI calls `semantic_crawler_main()` 
+- Discovered that CLI calls `semantic_crawler_main()`
 - Found that semantic crawler uses `run_scrapy_crawler()` from scrapy_integration.py
 
 ### Step 3: Configuration Loading Analysis
@@ -123,7 +123,7 @@ if proxy_rotate:
 # test_proxy_middleware.py - Verified configuration logic
 def test_proxy_middleware():
     # Test 1: Base settings should NOT include proxy middleware
-    # Test 2: proxy_rotate=False should NOT include proxy middleware  
+    # Test 2: proxy_rotate=False should NOT include proxy middleware
     # Test 3: proxy_rotate=True should include proxy middleware
 ```
 
@@ -218,7 +218,7 @@ python scripts/cli.py crawl --dry-run config/targets_finance.txt
 
 ### Key Files
 - `scripts/scrapers/semantic_spider.py` - Base Scrapy settings
-- `scripts/scrapers/scrapy_integration.py` - Scrapy integration layer  
+- `scripts/scrapers/scrapy_integration.py` - Scrapy integration layer
 - `scripts/semantic_crawler.py` - Main crawler implementation
 - `scripts/cli.py` - CLI interface
 
@@ -248,9 +248,9 @@ This debugging session highlighted the importance of understanding **configurati
 
 The solution demonstrates **proper conditional feature loading** - only adding middleware when needed rather than always loading and trying to disable. This approach is more predictable and easier to debug.
 
-**Time Investment:** ~1 hour  
-**Complexity:** Medium (required tracing through multiple layers)  
-**Resolution Quality:** High (addresses root cause, not symptoms)  
+**Time Investment:** ~1 hour
+**Complexity:** Medium (required tracing through multiple layers)
+**Resolution Quality:** High (addresses root cause, not symptoms)
 **Prevention Value:** High (establishes better configuration patterns)
 
 ---

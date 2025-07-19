@@ -60,7 +60,7 @@ class SemanticSpider(scrapy.Spider):
 
         # Extract content directly using trafilatura
         self.logger.debug(f"Extracting content from {response.url}")
-        
+
         # Get settings for trafilatura
         settings = self.crawler.settings
         content = trafilatura.extract(
@@ -81,7 +81,7 @@ class SemanticSpider(scrapy.Spider):
 
         # Check content length requirement
         min_content_length = settings.getint("TRAFILATURA_MIN_CONTENT_LENGTH", 100)
-        
+
         if content and len(content.strip()) >= min_content_length:
             # Create and yield the item
             item = {
@@ -94,7 +94,7 @@ class SemanticSpider(scrapy.Spider):
                 "extraction_method": "trafilatura",
                 "site": response.url.split("/")[2],
             }
-            
+
             self.logger.info(f"Yielding item from {response.url}: {item['title'][:50]}... ({len(content)} chars)")
             yield item
         else:

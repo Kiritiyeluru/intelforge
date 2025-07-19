@@ -26,7 +26,7 @@ The data from crawl jobs is stored in multiple locations:
 ```json
 {
   "url": "https://www.quantstart.com/articles/",
-  "title": "Articles", 
+  "title": "Articles",
   "content": "[15,422 chars of content]",
   "content_length": 15422,
   "extraction_method": "trafilatura",
@@ -234,7 +234,7 @@ python -c "from crawl_ops.utils.compressed_io import *; test_compression()"  # T
 ### **🚀 Ready for Production**
 All systems fully implemented, tested, and operational:
 - URL tracking and queue management
-- Performance-optimized processing pipeline  
+- Performance-optimized processing pipeline
 - Tool-first content enrichment
 - Scalable infrastructure components
 - Comprehensive CLI management interface
@@ -256,8 +256,8 @@ All systems fully implemented, tested, and operational:
        'your-domain.com': 'your_category',  # tutorial, research, code, blog
        # ...existing domains
    }
-   
-   # Add to _infer_priority() method  
+
+   # Add to _infer_priority() method
    high_priority_domains = [
        'your-domain.com',  # if high-quality source
        # ...existing domains
@@ -270,7 +270,7 @@ All systems fully implemented, tested, and operational:
        """Add your custom discovery method."""
        discovered_urls = []
        # Your discovery logic here
-       
+
        for url in your_url_list:
            discovered_urls.append({
                'url': url,
@@ -280,7 +280,7 @@ All systems fully implemented, tested, and operational:
                'quality_estimate': 0.7,
                'metadata': {'discovery_method': 'your_method'}
            })
-       
+
        added = self.queue.add_discovered_urls(discovered_urls)
        print(f"✅ Added {added} URLs from your source")
    ```
@@ -290,7 +290,7 @@ All systems fully implemented, tested, and operational:
    # In main() function, add new subparser
    your_parser = subparsers.add_parser("your_command", help="Your source discovery")
    your_parser.add_argument("--your-param", help="Your parameter")
-   
+
    # In command execution section
    elif args.command == "your_command":
        cli.add_your_source_discovery()
@@ -300,10 +300,10 @@ All systems fully implemented, tested, and operational:
    ```bash
    # Test your new source
    python crawl_ops/cli/queue_manager.py your_command --your-param value
-   
+
    # Verify in queue
    python crawl_ops/cli/queue_manager.py status
-   
+
    # Process and validate
    python crawl_ops/cli/queue_manager.py process --batch-size 5
    ```
@@ -330,7 +330,7 @@ All systems fully implemented, tested, and operational:
 ## Documentation Standards
 
 - Use ISO 8601 timestamps
-- Include success/failure metrics  
+- Include success/failure metrics
 - Document all configuration changes
 - Maintain lessons learned after incidents
 - Follow IntelForge naming conventions for all new documentation

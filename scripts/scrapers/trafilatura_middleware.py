@@ -29,14 +29,14 @@ class TrafilaturaMiddleware:
     def process_response(self, request, response, spider):
         """Process response with trafilatura extraction"""
         spider.logger.debug(f"TrafilaturaMiddleware processing: {response.url}")
-        
+
         spider.logger.debug(f"Response type: {type(response)}, has request: {hasattr(response, 'request')}")
         spider.logger.debug(f"Is HtmlResponse: {isinstance(response, HtmlResponse)}")
         spider.logger.debug(f"Request is not None: {response.request is not None if hasattr(response, 'request') else False}")
-        
+
         if isinstance(response, HtmlResponse):
             spider.logger.debug(f"HTML response detected, extracting content from {response.url}")
-            
+
             # Check if response has meta (some responses like robots.txt don't)
             try:
                 # Extract content using trafilatura
@@ -94,7 +94,7 @@ class TrafilaturaMiddleware:
                         spider.logger.warning(f"No content extracted by trafilatura from {response.url}")
                 else:
                     spider.logger.debug(f"Skipping item creation for {response.url} - no meta access")
-                    
+
             except Exception as e:
                 spider.logger.error(f"Error processing response {response.url}: {e}")
                 spider.logger.error(f"Exception type: {type(e)}")

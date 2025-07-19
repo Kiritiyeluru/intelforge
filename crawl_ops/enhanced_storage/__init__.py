@@ -13,7 +13,7 @@ Main Components:
 
 Usage:
     from crawl_ops.enhanced_storage import EnrichedContentStorage, CrawlerEnrichmentIntegration
-    
+
     storage = EnrichedContentStorage()
     integration = CrawlerEnrichmentIntegration()
 """

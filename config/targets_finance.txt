@@ -1,0 +1,36 @@
+# Finance-focused target URLs for nightly crawling
+# One URL per line - feeds and sites focused on algorithmic trading and quantitative finance
+
+# RSS Feeds - High-quality algorithmic trading sources
+https://www.quantstart.com/articles/
+https://robotwealth.com/articles/
+https://blog.quantinsti.com/feed/
+
+# Financial Data and Analysis
+https://www.investopedia.com/algorithmic-trading-4689756
+https://www.quantopian.com/posts
+https://www.algorithmic-trading.info/
+https://www.quantlib.org/
+https://www.alpaca.markets/blog/
+https://www.kaggle.com/datasets?search=trading
+
+# Trading Strategy Resources
+https://www.tradingview.com/ideas/
+https://www.mql5.com/en/articles/
+https://www.zorro-trader.com/
+https://www.amibroker.com/articles/
+https://www.interactivebrokers.com/en/trading/apis.php
+
+# Academic and Research Sources
+https://papers.ssrn.com/sol3/JELJOUR_Results.cfm?form_name=journalBrowse&journal_id=1867941
+https://www.jstor.org/action/showJournals?discipline=28503333
+https://www.risk.net/quantitative-analysis
+https://www.cfainstitute.org/en/research/financial-analysts-journal
+
+# Python/Programming for Finance
+https://www.python.org/jobs/
+https://realpython.com/python-finance/
+https://pandas.pydata.org/docs/user_guide/
+https://numpy.org/doc/stable/user/
+https://matplotlib.org/stable/gallery/index.html
+https://scikit-learn.org/stable/modules/clustering.html

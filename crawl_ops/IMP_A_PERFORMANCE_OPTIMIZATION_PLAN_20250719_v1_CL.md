@@ -1,9 +1,9 @@
 # IntelForge Performance Optimization Plan (YAKE-Style Replacements)
 
-**Created**: 2025-07-19  
-**Updated**: 2025-07-19  
-**Status**: PLANNING - Implementation Roadmap  
-**Priority**: High  
+**Created**: 2025-07-19
+**Updated**: 2025-07-19
+**Status**: PLANNING - Implementation Roadmap
+**Priority**: High
 **Philosophy**: REUSE OVER REBUILD - Drop-in performance replacements
 
 ## Executive Summary
@@ -12,7 +12,7 @@ Following the successful YAKE integration (5-10x keyword extraction speedup), th
 
 ## 🎯 **Implementation Priorities**
 
-### ✅ **COMPLETED: YAKE Integration** 
+### ✅ **COMPLETED: YAKE Integration**
 - **Status**: ✅ COMPLETE
 - **Impact**: 5-10x keyword extraction speedup
 - **Effort**: 5 minutes
@@ -91,7 +91,7 @@ def enhanced_content_similarity(self, content1: str, content2: str) -> float:
     """Enhanced content similarity with rapidfuzz (10-20x faster than difflib)"""
     if content1 == content2:
         return 100.0
-    
+
     if RAPIDFUZZ_AVAILABLE:
         # Use rapidfuzz for fast similarity scoring
         sample1 = content1[:1000] if len(content1) > 1000 else content1
@@ -148,7 +148,7 @@ def read_jsonl_zst(filepath: Path) -> Iterator[Any]:
 
 **Features Implemented**:
 - ✅ Streaming write/read for memory efficiency
-- ✅ orjson integration for 2-5x JSON performance  
+- ✅ orjson integration for 2-5x JSON performance
 - ✅ Compression level control (1-22, default 3)
 - ✅ Convenience functions for crawl data storage
 - ✅ Error handling and logging
@@ -167,7 +167,7 @@ def read_jsonl_zst(filepath: Path) -> Iterator[Any]:
 **Priority**: MEDIUM | **Effort**: 15 minutes | **Impact**: Better code quality
 
 **Use Case**: Monitor test coverage for URL tracking and enrichment pipeline
-**Implementation**: 
+**Implementation**:
 ```bash
 # ✅ IMPLEMENTED
 pip install pytest-cov
@@ -180,7 +180,7 @@ pytest crawl_ops/tests/ --cov=crawl_ops.utils --cov=crawl_ops.tracking --cov-rep
 
 **Test Coverage Implemented**:
 - ✅ orjson import and basic functionality tests
-- ✅ rapidfuzz content similarity tests  
+- ✅ rapidfuzz content similarity tests
 - ✅ zstandard compressed JSONL I/O tests
 - ✅ Content detector rapidfuzz integration tests
 - ✅ Performance package availability verification
@@ -215,7 +215,7 @@ from probables import BloomFilter
 class MemoryEfficientTracker:
     def __init__(self, estimated_elements=100000):
         self.bloom = BloomFilter(est_elements=estimated_elements, false_positive_rate=0.01)
-    
+
     def is_duplicate(self, url: str) -> bool:
         if url in self.bloom:
             return True  # Probably seen before
@@ -248,7 +248,7 @@ class MemoryEfficientTracker:
 
 ---
 
-### 8. **sqlite + content_hash Enhancement** 🗄️ 
+### 8. **sqlite + content_hash Enhancement** 🗄️
 **Priority**: LOW | **Effort**: 1 hour | **Impact**: Marginal improvement
 
 **Current Status**: Already implemented in URL tracking system
@@ -272,7 +272,7 @@ class MemoryEfficientTracker:
 **Reason**: Using Scrapy, not browser automation
 **Decision**: Not applicable to current architecture
 
-### Pandas-Profiling  
+### Pandas-Profiling
 **Reason**: Overkill for current data volume
 **Decision**: Defer until processing 10k+ articles
 
@@ -358,7 +358,7 @@ class MemoryEfficientTracker:
 
 ### **Performance Metrics**
 - JSON processing speed (items/second)
-- HTML parsing speed (pages/second)  
+- HTML parsing speed (pages/second)
 - Memory usage reduction
 - Overall crawl cycle time improvement
 
@@ -381,7 +381,7 @@ class MemoryEfficientTracker:
 - `orjson`: Drop-in JSON replacement
 - Enhanced quality scoring: Additive improvement
 
-### **Medium Risk (Test Thoroughly)**  
+### **Medium Risk (Test Thoroughly)**
 - `selectolax`: Different API, needs validation
 - Database optimizations: Potential migration issues
 
@@ -401,7 +401,7 @@ crawl_ops/
 ├── optimization/
 │   ├── __init__.py
 │   ├── benchmark_tools.py          # Performance testing utilities
-│   ├── orjson_integration.py       # JSON optimization implementation  
+│   ├── orjson_integration.py       # JSON optimization implementation
 │   ├── selectolax_integration.py   # HTML parsing optimization
 │   └── enhanced_scoring.py         # Improved quality scoring
 └── tests/
@@ -470,7 +470,7 @@ class URLQueue:
     def __init__(self, db_path="crawl_ops/tracking/url_queue.json"):
         self.db = TinyDB(db_path)
         self.queue = self.db.table('url_queue')
-        
+
     def add_discovered_urls(self, urls: List[dict]):
         """Add URLs from discovery sources with metadata"""
         for url_data in urls:
@@ -483,7 +483,7 @@ class URLQueue:
                 'status': 'queued',  # 'queued', 'processing', 'completed', 'failed'
                 'quality_estimate': url_data.get('quality_estimate', 0)
             })
-    
+
     def get_next_urls(self, batch_size: int = 10) -> List[dict]:
         """Get next URLs for processing, priority-ordered"""
         Query = self.db.Query()
@@ -557,7 +557,7 @@ class TargetedDiscovery:
 
 ### **Expected Outcomes**
 - **Systematic Discovery**: Move from manual URL selection to automated discovery
-- **Quality Control**: Leverage existing content scoring to filter discovered URLs  
+- **Quality Control**: Leverage existing content scoring to filter discovered URLs
 - **Scalability**: Process thousands of URLs systematically
 - **Efficiency**: Reduce manual URL hunting while maintaining quality
 
@@ -568,10 +568,10 @@ class TargetedDiscovery:
 
 ---
 
-**Status**: All Critical Optimizations Complete ✅ | Ready for Production 🚀  
-**Implementation Summary**: All Week 1 critical optimizations completed in single session  
+**Status**: All Critical Optimizations Complete ✅ | Ready for Production 🚀
+**Implementation Summary**: All Week 1 critical optimizations completed in single session
 **Achievement**: 60-150x performance boost + 90% storage savings + comprehensive test coverage
 
-**Documentation Standard**: IntelForge Performance Optimization Protocol v1.0  
-**Storage Location**: `/crawl_ops/IMP_A_PERFORMANCE_OPTIMIZATION_PLAN_20250719_v1_CL.md`  
+**Documentation Standard**: IntelForge Performance Optimization Protocol v1.0
+**Storage Location**: `/crawl_ops/IMP_A_PERFORMANCE_OPTIMIZATION_PLAN_20250719_v1_CL.md`
 **Philosophy**: REUSE OVER REBUILD - Maximum impact, minimal effort replacements

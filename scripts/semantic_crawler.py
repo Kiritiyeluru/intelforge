@@ -1253,7 +1253,7 @@ def run_semantic_crawler(
             output_dir = os.getenv('INTELFORGE_OUTPUT_DIR')
             if output_dir:
                 print(f"📁 Using output directory: {output_dir}")
-            
+
             scrapy_results = run_scrapy_crawler(
                 urls,
                 save_raw=save_raw,

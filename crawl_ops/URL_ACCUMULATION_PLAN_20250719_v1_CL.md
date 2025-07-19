@@ -78,7 +78,7 @@ class SearchProvider(ABC):
 | ✅ Dead simple: decorate a function with `@retry` | `GitHubDiscovery.search_repositories()` |
 | ✅ Prevents queue starvation or silent failures | `SearchDiscovery.search_google_custom()` |
 
-**Effort**: 2-line decorator  
+**Effort**: 2-line decorator
 **Benefit**: Stop losing URLs due to transient timeouts or rate limits
 
 ```python
@@ -97,7 +97,7 @@ def search_repositories(self, keywords: List[str], max_results: int = 50):
 | ✅ Auto-generates `--help`, argument validation, commands | Cleaner, more scalable CLI |
 | ✅ Used in `httpie`, `pipenv`, industry-standard | Minimal bloat, proven pattern |
 
-**Effort**: ~15 lines to refactor a CLI script  
+**Effort**: ~15 lines to refactor a CLI script
 **Benefit**: Consistent UX and better dev ergonomics
 
 #### **3. 📜 [`feedparser`](https://github.com/kurtmckee/feedparser) - Robust RSS Reader**
@@ -108,7 +108,7 @@ def search_repositories(self, keywords: List[str], max_results: int = 50):
 | ✅ Works with Atom, RDF, RSS1/2 — 20+ years proven | Quant blogs, GitHub releases, TradingView authors |
 | ✅ No dependencies beyond stdlib | Safe to bundle permanently |
 
-**Effort**: 5-line wrapper  
+**Effort**: 5-line wrapper
 **Benefit**: Ingests high-signal content without fragile HTML parsing
 
 ### **🕒 Hold Off For Now (Wait Until Scale)**
@@ -117,7 +117,7 @@ def search_repositories(self, keywords: List[str], max_results: int = 50):
 - Current async/schedule model works great
 - These introduce infra overhead unless doing thousands of tasks/day
 
-#### **❌ [`FastAPI`] - Dashboard/Monitoring Web UI**  
+#### **❌ [`FastAPI`] - Dashboard/Monitoring Web UI**
 - Useful only for web UI or external controller
 - Stick to CLI + local logs for current scale
 
@@ -137,7 +137,7 @@ def search_repositories(self, keywords: List[str], max_results: int = 50):
 | `feedparser` | RSS robustness | ★☆☆☆☆ | 🔥🔥🔥🔥 | **2nd** |
 | `click` | Better CLI handling | ★★☆☆☆ | 🔥🔥🔥🔥 | **3rd** |
 
-**Total Integration Effort**: <20 lines per tool  
+**Total Integration Effort**: <20 lines per tool
 **Result**: Massive resilience/maintainability gains with minimal complexity
 
 ### **🔍 Additional High-ROI Drop-in Tools (Advanced Optimization)**
@@ -157,11 +157,11 @@ def search_repositories(self, keywords: List[str], max_results: int = 50):
 import msgspec
 class EnrichedContent(msgspec.Struct):
     url: str
-    title: str  
+    title: str
     content: str
     quality_score: float
 
-# simhash example - content-aware deduplication  
+# simhash example - content-aware deduplication
 from simhash import Simhash
 fingerprint = Simhash(content).value
 ```
@@ -195,7 +195,7 @@ fingerprint = Simhash(content).value
 
 **No action needed** - these tools are perfectly chosen:
 - `orjson`, `zstandard`, `rapidfuzz`, `FlashText`, `YAKE`, `spaCy`, `textstat`, `selectolax`
-- TinyDB + Scrapy plugins for URL deduplication and deltafetch  
+- TinyDB + Scrapy plugins for URL deduplication and deltafetch
 - Pydantic for schema (only replace if performance bottlenecks)
 - Native Qdrant integration
 
@@ -218,7 +218,7 @@ fingerprint = Simhash(content).value
 # jiq - JSON inspector for pipeline debugging
 cat crawl_data.jsonl | jiq
 
-# tqdm - Progress bars for long operations  
+# tqdm - Progress bars for long operations
 from tqdm import tqdm
 for url in tqdm(url_batch): process(url)
 
@@ -294,7 +294,7 @@ def calculate_priority_score(url_data):
     strategy_density = get_historical_strategy_density(url_data['domain'])
     return domain_quality * 0.5 + recency_factor * 0.3 + strategy_density * 0.2
 
-# Semantic Drift Detection  
+# Semantic Drift Detection
 def needs_reprocessing(url, new_content):
     old_hash = get_stored_content_hash(url)
     new_hash = simhash.Simhash(new_content).value
@@ -323,7 +323,7 @@ python queue_manager.py add --with-sanitization
 
 **Domain-Specific TTL Adaptation**
 - QuantInsti blog: Monthly refresh (stable content)
-- GitHub repos: Weekly refresh (active development)  
+- GitHub repos: Weekly refresh (active development)
 - TradingView: Daily refresh (frequent updates)
 - Auto-adjust based on detected change frequency
 
@@ -355,7 +355,7 @@ python queue_manager.py add --with-sanitization
 - Leverage existing `quality_score` and `URLTracker` data
 - Provide operational visibility for system optimization
 
-**Phase 2 (Short Term)**: TTL adaptation + Drift detection  
+**Phase 2 (Short Term)**: TTL adaptation + Drift detection
 - Reduce unnecessary crawling and processing
 - Intelligent content change detection
 
@@ -391,7 +391,7 @@ python crawl_ops/cli/queue_manager.py add \
   "https://github.com/quantopian/zipline" \
   --source manual --priority 2 --category education
 
-# Research Sources (Priority 3-4)  
+# Research Sources (Priority 3-4)
 python crawl_ops/cli/queue_manager.py add \
   "https://arxiv.org/list/q-fin/recent" \
   "https://papers.ssrn.com/sol3/JELJOUR_Results.cfm?form_name=journalbrowse&journal_id=1353429" \
@@ -421,23 +421,23 @@ class GitHubDiscovery:
     def __init__(self, token: str = None):
         self.token = token
         self.base_url = "https://api.github.com"
-    
+
     def search_repositories(self, keywords: List[str], max_results: int = 50) -> List[Dict]:
         """Search GitHub for trading/quant repositories."""
         query = " ".join(keywords) + " language:python"
-        
+
         params = {
             'q': query,
             'sort': 'stars',
             'order': 'desc',
             'per_page': min(max_results, 100)
         }
-        
+
         headers = {'Authorization': f'token {self.token}'} if self.token else {}
-        
-        response = requests.get(f"{self.base_url}/search/repositories", 
+
+        response = requests.get(f"{self.base_url}/search/repositories",
                               params=params, headers=headers)
-        
+
         if response.status_code == 200:
             data = response.json()
             return [
@@ -476,14 +476,14 @@ class SitemapDiscovery:
             f"https://{domain}/sitemap_index.xml",
             f"https://{domain}/sitemap.xml"
         ]
-        
+
         all_urls = []
         for sitemap_url in sitemap_urls:
             try:
                 response = requests.get(sitemap_url, timeout=10)
                 if response.status_code == 200:
                     root = ET.fromstring(response.content)
-                    
+
                     # Handle sitemap index
                     sitemaps = root.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}sitemap')
                     if sitemaps:
@@ -491,13 +491,13 @@ class SitemapDiscovery:
                             loc = sitemap.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
                             if loc is not None:
                                 all_urls.extend(self.extract_urls_from_sitemap(loc.text))
-                    
+
                     # Handle URL entries
                     urls = root.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}url')
                     for url in urls:
                         loc = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
                         lastmod = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod')
-                        
+
                         if loc is not None:
                             all_urls.append({
                                 'url': loc.text,
@@ -513,16 +513,16 @@ class SitemapDiscovery:
                     break
             except Exception as e:
                 continue
-        
+
         return all_urls
-    
+
     def _infer_category_from_url(self, url: str) -> str:
         """Infer category from URL path."""
         path = urlparse(url).path.lower()
         if any(term in path for term in ['blog', 'article', 'post']):
             return 'blog'
         elif any(term in path for term in ['tutorial', 'guide', 'learn']):
-            return 'tutorial' 
+            return 'tutorial'
         elif any(term in path for term in ['research', 'paper', 'study']):
             return 'research'
         return 'general'
@@ -538,25 +538,25 @@ from typing import List, Dict
 class SearchDiscovery:
     def __init__(self, api_key: str = None):
         self.api_key = api_key
-    
+
     def search_google_custom(self, query: str, site_filter: str = None) -> List[Dict]:
         """Use Google Custom Search API for targeted discovery."""
         if not self.api_key:
             return []
-        
+
         search_query = query
         if site_filter:
             search_query = f"site:{site_filter} {query}"
-        
+
         params = {
             'key': self.api_key,
             'cx': '017576662512468239146:omuauf_lfve',  # Custom search engine ID
             'q': search_query,
             'num': 10
         }
-        
+
         response = requests.get('https://www.googleapis.com/customsearch/v1', params=params)
-        
+
         if response.status_code == 200:
             data = response.json()
             return [
@@ -595,7 +595,7 @@ class DiscoveryScheduler:
         self.queue = URLQueue()
         self.github = GitHubDiscovery()
         self.sitemap = SitemapDiscovery()
-    
+
     def daily_github_discovery(self):
         """Daily GitHub repository discovery."""
         keywords_sets = [
@@ -604,35 +604,35 @@ class DiscoveryScheduler:
             ["quantitative", "analysis", "trading"],
             ["portfolio", "optimization", "python"]
         ]
-        
+
         for keywords in keywords_sets:
             repos = self.github.search_repositories(keywords, max_results=10)
             if repos:
                 added = self.queue.add_discovered_urls(repos)
                 print(f"GitHub discovery: Added {added} repositories for {keywords}")
-    
+
     def weekly_sitemap_refresh(self):
         """Weekly sitemap discovery for known domains."""
         target_domains = [
             "quantstart.com",
-            "blog.quantinsti.com", 
+            "blog.quantinsti.com",
             "investopedia.com"
         ]
-        
+
         for domain in target_domains:
             urls = self.sitemap.extract_urls_from_sitemap(domain)
             if urls:
                 added = self.queue.add_discovered_urls(urls)
                 print(f"Sitemap discovery: Added {added} URLs from {domain}")
-    
+
     def start_scheduler(self):
         """Start the discovery scheduler."""
         # Schedule daily GitHub discovery
         schedule.every().day.at("02:00").do(self.daily_github_discovery)
-        
+
         # Schedule weekly sitemap refresh
         schedule.every().sunday.at("03:00").do(self.weekly_sitemap_refresh)
-        
+
         print("Discovery scheduler started")
         while True:
             schedule.run_pending()
@@ -662,22 +662,22 @@ def enhance_url_quality_scoring(self, urls: List[Dict]) -> List[Dict]:
             'paper': 0.1
         }
     }
-    
+
     for url_data in urls:
         domain = urlparse(url_data['url']).netloc.lower()
         path = urlparse(url_data['url']).path.lower()
-        
+
         # Base quality from domain
         base_quality = quality_signals['domains'].get(domain, 0.5)
-        
+
         # Boost from path keywords
         keyword_boost = sum(
             boost for keyword, boost in quality_signals['path_keywords'].items()
             if keyword in path
         )
-        
+
         url_data['quality_estimate'] = min(base_quality + keyword_boost, 1.0)
-    
+
     return urls
 ```
 
@@ -706,7 +706,7 @@ python crawl_ops/cli/queue_manager.py process --batch-size 5
 # Monitor queue growth
 python crawl_ops/cli/queue_manager.py status
 
-# Export for analysis  
+# Export for analysis
 python crawl_ops/cli/queue_manager.py export
 
 # Clean up old entries
@@ -800,7 +800,7 @@ enhanced_keywords = {
 - ✅ RSS automation: 8 articles automatically discovered and queued
 
 **Phase 2 - Enhanced Discovery Sources (✅ COMPLETE)**
-- ✅ **GitHub API Integration**: `crawl_ops/discovery/github_discovery.py` 
+- ✅ **GitHub API Integration**: `crawl_ops/discovery/github_discovery.py`
   - Real GitHub API with rate limiting and quality filtering
   - Quality scoring based on stars, forks, and activity
   - Supports 50+ repos per search with intelligent prioritization
@@ -836,7 +836,7 @@ enhanced_keywords = {
 
 **Quality Scoring Validation**
 - ✅ quantstart.com URLs: 0.660 quality (High tier)
-- ✅ GitHub repos with backtest keywords: 0.601 quality (Medium tier)  
+- ✅ GitHub repos with backtest keywords: 0.601 quality (Medium tier)
 - ✅ ArXiv PDFs: 0.557 quality (Medium tier)
 - ✅ Comprehensive quality breakdown available for all URLs
 
@@ -878,7 +878,7 @@ enhanced_keywords = {
 
 **Immediate (Next 24 hours)**
 1. ✅ Configure GitHub API token for production GitHub discovery
-2. ✅ Add Google/Bing API keys for search discovery scaling  
+2. ✅ Add Google/Bing API keys for search discovery scaling
 3. ✅ Deploy scheduler as background service
 4. **NEW**: Monitor first scheduled run at 02:00 tomorrow
 
@@ -897,7 +897,7 @@ enhanced_keywords = {
 
 **Implementation Status**: ✅ **PRODUCTION SYSTEM ACTIVE**
 - **Total Development Time**: ~6 hours (including high-ROI enhancements)
-- **Code Reuse**: 95%+ leveraging existing infrastructure  
+- **Code Reuse**: 95%+ leveraging existing infrastructure
 - **Files Created**: 8 modules + enhanced CLI + audit system
 - **Integration**: Seamless with existing crawl_ops system
 - **Service Status**: Running in background with scheduled automation
@@ -1058,10 +1058,10 @@ python crawl_ops/cli/audit_cli.py top --count 15
 | **Queue Prioritization** | SQL + existing metadata | 🔥🔥🔥🔥🔥 | ✅ **COMPLETE** |
 | **Audit System** | Operational visibility | 🔥🔥🔥 | ✅ **COMPLETE** |
 
-**Total Integration Effort**: <30 lines per tool (as predicted)  
+**Total Integration Effort**: <30 lines per tool (as predicted)
 **Result**: **Massive resilience/maintainability gains with minimal complexity**
 
-**System Assessment**: **EXCEEDS PRODUCTION REQUIREMENTS**  
+**System Assessment**: **EXCEEDS PRODUCTION REQUIREMENTS**
 - ✅ **No over-engineering**: Every tool serves multiple high-value functions
 - ✅ **Zero custom logic**: 100% prebuilt tool integration
 - ✅ **Maintainable**: Clear separation of concerns with existing patterns

@@ -83,7 +83,7 @@ PATH=/usr/local/bin:/usr/bin:/bin
 # Every Saturday at 10:00 AM - Test crawling with technical blog targets
 0 10 * * 6 cd $PROJECT_DIR && TARGET_FILE="$PROJECT_DIR/urls_technical_blogs.txt" OUTPUT_DIR="$PROJECT_DIR/crawl_ops/data_runs/test_blogs_$(date +%Y%m%d)" /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh --dry-run >> crawl_ops/logs/weekend_tests.log 2>&1
 
-# Weekend Test Runs - GitHub Strategies  
+# Weekend Test Runs - GitHub Strategies
 # Every Sunday at 10:00 AM - Test crawling with GitHub strategy targets
 0 10 * * 0 cd $PROJECT_DIR && TARGET_FILE="$PROJECT_DIR/urls_github_strategies.txt" OUTPUT_DIR="$PROJECT_DIR/crawl_ops/data_runs/test_github_$(date +%Y%m%d)" /home/kiriti/alpha_projects/intelforge/cron/nightly_crawl.sh --dry-run >> crawl_ops/logs/weekend_tests.log 2>&1
 

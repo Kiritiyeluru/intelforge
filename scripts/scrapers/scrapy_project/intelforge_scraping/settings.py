@@ -190,7 +190,7 @@ URL_TRACKING = {
     "enabled": True,
     "database_path": "crawl_ops/tracking/url_tracker.db",
     "default_refresh_days": 30,
-    
+
     # Site-specific refresh policies (days)
     "site_policies": {
         "quantstart.com": 90,
@@ -206,12 +206,12 @@ URL_TRACKING = {
         "medium.com": 14,
         "towards-data-science": 14,
     },
-    
+
     # Content change detection settings
     "content_change_detection": True,
     "check_http_headers": False,  # Enable for sites with reliable headers
     "quality_scoring": True,
-    
+
     # Content validation settings
     "validation": {
         "min_content_length": 100,
@@ -219,7 +219,7 @@ URL_TRACKING = {
         "drop_duplicates": True,
         "validate_encoding": True,
     },
-    
+
     # URL filtering settings
     "filtering": {
         "min_quality_score": 0,
@@ -233,7 +233,7 @@ URL_TRACKING = {
             r"/api/",
         ],
     },
-    
+
     # Analytics and reporting
     "analytics": {
         "enabled": True,

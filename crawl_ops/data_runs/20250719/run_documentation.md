@@ -1,12 +1,12 @@
 # Data Run Documentation - 20250719
-**Crawl Date**: July 19, 2025  
-**Run Type**: Production Finance Daily  
-**Execution Mode**: Immediate (Manual Trigger)  
+**Crawl Date**: July 19, 2025
+**Run Type**: Production Finance Daily
+**Execution Mode**: Immediate (Manual Trigger)
 
 ## Run Configuration
-**Target File**: `/home/kiriti/alpha_projects/intelforge/config/targets_finance.txt`  
-**Profile**: Standard Production  
-**Output Directory**: `/home/kiriti/alpha_projects/intelforge/crawl_ops/data_runs/20250719/`  
+**Target File**: `/home/kiriti/alpha_projects/intelforge/config/targets_finance.txt`
+**Profile**: Standard Production
+**Output Directory**: `/home/kiriti/alpha_projects/intelforge/crawl_ops/data_runs/20250719/`
 
 ### Technical Settings
 ```yaml
@@ -22,40 +22,40 @@ robotstxt_obey: true
 
 ## Execution Timeline
 - **Start**: 08:59:58 IST
-- **Completion**: ~09:02:00 IST  
+- **Completion**: ~09:02:00 IST
 - **Duration**: ~2 minutes
 - **Trigger**: Manual execution of nightly_crawl.sh
 
 ## Target Analysis
-**Total URLs**: 35 from finance premium target list  
-**Success Rate**: Partial (1/4 major sites captured content)  
+**Total URLs**: 35 from finance premium target list
+**Success Rate**: Partial (1/4 major sites captured content)
 
 ### URL Results
 1. **✅ QuantStart** (www.quantstart.com/articles/)
    - Status: SUCCESS
    - Content: 15,422 characters
    - Quality: High-value quant finance tutorials
-   
+
 2. **❌ Investopedia** (algorithmic-trading section)
    - Status: FAILED - HTTP 460 (Rate Limited)
    - Action: Requires rate limiting strategy
-   
+
 3. **❌ QuantInsti Blog** (RSS feed)
    - Status: SKIPPED - Non-HTML content
    - Action: Consider RSS parsing for blog posts
-   
+
 4. **❌ RobotWealth** (articles section)
    - Status: FAILED - HTTP 404
    - Action: Update URL or remove from targets
-   
+
 5. **❌ Quantopian**
    - Status: FAILED - Connection timeout
    - Action: Site appears discontinued, remove from targets
 
 ## Content Quality Assessment
-**Captured Content**: 1 high-quality source  
-**Content Type**: Comprehensive educational resource  
-**Relevance Score**: High (quantitative finance focus)  
+**Captured Content**: 1 high-quality source
+**Content Type**: Comprehensive educational resource
+**Relevance Score**: High (quantitative finance focus)
 **Topics Covered**:
 - Options pricing and derivatives
 - Statistical analysis methods
@@ -83,9 +83,9 @@ Summary statistics and run metadata
 - **System Stability**: Excellent
 
 ## Vector Storage Integration
-**Collection**: semantic_capture (Qdrant)  
-**Embedding Model**: all-MiniLM-L6-v2  
-**GPU Acceleration**: CUDA enabled  
+**Collection**: semantic_capture (Qdrant)
+**Embedding Model**: all-MiniLM-L6-v2
+**GPU Acceleration**: CUDA enabled
 **Storage Status**: Successfully updated
 
 ## Issues Encountered
@@ -125,6 +125,6 @@ Summary statistics and run metadata
 4. **Content Expansion**: Weekly comprehensive crawls Sundays 8 PM
 
 ---
-**Documentation Standard**: IntelForge Data Run Protocol v1.0  
-**Storage Location**: `/crawl_ops/data_runs/20250719/`  
+**Documentation Standard**: IntelForge Data Run Protocol v1.0
+**Storage Location**: `/crawl_ops/data_runs/20250719/`
 **Related Reports**: `/crawl_ops/reports/job_execution_report_20250719.md`
