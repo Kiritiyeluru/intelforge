@@ -1,0 +1,65 @@
+--------------------
+PROMPT FOR NEW CLAUDE SESSION
+
+  You are tasked with conducting a thorough, methodical analysis of the ScrapeGraphAI repository for potential integration with IntelForge. This is a CRITICAL
+  analysis that requires patience, attention to detail, and comprehensive documentation.
+
+  **CRITICAL INSTRUCTIONS - READ CAREFULLY:**
+
+  1. **DO NOT HURRY** - Take all the time needed for thorough analysis
+  2. **FOCUS ON ONE REPOSITORY ONLY** - ScrapeGraphAI (/home/kiriti/alpha_projects/intelforge/analysis/phase3-shallow-clones/selected-repos/Scrapegraph-ai)
+  3. **DO NOT think about next tasks** - Focus entirely on this single repository
+  4. **DOCUMENT EVERY USEFUL FEATURE** - No matter how small or seemingly insignificant
+
+  **YOUR TASK:**
+  Conduct a comprehensive analysis of ScrapeGraphAI and create a detailed analysis document similar to the Crawl4AI analysis at 
+  `/home/kiriti/alpha_projects/intelforge/analysis/phase3-shallow-clones/crawl4ai_comprehensive_analysis.md`.
+
+  **METHODOLOGY:**
+  1. **Start by reading the existing Crawl4AI analysis** to understand the expected depth and format
+  2. **Explore the repository structure** completely - map out all directories and key files
+  3. **Read core modules COMPLETELY** - do not use limit parameters, read entire files
+  4. **Examine examples thoroughly** - understand usage patterns and integration approaches
+  5. **Document architecture** - understand how the system works internally
+  6. **Identify ready-to-use modules** - find components that can be directly integrated
+  7. **Create integration patterns** - document how to use the system effectively
+  8. **Update analysis document continuously** - add findings as you discover them
+
+  **ANALYSIS DOCUMENT STRUCTURE:**
+  Create `/home/kiriti/alpha_projects/intelforge/analysis/phase3-shallow-clones/scrapegraphai_comprehensive_analysis.md` with sections:
+  - Repository Structure Overview
+  - Detailed Module Analysis
+  - Technical Deep Dive
+  - Useful Features for IntelForge
+  - Integration Patterns & Examples
+  - Ready-to-Use Modules
+  - Integration Plan
+
+  **QUALITY STANDARDS:**
+  - **Thoroughness over speed** - Better to take 2 hours and be complete than rush in 30 minutes
+  - **Document everything** - Even small utility functions might be valuable
+  - **Provide code examples** - Show how features actually work
+  - **Assess integration effort** - Be realistic about implementation time
+  - **Identify unique capabilities** - What does ScrapeGraphAI do differently?
+
+  **WHAT TO LOOK FOR:**
+  - Graph-based crawling approaches
+  - LLM integration patterns
+  - Content extraction strategies
+  - Pipeline architectures
+  - Configuration systems
+  - Error handling approaches
+  - Performance optimization techniques
+  - Any unique or innovative features
+
+  **IMPORTANT REMINDERS:**
+  - This is a CRUCIAL analysis for IntelForge's semantic crawler replacement
+  - Quality and thoroughness matter more than completion time
+  - Update the analysis document continuously as you discover features
+  - Read files completely without using limit parameters
+  - Focus on understanding the system deeply, not just surface-level features
+
+  **STARTING POINT:**
+  Begin by exploring the repository structure and creating the initial analysis document. Then systematically work through each major component.
+
+  Take your time. Be methodical. Document everything.

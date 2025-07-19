@@ -221,19 +221,3 @@ tool_env/
 analysis/
 backups/*.tar.gz
 
-# Scheduler scripts (temporary)
-start_discovery_scheduler.sh
-stop_discovery_scheduler.sh
-
-# User created external files
-(Strategic Intelligence Gathering).md
-user created/comments about plan.md
-user created/external tips/ semantic intelligence_repo mining.md
-user created/external tips/Task/
-user created/external tips/URL queue.md
-user created/external tips/YAKE style replacements.md
-user created/external tips/claude code prompt.txt
-user created/external tips/faster replacements.md
-user created/external tips/prompt to start using semantic crawler.md
-user created/external tips/track already scraped URLs.md
-user created/external tips/what to do with crawled jsonl.md
